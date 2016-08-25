@@ -5,6 +5,10 @@ namespace UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use UserBundle\User;
+use UserBundle\Role;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class UserType extends AbstractType
 {
@@ -15,10 +19,15 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('password')
-            ->add('salt')
-            ->add('userRoles')
+            ->setMethod('POST')
+            ->add('username','text',array('label'=>'Nom d\'utilisateur'))
+            ->add('password','password',array('label'=>'Mot de passe'))
+            ->add('userRoles',EntityType::class, array(
+                'class'=>'UserBundle:Role',
+                'attr'  => array('display' => 'hidden'),
+                'property'=>'name',
+                'label'=>"Role"
+                ))
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
@@ -27,8 +36,7 @@ class UserType extends AbstractType
             ->add('telephone')
             ->add('email')
             ->add('newsletter')
-            ->add('birthDate', 'datetime')
-            ->add('article')
+            ->add('birthDate', 'birthday',array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
         ;
     }
     

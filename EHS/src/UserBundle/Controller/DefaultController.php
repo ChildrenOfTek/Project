@@ -14,11 +14,5 @@ class DefaultController extends Controller
     {
         return $this->render('UserBundle:Default:index.html.twig');
     }
-    /**
-     * @Route("/logout")
-     */
-    public function logoutAction()
-    {
-        return $this->render('UserBundle:Default:index.html.twig');
-    }
+    
 }

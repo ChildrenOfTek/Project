@@ -18,8 +18,11 @@
     <body>
         {% block body %}
             {% block login %}
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}            
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}            
                     {% include 'security/login.html.twig' %}
+                {% else %}
+                    <h3> Bienvenue {{ app.user.username }} </h3>
+                    <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
                 {% endif %}
             {% endblock %}
         

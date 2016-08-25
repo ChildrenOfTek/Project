@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use UserBundle\User;
 use UserBundle\Role;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 
 class UserType extends AbstractType
@@ -27,7 +28,7 @@ class UserType extends AbstractType
             ->add('userRoles',EntityType::class, array(
                 'class'=>'UserBundle:Role',
                 'attr'  => array('display' => 'hidden'),
-                'property'=>'name',
+                'choice_label'=>'name',
                 'label'=>'Role à attribuer'
                 ))
             ->add('nom')
@@ -38,7 +39,7 @@ class UserType extends AbstractType
             ->add('telephone')
             ->add('email')
             ->add('newsletter')
-            ->add('birthDate', 'birthday',array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
+            ->add('birthDate', BirthdayType::class,array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
         ;
     }
     

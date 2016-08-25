@@ -40,13 +40,7 @@ class User implements UserInterface, \Serializable
      */
     private $password;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="salt", type="string", length=255)
-     */
-    private $salt;
-
+   
     /**
      * 
      * @ORM\OneToOne(targetEntity="Role", cascade={"remove"}))
@@ -120,8 +114,8 @@ class User implements UserInterface, \Serializable
     /**
      * @var int
      *
-     * @ORM\Column(name="article", type="integer")
-     * @ORM\OneToMany(targetEntity="ArticleBundle:Article", mappedBy="user", nullable=true)
+     * @ORM\Column(name="article", type="integer", nullable=true)
+     * @ORM\OneToMany(targetEntity="ArticleBundle:Article", mappedBy="user")
      */
     private $article;
     
@@ -147,7 +141,7 @@ class User implements UserInterface, \Serializable
      */
     public function serialize()
     {
-        return \json_encode(array($this->id, $this->login, $this->password, $this->salt, $this->userRoles));
+        return \json_encode(array($this->id, $this->username, $this->password, $this->userRoles));
     }
 
     /**
@@ -156,7 +150,7 @@ class User implements UserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list($this->id, $this->login, $this->password, $this->salt, $this->userRoles) = \json_decode($serialized);
+        list($this->id, $this->username, $this->password, $this->userRoles) = \json_decode($serialized);
     }
     
     /**
@@ -166,25 +160,12 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        //return array('ROLE_USER');
+        return array('ROLE_USER');
     }
     
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
     }
 
     /**

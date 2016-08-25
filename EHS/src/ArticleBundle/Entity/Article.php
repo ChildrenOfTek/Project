@@ -24,9 +24,10 @@ class Article
     /**
      * @var int
      *
-     * @ORM\Column(name="userId", type="integer")
+     * @ORM\Column(name="user", type="integer")
+     * @ORM\ManyToOne(targetEntity="UserBundle:User", inversedBy= "Article")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var \DateTime
@@ -88,7 +89,7 @@ class Article
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -111,7 +112,7 @@ class Article
     /**
      * Get userId
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserId()
     {
@@ -134,7 +135,7 @@ class Article
     /**
      * Get dateArticle
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateArticle()
     {
@@ -157,7 +158,7 @@ class Article
     /**
      * Get titreArticle
      *
-     * @return string 
+     * @return string
      */
     public function getTitreArticle()
     {
@@ -180,7 +181,7 @@ class Article
     /**
      * Get sujetArticle
      *
-     * @return string 
+     * @return string
      */
     public function getSujetArticle()
     {
@@ -203,7 +204,7 @@ class Article
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -226,7 +227,7 @@ class Article
     /**
      * Get datePublication
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDatePublication()
     {
@@ -249,7 +250,7 @@ class Article
     /**
      * Get imageArticle
      *
-     * @return string 
+     * @return string
      */
     public function getImageArticle()
     {
@@ -272,7 +273,7 @@ class Article
     /**
      * Get online
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getOnline()
     {
@@ -295,7 +296,7 @@ class Article
     /**
      * Get tagId
      *
-     * @return integer 
+     * @return integer
      */
     public function getTagId()
     {

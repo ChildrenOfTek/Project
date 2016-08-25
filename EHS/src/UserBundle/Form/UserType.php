@@ -10,6 +10,7 @@ use UserBundle\User;
 use UserBundle\Role;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
+
 class UserType extends AbstractType
 {
     /**
@@ -22,11 +23,12 @@ class UserType extends AbstractType
             ->setMethod('POST')
             ->add('username','text',array('label'=>'Nom d\'utilisateur'))
             ->add('password','password',array('label'=>'Mot de passe'))
+            ->add('salt','hidden')
             ->add('userRoles',EntityType::class, array(
                 'class'=>'UserBundle:Role',
                 'attr'  => array('display' => 'hidden'),
                 'property'=>'name',
-                'label'=>"Role"
+                'label'=>'Role à attribuer'
                 ))
             ->add('nom')
             ->add('prenom')

@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
- * @UniqueEntity(fields="login", message="Pseudonyme deja pris")
+ * @UniqueEntity(fields="username", message="Nom d'utilisateur deja pris")
  */
 
 class User implements UserInterface, \Serializable
@@ -193,7 +193,7 @@ class User implements UserInterface, \Serializable
      */
     public function getSalt()
     {
-        return $this->salt;
+        return null;
     }
     
     /**

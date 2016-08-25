@@ -5,6 +5,10 @@ security:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
             cost: 12
+    role_hierarchy:
+        ROLE_USER: ROLE_USER
+        ROLE_PRESS: ROLE_PRESS
+        ROLE_ADMIN: ROLE_ADMIN
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
@@ -14,16 +18,25 @@ security:
                 property: username
 
     firewalls:
+        main:
+            form_login:
+                default_target_path: /login
         secured_area:
+            pattern: ^/
+            anonymous: ~
+            form_login: 
+                login_path : /login
+                check_path : /login
+            logout:
+                path: /logout
+                target: /index
             
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            pattern: ^/
-            provider: db_provider
+        
             
     access_control:
         - { path: ^/admin, roles : ROLE_ADMIN }
@@ -34,3 +47,5 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html

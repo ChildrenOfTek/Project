@@ -48,9 +48,9 @@ class User implements UserInterface, \Serializable
     private $salt;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="userRoles", type="integer")
+     * 
+     * @ORM\OneToOne(targetEntity="Role", cascade={"remove"}))
+     * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
     private $userRoles;
 
@@ -121,6 +121,7 @@ class User implements UserInterface, \Serializable
      * @var int
      *
      * @ORM\Column(name="article", type="integer")
+     * @ORM\OneToMany(targetEntity="ArticleBundle:Article", mappedBy="user", nullable=true)
      */
     private $article;
     

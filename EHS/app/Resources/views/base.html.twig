@@ -16,9 +16,24 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% block login %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}            
+                    {% include 'security/login.html.twig' %}
+                {% endif %}
+            {% endblock %}
+        
+        
+            
         {% block nav %}{% endblock %}
+        
+        
         {% block section %}{% endblock %}
+        
+        
+        {% endblock %}
+        
+        
         {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -25,6 +25,7 @@
                 {% else %}
                     <h3> Bienvenue {{ app.user.username }} </h3>
                     <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
+                    <a href="{{ path("contact") }}">Nous contacter</a>
                 {% endif %}
             {% endblock %}
             </div>

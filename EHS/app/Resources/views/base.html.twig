@@ -16,9 +16,27 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% block login %}
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}            
+                    {% include 'security/login.html.twig' %}
+                {% else %}
+                    <h3> Bienvenue {{ app.user.username }} </h3>
+                    <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
+                {% endif %}
+            {% endblock %}
+        
+        
+            
         {% block nav %}{% endblock %}
+        
+        
         {% block section %}{% endblock %}
+        
+        
+        {% endblock %}
+        
+        
         {% block javascripts %}{% endblock %}
     </body>
 </html>

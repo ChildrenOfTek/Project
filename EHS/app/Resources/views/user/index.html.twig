@@ -36,8 +36,8 @@
                 <td>{{ user.telephone }}</td>
                 <td>{{ user.email }}</td>
                 <td>{% if user.newsletter %}Yes{% else %}No{% endif %}</td>
-                <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                
+                <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
+                <!-- H:i:s-->
                 <td>
                     <ul>
                         <li>

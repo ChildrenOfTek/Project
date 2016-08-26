@@ -40,10 +40,10 @@ class User implements UserInterface, \Serializable
      */
     private $password;
 
-   
+
+    // ...
     /**
-     * 
-     * @ORM\OneToOne(targetEntity="Role", cascade={"remove"}))
+     * @ORM\ManyToOne(targetEntity="Role", inversedBy="user")
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
     private $userRoles;

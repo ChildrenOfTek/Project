@@ -10,7 +10,8 @@
         
         <link href="{{ asset('Public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('Public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
-        <script href="{{ asset('Public/script/jquery-3.1.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('Public/script/jquery-3.1.0.min.js') }}"></script>
+
         {% block stylesheets %}
 
         {% endblock %}
@@ -61,6 +62,12 @@
         {% endblock %}
         
         
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            $(document).ready( function () {
+            // On cache les sous-menus :
+            $(".onhover").hide();
+            } ) ;
+
+        {% endblock %}
     </body>
 </html>

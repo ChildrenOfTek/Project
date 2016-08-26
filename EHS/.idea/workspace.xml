@@ -2,6 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ff6ac85-5b4c-41f1-99d0-8da498b1513b" name="Default" comment="" />
+=======
+    <list default="true" id="7ff6ac85-5b4c-41f1-99d0-8da498b1513b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/user/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/user/index.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/user/show.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/user/show.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/SymfonyRequirements.php" afterPath="$PROJECT_DIR$/app/SymfonyRequirements.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/check.php" afterPath="$PROJECT_DIR$/app/check.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UserBundle/Entity/Role.php" afterPath="$PROJECT_DIR$/src/UserBundle/Entity/Role.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/UserBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/UserBundle/Entity/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/config.php" afterPath="$PROJECT_DIR$/web/config.php" />
+    </list>
     <ignored path="EHS.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -60,6 +70,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="600">
               <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+=======
+            <state relative-caret-position="420">
+              <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -275,12 +288,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1472196991504</updated>
+<<<<<<< HEAD
       <workItem from="1472196995996" duration="3368000" />
+=======
+      <workItem from="1472196995996" duration="3066000" />
+>>>>>>> ecba4a8bfc052b073cfa04412f1e2e5c18a7548b
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="3368000" />
+=======
+    <option name="totallyTimeSpent" value="3066000" />
+>>>>>>> ecba4a8bfc052b073cfa04412f1e2e5c18a7548b
   </component>
   <component name="ToolWindowManager">
     <frame x="447" y="35" width="1400" height="945" extended-state="0" />
@@ -367,8 +388,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/user/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="600">
           <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+=======
+        <state relative-caret-position="420">
+          <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+>>>>>>> ecba4a8bfc052b073cfa04412f1e2e5c18a7548b
           <folding />
         </state>
       </provider>

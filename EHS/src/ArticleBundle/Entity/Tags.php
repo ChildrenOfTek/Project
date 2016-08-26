@@ -31,7 +31,7 @@ class Tags
     /**
      * @var int
      *
-     * @ORM\Column(name="articleId", type="integer")
+     * @ORM\Column(name="articleId", type="integer", nullable=true)
      * @ORM\ManyToMany(targetEntity="Article", inversedBy="tagId")
      * @ORM\JoinTable(name="tags_article")
      */

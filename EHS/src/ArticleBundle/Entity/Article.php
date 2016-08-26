@@ -81,9 +81,16 @@ class Article
     /**
      * @var int
      * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articleId")
-     * @ORM\Column(name="tagId", type="integer")
+     * @ORM\Column(name="tagId", type="integer", nullable=true)
      */
     private $tagId;
+
+    /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="Newsletter")
+     * @ORM\JoinColumn(name="idNews", referencedColumnName="id", nullable=true)
+     */
+    private $idNews;
 
 
 
@@ -320,7 +327,7 @@ class Article
     /**
      * Get user
      *
-     * @return integer 
+     * @return integer
      */
     public function getUser()
     {

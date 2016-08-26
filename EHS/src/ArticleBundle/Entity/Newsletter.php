@@ -43,10 +43,11 @@ class Newsletter
     private $sujetNletter;
 
 
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +70,7 @@ class Newsletter
     /**
      * Get dateNletter
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateNletter()
     {
@@ -92,7 +93,7 @@ class Newsletter
     /**
      * Get nomNletter
      *
-     * @return string 
+     * @return string
      */
     public function getNomNletter()
     {
@@ -115,7 +116,7 @@ class Newsletter
     /**
      * Get sujetNletter
      *
-     * @return string 
+     * @return string
      */
     public function getSujetNletter()
     {

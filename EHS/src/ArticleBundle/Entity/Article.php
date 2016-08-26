@@ -25,7 +25,7 @@ class Article
      * @var int
      *
      * @ORM\Column(name="user", type="integer")
-     * @ORM\ManyToOne(targetEntity="UserBundle:User", inversedBy= "Article")
+     * @ORM\ManyToOne(targetEntity="UserBundle:User", inversedBy= "article")
      */
     private $user;
 
@@ -80,10 +80,11 @@ class Article
 
     /**
      * @var int
-     *
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articleId")
      * @ORM\Column(name="tagId", type="integer")
      */
     private $tagId;
+
 
 
     /**

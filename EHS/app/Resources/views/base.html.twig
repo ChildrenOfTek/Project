@@ -3,20 +3,22 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}
-            
+
             Bienvenue !
             
             {% endblock %}</title>
         
         <link href="{{ asset('Public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
-        
+        <link href="{{ asset('Public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
+        <script href="{{ asset('Public/script/jquery-3.1.0.min.js') }}"></script>
         {% block stylesheets %}
-        
+
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}
+            <div class="login">
             {% block login %}
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}            
                     {% include 'security/login.html.twig' %}
@@ -25,10 +27,31 @@
                     <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
                 {% endif %}
             {% endblock %}
+            </div>
         
         
-            
-        {% block nav %}{% endblock %}
+        {% if app.request.requestUri != "/EHS/EHS/web/app_dev.php/user/new" %}
+        {% block nav %}
+        <div class="nav">
+        <div class="onhover">
+            <h1>Qui sommes nous?</h1>
+            <div>Association</div>
+            <div>Statuts</div>
+            <div>Bureau</div>
+            <div>Presentation</div>
+        </div>
+        <div class="onhover">
+            <h1>Nos actions</h1>
+            <div>Ateliers</div>
+            <div>Rencontres citoyennes</div>
+            <div>Spectacles</div>
+            <div>Contributions</div>
+        </div>
+        <div class="onhover">
+            <h1>Agenda</h1></div>
+        </div>
+        {% endblock %}
+        {% endif %}
         
         
         {% block section %}{% endblock %}

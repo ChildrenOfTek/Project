@@ -29,6 +29,11 @@ class Role implements RoleInterface
 
 
     /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="userRoles")
+     */
+    protected $user;
+
+    /**
      * Gets the id.
      *
      * @return integer The id.
@@ -85,5 +90,4 @@ class Role implements RoleInterface
     {
         return $this->getName();
     }
-
 }

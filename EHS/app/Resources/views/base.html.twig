@@ -9,16 +9,82 @@
             {% endblock %}</title>
 
         <link href="{{ asset('Public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
-
         {% block stylesheets %}
 
+        <link href="{{ asset('Public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="{{ asset('Public/script/jquery-3.1.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('Public/script/menuDeroulant.js') }}"></script>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block nav %}{% endblock %}
+        {% block body %}
+            <div class="login">
+            {% block login %}
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% include 'security/login.html.twig' %}
+                {% else %}
+                    <h3> Bienvenue {{ app.user.username }} </h3>
+                    <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
+                    <a href="{{ path("contact") }}">Nous contacter</a>
+                    {% if(is_granted('ROLE_ADMIN')) %}
+                        <a href="{{ path("user_new") }}">Ajouter un user</a>
+                    {% endif %}
+                    {% if(is_granted('ROLE_PRESS')) %}
+
+                    {% endif %}
+
+                {% endif %}
+            {% endblock %}
+            </div>
+
+
+        {% if app.request.requestUri != "/EHS/EHS/web/app_dev.php/user/new" %}
+        {% block nav %}
+        <div class="nav">
+        <ul class="navigation" >
+        <li class="toggleSubMenu"><span>Qui sommes nous?</span>
+            <ul class="subMenu">
+                <li ><a href="#" title="Association">Association</a></li>
+                <li ><a href="#" title="Statuts">Statuts</a></li>
+                <li ><a href="#" title="Bureau">Bureau</a></li>
+                <li ><a href="#" title="Presentation">Presentation</a></li>
+            </ul>
+        </li>
+
+        <li class="toggleSubMenu"><span>Nos actions</span>
+            <ul class="subMenu">
+                <li ><a href="#" title="Ateliers">Ateliers</a></li>
+                <li ><a href="#" title="Rencontres">Rencontres</a></li>
+                <li ><a href="#" title="Spectacles">Spectacles</a></li>
+                <li ><a href="#" title="Contributions">Contributions</a></li>
+            </ul>
+        </li>
+
+        <li class="toggleSubMenu"><span>Agenda</span>
+            <ul class="subMenu">
+            <li ><a href="#" title="Ateliers">Ateliers</a></li>
+            <li ><a href="#" title="Rencontres">Rencontres</a></li>
+            <li ><a href="#" title="Spectacles">Spectacles</a></li>
+            <li ><a href="#" title="Contributions">Contributions</a></li>
+            </ul>
+        </li>
+        </ul>
+        </div>
+        {% endblock %}
+        {% endif %}
+
+
         {% block section %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+
+        {% endblock %}
+
+
+        {% block javascripts %}
+
+
+
+        {% endblock %}
     </body>
 </html>

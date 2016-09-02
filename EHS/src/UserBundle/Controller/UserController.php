@@ -8,10 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use UserBundle\Entity\User;
 use UserBundle\Form\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * User controller.
- *
+ * @Security("has_role('ROLE_ADMIN')")
  * @Route("/user")
  */
 class UserController extends Controller
@@ -42,11 +44,19 @@ class UserController extends Controller
     public function newAction(Request $request)
     {
         $user = new User();
+        
         $form = $this->createForm('UserBundle\Form\UserType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data=$form->getData();
             $em = $this->getDoctrine()->getManager();
+            
+            $plainPassword = $data->getPassword();
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $plainPassword);
+
+            $user->setPassword($encoded);
             $em->persist($user);
             $em->flush();
 

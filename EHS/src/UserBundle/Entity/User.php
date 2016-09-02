@@ -6,6 +6,7 @@ use \Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
  * User
@@ -24,105 +25,102 @@ class User implements UserInterface, \Serializable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
      */
-    private $password;
+    protected $password;
+
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="salt", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Role", cascade={"remove"}))
+     * @ORM\JoinTable(name="user_role",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id",onDelete="CASCADE")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     *)
      */
-    private $salt;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="userRoles", type="integer")
-     */
-    private $userRoles;
+    protected $userRoles;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $nom;
+    protected $nom;
 
     /**
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255)
      */
-    private $prenom;
+    protected $prenom;
     
     /**
      * @var string
      *
      * @ORM\Column(name="adresse", type="string", length=255)
      */
-    private $adresse;
+    protected $adresse;
     
     /**
      * @var string
      *
      * @ORM\Column(name="cp", type="string", length=20)
      */
-    private $cp;
+    protected $cp;
     
     /**
      * @var string
      *
      * @ORM\Column(name="ville", type="string", length=255)
      */
-    private $ville;
+    protected $ville;
     
     /**
      * @var string
      *
      * @ORM\Column(name="telephone", type="string", length=30)
      */
-    private $telephone;
+    protected $telephone;
     
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
      */
-    private $email;
+    protected $email;
     
     /**
      * @var boolean
      *
      * @ORM\Column(name="newsletter", type="boolean")
      */
-    private $newsletter;
+    protected $newsletter;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthDate", type="datetime")
      */
-    private $birthDate;
+    protected $birthDate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="article", type="integer")
+     * @ORM\Column(name="article", type="integer", nullable=true)
+     * @ORM\OneToMany(targetEntity="ArticleBundle:Article", mappedBy="user")
      */
-    private $article;
+    protected $article;
     
     public function __construct()
     {
@@ -146,7 +144,7 @@ class User implements UserInterface, \Serializable
      */
     public function serialize()
     {
-        return \json_encode(array($this->id, $this->login, $this->password, $this->salt, $this->userRoles));
+        return \json_encode(array($this->id, $this->username, $this->password, $this->userRoles));
     }
 
     /**
@@ -155,7 +153,7 @@ class User implements UserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list($this->id, $this->login, $this->password, $this->salt, $this->userRoles) = \json_decode($serialized);
+        list($this->id, $this->username, $this->password, $this->userRoles) = \json_decode($serialized);
     }
     
     /**
@@ -165,25 +163,17 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        //return array('ROLE_USER');
+        $roles = array();
+        foreach ($this->userRoles as $role) {
+            $roles[] = $role->getRole();
+        }
+
+        return $roles;
     }
     
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * Set salt
-     *
-     * @param string $salt
-     * @return User
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-
-        return $this;
     }
 
     /**
@@ -252,7 +242,7 @@ class User implements UserInterface, \Serializable
      */
     public function setUserRoles($userRoles)
     {
-        $this->userRoles = $userRoles;
+        $this->userRoles[] = $userRoles;
 
         return $this;
     }

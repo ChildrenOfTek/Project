@@ -2,19 +2,19 @@
 
 {% block body %}
     <h1>Article list</h1>
-
-    <table>
+<div class="container">
+    <table class="table table-hover table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>User</th>
-                <th>Datearticle</th>
-                <th>Titrearticle</th>
-                <th>Sujetarticle</th>
-                <th>Content</th>
-                <th>Datepublication</th>
-                <th>Imagearticle</th>
-                <th>Online</th>
+                <th>Utilisateur</th>
+                <th>Date de rédaction</th>
+                <th>Titre de l'article</th>
+                <th>Sujet</th>
+                <th>Contenu</th>
+                <th>Date de Publication</th>
+                <th>Image</th>
+                <th>En ligne</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -44,7 +44,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <ul>
         <li>
             <a href="{{ path('article_new') }}">Create a new entry</a>

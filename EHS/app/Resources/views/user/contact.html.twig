@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+    <h1>Contact</h1>
+
+    <form id="contact" action="" method="POST">
+        <fieldset><legend>Vos coordonnées</legend>
+            Votre nom: <input type="text" name="nom" disabled value="{{ user.username }}">
+            Votre email: <input type="text" name="email" disabled value="{{ user.email }}">
+        </fieldset>
+        <fieldset><legend>Votre message :</legend>
+            <p><label for="objet">Objet :</label><input type="text" id="objet" name="objet" tabindex="3" /></p>
+            <p>Votre message :</p>
+            <p><label for="message : "></label><textarea cols="50" rows="10"></textarea></p>
+            <input type="submit" value="Nous contacter">
+        </fieldset>
+    </form>
+
+
+{% endblock %}

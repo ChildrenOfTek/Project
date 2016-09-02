@@ -24,7 +24,7 @@ class Article
     /**
      * @var int
      *
-     * @ORM\Column(name="user", type="integer")
+     * @ORM\Column(name="user", type="text")
      * @ORM\ManyToOne(targetEntity="UserBundle:User", inversedBy= "Article")
      */
     private $user;
@@ -292,7 +292,7 @@ class Article
     /**
      * Set user
      *
-     * @param integer $user
+     * @param text $user
      * @return Article
      */
     public function setUser($user)
@@ -305,7 +305,7 @@ class Article
     /**
      * Get user
      *
-     * @return integer 
+     * @return text
      */
     public function getUser()
     {
@@ -338,7 +338,7 @@ class Article
     /**
      * Get tag
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTag()
     {
@@ -361,7 +361,7 @@ class Article
     /**
      * Get newsletter
      *
-     * @return \ArticleBundle\Entity\Newsletter 
+     * @return \ArticleBundle\Entity\Newsletter
      */
     public function getNewsletter()
     {

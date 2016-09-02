@@ -18,7 +18,6 @@ class ArticleType extends AbstractType
             ->add('user')
             ->add('dateArticle')
             ->add('titreArticle')
-            ->add('sujetArticle')
             ->add('content')
             ->add('datePublication')
             ->add('imageArticle')
@@ -27,7 +26,7 @@ class ArticleType extends AbstractType
             ->add('newsletter')
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block section %}
     <h1>User list</h1>
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Salt</th>
-                <th>Userroles</th>
+                <th>Nom d'utilisateur</th>
+                <th>Role attribué</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Adresse</th>
@@ -29,9 +27,9 @@
             <tr>
                 <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
                 <td>{{ user.username }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.salt }}</td>
-                <td>{{ user.userRoles }}</td>
+                {% for user in user.userRoles %}
+                <td>{{ user.name }}</td>
+                {% endfor %}
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.adresse }}</td>
@@ -40,8 +38,8 @@
                 <td>{{ user.telephone }}</td>
                 <td>{{ user.email }}</td>
                 <td>{% if user.newsletter %}Yes{% else %}No{% endif %}</td>
-                <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ user.article }}</td>
+                <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
+                <!-- H:i:s-->
                 <td>
                     <ul>
                         <li>

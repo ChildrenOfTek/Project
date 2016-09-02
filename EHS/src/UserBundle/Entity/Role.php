@@ -29,11 +29,6 @@ class Role implements RoleInterface
 
 
     /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="userRoles")
-     */
-    protected $user;
-
-    /**
      * Gets the id.
      *
      * @return integer The id.
@@ -91,36 +86,4 @@ class Role implements RoleInterface
         return $this->getName();
     }
 
-    /**
-     * Add user
-     *
-     * @param \UserBundle\Entity\User $user
-     * @return Role
-     */
-    public function addUser(\UserBundle\Entity\User $user)
-    {
-        $this->user[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param \UserBundle\Entity\User $user
-     */
-    public function removeUser(\UserBundle\Entity\User $user)
-    {
-        $this->user->removeElement($user);
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

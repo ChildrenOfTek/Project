@@ -21,7 +21,7 @@
     <body>
         {% block body %}
             <div class="login">
-            {% block login %}<a href="{{ path("user_new") }}">Ajouter un user</a>
+            {% block login %}
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}            
                     {% include 'security/login.html.twig' %}
                 {% else %}
@@ -29,10 +29,10 @@
                     <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
                     <a href="{{ path("contact") }}">Nous contacter</a>
                     {% if(is_granted('ROLE_ADMIN')) %}
-                        <h1>Hello</h1>
-                        {% endif %}
+                        <a href="{{ path("user_new") }}">Ajouter un user</a>
+                    {% endif %}
                     {% if(is_granted('ROLE_PRESS')) %}
-                        <h1>Reporter</h1>
+
                     {% endif %}
 
                 {% endif %}

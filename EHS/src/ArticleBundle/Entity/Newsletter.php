@@ -3,6 +3,7 @@
 namespace ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Newsletter
@@ -44,9 +45,18 @@ class Newsletter
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="newsletter")
+     */
+    private $articles;
+
+    public function __construct() {
+        $this->articles = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +79,7 @@ class Newsletter
     /**
      * Get dateNletter
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateNletter()
     {
@@ -92,7 +102,7 @@ class Newsletter
     /**
      * Get nomNletter
      *
-     * @return string 
+     * @return string
      */
     public function getNomNletter()
     {
@@ -115,7 +125,7 @@ class Newsletter
     /**
      * Get sujetNletter
      *
-     * @return string 
+     * @return string
      */
     public function getSujetNletter()
     {

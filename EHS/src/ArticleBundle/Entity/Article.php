@@ -3,7 +3,7 @@
 namespace ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Article
  *
@@ -79,12 +79,21 @@ class Article
     private $online;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="tagId", type="integer")
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articles")
+     * @ORM\JoinTable(name="tags_articles")
      */
-    private $tagId;
+    private $tag;
 
+    public function __construct() {
+            $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Newsletter", inversedBy="articles")
+     * @ORM\JoinColumn(name="newsletter_id", referencedColumnName="id")
+     */
+    private $newsletter;
 
     /**
      * Get id
@@ -278,28 +287,5 @@ class Article
     public function getOnline()
     {
         return $this->online;
-    }
-
-    /**
-     * Set tagId
-     *
-     * @param integer $tagId
-     * @return Article
-     */
-    public function setTagId($tagId)
-    {
-        $this->tagId = $tagId;
-
-        return $this;
-    }
-
-    /**
-     * Get tagId
-     *
-     * @return integer
-     */
-    public function getTagId()
-    {
-        return $this->tagId;
     }
 }

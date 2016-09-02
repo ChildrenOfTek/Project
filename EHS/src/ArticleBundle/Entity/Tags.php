@@ -71,4 +71,37 @@ class Tags
     {
         return $this->libelle;
     }
+
+    /**
+     * Add articles
+     *
+     * @param \ArticleBundle\Entity\Article $articles
+     * @return Tags
+     */
+    public function addArticle(\ArticleBundle\Entity\Article $articles)
+    {
+        $this->articles[] = $articles;
+
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \ArticleBundle\Entity\Article $articles
+     */
+    public function removeArticle(\ArticleBundle\Entity\Article $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
 }

@@ -3,6 +3,7 @@
 namespace ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tags
@@ -28,11 +29,20 @@ class Tags
      */
     private $libelle;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
+     */
+    private $articles;
+
+    public function __construct() {
+            $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,7 +65,7 @@ class Tags
     /**
      * Get libelle
      *
-     * @return string 
+     * @return string
      */
     public function getLibelle()
     {

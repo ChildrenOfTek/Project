@@ -46,6 +46,13 @@ class NewsletterController extends Controller
             $em->persist($newsletter);
             $em->flush();
 
+            $message = \Swift_Message::newInstance()
+                ->setSubject('W E S H  G R O S')
+                ->setFrom('guillossou.michele@gmail.com')
+                ->setTo('y@blzr.org')
+                ->setBody('caca', 'text/html');
+            $this->get('mailer')->send($message);
+
             return $this->redirectToRoute('newsletter_show', array('id' => $newsletter->getId()));
         }
 

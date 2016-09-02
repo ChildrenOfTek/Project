@@ -7,8 +7,8 @@ security:
             cost: 12
     role_hierarchy:
         ROLE_USER: ROLE_USER
-        ROLE_PRESS: ROLE_PRESS
-        ROLE_ADMIN: ROLE_ADMIN
+        ROLE_PRESS: [ROLE_PRESS,ROLE_USER]
+        ROLE_ADMIN: [ROLE_ADMIN,ROLE_PRESS]
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:

@@ -42,11 +42,17 @@ class Post
      */
     private $dateEdit;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Topic", inversedBy="posts")
+     * @ORM\JoinColumn(name="topic_id", referencedColumnName="id")
+     */
+    private $topic;
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +75,7 @@ class Post
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -92,7 +98,7 @@ class Post
     /**
      * Get author
      *
-     * @return string 
+     * @return string
      */
     public function getAuthor()
     {
@@ -115,7 +121,7 @@ class Post
     /**
      * Get dateEdit
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateEdit()
     {

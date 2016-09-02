@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Topic list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for topic in topics %}
+            <tr>
+                <td><a href="{{ path('topic_show', { 'id': topic.id }) }}">{{ topic.id }}</a></td>
+                <td>{{ topic.title }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('topic_show', { 'id': topic.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('topic_edit', { 'id': topic.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('topic_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

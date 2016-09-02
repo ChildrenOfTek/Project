@@ -35,11 +35,18 @@ class Forum
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Topic",mappedBy="forum")
+     */
+     private $topics;
 
+    public function __construct() {
+        $this->features = new ArrayCollection();
+    }
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,7 +69,7 @@ class Forum
     /**
      * Get libForum
      *
-     * @return string 
+     * @return string
      */
     public function getLibForum()
     {
@@ -85,7 +92,7 @@ class Forum
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {

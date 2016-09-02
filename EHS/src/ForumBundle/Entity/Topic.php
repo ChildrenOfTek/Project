@@ -28,11 +28,25 @@ class Topic
      */
     private $title;
 
+    /**
+     *@ORM\ManyToOne(targetEntity="Forum",inversedBy="topics")
+     *@ORM\JoinColumn(name="forum_id", referencedColumnName="id")
+     */
+    private $forum;
+
+    /**
+     *@ORM\OneToMany(targetEntity="Post", mappedBy="topic")
+     */
+    private $posts;
+
+    public function __construct() {
+        $this->posts = new ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,7 +69,7 @@ class Topic
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {

@@ -1,3 +1,11 @@
+article_tags:
+    resource: "@ArticleBundle/Controller/TagsController.php"
+    type:     annotation
+
+article_article:
+    resource: "@ArticleBundle/Controller/ArticleController.php"
+    type:     annotation
+
 user_user:
     resource: "@UserBundle/Controller/UserController.php"
     type:     annotation

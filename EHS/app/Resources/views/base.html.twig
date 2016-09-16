@@ -11,8 +11,10 @@
 
         <link href="{{ asset('public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('public/CSS/Dropzone.css') }}" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="{{ asset('public/script/jquery-3.1.0.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/script/menuDeroulant.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/script/Dropzone.js') }}"></script>
 
         {% block stylesheets %}
 {{ dump(app.user) }}
@@ -38,7 +40,7 @@
                     <li>
                         <a href="#">Association</a>
                         <ul class="subnav">
-                            <li><a href="#">Statuts</a></li>
+                            <li><a href="{{ path('status') }}">Statuts</a></li>
                             <li><a href="#">Bureau</a></li>
                             <li><a href="#">Presentation</a></li>
                         </ul>
@@ -68,13 +70,15 @@
                             <li><a href="{{ path('article_index') }}">Voir les articles</a></li>
                             </ul>
                     </li>
+
                     <li>
                         <a href="#">Forum</a>
                         <ul class="subnav">
-                            <!-- faire une boucle pr chopper les sujets du forum? -->
-                            <li><a href="#">Ateliers</a></li>
+                            <li><a href="{{ path('forum_new') }}">Creer un forum</a></li>
+                            <li><a href="{{ path('forum_index') }}">Voir les forums</a></li>
                         </ul>
                     </li>
+
                     <li><a href="{{ path('about') }}">A propos</a></li>
                     <li><a href="{{ path('contact') }}">Contact</a></li>
                 </ul>

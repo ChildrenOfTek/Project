@@ -15,7 +15,7 @@ class ForumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libForum')
+            ->add('libForum','text',array('label'=>'Intitulé du forum'))
             ->add('description')
         ;
     }

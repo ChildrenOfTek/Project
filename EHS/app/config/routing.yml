@@ -12,11 +12,6 @@ newsletter:
     type:     annotation
     prefix:   /
 
-
-user_user:
-    resource: "@UserBundle/Controller/UserController.php"
-    type:     annotations
-
 forum:
     resource: "@ForumBundle/Controller/"
     type:     annotation

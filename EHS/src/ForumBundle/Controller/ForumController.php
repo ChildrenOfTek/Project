@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ForumBundle\Entity\Forum;
 use ForumBundle\Form\ForumType;
 
+
 /**
  * Forum controller.
  *

@@ -3,7 +3,7 @@
 namespace ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Post
  *
@@ -126,5 +126,29 @@ class Post
     public function getDateEdit()
     {
         return $this->dateEdit;
+    }
+
+    /**
+     * Gets the value of topic.
+     *
+     * @return mixed
+     */
+    public function getTopic()
+    {
+        return $this->topic;
+    }
+
+    /**
+     * Sets the value of topic.
+     *
+     * @param mixed $topic the topic
+     *
+     * @return self
+     */
+    private function _setTopic($topic)
+    {
+        $this->topic = $topic;
+
+        return $this;
     }
 }

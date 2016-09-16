@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block section %}
     <h1>Forum list</h1>
 
-    <table>
+    <table class='table'>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Libforum</th>
+
+                <th>Nom</th>
                 <th>Description</th>
                 <th>Actions</th>
             </tr>
@@ -15,27 +15,20 @@
         <tbody>
         {% for forum in forums %}
             <tr>
-                <td><a href="{{ path('forum_show', { 'id': forum.id }) }}">{{ forum.id }}</a></td>
-                <td>{{ forum.libForum }}</td>
+
+                <td><a href="{{ path('forum_show',{ 'id': forum.id })}}">{{ forum.libForum }}</td>
                 <td>{{ forum.description }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('forum_show', { 'id': forum.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('forum_edit', { 'id': forum.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('forum_edit', { 'id': forum.id }) }}">Modifier</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('forum_new') }}">Create a new entry</a>
-        </li>
+    <form method="POST" action="{{ path('forum_new') }}">
+            <input type="submit" value="Créer un nouveau sujet" >
+    </form>
+
     </ul>
 {% endblock %}

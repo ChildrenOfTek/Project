@@ -1,22 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Forum</h1>
+{% block section %}
+    <h1>{{ forum.libForum  }}</h1>
 
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ forum.id }}</td>
-            </tr>
-            <tr>
-                <th>Libforum</th>
-                <td>{{ forum.libForum }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ forum.description }}</td>
-            </tr>
+
+            {% for topic in forum.topics %}
+                <tr>
+                  <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
+                    <td><a href="{{ path('topic_edit', { 'id': topic.id }) }}">Modifier</a></td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
@@ -25,7 +20,7 @@
             <a href="{{ path('forum_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('forum_edit', { 'id': forum.id }) }}">Edit</a>
+            <a href="{{ path('topic_new', { 'id': forum.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

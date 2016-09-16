@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block section %}
     <h1>Topic edit</h1>
 
     {{ form_start(edit_form) }}
@@ -8,9 +8,13 @@
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
+
+
     <ul>
         <li>
-            <a href="{{ path('topic_index') }}">Back to the list</a>
+          {% for forum in topic.forum %}
+            <a href="{{ path('forum_show', { 'id': forum.id }) }}">Retour</a>
+          {% endfor %}
         </li>
         <li>
             {{ form_start(delete_form) }}
@@ -18,4 +22,5 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+
 {% endblock %}

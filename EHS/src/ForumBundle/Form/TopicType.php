@@ -5,6 +5,7 @@ namespace ForumBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class TopicType extends AbstractType
 {
@@ -16,10 +17,14 @@ class TopicType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('forum')
+            ->add('forum', EntityType::class, array(
+              'class'=>'ForumBundle:Forum',
+              'property'=>'libForum',
+              'label'=>'sujet'
+            ))
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

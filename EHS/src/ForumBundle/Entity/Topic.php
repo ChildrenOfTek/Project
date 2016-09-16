@@ -3,6 +3,7 @@
 namespace ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Topic
@@ -74,5 +75,29 @@ class Topic
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Gets the value of forum.
+     *
+     * @return mixed
+     */
+    public function getForum()
+    {
+        return $this->forum;
+    }
+
+    /**
+     * Sets the value of forum.
+     *
+     * @param mixed $forum the forum
+     *
+     * @return self
+     */
+    private function _setForum($forum)
+    {
+        $this->forum = $forum;
+
+        return $this;
     }
 }

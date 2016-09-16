@@ -5,6 +5,7 @@ namespace ForumBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PostType extends AbstractType
 {
@@ -18,7 +19,11 @@ class PostType extends AbstractType
             ->add('content')
             ->add('author')
             ->add('dateEdit', 'datetime')
-            ->add('topic')
+            ->add('topic', EntityType::class, array(
+              'class'=>'ForumBundle:Topic',
+              'property'=>'title',
+              'label'=>'question'
+            ))
         ;
     }
     

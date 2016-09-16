@@ -54,16 +54,16 @@ class DefaultController extends Controller
 
                 $message = \Swift_Message::newInstance()
                     ->setSubject($contact->getSujet())
-                    ->setFrom('guillossou.michele@gmail.com')
+                    ->setFrom($contact->getEmail())
                     // notre adresse mail
-                    ->setTo($user->getEmail())
-                    ->setContentType('text/html')
+                    ->setTo('guillossou.michele@gmail.com')
+                    //->setContentType('text/html')
                     //ici nous allons utiliser un template pour pouvoir styliser notre mail si nous le souhaitons
                     ->setBody(
-                        $this->render('user/email.html.twig', array(
+                        $this->renderView('user/email.html.twig', array(
                                 'contact' => $contact
                             )
-                        )
+                        ), 'text/html'
                     )
                 ;
 

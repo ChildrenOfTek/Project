@@ -26,13 +26,16 @@
 
     <ul>
         <li>
-            <a href="{{ path('newsletter_index') }}">Back to the list</a>
+            <a href="{{ path('newsletter_send', { 'id': newsletter.id }) }}">Send</a>
         </li>
         <li>
             <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">Edit</a>
         </li>
         <li>
             <a href="{{ path('newsletter_delete', { 'id': newsletter.id }) }}">Delete</a>
+        </li>
+        <li>
+            <a href="{{ path('newsletter_index') }}">Back to the list</a>
         </li>
     </ul>
 {% endblock %}

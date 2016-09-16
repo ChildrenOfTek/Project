@@ -28,7 +28,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/about", name="about")
+     * @Route("/about", name="association_about")
      */
     public function aboutAction()
     {
@@ -36,11 +36,27 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/status", name="status")
+     * @Route("/status", name="association_status")
      */
     public function statusAction()
     {
         return $this->render('association/status.html.twig');
+    }
+
+    /**
+     * @Route("/office", name="association_office")
+     */
+    public function officeAction()
+    {
+        return $this->render('association/office.html.twig');
+    }
+
+    /**
+     * @Route("/presenation", name="association_presentation")
+     */
+    public function presentationAction()
+    {
+        return $this->render('association/presentation.html.twig');
     }
 
     /* A SUIVRE ACTIONS PLUS SPECIFIQUES COMME FORMULAIRE DE CONTACT */

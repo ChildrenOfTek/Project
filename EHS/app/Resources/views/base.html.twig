@@ -16,7 +16,8 @@
         {% block stylesheets %}
 {{ dump(app.user) }}
         {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('Public/img/favicon.ico') }}" />
+        <LINK REL="SHORTCUT ICON" href="{{ asset('public/img/favicon.ico') }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('public/img/favicon.ico') }}" />
     </head>
     <body>
 
@@ -56,6 +57,13 @@
                             <li><a href="#">Rencontres</a></li>
                             <li><a href="#">Spectacles</a></li>
                             <li><a href="#">Contributions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Forum</a>
+                        <ul class="subnav">
+                            <!-- faire une boucle pr chopper les sujets du forum? -->
+                            <li><a href="#">Ateliers</a></li>
                         </ul>
                     </li>
                     <li><a href="{{ path('about') }}">A propos</a></li>

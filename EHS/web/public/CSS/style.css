@@ -29,11 +29,17 @@ body
 }
 .login
 {
-    width:30%;
+    width:20%;
+    text-align:center;
+    background: #222;
+    color:white;
+    height:50%;
 }
 .login li
 {
     list-style: none;
+    text-align:center;
+    color: #fff;
 }
 ul.topnav {
     list-style: none;

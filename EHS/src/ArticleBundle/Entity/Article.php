@@ -46,13 +46,6 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="sujetArticle", type="text")
-     */
-    private $sujetArticle;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
@@ -172,29 +165,6 @@ class Article
     public function getTitreArticle()
     {
         return $this->titreArticle;
-    }
-
-    /**
-     * Set sujetArticle
-     *
-     * @param string $sujetArticle
-     * @return Article
-     */
-    public function setSujetArticle($sujetArticle)
-    {
-        $this->sujetArticle = $sujetArticle;
-
-        return $this;
-    }
-
-    /**
-     * Get sujetArticle
-     *
-     * @return string
-     */
-    public function getSujetArticle()
-    {
-        return $this->sujetArticle;
     }
 
     /**

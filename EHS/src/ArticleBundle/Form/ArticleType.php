@@ -5,6 +5,9 @@ namespace ArticleBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ArticleType extends AbstractType
 {
@@ -16,13 +19,14 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('user')
-            ->add('dateArticle')
+            ->add('dateArticle', DateType::class, array('data' => new \Datetime()))
             ->add('titreArticle')
-            ->add('content')
+            ->add('content','textarea',array('attr'=>array('rows'=>15)))
             ->add('datePublication')
             ->add('imageArticle')
             ->add('online')
-            ->add('tag')
+            ->add('tag',EntityType::class,array('class'=>'ArticleBundle:Tags',
+          'choice_label'=>'libelle'))
             ->add('newsletter')
         ;
     }

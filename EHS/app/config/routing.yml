@@ -1,3 +1,15 @@
+forum_post:
+    resource: "@ForumBundle/Controller/PostController.php"
+    type:     annotation
+
+forum_topic:
+    resource: "@ForumBundle/Controller/TopicController.php"
+    type:     annotation
+
+forum_forum:
+    resource: "@ForumBundle/Controller/ForumController.php"
+    type:     annotation
+
 article_tags:
     resource: "@ArticleBundle/Controller/TagsController.php"
     type:     annotation
@@ -20,4 +32,3 @@ user:
     resource: "@UserBundle/Controller/"
     type:     annotation
     prefix:   /
-

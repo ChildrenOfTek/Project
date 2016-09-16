@@ -1,25 +1,45 @@
 {% extends 'base.html.twig' %}
 
+ {% block title %}
+     {#je recupere le contenu du block parent#}
+     {{ parent() }} - Contact
+ {% endblock %}
 {% block section %}
-    <h1>Contact</h1>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron">
+                <h1>Page contact</h1>
 
-    <form id="contact" action="" method="POST">
-        <fieldset><legend>Vos coordonnées</legend>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            Votre nom: <input type="text" name="nom" disabled value="{{ user.username }}">
-            Votre email: <input type="text" name="email" disabled value="{{ user.email }}">
-            {% else %}
-                Votre nom: <input type="text" name="nom">
-                Votre email: <input type="text" name="email">
-            {% endif %}
-        </fieldset>
-        <fieldset><legend>Votre message :</legend>
-            <p><label for="objet">Objet :</label><input type="text" id="objet" name="objet" tabindex="3" /></p>
-            <p>Votre message :</p>
-            <p><label for="message : "></label><textarea cols="50" rows="10"></textarea></p>
-            <input type="submit" value="Nous contacter">
-        </fieldset>
-    </form>
+                <form action="{{ path('contact') }}" method="post">
 
+                    {{ form_label(formContact.email) }}
+                    {{ form_widget(formContact.email) }}
+                    {{ form_errors(formContact.email) }}
+                    <br/>
+
+                    {{ form_label(formContact.username) }}
+                    {{ form_widget(formContact.username) }}
+                    {{ form_errors(formContact.username) }}
+                    <br/>
+
+                    {{ form_label(formContact.sujet) }}
+                    {{ form_widget(formContact.sujet) }}
+                    {{ form_errors(formContact.sujet) }}
+                    <br/>
+
+                    {{ form_label(formContact.contenu) }}
+                    {{ form_widget(formContact.contenu) }}
+                    {{ form_errors(formContact.contenu) }}
+                    <br/>
+
+                    {#Ce dernier form widget vas nous permettre d'ajouter des que nous aurions pu oublier et SURTOUT le form token sans ça votre formulaire ne sera jamais valide !!#}
+                    {{ form_widget(formContact) }}
+                    {{ form_errors(formContact) }}
+                    <button class="btn btn-success btn-big">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
+

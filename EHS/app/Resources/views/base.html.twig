@@ -8,71 +8,95 @@
             
             {% endblock %}</title>
         
-        <link href="{{ asset('Public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('Public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="{{ asset('Public/script/jquery-3.1.0.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('Public/script/menuDeroulant.js') }}"></script>
+        <link href="{{ asset('public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="{{ asset('public/script/jquery-3.1.0.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/script/menuDeroulant.js') }}"></script>
 
         {% block stylesheets %}
 {{ dump(app.user) }}
         {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <LINK REL="SHORTCUT ICON" href="{{ asset('public/img/favicon.ico') }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('public/img/favicon.ico') }}" />
     </head>
     <body>
+
         {% block body %}
-            <div class="login">
+
+        
+        
+        {% if app.request.requestUri != "/EHS/EHS/web/app_dev.php/user/new" %}
+        <div class="top-div">
+            <div class="logo">
+                <img src="{{ asset('public/img/wip_ehs.png') }}"/>
+            </div>
+            {% block nav %}
+                <ul class="topnav">
+                    <li><a href="{{ path('index') }}">Accueil</a></li>
+                    <li>
+                        <a href="#">Association</a>
+                        <ul class="subnav">
+                            <li><a href="#">Statuts</a></li>
+                            <li><a href="#">Bureau</a></li>
+                            <li><a href="#">Presentation</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Nos actions</a>
+                        <ul class="subnav">
+                            <li><a href="#">Ateliers</a></li>
+                            <li><a href="#">Rencontres</a></li>
+                            <li><a href="#">Spectacles</a></li>
+                            <li><a href="#">Contributions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Agenda</a>
+                        <ul class="subnav">
+                            <li><a href="#">Ateliers</a></li>
+                            <li><a href="#">Rencontres</a></li>
+                            <li><a href="#">Spectacles</a></li>
+                            <li><a href="#">Contributions</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Forum</a>
+                        <ul class="subnav">
+                            <!-- faire une boucle pr chopper les sujets du forum? -->
+                            <li><a href="#">Ateliers</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ path('about') }}">A propos</a></li>
+                    <li><a href="{{ path('contact') }}">Contact</a></li>
+                </ul>
+        <div class="login">
             {% block login %}
-                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}            
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                     {% include 'security/login.html.twig' %}
                 {% else %}
                     <h3> Bienvenue {{ app.user.username }} </h3>
-                    <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
+                    <ul>
+                        <li>
+                            <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
+                        </li>
+
+
 
                     {% if(is_granted('ROLE_ADMIN')) %}
-                        <a href="{{ path("user_new") }}">Ajouter un user</a>
+                        <li>
+                            <a href="#">Acceder à l'interface admin</a>
+                        </li>
+
                     {% endif %}
                     {% if(is_granted('ROLE_PRESS')) %}
 
                     {% endif %}
 
                 {% endif %}
-                <a href="{{ path("contact") }}">Nous contacter</a>
+                    </ul>
             {% endblock %}
-            </div>
-        
-        
-        {% if app.request.requestUri != "/EHS/EHS/web/app_dev.php/user/new" %}
-        {% block nav %}
-        <div class="nav">
-        <ul class="navigation" >
-        <li class="toggleSubMenu"><span>Qui sommes nous?</span>
-            <ul class="subMenu">
-                <li ><a href="#" title="Association">Association</a></li>
-                <li ><a href="#" title="Statuts">Statuts</a></li>
-                <li ><a href="#" title="Bureau">Bureau</a></li>
-                <li ><a href="#" title="Presentation">Presentation</a></li>
-            </ul>
-        </li>
-
-        <li class="toggleSubMenu"><span>Nos actions</span>
-            <ul class="subMenu">
-                <li ><a href="#" title="Ateliers">Ateliers</a></li>
-                <li ><a href="#" title="Rencontres">Rencontres</a></li>
-                <li ><a href="#" title="Spectacles">Spectacles</a></li>
-                <li ><a href="#" title="Contributions">Contributions</a></li>
-            </ul>
-        </li>
-
-        <li class="toggleSubMenu"><span>Agenda</span>
-            <ul class="subMenu">
-            <li ><a href="#" title="Ateliers">Ateliers</a></li>
-            <li ><a href="#" title="Rencontres">Rencontres</a></li>
-            <li ><a href="#" title="Spectacles">Spectacles</a></li>
-            <li ><a href="#" title="Contributions">Contributions</a></li>
-            </ul>
-        </li>
-        </ul>
         </div>
+    </div>
         {% endblock %}
         {% endif %}
         

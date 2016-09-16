@@ -46,13 +46,6 @@ class NewsletterController extends Controller
             $em->persist($newsletter);
             $em->flush();
 
-            $message = \Swift_Message::newInstance()
-                ->setSubject('W E S H  G R O S')
-                ->setFrom('guillossou.michele@gmail.com')
-                ->setTo('y@blzr.org')
-                ->setBody('caca', 'text/html');
-            $this->get('mailer')->send($message);
-
             return $this->redirectToRoute('newsletter_show', array('id' => $newsletter->getId()));
         }
 
@@ -74,14 +67,13 @@ class NewsletterController extends Controller
 
         return $this->render('NewsletterBundle:Default:show.html.twig', array(
             'newsletter' => $newsletter,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
      * Displays a form to edit an existing Newsletter entity.
      *
-     * @Route("/{id}/edit", name="newsletter_edit")
+     * @Route("/edit/{id}", name="newsletter_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Newsletter $newsletter)
@@ -95,7 +87,7 @@ class NewsletterController extends Controller
             $em->persist($newsletter);
             $em->flush();
 
-            return $this->redirectToRoute('newsletter_edit', array('id' => $newsletter->getId()));
+            return $this->redirectToRoute('newsletter_index');
         }
 
         return $this->render('NewsletterBundle:Default:edit.html.twig', array(
@@ -108,19 +100,15 @@ class NewsletterController extends Controller
     /**
      * Deletes a Newsletter entity.
      *
-     * @Route("/{id}", name="newsletter_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="newsletter_delete")
+     * @Method("GET")
      */
-    public function deleteAction(Request $request, Newsletter $newsletter)
-    {
-        $form = $this->createDeleteForm($newsletter);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($newsletter);
-            $em->flush();
-        }
+    public function deleteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('NewsletterBundle:Newsletter');
+        $newsletter = $repo->find($id);
+        $em->remove($newsletter);
+        $em->flush();
 
         return $this->redirectToRoute('newsletter_index');
     }
@@ -140,4 +128,24 @@ class NewsletterController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Finds and displays a Newsletter entity.
+     *
+     * @Route("/send/{id}", name="newsletter_send")
+     * @Method("GET")
+     */
+    public function sendAction(Newsletter $newsletter) {
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject($newsletter->getSujet())
+            ->setFrom('guillossou.michele@gmail.com')
+            ->setTo('y@blzr.org')
+            ->setBody($newsletter->getTexte(), 'text/html');
+        $this->get('mailer')->send($message);
+
+        return $this->redirectToRoute('newsletter_index');
+
+    }
+
 }

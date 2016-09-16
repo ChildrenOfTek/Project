@@ -11,7 +11,7 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{% if newsletter.date %}{{ newsletter.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if newsletter.date %}{{ newsletter.date|date('d-m-Y') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Sujet</th>
@@ -32,9 +32,7 @@
             <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">Edit</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
+            <a href="{{ path('newsletter_delete', { 'id': newsletter.id }) }}">Delete</a>
         </li>
     </ul>
 {% endblock %}

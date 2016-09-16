@@ -16,17 +16,19 @@
         <tbody>
         {% for newsletter in newsletters %}
             <tr>
-                <td><a href="{{ path('newsletter_show', { 'id': newsletter.id }) }}">{{ newsletter.id }}</a></td>
-                <td>{% if newsletter.date %}{{ newsletter.date|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ newsletter.sujet }}</td>
+                <td>{% if newsletter.date %}{{ newsletter.date|date('d-m-Y') }}{% endif %}</td>
+                <td><a href="{{ path('newsletter_show', { 'id': newsletter.id }) }}">{{ newsletter.sujet }}</a></td>
                 <td>{{ newsletter.texte }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('newsletter_show', { 'id': newsletter.id }) }}">show</a>
+                            <a href="{{ path('newsletter_send', { 'id': newsletter.id }) }}">send</a>
                         </li>
                         <li>
                             <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('newsletter_delete', { 'id': newsletter.id }) }}">delete</a>
                         </li>
                     </ul>
                 </td>

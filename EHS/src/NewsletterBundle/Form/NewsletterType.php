@@ -5,6 +5,8 @@ namespace NewsletterBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class NewsletterType extends AbstractType
 {
@@ -15,9 +17,9 @@ class NewsletterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', 'date')
+            ->add('date', DateType::class, array('data' => new \Datetime()))
             ->add('sujet')
-            ->add('texte')
+            ->add('texte', TextareaType::class)
         ;
     }
     

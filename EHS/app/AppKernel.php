@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
             new ForumBundle\ForumBundle(),
             new ArticleBundle\ArticleBundle(),
+            new NewsletterBundle\NewsletterBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

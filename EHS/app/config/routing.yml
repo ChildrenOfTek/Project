@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 forum_post:
     resource: "@ForumBundle/Controller/PostController.php"
     type:     annotation
@@ -10,10 +9,6 @@ forum_topic:
 forum_forum:
     resource: "@ForumBundle/Controller/ForumController.php"
     type:     annotation
-
-user_user:
-    resource: "@UserBundle/Controller/UserController.php"
-
 
 article_tags:
     resource: "@ArticleBundle/Controller/TagsController.php"
@@ -27,11 +22,6 @@ newsletter:
     resource: "@NewsletterBundle/Controller/"
     type:     annotation
     prefix:   /
-
-
-user_user:
-    resource: "@UserBundle/Controller/UserController.php"
-    type:     annotations
 
 forum:
     resource: "@ForumBundle/Controller/"

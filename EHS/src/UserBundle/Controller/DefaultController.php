@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/index")
+     * @Route("/index", name="index")
      */
     public function indexAction()
     {
@@ -31,4 +31,17 @@ class DefaultController extends Controller
 
         ));
     }
+
+    /**
+     * Generates an about us page.
+     *
+     * @Route("/about", name="about")
+     */
+    public function about()
+    {
+        return $this->render('UserBundle:Default:about.html.twig');
+    }
+
+
+
 }

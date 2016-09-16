@@ -8,43 +8,7 @@
     display:flex;
     flex-flow: column nowrap;
 }
-.navigation {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background: #000;
-    color: #fff;
-    width: 200px;
-    font: 1.2em "Trebuchet MS", sans-serif;
-}
-.navigation a, .navigation span {
-    display: block;
-    padding: 4px 10px;
-    color: #fff;
-    text-decoration: none;
-    background: #000 url(menu-item.png) left bottom no-repeat;
-}
-.navigation .toggleSubMenu a, .navigation .toggleSubMenu span {
-    background-image: url(menu-item-deroule.png);
-}
-.navigation .open a, .navigation .open span {
-    background-image: url(menu-item-enroule.png);
-}
-.navigation a:hover, .navigation a:focus, .navigation a:active {
-    text-decoration: underline;
-}
-.navigation .subMenu {
-    font-size: .8em;
-    background: #ccc url(subMenu.png) 0 0 repeat-x;
-    font-size: .9em;
-    margin: 0;
-    padding: 0;
-    border-bottom: 1px solid #666;
-}
-.navigation ul.subMenu a {
-    background: none;
-    padding: 3px 20px;
-}
+
 #user div
 {
     width:400px;
@@ -52,4 +16,85 @@
 body
 {
     margin-left: 30px;
+}
+.top-div
+{
+    display: flex;
+    flex-flow:row nowrap;
+}
+.logo
+{
+   height:300px;
+   width:30%;
+}
+.login
+{
+    width:30%;
+}
+.login li
+{
+    list-style: none;
+}
+ul.topnav {
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+    float: left;
+    width: 920px;
+    height:50px;
+    background: #222;
+    font-size: 1.2em;
+
+}
+ul.topnav li {
+    float: left;
+    margin: 0;
+    padding: 0 15px 0 0;
+    position: relative; /*--Declare X and Y axis base for sub navigation--*/
+}
+ul.topnav li a{
+    padding: 10px 5px;
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    float: left;
+}
+ul.topnav li a:hover{
+
+}
+ul.topnav li span { /*--Drop down trigger styles--*/
+    width: 30px;
+    height: 30px;
+    float: left;
+    background: url(img/background.gif) no-repeat center top;
+    z-index:1;
+
+}
+ul.topnav li span.subhover {background-position: center bottom; cursor: pointer;} /*--Hover effect for trigger--*/
+ul.topnav li ul.subnav {
+    list-style: none;
+    position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+    left: 0; top: 35px;
+    background: #333;
+    margin: 0; padding: 0;
+    display: none;
+    float: left;
+    width: 170px;
+    border: 1px solid #111;
+}
+ul.topnav li ul.subnav li{
+    margin: 0; padding: 0;
+    border-top: 1px solid #252525; /*--Create bevel effect--*/
+    border-bottom: 1px solid #444; /*--Create bevel effect--*/
+    clear: both;
+    width: 170px;
+}
+html ul.topnav li ul.subnav li a {
+    float: left;
+    width: 145px;
+    background: #333  no-repeat 10px center;
+    padding-left: 20px;
+}
+html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
+    background: #222  no-repeat 10px center;
 }

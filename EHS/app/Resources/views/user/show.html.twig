@@ -10,16 +10,16 @@
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Username</th>
+                <th>Nom d'utilisateur</th>
                 <td>{{ user.username }}</td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>Mot de passe</th>
                 <td>{{ user.password }}</td>
             </tr>
             
             <tr>
-                <th>Userroles</th>
+                <th>Roles</th>
                 <td>{{ user.userRoles[0].name }}</td>
             </tr>
             <tr>
@@ -52,29 +52,25 @@
             </tr>
             <tr>
                 <th>Newsletter</th>
-                <td>{% if user.newsletter %}Yes{% else %}No{% endif %}</td>
+                <td>{% if user.newsletter %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
-                <th>Birthdate</th>
+                <th>Date de naissance</th>
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Article</th>
-                <td>{{ user.article }}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('user_index') }}">Back to the list</a>
+            <a href="{{ path('user_index') }}">Retour à la liste </a>
         </li>
         <li>
-            <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
+            <a href="{{ path('user_edit', { 'id': user.id }) }}">Editer</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
         </li>
     </ul>

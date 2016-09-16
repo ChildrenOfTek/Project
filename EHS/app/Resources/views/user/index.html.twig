@@ -18,7 +18,7 @@
                 <th>Email</th>
                 <th>Newsletter</th>
                 <th>Birthdate</th>
-                <th>Article</th>
+                <
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,16 +37,16 @@
                 <td>{{ user.ville }}</td>
                 <td>{{ user.telephone }}</td>
                 <td>{{ user.email }}</td>
-                <td>{% if user.newsletter %}Yes{% else %}No{% endif %}</td>
+                <td>{% if user.newsletter %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
                 <!-- H:i:s-->
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('user_show', { 'id': user.id }) }}">show</a>
+                            <a href="{{ path('user_show', { 'id': user.id }) }}">Voir</a>
                         </li>
                         <li>
-                            <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
+                            <a href="{{ path('user_edit', { 'id': user.id }) }}">Editer</a>
                         </li>
                     </ul>
                 </td>
@@ -57,7 +57,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('user_new') }}">Create a new entry</a>
+            <a href="{{ path('user_new') }}">Ajouter un nouvel utilisateur</a>
         </li>
     </ul>
 {% endblock %}

@@ -5,8 +5,13 @@
 
     <form id="contact" action="" method="POST">
         <fieldset><legend>Vos coordonnées</legend>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             Votre nom: <input type="text" name="nom" disabled value="{{ user.username }}">
             Votre email: <input type="text" name="email" disabled value="{{ user.email }}">
+            {% else %}
+                Votre nom: <input type="text" name="nom">
+                Votre email: <input type="text" name="email">
+            {% endif %}
         </fieldset>
         <fieldset><legend>Votre message :</legend>
             <p><label for="objet">Objet :</label><input type="text" id="objet" name="objet" tabindex="3" /></p>

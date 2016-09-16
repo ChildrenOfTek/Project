@@ -32,7 +32,7 @@ class UserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
-            ->add('cp','text',array('attr'=> array('maxlength'=>'5')))
+            ->add('cp','text',array('attr'=> array('minlength'=>'5','maxlength'=>'5')))
             ->add('ville')
             ->add('telephone','text',array('attr'=> array('maxlength'=>'10')))
             ->add('email',EmailType::class)

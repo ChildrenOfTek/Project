@@ -3,11 +3,10 @@
 namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use UserBundle\User;
-use UserBundle\Role;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
@@ -27,17 +26,16 @@ class UserType extends AbstractType
             ->add('salt','hidden')
             ->add('userRoles',EntityType::class, array(
                 'class'=>'UserBundle:Role',
-                'attr'  => array('display' => 'hidden'),
                 'choice_label'=>'name',
                 'label'=>'Role à attribuer'
                 ))
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
-            ->add('cp')
+            ->add('cp','text',array('attr'=> array('minlength'=>'5','maxlength'=>'5')))
             ->add('ville')
-            ->add('telephone')
-            ->add('email')
+            ->add('telephone','text',array('attr'=> array('maxlength'=>'10')))
+            ->add('email',EmailType::class)
             ->add('newsletter')
             ->add('birthDate', BirthdayType::class,array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
         ;

@@ -31,9 +31,13 @@ body
 {
     width:20%;
     text-align:center;
-    background: #222;
-    color:white;
+    background:#007bae;
     height:50%;
+    border-radius:10px;
+}
+.login label,.login a
+{
+    color:white;
 }
 .login li
 {
@@ -48,8 +52,10 @@ ul.topnav {
     float: left;
     width: 920px;
     height:50px;
-    background: #222;
+    /* couleur du fond du menu*/
+    background: #007bae;
     font-size: 1.2em;
+    border-radius:10px;
 
 }
 ul.topnav li {
@@ -98,9 +104,11 @@ ul.topnav li ul.subnav li{
 html ul.topnav li ul.subnav li a {
     float: left;
     width: 145px;
-    background: #333  no-repeat 10px center;
+    /* ici couleur du background des sous menu*/
+    background: #f18f04  no-repeat 10px center;
     padding-left: 20px;
 }
 html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
-    background: #222  no-repeat 10px center;
+    /* ici couleur du background sur le hover des sous menus*/
+    background: #007bae  no-repeat 10px center;
 }

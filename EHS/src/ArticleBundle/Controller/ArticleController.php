@@ -152,14 +152,14 @@ class ArticleController extends Controller
         //get last inserted id to create the folder according to the article
         //$em->persist($article);
         //$em->flush();
-        //$newPath = $article->getId();
+        //$newFolder = 'Article '+$article->getId();
+        //mkdir($this->get('kernel')->getRootDir() . '/../web/public/img/'.$newFolder);
 
         $response = new Response();
 
-
         $ds          = DIRECTORY_SEPARATOR;  //1
 
-        $storeFolder = $this->get('kernel')->getRootDir() . '/../web/public/img/'+$newPath;   //2
+        $storeFolder = $this->get('kernel')->getRootDir() . '/../web/public/img/';   //2
 
         if (!empty($_FILES)) {
 

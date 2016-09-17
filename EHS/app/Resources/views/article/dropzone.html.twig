@@ -1,0 +1,8 @@
+{% block dropzone %}
+
+ {#<form action="{{ path('article_dropzone') }}" class="dropzone" id="articledropzone">#}
+  {#<div class="dz-message">Glissez deposez un fichier pour l'ajouter</div>#}
+ {#</form>#}
+ <form id="mydropzone" class="dropzone" action="{{ path('article_dropzone') }}"></form>
+ <script type="text/javascript" src="{{ asset('public/script/DynamicPath.js') }}"></script>
+{% endblock %}

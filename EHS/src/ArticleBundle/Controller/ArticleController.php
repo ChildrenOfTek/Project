@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ArticleBundle\Entity\Article;
 use ArticleBundle\Form\ArticleType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Article controller.
@@ -136,5 +137,43 @@ class ArticleController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Get dropzone file then move it into img and persist path in db.
+     *
+     * @Route("/dropzone", name="article_dropzone")
+     * @Method("POST")
+     */
+    public function dropzoneAction()
+    {
+
+        $response = new Response();
+
+
+        $ds          = DIRECTORY_SEPARATOR;  //1
+
+        $storeFolder = $this->get('kernel')->getRootDir() . '/../web/public/img/';   //2
+
+        if (!empty($_FILES)) {
+
+            $response->setStatusCode(Response::HTTP_OK);
+
+            $tempFile = $_FILES['file']['tmp_name'];          //3
+
+            //$targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
+
+            $targetFile =  $storeFolder. $_FILES['file']['name'];  //5
+
+//            $tempFile = $_FILES['file']['tmp_name'];          //3
+//
+//            $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
+//
+//            $targetFile =  $targetPath. $_FILES['file']['name'];  //5
+
+            move_uploaded_file($tempFile,$targetFile); //6
+
+        }
+        return $response  ;
     }
 }

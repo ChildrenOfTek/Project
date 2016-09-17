@@ -2,7 +2,7 @@
 
 {% block section %}
     <h1>Article creation</h1>
-
+{% include 'article/dropzone.html.twig' %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" />

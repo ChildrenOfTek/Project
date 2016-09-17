@@ -148,12 +148,18 @@ class ArticleController extends Controller
     public function dropzoneAction()
     {
 
+        //do some doctrine magic
+        //get last inserted id to create the folder according to the article
+        //$em->persist($article);
+        //$em->flush();
+        //$newPath = $article->getId();
+
         $response = new Response();
 
 
         $ds          = DIRECTORY_SEPARATOR;  //1
 
-        $storeFolder = $this->get('kernel')->getRootDir() . '/../web/public/img/';   //2
+        $storeFolder = $this->get('kernel')->getRootDir() . '/../web/public/img/'+$newPath;   //2
 
         if (!empty($_FILES)) {
 
@@ -171,7 +177,8 @@ class ArticleController extends Controller
 //
 //            $targetFile =  $targetPath. $_FILES['file']['name'];  //5
 
-            move_uploaded_file($tempFile,$targetFile); //6
+            move_uploaded_file($tempFile,$targetFile); //
+
 
         }
         return $response  ;

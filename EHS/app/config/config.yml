@@ -79,7 +79,7 @@ vich_uploader:
     db_driver: orm
     mappings:
         article_image:
-            uri_prefix:         ../web/public/img/articles
+            uri_prefix:         /article
             upload_destination: %kernel.root_dir%/../web/public/img/Articles
 
             inject_on_load:     false

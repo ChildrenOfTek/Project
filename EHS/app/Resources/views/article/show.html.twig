@@ -13,7 +13,10 @@
             </tr>
             <tr>
                 <td>{{ article.content }}</td>
-                <td><img src="{{ article.imageArticle }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
+                <td>Path</td>
+                <td>{{ article.imageName }}</td>
+                <td><img src="c:/xampp/htdocs/EHS/EHS/web/public/img/articles/{{article.imageName }}" alt="{{ article.imageName }}" />
+                    <!--<img src="{{ article.imageName }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>-->
             </tr>
             <tr>
                 <th>Date de publication</th>

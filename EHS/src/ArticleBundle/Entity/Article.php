@@ -4,11 +4,14 @@ namespace ArticleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Article
  *
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="ArticleBundle\Repository\ArticleRepository")
+ * @Vich\Uploadable
  */
 class Article
 {
@@ -58,11 +61,27 @@ class Article
     private $datePublication;
 
     /**
-     * @var string
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @ORM\Column(name="imageArticle", type="text", nullable=true)
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName")
+     *
+     * @var File
      */
-    private $imageArticle;
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     /**
      * @var bool
@@ -213,27 +232,57 @@ class Article
         return $this->datePublication;
     }
 
+
     /**
-     * Set imageArticle
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
      *
-     * @param string $imageArticle
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
      * @return Article
      */
-    public function setImageArticle($imageArticle)
+    public function setImageFile(File $image = null)
     {
-        $this->imageArticle = $imageArticle;
+        $this->imageFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
 
         return $this;
     }
 
     /**
-     * Get imageArticle
-     *
-     * @return string
+     * @return File|null
      */
-    public function getImageArticle()
+    public function getImageFile()
     {
-        return $this->imageArticle;
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     *
+     * @return Article
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
     }
 
     /**

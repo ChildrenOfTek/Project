@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ArticleType extends AbstractType
 {
@@ -24,7 +25,7 @@ class ArticleType extends AbstractType
             ->add('titreArticle')
             ->add('content',TextareaType::class,array('attr'=>array('rows'=>15)))
             ->add('datePublication')
-            ->add('imageArticle',HiddenType::class)
+            ->add('imageFile','vich_file',array('required'=>false,'label'=>'Ajouter une image'))
             ->add('online')
             ->add('tag',EntityType::class,array('class'=>'ArticleBundle:Tags',
           'choice_label'=>'libelle'))

@@ -17,11 +17,20 @@ $(function() {
 
     myDropzone.on("addedfile", function(file) {
 
+        $.ajax({
+            type: "POST",
+            url: "valid_modif_rempla.php",
+            data: file,
+            success: function(msg){
+                alert( "Résultat: " + msg );}
+        });
+
         var removeButton = Dropzone.createElement("<button data-dz-remove " +
             "class='del_thumbnail btn btn-default'><span class='glyphicon glyphicon-trash'></span></button>");
 
         removeButton.addEventListener("click", function(e) {
             myDropzone.removeFile(file);
+
         });
         file.previewElement.appendChild(removeButton);
     });

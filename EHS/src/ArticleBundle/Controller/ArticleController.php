@@ -51,47 +51,6 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
-            $newFolder=
-
-
-            //do some doctrine magic
-            //get last inserted id to create the folder according to the article
-            //$em->persist($article);
-            //$em->flush();
-            //$newFolder = 'Article '+$article->getId();
-            //mkdir($this->get('kernel')->getRootDir() . '/../web/public/img/'.$newFolder);
-
-            $response = new Response();
-            $ds          = DIRECTORY_SEPARATOR;  //1
-            $storeFolder = $this->get('kernel')->getRootDir() . '/../web/public/img/';   //2
-
-            $dirname = 'Article '.$article->getId();
-            $filename = "/" . $dirname . "/";
-
-            if (!file_exists($filename)) {
-                mkdir($storeFolder . $dirname, 0777);
-
-            if (!empty($_FILES)) {
-
-                $response->setStatusCode(Response::HTTP_OK);
-
-                $tempFile = $_FILES['file']['tmp_name'];          //3
-
-
-                $targetFile = $storeFolder . $_FILES['file']['name'];  //5
-
-//            $tempFile = $_FILES['file']['tmp_name'];          //3
-//
-//            $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
-//
-//            $targetFile =  $targetPath. $_FILES['file']['name'];  //5
-
-                move_uploaded_file($tempFile, $targetFile); //
-            }
-
-
-            }
-
             return $this->redirectToRoute('article_show', array('id' => $article->getId()));
         }
 

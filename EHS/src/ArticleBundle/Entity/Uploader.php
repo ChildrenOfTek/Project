@@ -13,7 +13,9 @@ class Uploader implements NamerInterface
     public function name($object, PropertyMapping $mapping)
     {
         $file = $mapping->getFile($object);
-        $name = 'Article_'.$object->getTitreArticle().'_'.$object->getImageName();
+        $temp=urlencode($object->getTitreArticle());
+        $final=preg_replace('/\+/', '%20', $temp);
+        $name = 'Article_'.$final.'_'.$object->getImageName();
 
         if ($extension = $this->getExtension($file)) {
             $name = sprintf('%s.%s', $name, $extension);

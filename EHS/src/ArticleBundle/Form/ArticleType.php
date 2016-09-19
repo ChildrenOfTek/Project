@@ -2,6 +2,7 @@
 
 namespace ArticleBundle\Form;
 
+use Symfony\Bridge\Doctrine\Tests\Form\Type\EntityTypeTest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,7 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user')
+            ->add('user',EntityType::class, array('class'=>'UserBundle:User','property'=>'username'))
             ->add('dateArticle', DateType::class, array('data' => new \Datetime()))
             ->add('titreArticle')
             ->add('content',TextareaType::class,array('attr'=>array('rows'=>15)))

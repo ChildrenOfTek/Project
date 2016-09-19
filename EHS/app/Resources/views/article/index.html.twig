@@ -26,7 +26,7 @@
                 <td>{{ article.titreArticle }}</td>
                 <td>{{ article.content }}</td>
                 <td>{{ article.datePublication | date('d-m-Y H:i:s') }}</td>
-                <td>{{ article.imageName }}</td>
+                <td><img src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="width:100px;height:100px;"></td>
                 <td>{% if article.online %}Yes{% else %}No{% endif %}</td>
                 <td>
                     <ul>

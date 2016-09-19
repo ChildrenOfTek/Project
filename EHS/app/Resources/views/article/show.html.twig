@@ -10,6 +10,7 @@
             </tr>
             <tr>
                 <td>R&eacute;dig&eacute; par: {{ article.user }}</td>
+                <td>Date création: {{ article.dateArticle| date('d-m-Y H:i:s') }}</td>
             </tr>
             <tr>
                 <td>{{ article.content }}</td>
@@ -19,8 +20,6 @@
                 <th>Date de publication</th>
                 <td>{{ article.datePublication | date('d-m-Y H:i:s') }}</td>
             </tr>
-            /EHS/EHS/web/public/img/Articles/Article_19_09_16_00_00_00/57dff5e4b4039_wip_ehs.png
-
             <tr>
                 <th>Nom du fichier</th>
                 <td>{{ article.imageName }}</td>

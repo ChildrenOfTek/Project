@@ -7,21 +7,17 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Vich\UploaderBundle\Mapping\PropertyMapping;
 
+use Symfony\Component\HttpFoundation\File\File;
+
 
 class Uploader implements NamerInterface
 {
     public function name($object, PropertyMapping $mapping)
     {
         $file = $mapping->getFile($object);
-        $temp=urlencode($object->getTitreArticle());
-        $final=preg_replace('/\+/', '%20', $temp);
-        $name = 'Article_'.$final.'_'.$object->getImageName();
+        $name = $object->getDateFileArticle('H','i','s').'_file_';
 
-        if ($extension = $this->getExtension($file)) {
-            $name = sprintf('%s.%s', $name, $extension);
-        }
-
-        return $name;
+        return $name.$file->getClientOriginalName();
     }
 
     protected function getExtension(UploadedFile $file)

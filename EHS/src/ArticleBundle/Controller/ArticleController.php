@@ -9,6 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ArticleBundle\Entity\Article;
 use ArticleBundle\Form\ArticleType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 /**
  * Article controller.
@@ -36,7 +39,7 @@ class ArticleController extends Controller
 
     /**
      * Creates a new Article entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/new", name="article_new")
      * @Method({"GET", "POST"})
      */
@@ -47,6 +50,12 @@ class ArticleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data=$form->getData();
+            $date=new \DateTime('now');
+
+            $article->setUser($data->getUser()->getUsername());
+            $article->setDateArticle($date);
+            //var_dump($data);die();
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
@@ -62,7 +71,7 @@ class ArticleController extends Controller
 
     /**
      * Finds and displays a Article entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="article_show")
      * @Method("GET")
      */
@@ -78,7 +87,7 @@ class ArticleController extends Controller
 
     /**
      * Displays a form to edit an existing Article entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="article_edit")
      * @Method({"GET", "POST"})
      */
@@ -105,7 +114,7 @@ class ArticleController extends Controller
 
     /**
      * Deletes a Article entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="article_delete")
      * @Method("DELETE")
      */
@@ -125,7 +134,7 @@ class ArticleController extends Controller
 
     /**
      * Creates a form to delete a Article entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Article $article The Article entity
      *
      * @return \Symfony\Component\Form\Form The form

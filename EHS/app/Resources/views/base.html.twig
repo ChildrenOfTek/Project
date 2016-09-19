@@ -81,29 +81,31 @@
                 </ul>
         <div class="login">
             {% block login %}
-                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                    {% include 'security/login.html.twig' %}
-                {% else %}
+                <ul>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <h3> Bienvenue {{ app.user.username }} </h3>
-                    <ul>
                         <li>
                             <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
                         </li>
-
-
+                {% else %}
+                    <li>
+                        <a href="{{ path("login") }}">Se connecter</a>
+                    </li>
 
                     {% if(is_granted('ROLE_ADMIN')) %}
+                        <ul>
                         <li>
                             <a href="#">Acceder à l'interface admin</a>
                         </li>
+                        </ul>
 
                     {% endif %}
                     {% if(is_granted('ROLE_PRESS')) %}
 
                     {% endif %}
-
+                </ul>
                 {% endif %}
-                    </ul>
+
             {% endblock %}
 
             </div>

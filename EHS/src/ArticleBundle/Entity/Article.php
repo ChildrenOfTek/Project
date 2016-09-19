@@ -25,7 +25,7 @@ class Article
     private $id;
 
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Column(name="user", type="text")
      * @ORM\ManyToOne(targetEntity="UserBundle:User", inversedBy= "Article")
@@ -161,6 +161,15 @@ class Article
     public function getDateArticle()
     {
         return $this->dateArticle;
+    }
+    /**
+     * Get dateFileArticle
+     * Used to name the files with full date
+     * @return \DateTime
+     */
+    public function getDateFileArticle($h,$m,$s)
+    {
+        return date($h.'_'.$m.'_'.$s);
     }
 
     /**

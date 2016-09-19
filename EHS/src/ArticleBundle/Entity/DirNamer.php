@@ -11,8 +11,8 @@ class DirNamer implements DirectoryNamerInterface
 {
     public function directoryName($object, PropertyMapping $mapping)
     {
-        $temp = 'Article_'.urlencode($object->getTitreArticle());
-        $name = preg_replace('/\+/', '%20', $temp);
+        $name = 'Article_'.$object->getDateArticle()->format("d_m_y");
+        //$name = preg_replace('/\+/', '%20', $temp);
         return $name;
     }
 }

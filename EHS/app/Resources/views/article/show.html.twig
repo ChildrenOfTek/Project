@@ -13,12 +13,14 @@
             </tr>
             <tr>
                 <td>{{ article.content }}</td>
-                <td><img src="{{ asset('public/img/Articles/Article_'~article.titreArticle | url_encode~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td></td>
+                <td><img src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td></td>
             </tr>
             <tr>
                 <th>Date de publication</th>
                 <td>{{ article.datePublication | date('d-m-Y H:i:s') }}</td>
             </tr>
+            /EHS/EHS/web/public/img/Articles/Article_19_09_16_00_00_00/57dff5e4b4039_wip_ehs.png
+
             <tr>
                 <th>Nom du fichier</th>
                 <td>{{ article.imageName }}</td>

@@ -85,5 +85,5 @@ vich_uploader:
             inject_on_load:     false
             delete_on_update:   false
             delete_on_remove:   true
-            namer:              namer.media_file
+            namer:              vich_uploader.namer_origname
             directory_namer:    namer.dir_name

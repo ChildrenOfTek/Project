@@ -38,6 +38,30 @@ class ArticleController extends Controller
     }
 
     /**
+     * Lists all Article entities to be published.
+     *
+     * @Route("/publish", name="article_publish")
+     * @Method("GET")
+     */
+    public function indexPublishAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $date=new \DateTime('now');
+        $query = $em->createQuery(
+            'SELECT a
+                FROM ArticleBundle:Article a
+                WHERE a.datePublication <= :date and a.online = 1
+                ORDER BY a.dateArticle ASC'
+        )->setParameter('date', $date);
+
+        $articles = $query->getResult();
+
+        return $this->render('article/all.html.twig', array(
+            'articles' => $articles
+        ));
+    }
+
+    /**
      * Creates a new Article entity.
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/new", name="article_new")

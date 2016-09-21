@@ -117,7 +117,7 @@ class Forum
      *
      * @return self
      */
-    private function _setTopics($topics)
+    public function setTopics($topics)
     {
         $this->topics = $topics;
 

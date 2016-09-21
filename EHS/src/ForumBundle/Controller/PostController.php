@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ForumBundle\Entity\Post;
 use ForumBundle\Form\PostType;
 
+
 /**
  * Post controller.
  *
@@ -44,9 +45,10 @@ class PostController extends Controller
         $post = new Post();
         $form = $this->createForm('ForumBundle\Form\PostType', $post);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $post->setDateEdit(new \DateTime());
             $em->persist($post);
             $em->flush();
 
@@ -89,6 +91,7 @@ class PostController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
             $em->persist($post);
             $em->flush();
 

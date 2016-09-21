@@ -94,7 +94,7 @@ class Topic
      *
      * @return self
      */
-    private function _setForum($forum)
+    public function setForum($forum)
     {
         $this->forum = $forum;
 

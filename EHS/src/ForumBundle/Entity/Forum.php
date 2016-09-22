@@ -37,7 +37,7 @@ class Forum
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Topic",mappedBy="forum")
+     * @ORM\OneToMany(targetEntity="Topic",mappedBy="forum",cascade={"persist","remove","merge"})
      */
      private $topics;
 

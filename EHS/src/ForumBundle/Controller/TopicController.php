@@ -114,14 +114,17 @@ class TopicController extends Controller
     {
         $form = $this->createDeleteForm($topic);
         $form->handleRequest($request);
-
+        //$id='';
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($topic);
             $em->flush();
         }
 
+        
         return $this->redirectToRoute('topic_index');
+
     }
 
     /**

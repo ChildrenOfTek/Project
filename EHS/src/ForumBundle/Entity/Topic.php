@@ -30,13 +30,13 @@ class Topic
     private $title;
 
     /**
-     *@ORM\ManyToOne(targetEntity="Forum",inversedBy="topics")
+     *@ORM\ManyToOne(targetEntity="Forum",inversedBy="topics",cascade={"persist","merge"})
      *@ORM\JoinColumn(name="forum_id", referencedColumnName="id")
      */
     private $forum;
 
     /**
-     *@ORM\OneToMany(targetEntity="Post", mappedBy="topic")
+     *@ORM\OneToMany(targetEntity="Post", mappedBy="topic",cascade={"persist","remove","merge"})
      */
     private $posts;
 

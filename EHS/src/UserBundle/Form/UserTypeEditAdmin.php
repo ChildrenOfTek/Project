@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 
-class UserTypeEdit extends AbstractType
+class UserTypeEditAdmin extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,6 +22,7 @@ class UserTypeEdit extends AbstractType
         $builder
             ->setMethod('POST')
             ->add('username','text',array('label'=>'Nom d\'utilisateur'))
+            ->add('password')
             ->add('nom')
             ->add('prenom')
             ->add('adresse')

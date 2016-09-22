@@ -13,9 +13,11 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $role_user = new Role();
-        $role_user->setName('ROLE_USER');
+        $role_user->setName('user');
+        $role_user->setRole('ROLE_USER');
         $role_admin = new Role();
-        $role_admin->setName('ROLE_ADMIN');
+        $role_admin->setName('admin');
+        $role_admin->setRole('ROLE_ADMIN');
 
         $manager->persist($role_user);
         $manager->persist($role_admin);

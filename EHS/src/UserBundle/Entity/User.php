@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Role\RoleInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -43,11 +44,7 @@ class User implements UserInterface, \Serializable
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Role", cascade={"all"}))
-     * @ORM\JoinTable(name="user_role",
-     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id",onDelete="CASCADE")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
-     *)
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users", cascade={"remove"}))
      */
     protected $userRoles;
 
@@ -73,12 +70,12 @@ class User implements UserInterface, \Serializable
     protected $adresse;
     
     /**
-     * @var integer
+     * @var string
      * @Assert\Type(
      *     type="integer",
      *     message="La valeur {{ value }} n'est pas un nombre."
      * )
-     * @ORM\Column(name="cp", type="integer", length=5)
+     * @ORM\Column(name="cp", type="string", length=5)
      */
     protected $cp;
     
@@ -128,7 +125,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->userRoles=[];
+        $this->userRoles=new ArrayCollection();// new \Doctrine\Common\Collections\ArrayCollection();
         $this->updatedAt = new \DateTime();
     }
     
@@ -166,12 +163,13 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        $roles = array();
+        return $this->userRoles->toArray();
+        /*$roles = array();
         foreach ($this->userRoles as $role) {
             $roles[] = $role->getRole();
         }
 
-        return $roles;
+        return $roles;*/
     }
     
     public function getPassword()
@@ -245,7 +243,7 @@ class User implements UserInterface, \Serializable
      */
     public function setUserRoles($userRoles)
     {
-        $this->userRoles[] = $userRoles;
+       $this->userRoles[] = $userRoles;
 
         return $this;
     }
@@ -253,7 +251,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get userRoles
      *
-     * @return integer 
+     * @return array
      */
     public function getUserRoles()
     {
@@ -488,5 +486,28 @@ class User implements UserInterface, \Serializable
     public function getArticle()
     {
         return $this->article;
+    }
+
+    /**
+     * Add userRoles
+     *
+     * @param \UserBundle\Entity\Role $userRoles
+     * @return User
+     */
+    public function addUserRole(\UserBundle\Entity\Role $userRoles)
+    {
+        $this->userRoles[] = $userRoles;
+
+        return $this;
+    }
+
+    /**
+     * Remove userRoles
+     *
+     * @param \UserBundle\Entity\Role $userRoles
+     */
+    public function removeUserRole(\UserBundle\Entity\Role $userRoles)
+    {
+        $this->userRoles->removeElement($userRoles);
     }
 }

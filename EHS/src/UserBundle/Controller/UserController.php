@@ -105,7 +105,7 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing User entity.
+     * Displays a form to edit an existing User entity, as his own profile.
      *
      * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
@@ -114,6 +114,33 @@ class UserController extends Controller
     {
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('UserBundle\Form\UserTypeEdit', $user);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('user/user.edit.html.twig', array(
+            'user' => $user,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing User entity as Admin editing.
+     *
+     * @Route("/{id}/editadmin", name="user_editadmin")
+     * @Method({"GET", "POST"})
+     */
+    public function editAdminAction(Request $request, User $user)
+    {
+        $deleteForm = $this->createDeleteForm($user);
+        $editForm = $this->createForm('UserBundle\Form\UserTypeEditAdmin', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

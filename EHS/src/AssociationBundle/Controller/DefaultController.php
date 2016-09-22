@@ -25,7 +25,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        var_dump($user);
+        //var_dump($user);
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')){
 
             $check="P@ssword";

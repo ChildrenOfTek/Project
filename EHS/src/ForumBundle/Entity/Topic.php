@@ -100,4 +100,28 @@ class Topic
 
         return $this;
     }
+
+    /**
+     * Gets the value of posts.
+     *
+     * @return mixed
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * Sets the value of posts.
+     *
+     * @param mixed $posts the posts
+     *
+     * @return self
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+
+        return $this;
+    }
 }

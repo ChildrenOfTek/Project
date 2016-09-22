@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Topic</h1>
+{% block section %}
+    <h1>{{ topic.title }}</h1>
 
-    <table>
+    <table class='table'>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ topic.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ topic.title }}</td>
-            </tr>
+
+            {% for post in topic.posts %}
+                <tr>
+                    <td>{{ post.content }}<td>
+                    <td>Publié par {{ post.author }}
+                    <td><a href="{{ path('post_edit', { 'id': post.id }) }}">Modifier</a></td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
@@ -21,7 +21,7 @@
             <a href="{{ path('topic_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('topic_edit', { 'id': topic.id }) }}">Edit</a>
+            <a href="{{ path('post_new', { 'id': topic.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
@@ -29,4 +29,11 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+
+
+
+
+
+
+    
 {% endblock %}

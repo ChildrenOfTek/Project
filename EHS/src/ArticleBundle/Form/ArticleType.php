@@ -25,7 +25,7 @@ class ArticleType extends AbstractType
             ->add('dateArticle', DateType::class, array('data' => new \Datetime()))
             ->add('titreArticle')
             ->add('content',TextareaType::class,array('attr'=>array('rows'=>15)))
-            ->add('datePublication')
+            ->add('datePublication',DateType::class,array('data'=> new \Datetime()))
             ->add('imageFile','vich_file',array('required'=>false,'label'=>'Ajouter une image'))
             ->add('online')
             ->add('tag',EntityType::class,array('class'=>'ArticleBundle:Tags',

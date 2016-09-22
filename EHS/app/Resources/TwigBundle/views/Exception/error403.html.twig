@@ -1,0 +1,15 @@
+{# app/Resources/TwigBundle/views/Exception/error403.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block section %}
+    <h1>Autorisation requise</h1>
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {# ... #}
+    {% endif %}
+
+    <p>
+        Oups ! Vous n'avez pas les droits requis pour voir cette page !
+    </p>
+    <a href="javascript:history.go(-1)">Retour</a>
+{% endblock %}

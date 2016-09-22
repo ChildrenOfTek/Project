@@ -2,12 +2,15 @@
 
 namespace ArticleBundle\Form;
 
+use Symfony\Bridge\Doctrine\Tests\Form\Type\EntityTypeTest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ArticleType extends AbstractType
 {
@@ -18,12 +21,12 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user')
+            ->add('user',EntityType::class, array('class'=>'UserBundle:User','property'=>'username'))
             ->add('dateArticle', DateType::class, array('data' => new \Datetime()))
             ->add('titreArticle')
-            ->add('content','textarea',array('attr'=>array('rows'=>15)))
-            ->add('datePublication')
-            ->add('imageArticle')
+            ->add('content',TextareaType::class,array('attr'=>array('rows'=>15)))
+            ->add('datePublication',DateType::class,array('data'=> new \Datetime()))
+            ->add('imageFile','vich_file',array('required'=>false,'label'=>'Ajouter une image'))
             ->add('online')
             ->add('tag',EntityType::class,array('class'=>'ArticleBundle:Tags',
           'choice_label'=>'libelle'))

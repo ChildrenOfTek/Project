@@ -60,6 +60,25 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
+            /* A decommenter lors de l'implémentation
+            pour envoyer un mail a l'inscription
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Bienvenue')
+                ->setFrom('guillossou.michele@gmail.com')
+                // notre adresse mail
+                ->setTo($data->getEmail())
+                //->setContentType('text/html')
+                //ici nous allons utiliser un template pour pouvoir styliser notre mail si nous le souhaitons
+                ->setBody(
+                    $this->renderView('association/newUser.html.twig', array(
+                            'user' => $user
+                        )
+                    ), 'text/html'
+                )
+
+            ;
+            $this->get('mailer')->send($message);*/
+
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
 

@@ -1,3 +1,8 @@
+association:
+    resource: "@AssociationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 forum_post:
     resource: "@ForumBundle/Controller/PostController.php"
     type:     annotation

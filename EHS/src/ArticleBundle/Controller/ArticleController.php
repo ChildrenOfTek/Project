@@ -69,8 +69,10 @@ class ArticleController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em=$this->getDoctrine()->getEntityManager();
         $article = new Article();
-        $form = $this->createForm('ArticleBundle\Form\ArticleType', $article);
+        //On passe l'entity manager au formulaire
+        $form = $this->createForm(new ArticleType($em),$article );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +81,7 @@ class ArticleController extends Controller
 
             $article->setUser($data->getUser()->getUsername());
             $article->setDateArticle($date);
-            //var_dump($data);die();
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();

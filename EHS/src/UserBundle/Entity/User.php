@@ -71,9 +71,10 @@ class User implements UserInterface, \Serializable
     
     /**
      * @var string
-     * @Assert\Type(
-     *     type="integer",
-     *     message="La valeur {{ value }} n'est pas un nombre."
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=true,
+     *     message="Un code postal doit être composé de nombres."
      * )
      * @ORM\Column(name="cp", type="string", length=5)
      */
@@ -88,7 +89,11 @@ class User implements UserInterface, \Serializable
     
     /**
      * @var string
-     *
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=true,
+     *     message="Un numero de téléphone doit être composé de chiffres."
+     * )
      * @ORM\Column(name="telephone", type="string", length=30)
      */
     protected $telephone;

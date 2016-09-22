@@ -24,19 +24,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        //var_dump($user);
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')){
-
-            $check="P@ssword";
-
-            $encoder = $this->container->get('security.password_encoder');
-            $encoded = $encoder->encodePassword($user, $check);
-
-            if($encoded === $user->getPassword()){var_dump($check);}
-
-        }
-
         return $this->render('association/index.html.twig');
     }
 

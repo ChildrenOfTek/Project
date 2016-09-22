@@ -11,9 +11,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Doctrine\ORM\EntityManager;
+use UserBundle\Entity\Article;
 class ArticleType extends AbstractType
 {
+    // L'entity manager va nous servir a reccuperer la liste des tags existants
+    private $em;
+
+    public function __construct(EntityManager $em){
+        $this->em = $em;
+    }
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -28,8 +36,10 @@ class ArticleType extends AbstractType
             ->add('datePublication',DateType::class,array('data'=> new \Datetime()))
             ->add('imageFile','vich_file',array('required'=>false))
             ->add('online')
-            ->add('tag',EntityType::class,array('class'=>'ArticleBundle:Tags',
-          'choice_label'=>'libelle'))
+            ->add('tag',ChoiceType::class,array('label'=>'Tags (Maintenir CTRL pour en choisir plusieurs)',
+                'choices'=>$this->fillTags(),'attr'=>array('class'=>"form-control select2"),
+                'choices_as_values'=>true,'expanded'=>false,'multiple'=>true
+                ))
             ->add('newsletter')
         ;
     }
@@ -42,5 +52,18 @@ class ArticleType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'ArticleBundle\Entity\Article'
         ));
+    }
+
+    private function fillTags() {
+        //On reccup la liste des tags, on push dans un array,
+        // et on renvoie à ChoiceType
+        $tags=$this->em->getRepository('ArticleBundle:Tags')->findAll();
+
+        $tagsLib = [];
+        foreach($tags as $tag){
+            //if($tag->getLibelle()!=)
+            $tagsLib[$tag->getLibelle()] = $tag;
+        }
+        return $tagsLib;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 // src/UserBundle/DataFixtures/ORM/LoadUserData.php
 
-namespace AppBundle\DataFixtures\ORM;
+namespace UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;

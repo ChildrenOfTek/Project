@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use UserBundle\Entity\User;
 use UserBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 /**
@@ -113,7 +114,9 @@ class UserController extends Controller
     public function editAction(Request $request, User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('UserBundle\Form\UserTypeEdit', $user);
+        $editForm = $this->createForm('UserBundle\Form\UserType', $user);
+        $editForm->remove('userRoles');
+        $editForm->remove('password');
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -140,15 +143,28 @@ class UserController extends Controller
     public function editAdminAction(Request $request, User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('UserBundle\Form\UserTypeEditAdmin', $user);
+        $editForm = $this->createForm('UserBundle\Form\UserType', $user);
+        $editForm->remove('userRoles');
+        $editForm->remove('password');
+        $editForm->add('password');
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $data=$editForm->getData();
+            if(strlen(utf8_decode($data->getPassword()))<20)
+            {
+                $plainPassword = $data->getPassword();
+                $encoder = $this->container->get('security.password_encoder');
+                $encoded = $encoder->encodePassword($user, $plainPassword);
+
+                $user->setPassword($encoded);
+            }
+
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('user_index');
         }
 
         return $this->render('user/edit.html.twig', array(

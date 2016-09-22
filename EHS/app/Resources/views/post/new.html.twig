@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block section %}
     <h1>Création d'un post</h1>
 
     {{ form_start(form) }}
@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('topic_index') }}">Annuler</a>
+            <a href="javascript:history.go(-1)">Annuler</a>
         </li>
     </ul>
 {% endblock %}

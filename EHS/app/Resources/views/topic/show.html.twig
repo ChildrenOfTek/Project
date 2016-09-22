@@ -10,6 +10,7 @@
                 <tr>
                     <td>{{ post.content }}<td>
                     <td>Publié par {{ post.author }}
+                    <td>Le {{ post.dateEdit|date('d/m/Y')}} à {{ post.dateEdit|date('H:i')}}
                     <td><a href="{{ path('post_edit', { 'id': post.id }) }}">Modifier</a></td>
                 </tr>
             {% endfor %}
@@ -18,7 +19,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('topic_index') }}">Retour</a>
+            <a href="{{ path('forum_show', { 'id': topic.forum.id }) }}">Retour</a>
         </li>
         <li>
             <a href="{{ path('post_new', { 'id': topic.id }) }}">Commenter</a>
@@ -28,6 +29,7 @@
                 <input type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
         </li>
+        
     </ul>
 
 

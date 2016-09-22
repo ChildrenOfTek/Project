@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block section %}
     <h1>{{ topic.title }}</h1>
 
     <table class='table'>
@@ -29,7 +29,7 @@
             <a href="{{ path('topic_index') }}">Retour</a>
         </li>
         <li>
-            <a href="{{ path('post_edit', { 'id': post.id }) }}">Commenter</a>
+            <a href="{{ path('post_edit', { 'id': topic.id }) }}">Commenter</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

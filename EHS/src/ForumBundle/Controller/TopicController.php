@@ -44,7 +44,7 @@ class TopicController extends Controller
         $topic = new Topic();
         $form = $this->createForm('ForumBundle\Form\TopicType', $topic);
         $form->handleRequest($request);
-        
+        $id=$_GET['id'];
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $forum=$em->getRepository('ForumBundle:Forum')->find($id);

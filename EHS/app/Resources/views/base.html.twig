@@ -15,11 +15,10 @@
         <script type="text/javascript" src="{{ asset('public/script/menuDeroulant.js') }}"></script>
 
         {% block stylesheets %}
-{{ dump(app.user) }}
+<!--{{ dump(app.user) }}-->
 
         {% endblock %}
-        <LINK REL="SHORTCUT ICON" href="{{ asset('public/img/favicon.ico') }}">
-        <link rel="icon" type="image/x-icon" href="{{ asset('public/img/favicon.ico') }}" />
+
     </head>
     <body>
 
@@ -38,9 +37,9 @@
                     <li>
                         <a href="#">Association</a>
                         <ul class="subnav">
-                            <li><a href="#">Statuts</a></li>
-                            <li><a href="#">Bureau</a></li>
-                            <li><a href="#">Presentation</a></li>
+                            <li><a href="{{ path('association_status') }}">Statuts</a></li>
+                            <li><a href="{{ path('association_office') }}">Bureau</a></li>
+                            <li><a href="{{ path('association_presentation') }}">Presentation</a></li>
                         </ul>
                     </li>
                     <li>
@@ -62,50 +61,61 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#">Articles</a>
+                        <ul class="subnav">
+                            <li><a href="{{ path('article_new') }}">Creer un article</a></li>
+                            <li><a href="{{ path('article_index') }}">Voir les articles</a></li>
+                            </ul>
+                    </li>
+
+                    <li>
                         <a href="#">Forum</a>
                         <ul class="subnav">
-                            <!-- faire une boucle pr chopper les sujets du forum? -->
-                            <li><a href="#">Ateliers</a></li>
+                            <li><a href="{{ path('forum_new') }}">Creer un forum</a></li>
+                            <li><a href="{{ path('forum_index') }}">Voir les forums</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ path('about') }}">A propos</a></li>
+
+                    <li><a href="{{ path('association_about') }}">A propos</a></li>
                     <li><a href="{{ path('contact') }}">Contact</a></li>
                 </ul>
         <div class="login">
             {% block login %}
-                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                    {% include 'security/login.html.twig' %}
-                {% else %}
+                <ul>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <h3> Bienvenue {{ app.user.username }} </h3>
-                    <ul>
                         <li>
                             <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
                         </li>
-
-
+                {% else %}
+                    <li>
+                        <a href="{{ path("login") }}">Se connecter</a>
+                    </li>
 
                     {% if(is_granted('ROLE_ADMIN')) %}
+                        <ul>
                         <li>
                             <a href="#">Acceder à l'interface admin</a>
                         </li>
+                        </ul>
 
                     {% endif %}
                     {% if(is_granted('ROLE_PRESS')) %}
 
                     {% endif %}
-
+                </ul>
                 {% endif %}
-                    </ul>
+
             {% endblock %}
 
             </div>
         </div>
-    </div>
         {% endblock %}
         {% endif %}
 
 
         {% block section %}{% endblock %}
+            {% block dropzone %}{% endblock %}
 
 
         {% endblock %}

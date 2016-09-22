@@ -35,9 +35,14 @@ body
 {
     width:400px;
     text-align:center;
-    background: #222;
     color:white;
     height:100px;
+    background:#007bae;
+    border-radius:10px;
+}
+.login label,.login a
+{
+    color:white;
 }
 .login li
 {
@@ -53,7 +58,9 @@ ul.topnav {
     width: 920px;
     height:100px;
     background: #ff7a00;
+    /* couleur du fond du menu*/
     font-size: 1.2em;
+    border-radius:10px;
 
 }
 ul.topnav li {

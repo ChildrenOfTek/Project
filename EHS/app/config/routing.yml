@@ -1,3 +1,20 @@
+association:
+    resource: "@AssociationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+forum_post:
+    resource: "@ForumBundle/Controller/PostController.php"
+    type:     annotation
+
+forum_topic:
+    resource: "@ForumBundle/Controller/TopicController.php"
+    type:     annotation
+
+forum_forum:
+    resource: "@ForumBundle/Controller/ForumController.php"
+    type:     annotation
+
 article_tags:
     resource: "@ArticleBundle/Controller/TagsController.php"
     type:     annotation
@@ -6,12 +23,8 @@ article_article:
     resource: "@ArticleBundle/Controller/ArticleController.php"
     type:     annotation
 
-user_user:
-    resource: "@UserBundle/Controller/UserController.php"
-    type:     annotation
-
-article:
-    resource: "@ArticleBundle/Controller/"
+newsletter:
+    resource: "@NewsletterBundle/Controller/"
     type:     annotation
     prefix:   /
 
@@ -24,4 +37,3 @@ user:
     resource: "@UserBundle/Controller/"
     type:     annotation
     prefix:   /
-

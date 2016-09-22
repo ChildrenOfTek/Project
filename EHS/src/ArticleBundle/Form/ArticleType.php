@@ -26,7 +26,7 @@ class ArticleType extends AbstractType
             ->add('titreArticle')
             ->add('content',TextareaType::class,array('attr'=>array('rows'=>15)))
             ->add('datePublication',DateType::class,array('data'=> new \Datetime()))
-            ->add('imageFile','vich_file',array('required'=>false,'label'=>'Ajouter une image'))
+            ->add('imageFile','vich_file',array('required'=>false))
             ->add('online')
             ->add('tag',EntityType::class,array('class'=>'ArticleBundle:Tags',
           'choice_label'=>'libelle'))

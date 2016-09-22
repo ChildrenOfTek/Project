@@ -43,7 +43,7 @@ class User implements UserInterface, \Serializable
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Role", cascade={"remove"}))
+     * @ORM\ManyToMany(targetEntity="Role", cascade={"all"}))
      * @ORM\JoinTable(name="user_role",
      *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id",onDelete="CASCADE")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
@@ -73,9 +73,12 @@ class User implements UserInterface, \Serializable
     protected $adresse;
     
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cp", type="string", length=20)
+     * @var integer
+     * @Assert\Type(
+     *     type="integer",
+     *     message="La valeur {{ value }} n'est pas un nombre."
+     * )
+     * @ORM\Column(name="cp", type="integer", length=5)
      */
     protected $cp;
     

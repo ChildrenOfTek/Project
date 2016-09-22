@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 
-class UserType extends AbstractType
+class UserTypeEdit extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,7 +22,7 @@ class UserType extends AbstractType
         $builder
             ->setMethod('POST')
             ->add('username','text',array('label'=>'Nom d\'utilisateur'))
-            ->add('password','password',array('label'=>'Mot de passe'))
+            ->add('password')
             ->add('salt','hidden')
             ->add('userRoles',EntityType::class, array(
                 'class'=>'UserBundle:Role',

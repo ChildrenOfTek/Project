@@ -5,6 +5,12 @@
 
     <table class='table'>
         <tbody>
+                <tr>
+                    <td>{{ topic.title }}</td>
+                </tr>
+                <tr>
+                    <td>{{ topic.content }}</td>
+                </tr>
 
             {% for post in topic.posts %}
                 <tr>

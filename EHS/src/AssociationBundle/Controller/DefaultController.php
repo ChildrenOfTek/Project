@@ -11,7 +11,7 @@ use AssociationBundle\Form\ContactType;
 
 /**
  * Association controller.
- * @Route("/association")
+ * @Route("/")
  */
 class DefaultController extends Controller
 {
@@ -23,11 +23,13 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('association/index.html.twig');
+        $em=$this->getDoctrine()->getManager();
+        $articles=$em->getRepository('ArticleBundle:Article')->findOnline();
+        return $this->render('association/index.html.twig',array('articles'=>$articles));
     }
 
     /**
-     * @Route("/about", name="association_about")
+     * @Route("/association/about", name="association_about")
      */
     public function aboutAction()
     {
@@ -35,7 +37,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/status", name="association_status")
+     * @Route("/association/status", name="association_status")
      */
     public function statusAction()
     {
@@ -43,7 +45,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/office", name="association_office")
+     * @Route("/association/office", name="association_office")
      */
     public function officeAction()
     {
@@ -51,7 +53,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/presentation", name="association_presentation")
+     * @Route("/association/presentation", name="association_presentation")
      */
     public function presentationAction()
     {
@@ -63,7 +65,7 @@ class DefaultController extends Controller
     /**
      * Generates a contact form.
      *
-     * @Route("/contact", name="contact")
+     * @Route("/association/contact", name="contact")
      * @Method({"GET","POST"})
      */
     public function contactAction(Request $r)

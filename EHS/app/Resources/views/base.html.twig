@@ -43,7 +43,8 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">
-          <div class="logo"></div>
+
+          <div class="logo"><img src="{{ asset('public/img/wip_ehs3.svg') }}" alt="" /></div>
         </a>
       </div>
 
@@ -55,23 +56,12 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">L'Association <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="{{ path('association_status') }}">Statuts</a></li>
-              <li><a href="{{ path('association_office') }}">Bureau</a></li>
-              <li><a href="{{ path('association_presentation') }}">Presentation</a></li>
+              <li><a href="{{ path('association_status') }}">Notre équipe</a></li>
+              <li><a href="{{ path('association_office') }}">Nos actions</a></li>
+              <li><a href="{{ path('association_presentation') }}">Comment adhérer?</a></li>
             </ul>
           </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos Actions <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Ateliers</a></li>
-              <li><a href="#">Rencontres</a></li>
-              <li><a href="#">Spectacles</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Contributionsk</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
+
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agenda<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -84,38 +74,30 @@
               <li><a href="#">Un autre truc</a></li>
             </ul>
           </li>
-
+<li><a href="{{ path('forum_index') }}">Forum</a></li>
 
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Link</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace Personnel <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li>
                 <div class="login">
                    {% block login %}
-                   <li>
+
                       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                      <h4>{{ app.user.username }}</h4></li>
-                      <li>
-                         <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
-                      </li>
+                      <li><a href="#">{{ app.user.username }}</a></li>
+                      <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
                       {% else %}
-                      <li>
-                         <a href="{{ path("login") }}">Se connecter</a>
-                      </li>
+                      <li><a href="{{ path("login") }}">Se connecter</a></li>
                       {% if(is_granted('ROLE_ADMIN')) %}
                       <ul>
-                         <li>
-                            <a href="#">Acceder à l'interface admin</a>
-                         </li>
+                         <li><a href="#">Acceder à l'interface admin</a></li>
                       </ul>
                       {% endif %}
                       {% if(is_granted('ROLE_PRESS')) %}
                       {% endif %}
-
                    {% endif %}
                    {% endblock %}
                 </div>

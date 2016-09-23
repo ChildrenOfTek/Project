@@ -97,7 +97,6 @@ class ArticleController extends Controller
 
     /**
      * Finds and displays a Article entity.
-     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="article_show")
      * @Method("GET")
      */
@@ -126,7 +125,7 @@ class ArticleController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $data=$editForm->getData();
 
-            $article->setUser($data->getUser()->getUsername());
+            $article->setUser($data->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);

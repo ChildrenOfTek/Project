@@ -3,9 +3,9 @@ $('.dropdown').on('show.bs.dropdown', function(e){
  });
 
 
- $('ul.nav li.dropdown').hover(function(e){
-   $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
- });
+ $('.dropdown').on('hide.bs.dropdown', function(e){
+    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+  });
 
 
  /*

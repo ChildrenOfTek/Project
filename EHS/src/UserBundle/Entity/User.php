@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Role\RoleInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -121,12 +122,20 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="ArticleBundle:Article", mappedBy="user")
      */
     protected $article;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="topics", type="integer", nullable=true)
+     * @ORM\OneToMany(targetEntity="ForumBundle:Topic", mappedBy="user")
+     */
     
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->userRoles=[];
         $this->updatedAt = new \DateTime();
+        
     }
     
 /*********************** METHODES OBLIGATOIRES *********************/

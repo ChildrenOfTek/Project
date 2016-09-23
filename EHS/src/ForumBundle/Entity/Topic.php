@@ -44,6 +44,10 @@ class Topic
         $this->posts = new ArrayCollection();
     }
 
+    
+
+/*********************** METHODES OBLIGATOIRES *********************/
+
     /**
      * Get id
      *

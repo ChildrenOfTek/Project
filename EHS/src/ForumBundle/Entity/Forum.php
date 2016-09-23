@@ -42,8 +42,11 @@ class Forum
      private $topics;
 
     public function __construct() {
-        $this->features = new ArrayCollection();
+        $this->topics = new ArrayCollection();
     }
+
+/*********************** METHODES OBLIGATOIRES *********************/
+    
     /**
      * Get id
      *

@@ -17,11 +17,11 @@ class TopicType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('forum', EntityType::class, array(
+            /*->add('forum', EntityType::class, array(
               'class'=>'ForumBundle:Forum',
               'property'=>'libForum',
-              'label'=>'sujet'
-            ))
+              'label'=>'Sujet'
+            ))*/
         ;
     }
 

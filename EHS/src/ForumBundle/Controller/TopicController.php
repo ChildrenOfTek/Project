@@ -44,13 +44,15 @@ class TopicController extends Controller
         $topic = new Topic();
         $form = $this->createForm('ForumBundle\Form\TopicType', $topic);
         $form->handleRequest($request);
-
+        $id=$_GET['id'];
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $forum=$em->getRepository('ForumBundle:Forum')->find($id);
+            $topic->setForum($forum);
             $em->persist($topic);
             $em->flush();
-
-            return $this->redirectToRoute('topic_show', array('id' => $topic->getId()));
+            
+            return $this->redirectToRoute('forum_show', array('id' => $_GET['id']));
         }
 
         return $this->render('topic/new.html.twig', array(
@@ -112,14 +114,17 @@ class TopicController extends Controller
     {
         $form = $this->createDeleteForm($topic);
         $form->handleRequest($request);
-
+        $id= $topic->getForum()->getId();
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($topic);
             $em->flush();
+            
         }
-
-        return $this->redirectToRoute('topic_index');
+        ;
+        
+        return $this->redirectToRoute('forum_show', array('id' => $id));
+        
     }
 
     /**

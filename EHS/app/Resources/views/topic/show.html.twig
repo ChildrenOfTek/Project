@@ -1,32 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Topic</h1>
+{% block section %}
+    <h1>{{ topic.title }}</h1>
 
-    <table>
+    <table class='table'>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ topic.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ topic.title }}</td>
-            </tr>
+
+            {% for post in topic.posts %}
+                <tr>
+                    <td>{{ post.content }}<td>
+                    <td>Publié par {{ post.author }}
+                    <td>Le {{ post.dateEdit|date('d/m/Y')}} à {{ post.dateEdit|date('H:i')}}
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('topic_index') }}">Back to the list</a>
+            <a href="{{ path('forum_show', { 'id': topic.forum.id }) }}">Retour</a>
         </li>
         <li>
-            <a href="{{ path('topic_edit', { 'id': topic.id }) }}">Edit</a>
+            <a href="{{ path('post_new', { 'id': topic.id }) }}">Commenter</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
         </li>
+        
     </ul>
+
+
+
+
+
+
+    
 {% endblock %}

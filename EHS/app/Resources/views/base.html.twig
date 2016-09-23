@@ -10,6 +10,9 @@
         <link href="{{ asset('public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }} "/>
+        <link rel="icon" type="image/png" href="{{ asset('favicon.ico') }}" />
 
 
 
@@ -87,17 +90,18 @@
                    {% block login %}
 
                       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                      <li><a href="#">{{ app.user.username }}</a></li>
+                      <li><a href="#">{{ app.user.nom }} {{ app.user.prenom }}</a></li>
                       <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
-                      {% else %}
+                        {% if(is_granted('ROLE_ADMIN')) %}
+                                <li><a href="#">Acceder à l'interface admin</a></li>
+                        {% endif %}
+                        {% if(is_granted('ROLE_PRESS')) %}
+
+                        {% endif %}
+
+                        {% else %}
                       <li><a href="{{ path("login") }}">Se connecter</a></li>
-                      {% if(is_granted('ROLE_ADMIN')) %}
-                      <ul>
-                         <li><a href="#">Acceder à l'interface admin</a></li>
-                      </ul>
-                      {% endif %}
-                      {% if(is_granted('ROLE_PRESS')) %}
-                      {% endif %}
+
                    {% endif %}
                    {% endblock %}
                 </div>

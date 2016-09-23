@@ -46,6 +46,7 @@ class LoadTagsData extends AbstractFixture implements OrderedFixtureInterface
         {
             $tag[$i]=new Tags();
             $tag[$i]->setLibelle($lib[$i]);
+            $this->addReference($lib[$i],$tag[$i]);
             $manager->persist($tag[$i]);
         }
 

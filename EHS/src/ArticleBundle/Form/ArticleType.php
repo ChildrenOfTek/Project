@@ -70,7 +70,8 @@ class ArticleType extends AbstractType
                 ))
 
             ->add('online',CheckboxType::class, array(
-                'label'=>'L\'article doit-il être mis en ligne?'))
+                'label'=>'L\'article doit-il être mis en ligne?',
+                'required'=>false))
             ->add('newsletter')
         ;
     }

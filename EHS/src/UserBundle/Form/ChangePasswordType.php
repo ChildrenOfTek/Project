@@ -9,7 +9,7 @@ class ChangePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-    $builder->add('oldPassword', 'password',array('label'=>'Entrez votre ancien mot de passe :'));
+    $builder->add('oldPassword', 'password',array('label'=>'Entrez votre ancien mot de passe'));
     $builder->add('newPassword', 'repeated', array(
     'type' => 'password',
     'invalid_message' => 'Les deux mots de passe doivent etre identiques',

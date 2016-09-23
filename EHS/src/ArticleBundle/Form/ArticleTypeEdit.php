@@ -9,11 +9,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Doctrine\ORM\EntityManager;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ArticleTypeEdit extends AbstractType
 {
@@ -25,12 +23,34 @@ class ArticleTypeEdit extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user',EntityType::class, array('class'=>'UserBundle:User','property'=>'username'))
-            ->add('dateArticle', DateType::class, array('data' => new \Datetime()))
-            ->add('titreArticle')
-            ->add('content',TextareaType::class,array('attr'=>array('rows'=>15)))
-            ->add('datePublication',DateType::class,array('data'=> new \Datetime()))
-            ->add('imageFile','vich_file')
+            ->add('user',EntityType::class, array(
+                'class'=>'UserBundle:User',
+                'property'=>'username',
+                'label'=>'Auteur'))
+
+            ->add('dateArticle', DateType::class, array(
+                'data' => new \Datetime(),
+                'widget'=>'choice',
+                'format'=>'dd-MM-yyyy',
+                'label'=>'Date de création'
+            ))
+
+            ->add('titreArticle','text',array(
+                'label'=>'Titre de l\'article'))
+
+            ->add('content',TextareaType::class,array(
+                'attr'=>array('rows'=>15),
+                'label'=>'Contenu de l\'article'))
+
+            ->add('datePublication',DateType::class,array(
+                'data'=> new \Datetime(),
+                'widget'=>'choice',
+                'format'=>'dd-MM-yyyy',
+                'label'=>'Date de publication'))
+
+            ->add('imageFile',VichFileType::class,
+                array('required'=>false,
+                    'label'=>'Choisissez un fichier à ajouter'))
             ->add('online')
             ->add('tag',CollectionType::class,array(
                 'entry_type'=>TagsType::class,
@@ -39,6 +59,8 @@ class ArticleTypeEdit extends AbstractType
                 'by_reference'=>false,
 
             ))
+            ->add('online',CheckboxType::class, array(
+                'label'=>'L\'article doit-il être mis en ligne?'))
             ->add('newsletter')
         ;
     }

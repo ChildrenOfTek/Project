@@ -13,6 +13,7 @@ jQuery(document).ready(function() {
     $collectionHolder.append($newLinkLi);
 
     // add a delete link to all of the existing tag form li elements
+    //excepts the last one
     var $set=$collectionHolder.find('li');
     var len=$set.length;
         $set.each(function(index) {

@@ -9,7 +9,8 @@
         {{ form_row(edit_form.titreArticle) }}
         {{ form_row(edit_form.content) }}
         {{ form_row(edit_form.datePublication) }}
-        {{ form_row(edit_form.imageFile) }}
+        <div class="vich-file">
+        {{ form_widget(edit_form.imageFile) }}
         {{ form_row(edit_form.online) }}
         {{ form_row(edit_form.newsletter) }}
 

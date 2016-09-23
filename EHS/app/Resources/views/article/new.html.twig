@@ -9,11 +9,11 @@
         {{ form_row(form.content) }}
         {{ form_row(form.datePublication) }}
         <div class="vich-file">
-            {{ form_widget(form.imageFile) }} {# here #}
-
+            {{ form_widget(form.imageFile) }}
+        {{ form_row(form.tag) }}
         {{ form_row(form.online) }}
         {{ form_row(form.newsletter) }}
-        {{ form_row(form.tag) }}
+
 
     <input type="submit" value="Créer un article" />
     {{ form_end(form) }}

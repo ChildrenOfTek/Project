@@ -8,12 +8,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ArticleType extends AbstractType
 {
@@ -56,7 +55,7 @@ class ArticleType extends AbstractType
                 'format'=>'dd-MM-yyyy',
                 'label'=>'Date de publication'))
 
-            ->add('imageFile','vich_file',
+            ->add('imageFile',VichFileType::class,
                 array('required'=>false,
                     'label'=>'Choisissez un fichier à ajouter'))
 

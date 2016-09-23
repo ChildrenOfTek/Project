@@ -55,7 +55,7 @@
            </div>
            <div class="panel-body">
              {% for tag in article.tag%}
-             {{ tag.libelle}}
+             <a href="{{ path('tags_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
              {% endfor %}
            </div>
           </div>

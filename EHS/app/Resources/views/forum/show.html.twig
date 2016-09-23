@@ -10,7 +10,12 @@
             {% for topic in forum.topics %}
                 <tr>
                   <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
-                    <td><a href="{{ path('topic_edit', { 'id': topic.id}) }}">Modifier</a></td>
+                    <div class="admin">
+                        <td><a href="{{ path('topic_edit', { 'id': topic.id}) }}">Modifier</a></td>
+                    </div>
+                </tr>
+                <tr>
+                    <td>{{ topic.content }}</td>
                 </tr>
             {% endfor %}
         </tbody>

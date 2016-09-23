@@ -30,6 +30,13 @@ class Topic
     private $title;
 
     /**
+     * @var text
+     *
+     * @ORM\Column(name="content", type="text", length=10000)
+     */
+    private $content;
+
+    /**
      *@ORM\ManyToOne(targetEntity="Forum",inversedBy="topics",cascade={"persist","merge"})
      *@ORM\JoinColumn(name="forum_id", referencedColumnName="id")
      */
@@ -121,6 +128,44 @@ class Topic
     public function setPosts($posts)
     {
         $this->posts = $posts;
+
+        return $this;
+    }
+
+    /**
+     * Sets the value of posts.
+     *
+     * @param mixed $posts the posts
+     *
+     * @return self
+     */
+    private function _setPosts($posts)
+    {
+        $this->posts = $posts;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of content.
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Sets the value of content.
+     *
+     * @param string $content the content
+     *
+     * @return self
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
 
         return $this;
     }

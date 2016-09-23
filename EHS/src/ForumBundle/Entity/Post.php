@@ -29,9 +29,9 @@ class Post
     private $content;
 
     /**
-     * @var string
+     * @var text
      *
-     * @ORM\Column(name="author", type="string", length=100)
+     * @ORM\Column(name="author", type="text", length=5000)
      */
     private $author;
 

@@ -120,10 +120,14 @@ class ArticleController extends Controller
     public function editAction(Request $request, Article $article)
     {
         $deleteForm = $this->createDeleteForm($article);
-        $editForm = $this->createForm('ArticleBundle\Form\ArticleType', $article);
+        $editForm = $this->createForm('ArticleBundle\Form\ArticleTypeEdit', $article);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $data=$editForm->getData();
+
+            $article->setUser($data->getUser()->getUsername());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();

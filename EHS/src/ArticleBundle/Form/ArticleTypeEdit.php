@@ -4,6 +4,7 @@ namespace ArticleBundle\Form;
 
 use Symfony\Bridge\Doctrine\Tests\Form\Type\EntityTypeTest;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -14,14 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityManager;
 
-class ArticleType extends AbstractType
+class ArticleTypeEdit extends AbstractType
 {
-    // L'entity manager va nous servir a reccuperer la liste des tags existants
-    private $em;
 
-    public function __construct(EntityManager $em){
-        $this->em = $em;
-    }
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -34,12 +30,15 @@ class ArticleType extends AbstractType
             ->add('titreArticle')
             ->add('content',TextareaType::class,array('attr'=>array('rows'=>15)))
             ->add('datePublication',DateType::class,array('data'=> new \Datetime()))
-            ->add('imageFile','vich_file',array('required'=>false))
+            ->add('imageFile','vich_file')
             ->add('online')
-            ->add('tag',ChoiceType::class,array('label'=>'Tags (Maintenir CTRL pour en choisir plusieurs)',
-                'choices'=>$this->fillTags(),'attr'=>array('class'=>"form-control select2"),
-                'choices_as_values'=>true,'expanded'=>false,'multiple'=>true
-                ))
+            ->add('tag',CollectionType::class,array(
+                'entry_type'=>TagsType::class,
+                'allow_add'=>true,
+                'allow_delete'=>true,
+                'by_reference'=>false,
+
+            ))
             ->add('newsletter')
         ;
     }
@@ -54,16 +53,4 @@ class ArticleType extends AbstractType
         ));
     }
 
-    private function fillTags() {
-        //On reccup la liste des tags, on push dans un array,
-        // et on renvoie à ChoiceType
-        $tags=$this->em->getRepository('ArticleBundle:Tags')->findAll();
-
-        $tagsLib = [];
-        foreach($tags as $tag){
-            //if($tag->getLibelle()!=)
-            $tagsLib[$tag->getLibelle()] = $tag;
-        }
-        return $tagsLib;
-    }
 }

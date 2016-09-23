@@ -10,6 +10,9 @@ namespace UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SecurityController extends Controller
 {
@@ -42,4 +45,7 @@ class SecurityController extends Controller
     {
         return $this->render('UserBundle:Default:index.html.twig');
     }
+
+    //envoyer un mail sur une route reset avec l'id du mail
+
 }

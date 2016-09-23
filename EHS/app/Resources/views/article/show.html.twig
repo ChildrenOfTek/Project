@@ -24,6 +24,15 @@
                 <th>Nom du fichier</th>
                 <td>{{ article.imageName }}</td>
             </tr>
+            <tr>
+                <th>Tags</th>
+                <td><!--Affichage des tags de l'article -->
+                    {% for tag in article.tag %}
+                    {{ tag.libelle }}
+                    {% endfor  %}
+                </td>
+
+            </tr>
         </tbody>
     </table>
 </div>

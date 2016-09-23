@@ -9,7 +9,8 @@
 
             {% for topic in forum.topics %}
                 <tr>
-                  <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
+                    <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
+                    <td>Le {{ topic.dateCreated|date('d/m/Y') }} à {{ topic.dateCreated|date('H:i') }}</td>
                     <div class="admin">
                         <td><a href="{{ path('topic_edit', { 'id': topic.id}) }}">Modifier</a></td>
                     </div>

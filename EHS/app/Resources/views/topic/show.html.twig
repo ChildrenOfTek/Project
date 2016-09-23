@@ -7,6 +7,7 @@
         <tbody>
                 <tr>
                     <td>{{ topic.title }}</td>
+                    <td>Le {{ topic.dateCreated|date('d/m/Y')}} à {{ topic.dateCreated|date('H:i')}}</td>
                 </tr>
                 <tr>
                     <td>{{ topic.content }}</td>

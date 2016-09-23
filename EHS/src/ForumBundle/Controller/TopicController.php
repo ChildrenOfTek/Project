@@ -49,6 +49,7 @@ class TopicController extends Controller
             $em = $this->getDoctrine()->getManager();
             $forum=$em->getRepository('ForumBundle:Forum')->find($id);
             $topic->setForum($forum);
+            $topic->setDateCreated(new \DateTime());
             $em->persist($topic);
             $em->flush();
             

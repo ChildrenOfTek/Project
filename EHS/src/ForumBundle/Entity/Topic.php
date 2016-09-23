@@ -37,6 +37,13 @@ class Topic
     private $content;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateEdit", type="datetime")
+     */
+    private $dateCreated;
+
+    /**
      *@ORM\ManyToOne(targetEntity="Forum",inversedBy="topics",cascade={"persist","merge"})
      *@ORM\JoinColumn(name="forum_id", referencedColumnName="id")
      */
@@ -166,6 +173,30 @@ class Topic
     public function setContent($content)
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of dateCreated.
+     *
+     * @return \DateTime
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    /**
+     * Sets the value of dateCreated.
+     *
+     * @param \DateTime $dateCreated the date created
+     *
+     * @return self
+     */
+    public function setDateCreated(\DateTime $dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
 
         return $this;
     }

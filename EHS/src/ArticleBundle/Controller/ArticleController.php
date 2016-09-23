@@ -79,7 +79,7 @@ class ArticleController extends Controller
             $data=$form->getData();
             $date=new \DateTime('now');
 
-            $article->setUser($data->getUser()->getUsername());
+            $article->setUser($data->getUser());
             $article->setDateArticle($date);
 
             $em = $this->getDoctrine()->getManager();

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use ArticleBundle\Entity\Article;
 
 /**
  * User
@@ -123,14 +124,15 @@ class User implements UserInterface, \Serializable
      * @var int
      *
      * @ORM\Column(name="article", type="integer", nullable=true)
-     * @ORM\OneToMany(targetEntity="ArticleBundle:Article", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="ArticleBundle\Entity\Article", mappedBy="user")
      */
     protected $article;
     
     public function __construct()
     {
         $this->createdAt = new \DateTime();
-        $this->userRoles=new ArrayCollection();// new \Doctrine\Common\Collections\ArrayCollection();
+        $this->userRoles=new ArrayCollection();
+        $this->article=new ArrayCollection();
         $this->updatedAt = new \DateTime();
     }
     

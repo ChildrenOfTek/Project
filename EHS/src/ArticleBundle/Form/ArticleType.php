@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ArticleType extends AbstractType
 {
@@ -31,7 +32,7 @@ class ArticleType extends AbstractType
         $builder
             ->add('user',EntityType::class, array(
                 'class'=>'UserBundle:User',
-                'property'=>'username',
+                'property'=>'nom',
                 'label'=>'Auteur'))
 
             ->add('dateArticle', DateType::class, array(
@@ -42,7 +43,7 @@ class ArticleType extends AbstractType
 
             ))
 
-            ->add('titreArticle','text',array(
+            ->add('titreArticle',TextType::class,array(
                 'label'=>'Titre de l\'article'))
 
             ->add('content',TextareaType::class,array(
@@ -63,7 +64,7 @@ class ArticleType extends AbstractType
                 'label'=>'Tags à ajouter',
                 'label_attr'=>array('class'=>'checkbox-inline'),
                 'choices'=>$this->fillTags(),
-                'attr'=>array('class'=>"checkbox"),
+                'attr'=>array('class'=>CheckboxType::class),
                 'choices_as_values'=>true,
                 'expanded'=>true,
                 'multiple'=>true

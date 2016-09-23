@@ -17,7 +17,7 @@
 
             <!-- Author -->
             <p class="lead">
-                par <a href="#">{{ article.user }}</a>
+                par <a href="{{ path('user_showpublic',{'id':article.user.id}) }}">{{ article.user.nom }}</a>
             </p>
 
             <hr>

@@ -1,8 +1,46 @@
-.nav
-{
-    display: flex;
-    flex-flow: row nowrap;
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300');
+body{
+    height:100%;
+    margin-top: 100px;
+    font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
+    background-color: #f4f4f4;
+
+
 }
+
+body a:link{
+  color: #ad05fc;
+}
+
+body a:visited{
+  color: #fc5705;
+}
+
+
+.bg {
+  background: url(../img/handicap.jpg);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+
+}
+
+.panel{
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  color:#777;
+  border-style: none;
+}
+
+.panel .panel-heading{
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #eee;
+  color: #afafaf;
+}
+
 .onhover
 {
     display:flex;
@@ -13,102 +51,100 @@
 {
     width:400px;
 }
-body
-{
-    margin-left: 30px;
-}
+
 .top-div
 {
-    display: flex;
-    flex-flow:row nowrap;
+width: 100%;
 }
 .logo
 {
-   height:300px;
-   width:30%;
+   height:80px;
+   width:210px;
+
+   background: url(../img/wip_ehs.png) no-repeat center top;
+   background-size: 200px 80px;
 }
-.login
-{
-    width:20%;
-    text-align:center;
-    background:#007bae;
-    height:50%;
-    border-radius:10px;
+
+
+.navbar{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+border-style: none;
+background-color: #fff;
+
 }
-.login label,.login a
-{
-    color:white;
+
+.container-fluid,
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 80px;
+    height: 80px;
+    padding-top: 0;
+    background-color: transparent;
+    color: #494949;
+    text-align: center;
 }
-.login li
-{
-    list-style: none;
-    text-align:center;
+.collapse{
+  background-color: #fff;
+  color: #761aeb;
+}
+
+.navbar-default .navbar-nav > li > a{
+  color: #494949;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #ad05fc;
     color: #fff;
+    font-weight: bold;
+    -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
 }
-ul.topnav {
-    list-style: none;
-    padding: 0 20px;
-    margin: 0;
-    float: left;
-    width: 920px;
-    height:50px;
-    /* couleur du fond du menu*/
-    background: #007bae;
-    font-size: 1.2em;
-    border-radius:10px;
 
+.dropdown-menu{
+  border-style: none;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 0px;
 }
-ul.topnav li {
-    float: left;
-    margin: 0;
-    padding: 0 15px 0 0;
-    position: relative; /*--Declare X and Y axis base for sub navigation--*/
-}
-ul.topnav li a{
-    padding: 10px 5px;
-    color: #fff;
-    display: block;
-    text-decoration: none;
-    float: left;
-}
-ul.topnav li a:hover{
 
+.dropdown-menu li a{
+  height: 50px;
+  line-height: 50px;
 }
-ul.topnav li span { /*--Drop down trigger styles--*/
-    width: 30px;
-    height: 30px;
-    float: left;
-    background: url(img/background.gif) no-repeat center top;
-    z-index:1;
 
+.dropdown-menu > li > a:hover{
+  background-color: #ff4d00;
+  color: #fff;
+  font-weight: bold;
+  -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
-ul.topnav li span.subhover {background-position: center bottom; cursor: pointer;} /*--Hover effect for trigger--*/
-ul.topnav li ul.subnav {
-    list-style: none;
-    position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
-    left: 0; top: 35px;
-    background: #333;
-    margin: 0; padding: 0;
-    display: none;
-    float: left;
-    width: 170px;
-    border: 1px solid #111;
+
+section {
+    width:94%;
+  	margin:0 auto;
+  	height:100%;
+	color:#fff;
 }
-ul.topnav li ul.subnav li{
-    margin: 0; padding: 0;
-    border-top: 1px solid #252525; /*--Create bevel effect--*/
-    border-bottom: 1px solid #444; /*--Create bevel effect--*/
-    clear: both;
-    width: 170px;
+
+section .row{
+  margin: 20px;
 }
-html ul.topnav li ul.subnav li a {
-    float: left;
-    width: 145px;
-    /* ici couleur du background des sous menu*/
-    background: #f18f04  no-repeat 10px center;
-    padding-left: 20px;
+
+.row .text-center{
+  margin: 50px;
 }
-html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
-    /* ici couleur du background sur le hover des sous menus*/
-    background: #007bae  no-repeat 10px center;
+
+a:link, a:visited {
+	color:#eee;
+}
+
+
+
+.navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus {
+	background-color: transparent;
 }

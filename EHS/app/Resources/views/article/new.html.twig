@@ -3,13 +3,24 @@
 {% block section %}
     <h1>Article creation</h1>
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        {{ form_row(form.user) }}
+        {{ form_row(form.dateArticle) }}
+        {{ form_row(form.titreArticle) }}
+        {{ form_row(form.content) }}
+        {{ form_row(form.datePublication) }}
+        <div class="vich-file">
+            {{ form_widget(form.imageFile) }}
+        {{ form_row(form.tag) }}
+        {{ form_row(form.online) }}
+        {{ form_row(form.newsletter) }}
+
+
+    <input type="submit" value="Créer un article" />
     {{ form_end(form) }}
 
     <ul>
         <li>
-            <a href="{{ path('article_index') }}">Back to the list</a>
+            <a href="{{ path('article_index') }}">Retour à la liste</a>
         </li>
     </ul>
 {% endblock %}

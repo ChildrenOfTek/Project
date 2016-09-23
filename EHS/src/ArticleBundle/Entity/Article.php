@@ -91,7 +91,7 @@ class Article
     private $online;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articles")
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articles",cascade={"persist"})
      * @ORM\JoinTable(name="tags_articles")
      */
     private $tag;

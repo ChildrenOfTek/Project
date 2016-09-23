@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ForumBundle\Entity\Post;
 use ForumBundle\Form\PostType;
 
+
 /**
  * Post controller.
  *
@@ -44,13 +45,17 @@ class PostController extends Controller
         $post = new Post();
         $form = $this->createForm('ForumBundle\Form\PostType', $post);
         $form->handleRequest($request);
-
+        $id=$_GET['id'];
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $topic=$em->getRepository('ForumBundle:Topic')->find($id);
+            var_dump($id);
+            $post->setTopic($topic);
+            $post->setDateEdit(new \DateTime());
             $em->persist($post);
             $em->flush();
 
-            return $this->redirectToRoute('post_show', array('id' => $post->getId()));
+            return $this->redirectToRoute('topic_show', array('id' => $_GET['id'] ));
         }
 
         return $this->render('post/new.html.twig', array(
@@ -89,6 +94,7 @@ class PostController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
             $em->persist($post);
             $em->flush();
 

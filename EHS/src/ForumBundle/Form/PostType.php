@@ -18,12 +18,6 @@ class PostType extends AbstractType
         $builder
             ->add('content')
             ->add('author')
-            ->add('dateEdit', 'datetime')
-            ->add('topic', EntityType::class, array(
-              'class'=>'ForumBundle:Topic',
-              'property'=>'title',
-              'label'=>'question'
-            ))
         ;
     }
     

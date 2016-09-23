@@ -58,7 +58,7 @@ function addTagForm($collectionHolder, $newLinkLi) {
     addTagFormDeleteLink($newFormLi);
 }
 function addTagFormDeleteLink($tagFormLi) {
-    var $removeFormA = $('<a href="#">delete this tag</a>');
+    var $removeFormA = $('<a href="#">Supprimer ce tag</a>');
     $tagFormLi.append($removeFormA);
 
     $removeFormA.on('click', function(e) {

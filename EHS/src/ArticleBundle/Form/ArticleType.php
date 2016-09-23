@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ArticleType extends AbstractType
 {
@@ -29,17 +30,48 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user',EntityType::class, array('class'=>'UserBundle:User','property'=>'username'))
-            ->add('dateArticle', DateType::class, array('data' => new \Datetime()))
-            ->add('titreArticle')
-            ->add('content',TextareaType::class,array('attr'=>array('rows'=>15)))
-            ->add('datePublication',DateType::class,array('data'=> new \Datetime()))
-            ->add('imageFile','vich_file',array('required'=>false))
-            ->add('online')
-            ->add('tag',ChoiceType::class,array('label'=>'Tags (Maintenir CTRL pour en choisir plusieurs)',
-                'choices'=>$this->fillTags(),'attr'=>array('class'=>"form-control select2"),
-                'choices_as_values'=>true,'expanded'=>false,'multiple'=>true
+            ->add('user',EntityType::class, array(
+                'class'=>'UserBundle:User',
+                'property'=>'username',
+                'label'=>'Auteur'))
+
+            ->add('dateArticle', DateType::class, array(
+                'data' => new \Datetime(),
+                'widget'=>'choice',
+                'format'=>'dd-MM-yyyy',
+                'label'=>'Date de création'
+
+            ))
+
+            ->add('titreArticle','text',array(
+                'label'=>'Titre de l\'article'))
+
+            ->add('content',TextareaType::class,array(
+                'attr'=>array('rows'=>15),
+                'label'=>'Contenu de l\'article'))
+
+            ->add('datePublication',DateType::class,array(
+                'data'=> new \Datetime(),
+                'widget'=>'choice',
+                'format'=>'dd-MM-yyyy',
+                'label'=>'Date de publication'))
+
+            ->add('imageFile','vich_file',
+                array('required'=>false,
+                    'label'=>'Choisissez un fichier à ajouter'))
+
+            ->add('tag',ChoiceType::class,array(
+                'label'=>'Tags à ajouter',
+                'label_attr'=>array('class'=>'checkbox-inline'),
+                'choices'=>$this->fillTags(),
+                'attr'=>array('class'=>"checkbox"),
+                'choices_as_values'=>true,
+                'expanded'=>true,
+                'multiple'=>true
                 ))
+
+            ->add('online',CheckboxType::class, array(
+                'label'=>'L\'article doit-il être mis en ligne?'))
             ->add('newsletter')
         ;
     }

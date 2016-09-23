@@ -13,18 +13,42 @@ class LoadTagsData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $tag1=new Tags();
-        $tag1->setLibelle("Santé");
+        // Pour ajouter un tag à la liste des fixtures,
+        // le mettre à la suite dans le tableau $lib
+        $lib=[
+            'Santé',
+            'Informations',
+            'Association',
+            'Politique',
+            'Evenements',
+            'Lorem',
+            'Ipsum',
+            'Classe',
+            'Debut',
+            'Fin',
+            'Milieu',
+            'Forum',
+            'Santéé',
+            'Informationss',
+            'Associations',
+            'Politiques',
+            'Evenementss',
+            'Lorems',
+            'Ipsums',
+            'Classes',
+            'Debuts',
+            'Fins',
+            'Milieus',
+            'Forums'
 
-        $tag2=new Tags();
-        $tag2->setLibelle("Info");
+        ];
+        for($i=0;$i<count($lib);$i++)
+        {
+            $tag[$i]=new Tags();
+            $tag[$i]->setLibelle($lib[$i]);
+            $manager->persist($tag[$i]);
+        }
 
-        $tag3=new Tags();
-        $tag3->setLibelle("Association");
-
-        $manager->persist($tag1);
-        $manager->persist($tag2);
-        $manager->persist($tag3);
         $manager->flush();
     }
 

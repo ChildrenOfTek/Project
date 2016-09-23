@@ -37,7 +37,7 @@ class Forum
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Topic",mappedBy="forum")
+     * @ORM\OneToMany(targetEntity="Topic",mappedBy="forum",cascade={"persist","remove","merge"})
      */
      private $topics;
 
@@ -117,7 +117,7 @@ class Forum
      *
      * @return self
      */
-    private function _setTopics($topics)
+    public function setTopics($topics)
     {
         $this->topics = $topics;
 

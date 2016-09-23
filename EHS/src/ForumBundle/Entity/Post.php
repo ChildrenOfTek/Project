@@ -145,7 +145,7 @@ class Post
      *
      * @return self
      */
-    private function _setTopic($topic)
+    public function setTopic($topic)
     {
         $this->topic = $topic;
 

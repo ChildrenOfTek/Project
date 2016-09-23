@@ -7,12 +7,11 @@
             Bienvenue !
 
             {% endblock %}</title>
-
-
         <link href="{{ asset('public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="{{ asset('public/script/jquery-3.1.0.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('public/script/menuDeroulant.js') }}"></script>
+
+
 
         {% block stylesheets %}
 <!--{{ dump(app.user) }}-->
@@ -28,87 +27,110 @@
 
         {% if app.request.requestUri != "/EHS/EHS/web/app_dev.php/user/new" %}
         <div class="top-div">
-            <div class="logo">
-                <img src="{{ asset('public/img/wip_ehs.png') }}"/>
-            </div>
+
             {% block nav %}
-                <ul class="topnav">
-                    <li><a href="{{ path('index') }}">Accueil</a></li>
-                    <li>
-                        <a href="#">Association</a>
-                        <ul class="subnav">
-                            <li><a href="{{ path('association_status') }}">Statuts</a></li>
-                            <li><a href="{{ path('association_office') }}">Bureau</a></li>
-                            <li><a href="{{ path('association_presentation') }}">Presentation</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Nos actions</a>
-                        <ul class="subnav">
-                            <li><a href="#">Ateliers</a></li>
-                            <li><a href="#">Rencontres</a></li>
-                            <li><a href="#">Spectacles</a></li>
-                            <li><a href="#">Contributions</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Agenda</a>
-                        <ul class="subnav">
-                            <li><a href="#">Ateliers</a></li>
-                            <li><a href="#">Rencontres</a></li>
-                            <li><a href="#">Spectacles</a></li>
-                            <li><a href="#">Contributions</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Articles</a>
-                        <ul class="subnav">
-                            <li><a href="{{ path('article_new') }}">Creer un article</a></li>
-                            <li><a href="{{ path('article_index') }}">Voir les articles</a></li>
-                            </ul>
-                    </li>
 
-                    <li>
-                        <a href="#">Forum</a>
-                        <ul class="subnav">
-                            <li><a href="{{ path('forum_new') }}">Creer un forum</a></li>
-                            <li><a href="{{ path('forum_index') }}">Voir les forums</a></li>
-                        </ul>
-                    </li>
 
-                    <li><a href="{{ path('association_about') }}">A propos</a></li>
-                    <li><a href="{{ path('contact') }}">Contact</a></li>
-                </ul>
-        <div class="login">
-            {% block login %}
-                <ul>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <h3> Bienvenue {{ app.user.username }} </h3>
-                        <li>
-                            <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
-                        </li>
-                {% else %}
-                    <li>
-                        <a href="{{ path("login") }}">Se connecter</a>
-                    </li>
 
-                    {% if(is_granted('ROLE_ADMIN')) %}
-                        <ul>
-                        <li>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <div class="logo"></div>
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="inactive"><a href="{{ path('index') }}">Accueil</a></li>
+          <li class="inactive"><a href="{{ path('article_index') }}">Articles</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">L'Association <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ path('association_status') }}">Statuts</a></li>
+              <li><a href="{{ path('association_office') }}">Bureau</a></li>
+              <li><a href="{{ path('association_presentation') }}">Presentation</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nos Actions <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Ateliers</a></li>
+              <li><a href="#">Rencontres</a></li>
+              <li><a href="#">Spectacles</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Contributionsk</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agenda<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Ateliers</a></li>
+              <li><a href="#">Rencontres</a></li>
+              <li><a href="#">Spectacles</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Contributions</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Un autre truc</a></li>
+            </ul>
+          </li>
+
+
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace Personnel <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li>
+                <div class="login">
+                   {% block login %}
+                   <li>
+                      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                      <h4>{{ app.user.username }}</h4></li>
+                      <li>
+                         <a href="{{ path("user_security_logout") }}">Se deconnecter</a>
+                      </li>
+                      {% else %}
+                      <li>
+                         <a href="{{ path("login") }}">Se connecter</a>
+                      </li>
+                      {% if(is_granted('ROLE_ADMIN')) %}
+                      <ul>
+                         <li>
                             <a href="#">Acceder à l'interface admin</a>
-                        </li>
-                        </ul>
+                         </li>
+                      </ul>
+                      {% endif %}
+                      {% if(is_granted('ROLE_PRESS')) %}
+                      {% endif %}
 
-                    {% endif %}
-                    {% if(is_granted('ROLE_PRESS')) %}
+                   {% endif %}
+                   {% endblock %}
+                </div>
+                </li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 
-                    {% endif %}
-                </ul>
-                {% endif %}
 
-            {% endblock %}
 
-            </div>
+
+  </nav>
+
         </div>
         {% endblock %}
         {% endif %}
@@ -122,7 +144,10 @@
 
 
         {% block javascripts %}
-
+<script type="text/javascript" src="{{ asset('public/script/jquery-3.1.0.min.js') }}"></script>
+<script src="{{ asset('public/script/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/script/menuDeroulant.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/script/parallax.js') }}"></script>
 
 
         {% endblock %}

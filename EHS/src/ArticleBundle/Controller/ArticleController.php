@@ -97,7 +97,6 @@ class ArticleController extends Controller
 
     /**
      * Finds and displays a Article entity.
-     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="article_show")
      * @Method("GET")
      */

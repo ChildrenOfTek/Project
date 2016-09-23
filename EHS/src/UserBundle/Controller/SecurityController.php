@@ -5,7 +5,7 @@ namespace UserBundle\Controller;
 /**
  * Description of SecurityController
  *
- * 
+ *
  */
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +43,7 @@ class SecurityController extends Controller
      */
     public function logoutAction()
     {
-        return $this->render('UserBundle:Default:index.html.twig');
+        return $this->render('association/index.html.twig');
     }
 
     //envoyer un mail sur une route reset avec l'id du mail

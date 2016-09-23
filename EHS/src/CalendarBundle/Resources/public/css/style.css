@@ -1,0 +1,18 @@
+#calendar{
+	max-width: 1000px;
+	margin: auto;
+}
+
+#calendar .fc-today{
+	background-color: #FFB266;
+	border-color: transparent;
+}
+
+/*#calendar .fc-day{
+	transition: all .2s;
+}
+
+#calendar .fc-day:hover{
+	background-color: #FFF;
+}
+*/

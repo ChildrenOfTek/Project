@@ -52,7 +52,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/presenation", name="association_presentation")
+     * @Route("/presentation", name="association_presentation")
      */
     public function presentationAction()
     {

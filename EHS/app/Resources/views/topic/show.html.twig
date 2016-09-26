@@ -7,14 +7,14 @@
         <tbody>
                 <tr>
                     <td>{{ topic.content }}</td>
-                    <td>Publié par { à ajouter }</td>
+                    <td>Publié par {{user.userName}}</td>
                     <td>Le {{ topic.dateCreated|date('d/m/Y')}} à {{ topic.dateCreated|date('H:i')}}</td>
                 </tr>
 
             {% for post in topic.posts %}
                 <tr>
                     <td>{{ post.content }}</td>
-                    <td>Publié par {{ post.author }}</td>
+                    <td>Publié par {{ user.userName }}</td>
                     <td>Le {{ post.dateEdit|date('d/m/Y')}} à {{ post.dateEdit|date('H:i')}}</td>
                 </tr>
             {% endfor %}

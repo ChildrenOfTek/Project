@@ -72,10 +72,11 @@ class TopicController extends Controller
     {
         $deleteForm = $this->createDeleteForm($topic);
         
-        //var_dump($this->getUser()->getUsername());
+        var_dump($this->getUser()->getUsername());
         return $this->render('topic/show.html.twig', array(
             'topic' => $topic,
             'delete_form' => $deleteForm->createView(),
+            'user'=> $this->getUser()
         ));
     }
 

@@ -71,7 +71,8 @@ class TopicController extends Controller
     public function showAction(Topic $topic)
     {
         $deleteForm = $this->createDeleteForm($topic);
-
+        
+        //var_dump($this->getUser()->getUsername());
         return $this->render('topic/show.html.twig', array(
             'topic' => $topic,
             'delete_form' => $deleteForm->createView(),

@@ -45,10 +45,29 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userAdmin->setBirthDate(new \DateTime());
         $userAdmin->setUserRoles($this->getReference('admin-group'));
 
+        $userUser = new User();
+
+        $encoded = $encoder->encodePassword($userUser, 'user');
+
+        $userUser->setUsername('user');
+        $userUser->setPassword($encoded);
+        $userUser->setNom('user');
+        $userUser->setPrenom('user');
+        $userUser->setAdresse('user');
+        $userUser->setCp('user');
+        $userUser->setVille('user');
+        $userUser->setTelephone('0123456789');
+        $userUser->setEmail('test@test.fr');
+        $userUser->setNewsletter(false);
+        $userUser->setBirthDate(new \DateTime());
+        $userUser->setUserRoles($this->getReference('user-group'));
+
         $manager->persist($userAdmin);
+        $manager->persist($userUser);
         $manager->flush();
 
         $this->addReference('admin-user', $userAdmin);
+        $this->addReference('user-user', $userUser);
     }
 
     public function getOrder()

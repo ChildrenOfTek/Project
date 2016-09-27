@@ -10,6 +10,7 @@ use UserBundle\Entity\User;
 use UserBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 /**
@@ -123,7 +124,7 @@ class UserController extends Controller
 
     /**
      * Displays a form to edit an existing User entity, as his own profile.
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_USER')")
      * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
      */
@@ -134,7 +135,7 @@ class UserController extends Controller
         $editForm->remove('userRoles');
         $editForm->remove('password');
         $editForm->handleRequest($request);
-
+        //var_dump($editForm);die();
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -142,12 +143,21 @@ class UserController extends Controller
 
             return $this->redirectToRoute('index');
         }
+        //On verifie que l'utilisateur cherche bien à éditer son propre profil
+        if($this->get('security.token_storage')->getToken()->getUser()->getUsername()
+        == $editForm->getData()->getUsername())
+        {
+            return $this->render('user/user.edit.html.twig', array(
+                'user' => $user,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            ));
+        }
+        //sinon on renvoie une erreur 403
+        else{
+            throw new AccessDeniedException();
+        }
 
-        return $this->render('user/user.edit.html.twig', array(
-            'user' => $user,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
     }
 
     /**

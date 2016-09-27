@@ -22,6 +22,10 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             'Un petit article de présentation tout simple !'
 
         ];
+        $user=[
+            'admin-user',
+            'user-user'
+        ];
 
         $articles=[];
         for($i=0;$i<count($titre);$i++)
@@ -34,7 +38,7 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $articles[$i]->setUpdatedAt(new \DateTime());
             $articles[$i]->setOnline(true);
             $articles[$i]->setImageName('raté');
-            $articles[$i]->setUser($this->getReference('admin-user'));
+            $articles[$i]->setUser($this->getReference($user[$i]));
             $articles[$i]->addTag($this->getReference('Santé'));
             $articles[$i]->addTag($this->getReference('Informations'));
             $articles[$i]->addTag($this->getReference('Association'));

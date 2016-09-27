@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>User</h1>
+    <h1>Profil de {{ user.nom }} {{ user.prenom }}</h1>
 
     <table>
         <tbody>
@@ -13,11 +13,6 @@
                 <th>Prenom</th>
                 <td>{{ user.prenom }}</td>
             </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ user.adresse }}</td>
-            </tr>
-            <tr>
                 <th>Cp</th>
                 <td>{{ user.cp }}</td>
             </tr>
@@ -27,14 +22,22 @@
             </tr>
             <tr>
                 <th>Date de naissance</th>
-                <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if user.birthDate %}{{ user.birthDate|date('d-m-Y') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
+    {% if app.user.username == user.username %}
+        <ul>
+            <li>
+                <a href="{{ path('user_edit',{"id":user.id}) }}">Editer son profil</a>
+            </li>
+        </ul>
+    {% endif %}
+
     <ul>
         <li>
-            <a href="{{ path('article_index') }}">Retour à la liste des articles</a>
+            <a href="javascript:history.go(-1)">Retour page précedente</a>
         </li>
     </ul>
 {% endblock %}

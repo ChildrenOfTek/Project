@@ -55,10 +55,6 @@ class Topic
      */
     private $posts;
 
-
-    
-
-
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")

@@ -2,136 +2,114 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}
-
-            Bienvenue !
-
-            {% endblock %}</title>
+        <title>
+        {% block title %}
+        Bienvenue !
+        {% endblock %}
+        </title>
         <link href="{{ asset('public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
-
-
-
         {% block stylesheets %}
 <!--{{ dump(app.user) }}-->
-
         {% endblock %}
 
     </head>
     <body>
-
         {% block body %}
-
-
-
         {% if app.request.requestUri != "/EHS/EHS/web/app_dev.php/user/new" %}
         <div class="top-div">
+          {% block nav %}
+          <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
 
-            {% block nav %}
+                  <div class="logo"><img src="{{ asset('public/img/wip_ehs3.svg') }}" alt="" /></div>
+                </a>
+              </div>
 
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li class="inactive"><a href="{{ path('index') }}">Accueil</a></li>
+                  <li class="inactive"><a href="{{ path('article_index') }}">Articles</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">L'Association <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ path('association_status') }}">Notre équipe</a></li>
+                      <li><a href="{{ path('association_office') }}">Nos actions</a></li>
+                      <li><a href="{{ path('association_presentation') }}">Comment adhérer?</a></li>
+                    </ul>
+                  </li>
 
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agenda<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Ateliers</a></li>
+                      <li><a href="#">Rencontres</a></li>
+                      <li><a href="#">Spectacles</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">Contributions</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">Un autre truc</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                  <a href="{{ path('forum_index') }}">Forum</a>
+                  </li>
+                </ul>
 
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace Personnel <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <div class="login">
+                           {% block login %}
 
-          <div class="logo"><img src="{{ asset('public/img/wip_ehs3.svg') }}" alt="" /></div>
-        </a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="inactive"><a href="{{ path('index') }}">Accueil</a></li>
-          <li class="inactive"><a href="{{ path('article_index') }}">Articles</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">L'Association <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ path('association_status') }}">Notre équipe</a></li>
-              <li><a href="{{ path('association_office') }}">Nos actions</a></li>
-              <li><a href="{{ path('association_presentation') }}">Comment adhérer?</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agenda<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Ateliers</a></li>
-              <li><a href="#">Rencontres</a></li>
-              <li><a href="#">Spectacles</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Contributions</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Un autre truc</a></li>
-            </ul>
-          </li>
-<li><a href="{{ path('forum_index') }}">Forum</a></li>
-
-
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace Personnel <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li>
-                <div class="login">
-                   {% block login %}
-
-                      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                      <li><a href="#">{{ app.user.username }}</a></li>
-                      <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
-                      {% else %}
-                      <li><a href="{{ path("login") }}">Se connecter</a></li>
-                      {% if(is_granted('ROLE_ADMIN')) %}
-                      <ul>
-                         <li><a href="#">Acceder à l'interface admin</a></li>
-                      </ul>
-                      {% endif %}
-                      {% if(is_granted('ROLE_PRESS')) %}
-                      {% endif %}
-                   {% endif %}
-                   {% endblock %}
-                </div>
-                </li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-
-
-
-
-  </nav>
-
+                              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                              <li><a href="#">{{ app.user.username }}</a></li>
+                              <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
+                              {% else %}
+                              <li><a href="{{ path("login") }}">Se connecter</a></li>
+                              {% if(is_granted('ROLE_ADMIN')) %}
+                              <ul>
+                                 <li><a href="#">Acceder à l'interface admin</a></li>
+                              </ul>
+                              {% endif %}
+                              {% if(is_granted('ROLE_PRESS')) %}
+                              {% endif %}
+                           {% endif %}
+                           {% endblock %}
+                        </div>
+                        </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
         </div>
         {% endblock %}
         {% endif %}
-
-
-        {% block section %}{% endblock %}
-            {% block dropzone %}{% endblock %}
-
-
+        {% block section %}
         {% endblock %}
-
-
+        {% block dropzone %}
+        {% endblock %}
+        {% endblock %}
         {% block javascripts %}
 <script type="text/javascript" src="{{ asset('public/script/jquery-3.1.0.min.js') }}"></script>
 <script src="{{ asset('public/script/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/script/menuDeroulant.js') }}"></script>
 <script type="text/javascript" src="{{ asset('public/script/parallax.js') }}"></script>
-
-
         {% endblock %}
     </body>
 </html>

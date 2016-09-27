@@ -5,13 +5,11 @@
 <div class="bg"></div>
 
 <section>
-
       <div class="row">
         <h1 class="text-center"><i class="icon-fire icon-3x"></i></h1>
         <h1 class="text-center"><strong>TOUS ENSEMBLES</strong></h1>
         <p class="lead text-center">Débattons des vrais sujets</p>
       </div>
-
       <div class="row">
           <div class="col-md-4">
             <div class="text-center">
@@ -47,24 +45,34 @@
   {% for article in articles %}
       <div class="row">
        <div class="col-md-12">
-        <div class="col-md-5 col-md-offset-1">
+        <div class="col-md-8 col-md-offset-2">
           <div class="panel panel-default">
-           <div class="panel-heading"><a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a></div>
-           <div class="panel-body">
-             {{ article.content}}
+           <div class="panel-heading"><a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a>
            </div>
-           <div class="panel-body">
-             {% for tag in article.tag%}
-             {{ tag.libelle}}
-             {% endfor %}
-           </div>
-          </div>
-          </div>
-          </div>
-          </div>
-          {% endfor %}
+             <div class="panel-body">
+               <div class="row">
+                 <div class="col-sm-4">
+                   <img class="img-responsive" src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="">
+                  </div>
+                  <div class="col-sm-8">
+                   {{ article.content}}
+                  </div>
+                </div>
+                <div class="panel-body">
+                   <h4>Tags:</h4>
+                   {% for tag in article.tag%}
+                   <button class="tagbox">{{ tag.libelle}}</button>
+                   {% endfor %}
 
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 </section>
+
 <section>
     <div class="row">
       <div class="col-md-12">

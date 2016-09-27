@@ -28,6 +28,12 @@ body a:visited{
 
 }
 
+.crop {
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+}
+
 .panel{
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
   color:#777;
@@ -40,6 +46,26 @@ body a:visited{
   background-color: #eee;
   color: #afafaf;
 }
+
+
+
+.tagbox{
+  background-color: rgba(63, 28, 129, 0.31);
+  color: rgb(255, 255, 255);
+  border-style: none;
+  border-radius: 5px;
+}
+
+.tagbox:hover{
+  background-color: #761aeb;
+  text-shadow: 0px 0px 10px rgb(255, 255, 255);
+  box-shadow: 0 0px 10px 0 rgba(89, 0, 255, 1);
+  -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
 
 .onhover
 {

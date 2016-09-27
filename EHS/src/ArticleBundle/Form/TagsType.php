@@ -16,7 +16,6 @@ class TagsType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('articles')
         ;
     }
     

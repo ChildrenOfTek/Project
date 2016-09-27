@@ -30,7 +30,7 @@ class Tags
     private $libelle;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tag")
      */
     private $articles;
 

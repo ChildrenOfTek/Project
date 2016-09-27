@@ -1,20 +1,23 @@
 <?php
 
-namespace UserBundle\Form;
+namespace AssociationBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username','text',array('label'=>"Nom d'utilisateur"))
-            ->add('email', 'email')
-            ->add('sujet')
-            ->add('contenu', 'textarea',array('attr'=>array('rows'=>15)))
+            ->add('username',TextType::class,array('label'=>"Nom d'utilisateur"))
+            ->add('email', EmailType::class)
+            ->add('sujet',TextType::class)
+            ->add('contenu', TextareaType::class,array('attr'=>array('rows'=>15)))
         ;
     }
 

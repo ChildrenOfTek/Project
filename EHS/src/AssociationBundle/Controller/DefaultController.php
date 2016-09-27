@@ -6,8 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
-use UserBundle\Form\ContactType;
-use UserBundle\Entity\User;
+use AssociationBundle\Form\ContactType;
 
 
 /**
@@ -70,7 +69,7 @@ class DefaultController extends Controller
     public function contactAction(Request $r)
     {
 
-        $user=$this->get('security.context')->getToken()->getUser();
+        $user=$this->get('security.token_storage')->getToken()->getUser();
 
         // on créer le formulaire à partir de notre formType
         $formContact = $this->createForm(new ContactType());

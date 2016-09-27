@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+    <h1>User</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Nom d'utilisateur</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ user.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Cp</th>
+                <td>{{ user.cp }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ user.ville }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ user.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Date de naissance</th>
+                <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('article_index') }}">Retour à la liste des articles</a>
+        </li>
+    </ul>
+{% endblock %}

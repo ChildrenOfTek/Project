@@ -9,11 +9,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use UserBundle\Entity\User;
 use UserBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 /**
  * User controller.
- * @Security("has_role('ROLE_ADMIN')")
  * @Route("/user")
  */
 class UserController extends Controller
@@ -37,7 +37,7 @@ class UserController extends Controller
 
     /**
      * Creates a new User entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/new", name="user_new")
      * @Method({"GET", "POST"})
      */
@@ -90,7 +90,7 @@ class UserController extends Controller
 
     /**
      * Finds and displays a User entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="user_show")
      * @Method("GET")
      */
@@ -105,8 +105,25 @@ class UserController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing User entity.
+     * Finds and displays a User entity in public mode.
      *
+     * @Route("/{id}/profile", name="user_showpublic")
+     * @Method("GET")
+     */
+    public function showPublicAction(User $user)
+    {
+        $deleteForm = $this->createDeleteForm($user);
+
+        return $this->render('user/show.public.html.twig', array(
+            'user' => $user,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+
+    /**
+     * Displays a form to edit an existing User entity, as his own profile.
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
      */
@@ -114,6 +131,8 @@ class UserController extends Controller
     {
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('UserBundle\Form\UserType', $user);
+        $editForm->remove('userRoles');
+        $editForm->remove('password');
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -121,7 +140,47 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('user/user.edit.html.twig', array(
+            'user' => $user,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing User entity as Admin editing.
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Route("/{id}/editadmin", name="user_editadmin")
+     * @Method({"GET", "POST"})
+     */
+    public function editAdminAction(Request $request, User $user)
+    {
+        $deleteForm = $this->createDeleteForm($user);
+        $editForm = $this->createForm('UserBundle\Form\UserType', $user);
+        $editForm->remove('userRoles');
+        $editForm->remove('password');
+        $editForm->add('password');
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $data=$editForm->getData();
+            if(strlen(utf8_decode($data->getPassword()))<20)
+            {
+                $plainPassword = $data->getPassword();
+                $encoder = $this->container->get('security.password_encoder');
+                $encoded = $encoder->encodePassword($user, $plainPassword);
+
+                $user->setPassword($encoded);
+            }
+
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user_index');
         }
 
         return $this->render('user/edit.html.twig', array(
@@ -133,7 +192,7 @@ class UserController extends Controller
 
     /**
      * Deletes a User entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="user_delete")
      * @Method("DELETE")
      */
@@ -153,7 +212,7 @@ class UserController extends Controller
 
     /**
      * Creates a form to delete a User entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @param User $user The User entity
      *
      * @return \Symfony\Component\Form\Form The form

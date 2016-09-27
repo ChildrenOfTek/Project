@@ -23,7 +23,6 @@ class UserType extends AbstractType
             ->setMethod('POST')
             ->add('username','text',array('label'=>'Nom d\'utilisateur'))
             ->add('password','password',array('label'=>'Mot de passe'))
-            ->add('salt','hidden')
             ->add('userRoles',EntityType::class, array(
                 'class'=>'UserBundle:Role',
                 'choice_label'=>'name',
@@ -32,7 +31,7 @@ class UserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
-            ->add('cp','text',array('attr'=> array('minlength'=>'5','maxlength'=>'5')))
+            ->add('cp','text',array('attr'=> array('minlength'=>'4','maxlength'=>'5')))
             ->add('ville')
             ->add('telephone','text',array('attr'=> array('maxlength'=>'10')))
             ->add('email',EmailType::class)

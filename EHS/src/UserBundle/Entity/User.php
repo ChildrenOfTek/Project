@@ -121,12 +121,12 @@ class User implements UserInterface, \Serializable
     protected $birthDate;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="article", type="integer", nullable=true)
      * @ORM\OneToMany(targetEntity="ArticleBundle\Entity\Article", mappedBy="user")
+     * @ORM\Column(name="article", nullable=true)
+     *
      */
-    protected $article;
+    private $article;
     
     public function __construct()
     {

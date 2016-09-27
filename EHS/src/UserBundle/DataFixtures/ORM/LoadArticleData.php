@@ -24,7 +24,7 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
         ];
 
         $articles=[];
-        for($i=0;$i<count($article);$i++)
+        for($i=0;$i<count($titre);$i++)
         {
             $articles[$i]= new Article();
             $articles[$i]->setDateArticle(new \DateTime());

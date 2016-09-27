@@ -12,7 +12,7 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Utilisateur / Nom</th>
+                <th>Utilisateur / Nom Prénom</th>
                 <th>Date de rédaction</th>
                 <th>Titre de l'article</th>
                 <th>Contenu</th>
@@ -27,7 +27,7 @@
         {% for article in articles %}
             <tr>
                 <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
-                <td>{{ article.user.username }} / {{ article.user.nom }}</td>
+                <td>{{ article.user.username }} / {{ article.user.nom }} {{ article.user.prenom }}</td>
                 <td>{{ article.dateArticle | date('d-m-Y H:i:s') }}</td>
                 <td>{{ article.titreArticle }}</td>
                 <td>{{ article.content }}</td>

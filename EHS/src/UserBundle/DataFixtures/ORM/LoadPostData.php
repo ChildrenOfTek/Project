@@ -24,9 +24,9 @@ class LoadPostData extends AbstractFixture implements OrderedFixtureInterface
                 for($i=0;$i<count($post);$i++)
                 {
                     $posts[$i] = new Post();
-                    $posts[$i]->setContent($post[$i]);
+                    $posts[$i]->setContent($post[$j]);
                     //a changer par un get reference au user-admin
-                    $posts[$i]->setAuthor('Admin');
+                    $posts[$i]->setAuthor($this->getReference('admin-user'));
                     $posts[$i]->setDateEdit(new \DateTime());
                     $posts[$i]->setTopic($this->getReference('Topic'.$i));
 

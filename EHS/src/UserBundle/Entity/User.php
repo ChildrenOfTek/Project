@@ -119,20 +119,11 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="birthDate", type="datetime")
      */
     protected $birthDate;
-
-    /**
-     *
-     * @ORM\OneToMany(targetEntity="ArticleBundle\Entity\Article", mappedBy="user")
-     * @ORM\Column(name="article", nullable=true)
-     *
-     */
-    private $article;
     
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->userRoles=new ArrayCollection();
-        $this->article=new ArrayCollection();
         $this->updatedAt = new \DateTime();
     }
     
@@ -470,29 +461,6 @@ class User implements UserInterface, \Serializable
     public function getBirthDate()
     {
         return $this->birthDate;
-    }
-
-    /**
-     * Set article
-     *
-     * @param integer $article
-     * @return User
-     */
-    public function setArticle($article)
-    {
-        $this->article = $article;
-
-        return $this;
-    }
-
-    /**
-     * Get article
-     *
-     * @return integer 
-     */
-    public function getArticle()
-    {
-        return $this->article;
     }
 
     /**

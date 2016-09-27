@@ -26,7 +26,7 @@ class LoadPostData extends AbstractFixture implements OrderedFixtureInterface
                     $posts[$i] = new Post();
                     $posts[$i]->setContent($post[$i]);
                     //a changer par un get reference au user-admin
-                    $posts[$i]->setAuthor($post[$i]);
+                    $posts[$i]->setAuthor('Admin');
                     $posts[$i]->setDateEdit(new \DateTime());
                     $posts[$i]->setTopic($this->getReference('Topic'.$i));
 

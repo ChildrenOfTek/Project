@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ForumBundle\Entity\Topic;
 use ForumBundle\Form\TopicType;
+use UserBundle\Entity\User;
 
 /**
  * Topic controller.
@@ -45,10 +46,13 @@ class TopicController extends Controller
         $form = $this->createForm('ForumBundle\Form\TopicType', $topic);
         $form->handleRequest($request);
         $id=$_GET['id'];
+        $author=$this->get("security.token_storage")->getToken()->getUser();
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $forum=$em->getRepository('ForumBundle:Forum')->find($id);
             $topic->setForum($forum);
+            $topic->setDateCreated(new \DateTime());
+            $topic->setAuthor($author);
             $em->persist($topic);
             $em->flush();
             
@@ -70,10 +74,12 @@ class TopicController extends Controller
     public function showAction(Topic $topic)
     {
         $deleteForm = $this->createDeleteForm($topic);
+        
 
         return $this->render('topic/show.html.twig', array(
             'topic' => $topic,
             'delete_form' => $deleteForm->createView(),
+            'user'=> $this->get('security.token_storage')->getToken()->getUser()
         ));
     }
 

@@ -125,7 +125,12 @@ class User implements UserInterface, \Serializable
         $this->createdAt = new \DateTime();
         $this->userRoles=new ArrayCollection();
         $this->updatedAt = new \DateTime();
+      
     }
+
+    
+
+
     
 /*********************** METHODES OBLIGATOIRES *********************/
     /**

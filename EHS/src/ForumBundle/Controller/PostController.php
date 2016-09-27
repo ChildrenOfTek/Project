@@ -46,12 +46,13 @@ class PostController extends Controller
         $form = $this->createForm('ForumBundle\Form\PostType', $post);
         $form->handleRequest($request);
         $id=$_GET['id'];
+        $author=$this->get("security.token_storage")->getToken()->getUser();
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $topic=$em->getRepository('ForumBundle:Topic')->find($id);
-            var_dump($id);
             $post->setTopic($topic);
             $post->setDateEdit(new \DateTime());
+            $post->setAuthor($author);
             $em->persist($post);
             $em->flush();
 

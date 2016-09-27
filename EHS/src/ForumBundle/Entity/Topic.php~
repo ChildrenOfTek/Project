@@ -60,7 +60,7 @@ class Topic
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="UserBundle:User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */ 
     private $author;
@@ -224,28 +224,5 @@ class Topic
         $this->author = $author;
 
         return $this;
-    }
-
-    /**
-     * Add posts
-     *
-     * @param \ForumBundle\Entity\Post $posts
-     * @return Topic
-     */
-    public function addPost(\ForumBundle\Entity\Post $posts)
-    {
-        $this->posts[] = $posts;
-
-        return $this;
-    }
-
-    /**
-     * Remove posts
-     *
-     * @param \ForumBundle\Entity\Post $posts
-     */
-    public function removePost(\ForumBundle\Entity\Post $posts)
-    {
-        $this->posts->removeElement($posts);
     }
 }

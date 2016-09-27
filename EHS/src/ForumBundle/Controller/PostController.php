@@ -49,7 +49,6 @@ class PostController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $topic=$em->getRepository('ForumBundle:Topic')->find($id);
-            var_dump($id);
             $post->setTopic($topic);
             $post->setDateEdit(new \DateTime());
             $em->persist($post);

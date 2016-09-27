@@ -126,13 +126,20 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="ArticleBundle:Article", mappedBy="user")
      */
     protected $article;
+
+    
     
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->userRoles=new ArrayCollection();// new \Doctrine\Common\Collections\ArrayCollection();
         $this->updatedAt = new \DateTime();
+      
     }
+
+    
+
+
     
 /*********************** METHODES OBLIGATOIRES *********************/
     /**

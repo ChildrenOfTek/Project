@@ -22,16 +22,16 @@ class Post
     private $id;
 
     /**
-     * @var string
+     * @var text
      *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
 
     /**
-     * @var text
+     * @var string
      *
-     * @ORM\Column(name="author", type="text", length=5000)
+     * @ORM\Column(name="author", type="string", length=100)
      */
     private $author;
 

@@ -88,9 +88,10 @@
                    {% block login %}
 
                       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                      <li><a href="#">{{ app.user.nom }} {{ app.user.prenom }}</a></li>
+                      <li><a href="{{ path('user_showpublic',{"id":app.user.id}) }}">Mon profil</a></li>
                       <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
                         {% if(is_granted('ROLE_ADMIN')) %}
+                                <li><a href="{{ path('user_new') }}">Ajouter un utilisateur</a></li>
                                 <li><a href="#">Acceder à l'interface admin</a></li>
                         {% endif %}
                         {% if(is_granted('ROLE_PRESS')) %}
@@ -99,6 +100,7 @@
 
                         {% else %}
                       <li><a href="{{ path("login") }}">Se connecter</a></li>
+                      <li><a href="{{ path("forgot_password") }}">Mot de passe oublie?</a></li>
 
                    {% endif %}
                    {% endblock %}
@@ -117,9 +119,21 @@
 
         </div>
         {% endblock %}
+            {% block flashbag %}
+                {% for flash in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success">
+                        <p align="center">{{ flash }}</p>
+                    </div>
+                {% endfor %}
+                {% for flash in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger">
+                        <p align="center">{{ flash }}</p>
+                    </div>
+                {% endfor %}
+
+            {% endblock %}
 
         {% block section %}{% endblock %}
-            {% block dropzone %}{% endblock %}
 
 
         {% endblock %}

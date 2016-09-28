@@ -47,13 +47,15 @@ class UserController extends Controller
         $user = new User();
         
         $form = $this->createForm('UserBundle\Form\UserType', $user);
+        $form->remove('password');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data=$form->getData();
             $em = $this->getDoctrine()->getManager();
             
-            $plainPassword = $data->getPassword();
+            $plainPassword = $user->generateStrongPassword(25);
+            //var_dump($plainPassword);die();
             $encoder = $this->container->get('security.password_encoder');
             $encoded = $encoder->encodePassword($user, $plainPassword);
 
@@ -61,9 +63,9 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            /* A decommenter lors de l'implémentation
-            pour envoyer un mail a l'inscription
-            $message = \Swift_Message::newInstance()
+            // A decommenter lors de l'implémentation
+            //pour envoyer un mail a l'inscription
+            /*$message = \Swift_Message::newInstance()
                 ->setSubject('Bienvenue')
                 ->setFrom('guillossou.michele@gmail.com')
                 // notre adresse mail
@@ -72,7 +74,8 @@ class UserController extends Controller
                 //ici nous allons utiliser un template pour pouvoir styliser notre mail si nous le souhaitons
                 ->setBody(
                     $this->renderView('association/newUser.html.twig', array(
-                            'user' => $user
+                            'user' => $user,
+                            'password'=>$plainPassword
                         )
                     ), 'text/html'
                 )

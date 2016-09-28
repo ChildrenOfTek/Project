@@ -40,7 +40,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userAdmin->setCp('test');
         $userAdmin->setVille('test');
         $userAdmin->setTelephone('0123456789');
-        $userAdmin->setEmail('test@test.fr');
+        $userAdmin->setEmail('vincent.lene.dl@gmail.com');
         $userAdmin->setNewsletter(false);
         $userAdmin->setBirthDate(new \DateTime());
         $userAdmin->setUserRoles($this->getReference('admin-group'));

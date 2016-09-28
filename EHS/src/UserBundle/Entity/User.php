@@ -16,6 +16,7 @@ use ArticleBundle\Entity\Article;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  * @UniqueEntity(fields="username", message="Nom d'utilisateur deja pris")
+ * @UniqueEntity(fields="email", message="Email déjà utilisé")
  */
 
 class User implements UserInterface, \Serializable
@@ -119,12 +120,19 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="birthDate", type="datetime")
      */
     protected $birthDate;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ArticleBundle\Entity\Article",mappedBy="user", cascade={"persist","remove"})
+     *
+     */
+    private $user;
     
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->userRoles=new ArrayCollection();
         $this->updatedAt = new \DateTime();
+        $this->article = new ArrayCollection();
       
     }
 
@@ -489,5 +497,74 @@ class User implements UserInterface, \Serializable
     public function removeUserRole(\UserBundle\Entity\Role $userRoles)
     {
         $this->userRoles->removeElement($userRoles);
+    }
+
+    //Generates a random password
+    function generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds')
+    {
+        $sets = array();
+        if(strpos($available_sets, 'l') !== false)
+            $sets[] = 'abcdefghjkmnpqrstuvwxyz';
+        if(strpos($available_sets, 'u') !== false)
+            $sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
+        if(strpos($available_sets, 'd') !== false)
+            $sets[] = '23456789';
+        if(strpos($available_sets, 's') !== false)
+            $sets[] = '!@#$%&*?';
+        $all = '';
+        $password = '';
+        foreach($sets as $set)
+        {
+            $password .= $set[array_rand(str_split($set))];
+            $all .= $set;
+        }
+        $all = str_split($all);
+        for($i = 0; $i < $length - count($sets); $i++)
+            $password .= $all[array_rand($all)];
+        $password = str_shuffle($password);
+        if(!$add_dashes)
+            return $password;
+        $dash_len = floor(sqrt($length));
+        $dash_str = '';
+        while(strlen($password) > $dash_len)
+        {
+            $dash_str .= substr($password, 0, $dash_len) . '-';
+            $password = substr($password, $dash_len);
+        }
+        $dash_str .= $password;
+        return $dash_str;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \ArticleBundle\Entity\Article $user
+     * @return User
+     */
+    public function addUser(\ArticleBundle\Entity\Article $user)
+    {
+        $this->user[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \ArticleBundle\Entity\Article $user
+     */
+    public function removeUser(\ArticleBundle\Entity\Article $user)
+    {
+        $this->user->removeElement($user);
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

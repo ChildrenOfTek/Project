@@ -95,16 +95,14 @@ class Article
      */
     private $tag;
 
-    public function __construct() {
-            $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-        }
-
-
     /**
-     * @ORM\ManyToOne(targetEntity="Newsletter", inversedBy="articles")
-     * @ORM\JoinColumn(name="newsletter_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Newsletter")
      */
     private $newsletter;
+
+    public function __construct() {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id

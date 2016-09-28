@@ -62,7 +62,6 @@ class ArticleTypeEdit extends AbstractType
             ))
             ->add('online',CheckboxType::class, array(
                 'label'=>'L\'article doit-il être mis en ligne?'))
-            ->add('newsletter')
         ;
     }
 

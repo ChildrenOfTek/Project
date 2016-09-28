@@ -83,6 +83,9 @@ class UserController extends Controller
             ;
             $this->get('mailer')->send($message);*/
 
+            $this->get('session')->getFlashBag()->set('success',
+                'Utilisateur ajouté !');
+
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
 
@@ -150,6 +153,8 @@ class UserController extends Controller
         if($this->get('security.token_storage')->getToken()->getUser()->getUsername()
         == $editForm->getData()->getUsername())
         {
+            $this->get('session')->getFlashBag()->set('success',
+                'Profil mis à jour !');
             return $this->render('user/user.edit.html.twig', array(
                 'user' => $user,
                 'edit_form' => $editForm->createView(),
@@ -193,6 +198,9 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set('success',
+                'Utilisateur mis à jour !');
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -212,14 +220,31 @@ class UserController extends Controller
     public function deleteAction(Request $request, User $user)
     {
         $form = $this->createDeleteForm($user);
-        $form->handleRequest($request);
+        $em=$this->getDoctrine()->getManager();
+        $repo=$em->getRepository('UserBundle:User');
+        //custom repo method for finding users with ROLE_ADMIN
+        $admins=$repo->findUserByRoles();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
+        if($user->getRoles()[0]->getRole() != 'ROLE_ADMIN')
+        {
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($user);
+                $em->flush();
+            }
+
+            $this->get('session')->getFlashBag()->set('success',
+                'Utilisateur '.$user->getUsername().' supprimé !');
+
+        }else if ($user->getRoles()[0]->getRole() == 'ROLE_ADMIN'
+        AND count($admins)==1){
+
+            $this->get('session')->getFlashBag()->set('error',
+                'Attention, ne supprimez pas le dernier compte Administrateur !');
+
         }
-
         return $this->redirectToRoute('user_index');
     }
 

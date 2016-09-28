@@ -56,7 +56,7 @@ class Topic
     private $posts;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="topic")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */ 
     private $author;

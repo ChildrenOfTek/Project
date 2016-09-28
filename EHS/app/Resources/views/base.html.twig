@@ -92,7 +92,7 @@
                       <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
                         {% if(is_granted('ROLE_ADMIN')) %}
                                 <li><a href="{{ path('user_new') }}">Ajouter un utilisateur</a></li>
-                                <li><a href="#">Acceder à l'interface admin</a></li>
+                                <li><a href="{{ path('user_index') }}">Acceder à l'interface admin</a></li>
                         {% endif %}
                         {% if(is_granted('ROLE_PRESS')) %}
 

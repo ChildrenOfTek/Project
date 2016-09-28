@@ -125,7 +125,13 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="ArticleBundle\Entity\Article",mappedBy="user", cascade={"persist","remove"})
      *
      */
-    private $user;
+    private $article;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ForumBundle\Entity\Topic",mappedBy="author", cascade={"persist","remove"})
+     *
+     */
+    private $topic;
     
     public function __construct()
     {
@@ -566,5 +572,71 @@ class User implements UserInterface, \Serializable
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add article
+     *
+     * @param \ArticleBundle\Entity\Article $article
+     * @return User
+     */
+    public function addArticle(\ArticleBundle\Entity\Article $article)
+    {
+        $this->article[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \ArticleBundle\Entity\Article $article
+     */
+    public function removeArticle(\ArticleBundle\Entity\Article $article)
+    {
+        $this->article->removeElement($article);
+    }
+
+    /**
+     * Get article
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * Add topic
+     *
+     * @param \ForumBundle\Entity\Topic $topic
+     * @return User
+     */
+    public function addTopic(\ForumBundle\Entity\Topic $topic)
+    {
+        $this->topic[] = $topic;
+
+        return $this;
+    }
+
+    /**
+     * Remove topic
+     *
+     * @param \ForumBundle\Entity\Topic $topic
+     */
+    public function removeTopic(\ForumBundle\Entity\Topic $topic)
+    {
+        $this->topic->removeElement($topic);
+    }
+
+    /**
+     * Get topic
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTopic()
+    {
+        return $this->topic;
     }
 }

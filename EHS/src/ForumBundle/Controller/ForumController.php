@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ForumBundle\Entity\Forum;
 use ForumBundle\Form\ForumType;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Forum controller.
@@ -31,12 +31,13 @@ class ForumController extends Controller
 
         return $this->render('forum/index.html.twig', array(
             'forums' => $forums,
+            'user'=> $this->get('security.token_storage')->getToken()->getUser(),
         ));
     }
 
     /**
      * Creates a new Forum entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/new", name="forum_new")
      * @Method({"GET", "POST"})
      */
@@ -45,9 +46,11 @@ class ForumController extends Controller
         $forum = new Forum();
         $form = $this->createForm('ForumBundle\Form\ForumType', $forum);
         $form->handleRequest($request);
+        $author=$this->get("security.token_storage")->getToken()->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $forum->setAuthor($author);
             $em->persist($forum);
             $em->flush();
 
@@ -69,16 +72,17 @@ class ForumController extends Controller
     public function showAction(Forum $forum)
     {
         $deleteForm = $this->createDeleteForm($forum);
-
+        
         return $this->render('forum/show.html.twig', array(
             'forum' => $forum,
             'delete_form' => $deleteForm->createView(),
+            'user'=> $this->get('security.token_storage')->getToken()->getUser(),
         ));
     }
 
     /**
      * Displays a form to edit an existing Forum entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="forum_edit")
      * @Method({"GET", "POST"})
      */
@@ -105,7 +109,7 @@ class ForumController extends Controller
 
     /**
      * Deletes a Forum entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="forum_delete")
      * @Method("DELETE")
      */

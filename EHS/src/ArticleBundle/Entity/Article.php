@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use UserBundle\Entity\User;
 /**
  * Article
  *
@@ -25,10 +26,8 @@ class Article
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="user", type="text")
-     * @ORM\ManyToOne(targetEntity="UserBundle:User", inversedBy= "Article")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="article")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
@@ -91,21 +90,19 @@ class Article
     private $online;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articles")
-     * @ORM\JoinTable(name="tags_articles")git commit 
+     * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articles",cascade={"persist"})
+     * @ORM\JoinTable(name="tags_articles")s
      */
     private $tag;
 
-    public function __construct() {
-            $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-        }
-
-
     /**
-     * @ORM\ManyToOne(targetEntity="Newsletter", inversedBy="articles")
-     * @ORM\JoinColumn(name="newsletter_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Newsletter")
      */
     private $newsletter;
+
+    public function __construct() {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -394,5 +391,28 @@ class Article
     public function getNewsletter()
     {
         return $this->newsletter;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Article
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

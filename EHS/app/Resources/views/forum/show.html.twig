@@ -4,28 +4,35 @@
     <h1>{{ forum.libForum  }}</h1>
     <p>{{ forum.description  }}</p>
 
-    <table>
+    <table class='table'>
         <tbody>
 
             {% for topic in forum.topics %}
                 <tr>
-                  <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
-                    <td><a href="{{ path('topic_edit', { 'id': topic.id }) }}">Modifier</a></td>
+                    <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
+                    <td>Publié par {{topic.author.prenom}} {{topic.author.nom}}</td>
+                    <td>Le {{ topic.dateCreated|date('d/m/Y') }} à {{ topic.dateCreated|date('H:i') }}</td>
+                    {% if(is_granted('ROLE_ADMIN')) %}
+                        <td><a href="{{ path('topic_edit', { 'id': topic.id}) }}">Modifier</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    
+    
+
 
     <ul>
         <li>
-            <a href="{{ path('forum_index') }}">Back to the list</a>
+            <a href="{{ path('forum_index') }}">Retour</a>
         </li>
         <li>
-            <a href="{{ path('topic_new', { 'id': forum.id }) }}">Edit</a>
+            <a href="{{ path('topic_new', { 'id': forum.id }) }}">Créer un nouveau topic</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
         </li>
     </ul>

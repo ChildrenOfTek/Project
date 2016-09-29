@@ -1,29 +1,101 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>Salut</h1>
-    <p>Bien vivre ensemble ! Telle est la devise qui nous anime plus que jamais aujourd’hui,
-        nous qui nous enrichissons chaque jour au contact de nos proches et de nos amis
-        qui vivent avec un handicap! Nous vivons une période où ces valeurs de fraternité et
-        d’accueil des différences prennent tout leur sens. Nous avons souhaité parler d’une
-        seule voix et faire connaître les difficultés rencontrées, les bonheurs partagés, la vraie
-        vie, par la parole des personnes handicapées elles-mêmes, de leurs proches, de
-        leurs soignants, de ceux qui construisent concrètement notre société pour bien vivre
-        ensemble, de ceux qui nous aident à mettre des mots sur ce que nous vivons.
-    </p>
-    <p>
-        Nous avons souhaité cheminer avec vous dans cette réflexion éthique et avons voulu
-        que cette rencontre citoyenne Éthique et Handicap soit la première d’un rendezvous
-        annuel qui se veut être un temps fort de la construction concrète du bien vivre
-        ensemble.
-    </p>
-    <p>
-        Portée par l’association Éthique, Handicap et Société, cette démarche se traduira
-        également par des temps de rencontres culturelles. Cette journée se veut être un
-        moment de partage, d’échange et de fête. En effet, nous avons la chance d’accueillir
-        Philippe Pozzo di Borgo, de nous réjouir de voir et revoir avec lui le film Intouchables,
-        inspiré de sa vie, qui clôturera cette première rencontre citoyenne Éthique et Handicap.
-        Professeur Françoise Ballereau
-        Présidente du Gneds
-    </p>
+
+<div class="bg"></div>
+
+<section>
+      <div class="row">
+        <h1 class="text-center"><i class="icon-fire icon-3x"></i></h1>
+        <h1 class="text-center"><strong>ENSEMBLE</strong></h1>
+        <p class="lead text-center">Disputons nous</p>
+      </div>
+      <div class="row">
+          <div class="col-md-4">
+            <div class="text-center">
+              <h1>Ethique</h1>
+              <p>
+              L'éthique c'est vraiment top car c'est vraiment bien et en plus c'est génial.</p>
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-center">
+              <h1>Handicap</h1>
+              <p>
+              Le handicap c'est pas terrible parce que c'est vraiment handicapant et en plus c'est très bof.</p>
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="text-center">
+              <h1>Société</h1>
+              <p>
+              La société elle à que des problèmes, la société elle à mauvaise haleine.</p>
+
+            </div>
+          </div>
+    </div>
+</section>
+
+<section>
+  {% for article in articles %}
+      <div class="row">
+       <div class="col-md-12">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel panel-default">
+           <div class="panel-heading"><a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a>
+           </div>
+             <div class="panel-body">
+               <div class="row">
+                 <div class="col-sm-4">
+                   <img class="img-responsive" src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="">
+                  </div>
+                  <div class="col-sm-8">
+                   {{ article.content | raw }}
+                  </div>
+                </div>
+                <div class="panel-body">
+                   <h4>Tags:</h4>
+                   {% for tag in article.tag%}
+                   <button class="tagbox">{{ tag.libelle}}</button>
+                   {% endfor %}
+
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+<section>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-4">
+        <h2>Build</h2>
+          Bootply is a playground for Twitter Bootstrap.
+        </div>
+        <div class="col-md-4">
+        <h2>Design</h2>
+          Use Bootply to design, prototype, extend the Bootstrap framework.
+        </div>
+        <div class="col-md-4">
+        <h2>Test</h2>
+          Use Bootply to test and debug Bootstrap designs.
+        </div>
+      </div>
+      </div>
+</section>
+
+<section>
+  <div class="row">
+    <div class="text-center">
+      <a href="http://www.bootply.com"><i class="icon-facebook icon-3x"></i> </a> &nbsp;
+      <a href="http://twitter.com/bootply"><i class="icon-twitter icon-3x"></i></a> &nbsp;
+      <a href="http://pinterest.com/in1"><i class="icon-pinterest icon-3x"></i></a>
+    </div>
+  </div>
+</section>
 {% endblock %}

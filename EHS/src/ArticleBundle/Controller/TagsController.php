@@ -34,6 +34,36 @@ class TagsController extends Controller
     }
 
     /**
+     * Gives a view with articles matching clicked tag.
+     *
+     * @Route("/{libelle}/search", name="tags_search")
+     * @Method("GET")
+     */
+    public function tagMatchAction($libelle)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tags = $em->getRepository('ArticleBundle:Tags')->findOneBy(array('libelle'=>$libelle));
+
+        $query = $em->createQuery('
+                                    SELECT a
+                                    FROM ArticleBundle:Article a
+                                    JOIN a.tag t
+                                    WHERE t.libelle = :libelle
+                                ');
+
+        $query->setParameter('libelle', $libelle);
+
+        $articles= $query->getResult();
+        //var_dump($query->getResult());die();
+
+        return $this->render('tags/search.html.twig', array(
+            'tags' => $tags,
+            'articles'=>$articles
+        ));
+    }
+
+    /**
      * Creates a new Tags entity.
      *
      * @Route("/new", name="tags_new")

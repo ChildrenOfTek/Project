@@ -22,17 +22,16 @@ class Post
     private $id;
 
     /**
-     * @var string
+     * @var text
      *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=100)
-     */
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */ 
     private $author;
 
     /**
@@ -145,7 +144,7 @@ class Post
      *
      * @return self
      */
-    private function _setTopic($topic)
+    public function setTopic($topic)
     {
         $this->topic = $topic;
 

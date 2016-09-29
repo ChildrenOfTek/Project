@@ -69,20 +69,25 @@ class ArticleController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em=$this->getDoctrine()->getEntityManager();
         $article = new Article();
-        $form = $this->createForm('ArticleBundle\Form\ArticleType', $article);
+        //On passe l'entity manager au formulaire
+        $form = $this->createForm(new ArticleType($em),$article );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data=$form->getData();
             $date=new \DateTime('now');
 
-            $article->setUser($data->getUser()->getUsername());
+            $article->setUser($data->getUser());
             $article->setDateArticle($date);
-            //var_dump($data);die();
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->set('success',
+                'L\'article a bien été crée !');
 
             return $this->redirectToRoute('article_show', array('id' => $article->getId()));
         }
@@ -95,7 +100,6 @@ class ArticleController extends Controller
 
     /**
      * Finds and displays a Article entity.
-     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="article_show")
      * @Method("GET")
      */
@@ -118,15 +122,22 @@ class ArticleController extends Controller
     public function editAction(Request $request, Article $article)
     {
         $deleteForm = $this->createDeleteForm($article);
-        $editForm = $this->createForm('ArticleBundle\Form\ArticleType', $article);
+        $editForm = $this->createForm('ArticleBundle\Form\ArticleTypeEdit', $article);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $data=$editForm->getData();
+
+            $article->setUser($data->getUser());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
+            $this->get('session')->getFlashBag()->set('success',
+                'L\'article a bien été mis à jour !');
+
+            return $this->redirectToRoute('article_show', array('id' => $article->getId()));
         }
 
         return $this->render('article/edit.html.twig', array(
@@ -152,6 +163,9 @@ class ArticleController extends Controller
             $em->remove($article);
             $em->flush();
         }
+
+        $this->get('session')->getFlashBag()->set('success',
+            'L\'article a bien été supprimé !');
 
         return $this->redirectToRoute('article_index');
     }

@@ -1,43 +1,80 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <div class="container">
-        <table class="table table-striped table-bordered">
-        <tbody>
+<section>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-body">
 
-            <tr>
-                <th><h1>{{ article.titreArticle }}</h1></th>
-            </tr>
-            <tr>
-                <td>R&eacute;dig&eacute; par: {{ article.user }}</td>
-                <td>Date création: {{ article.dateArticle| date('d-m-Y H:i:s') }}</td>
-            </tr>
-            <tr>
-                <td>{{ article.content }}</td>
-                <td><img src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td></td>
-            </tr>
-            <tr>
-                <th>Date de publication</th>
-                <td>{{ article.datePublication | date('d-m-Y H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Nom du fichier</th>
-                <td>{{ article.imageName }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <!-- Blog Post Content Column -->
+
+
+            <!-- Blog Post -->
+
+            <!-- Title -->
+            <h1>{{ article.titreArticle }}</h1>
+
+            <!-- Author -->
+            <p class="lead">
+                par <a href="{{ path('user_showpublic',{'id':article.user.id}) }}">{{ article.user.nom }} {{ article.user.prenom }}</a>
+            </p>
+
+            <hr>
+
+            <!-- Date/Time -->
+            <p><span class="glyphicon glyphicon-time"></span> Publié le {{ article.datePublication | date('d-m-Y H:i') }}</p>
+
+            <hr>
+
+            <!-- Preview Image -->
+            <img class="img-responsive" src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
+
+            <hr>
+
+            <!-- Post Content -->
+
+            {{ article.content | raw }}
+
+            <hr>
+
+            <!-- Blog Comments -->
+
+            <!-- Comments Form -->
+            <th>Tags</th>
+            <td><!--Affichage des tags de l'article -->
+                {% for tag in article.tag %}
+                {{ tag.libelle }}
+                {% endfor  %}
+            </td>
+
+
+
+            <!-- Posted Comments -->
+
+            <!-- Comment -->
+
+                    <!-- End Nested Comment -->
+
+            </div>
+            </div>
+
 </div>
+        </div>
+</section>
     <ul>
         <li>
-            <a href="{{ path('article_index') }}">Back to the list</a>
+            <a href="{{ path('article_index') }}">Retourner à la liste</a>
         </li>
+        {% if is_granted('ROLE_ADMIN') %}
         <li>
-            <a href="{{ path('article_edit', { 'id': article.id }) }}">Edit</a>
+            <a href="{{ path('article_edit', { 'id': article.id }) }}">Editer l'article</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Effacer l'article">
             {{ form_end(delete_form) }}
         </li>
+        {% endif %}
     </ul>
 {% endblock %}

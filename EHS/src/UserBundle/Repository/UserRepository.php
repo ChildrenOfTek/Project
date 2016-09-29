@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    public function findUserByRoles()
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('u')
+            ->from('\UserBundle\Entity\User', 'u')
+            ->innerJoin('u.userRoles', 'r', 'WITH', 'r.role = ?1')
+            ->setParameter(1, 'ROLE_ADMIN');
+
+ return $qb->getQuery()->getResult();
+    }
+
 }

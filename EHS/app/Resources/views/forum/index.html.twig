@@ -1,26 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>Forum list</h1>
+    <h1>Liste des forums</h1>
 
     <table class='table'>
         <thead>
+            
             <tr>
 
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Actions</th>
+                {% for forum in forums %}
+                    {% if(is_granted('ROLE_ADMIN')) %}
+                        <th>Actions</th>
+                    {% endif %}
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
-        {% for forum in forums %}
+            {% for forum in forums %}
             <tr>
 
                 <td><a href="{{ path('forum_show',{ 'id': forum.id })}}">{{ forum.libForum }}</td>
                 <td>{{ forum.description }}</td>
-                <td>
-                    <a href="{{ path('forum_edit', { 'id': forum.id }) }}">Modifier</a>
-                </td>
+                {% if(is_granted('ROLE_ADMIN')) %}
+                    <td><a href="{{ path('forum_edit', { 'id': forum.id }) }}">Modifier</a></td>
+                {% endif %}
+
             </tr>
         {% endfor %}
         </tbody>

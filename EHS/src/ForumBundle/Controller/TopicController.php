@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ForumBundle\Entity\Topic;
 use ForumBundle\Form\TopicType;
+use UserBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Topic controller.
@@ -24,7 +26,7 @@ class TopicController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();//
 
         $topics = $em->getRepository('ForumBundle:Topic')->findAll();
 
@@ -44,13 +46,19 @@ class TopicController extends Controller
         $topic = new Topic();
         $form = $this->createForm('ForumBundle\Form\TopicType', $topic);
         $form->handleRequest($request);
-
+        $id=$_GET['id'];
+        $author=$this->get("security.token_storage")->getToken()->getUser();
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $forum=$em->getRepository('ForumBundle:Forum')->find($id);
+            $topic->setForum($forum);
+            $topic->setDateCreated(new \DateTime());
+            $topic->setAuthor($author);
             $em->persist($topic);
             $em->flush();
-
-            return $this->redirectToRoute('topic_show', array('id' => $topic->getId()));
+            
+            return $this->redirectToRoute('forum_show', array('id' => $_GET['id']));
         }
 
         return $this->render('topic/new.html.twig', array(
@@ -69,15 +77,28 @@ class TopicController extends Controller
     {
         $deleteForm = $this->createDeleteForm($topic);
 
+        /*$em = $this->getDoctrine()->getManager();
+        $date=new \DateTime('now');
+        $query = $em->createQuery(
+            'SELECT a
+                FROM ForumBundle:Topic a
+                ORDER BY a.dateEdit DESC'
+        )->setParameter('date', $date);
+
+        $topic = $query->getResult();*/
+        
+        
+
         return $this->render('topic/show.html.twig', array(
             'topic' => $topic,
             'delete_form' => $deleteForm->createView(),
+            'user'=> $this->get('security.token_storage')->getToken()->getUser()
         ));
     }
 
     /**
      * Displays a form to edit an existing Topic entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="topic_edit")
      * @Method({"GET", "POST"})
      */
@@ -104,7 +125,7 @@ class TopicController extends Controller
 
     /**
      * Deletes a Topic entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="topic_delete")
      * @Method("DELETE")
      */
@@ -112,14 +133,17 @@ class TopicController extends Controller
     {
         $form = $this->createDeleteForm($topic);
         $form->handleRequest($request);
-
+        $id= $topic->getForum()->getId();
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($topic);
             $em->flush();
+            
         }
-
-        return $this->redirectToRoute('topic_index');
+        ;
+        
+        return $this->redirectToRoute('forum_show', array('id' => $id));
+        
     }
 
     /**

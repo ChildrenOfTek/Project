@@ -37,12 +37,18 @@ class Forum
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="Topic",mappedBy="forum")
+     * @ORM\OneToMany(targetEntity="Topic",mappedBy="forum",cascade={"persist","remove","merge"})
      */
      private $topics;
 
+     /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */ 
+    private $author;
+
     public function __construct() {
-        $this->features = new ArrayCollection();
+        $this->topics = new ArrayCollection();
     }
     /**
      * Get id
@@ -117,10 +123,57 @@ class Forum
      *
      * @return self
      */
-    private function _setTopics($topics)
+    public function setTopics($topics)
     {
         $this->topics = $topics;
 
         return $this;
+    }
+
+    /**
+     * Gets the value of author.
+     *
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Sets the value of author.
+     *
+     * @param mixed $author the author
+     *
+     * @return self
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Add topics
+     *
+     * @param \ForumBundle\Entity\Topic $topics
+     * @return Forum
+     */
+    public function addTopic(\ForumBundle\Entity\Topic $topics)
+    {
+        $this->topics[] = $topics;
+
+        return $this;
+    }
+
+    /**
+     * Remove topics
+     *
+     * @param \ForumBundle\Entity\Topic $topics
+     */
+    public function removeTopic(\ForumBundle\Entity\Topic $topics)
+    {
+        $this->topics->removeElement($topics);
     }
 }

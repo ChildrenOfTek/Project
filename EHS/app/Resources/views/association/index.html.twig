@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Accueil
+{% endblock %}
+
 {% block section %}
 
 <div class="bg"></div>
@@ -56,10 +60,12 @@
                   </div>
                 </div>
                 <div class="panel-body">
-                   <h4>Tags:</h4>
-                   {% for tag in article.tag%}
+                   <h4>Tags:</h4>{% for tag in article.tag%}
                    <button class="tagbox">{{ tag.libelle}}</button>
                    {% endfor %}
+                    {% for tag in article.tag%}
+                        <a class="tagbox" href="{{ path('tags_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+                    {% endfor %}
 
                 </div>
             </div>

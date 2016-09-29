@@ -79,22 +79,25 @@
                     <ul class="dropdown-menu">
                       <li>
                         <div class="login">
-                           {% block login %}
+                            {% block login %}
 
-                              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                              <li><a href="#">{{ app.user.username }}</a></li>
-                              <li><a href="{{ path("user_security_logout") }}">Se déconnecter</a></li>
-                              {% else %}
-                              <li><a href="{{ path("login") }}">Se connecter</a></li>
-                              {% if(is_granted('ROLE_ADMIN')) %}
-                              <ul>
-                                 <li><a href="#">Acceder à l'interface admin</a></li>
-                              </ul>
-                              {% endif %}
-                              {% if(is_granted('ROLE_PRESS')) %}
-                              {% endif %}
-                           {% endif %}
-                           {% endblock %}
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('user_showpublic',{"id":app.user.id}) }}">Mon profil</a></li>
+                        <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
+                        {% if(is_granted('ROLE_ADMIN')) %}
+                            <li><a href="{{ path('user_new') }}">Ajouter un utilisateur</a></li>
+                            <li><a href="{{ path('user_index') }}">Acceder à l'interface admin</a></li>
+                        {% endif %}
+                        {% if(is_granted('ROLE_PRESS')) %}
+
+                        {% endif %}
+
+                        {% else %}
+                            <li><a href="{{ path("login") }}">Se connecter</a></li>
+                            <li><a href="{{ path("forgot_password") }}">Mot de passe oublie?</a></li>
+
+                        {% endif %}
+                        {% endblock %}
                         </div>
                         </li>
                     </ul>

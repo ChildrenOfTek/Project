@@ -86,7 +86,7 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->set('success',
+            $this->addFlash('success',
                 'L\'article a bien été crée !');
 
             return $this->redirectToRoute('article_show', array('id' => $article->getId()));
@@ -134,7 +134,7 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->set('success',
+            $this->addFlash('success',
                 'L\'article a bien été mis à jour !');
 
             return $this->redirectToRoute('article_show', array('id' => $article->getId()));
@@ -164,7 +164,7 @@ class ArticleController extends Controller
             $em->flush();
         }
 
-        $this->get('session')->getFlashBag()->set('success',
+        $this->addFlash('success',
             'L\'article a bien été supprimé !');
 
         return $this->redirectToRoute('article_index');

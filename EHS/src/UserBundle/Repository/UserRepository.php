@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
-    public function findUserByRoles()
+    public function findAdmins()
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('u')

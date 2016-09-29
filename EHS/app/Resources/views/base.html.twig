@@ -130,6 +130,11 @@
                         <p align="center">{{ flash }}</p>
                     </div>
                 {% endfor %}
+                {% for flash in app.session.flashbag.get('notice') %}
+                    <div class="flash notice">
+                        <p align="center">{{ flash }}</p>
+                    </div>
+                {% endfor %}
 
             {% endblock %}
 

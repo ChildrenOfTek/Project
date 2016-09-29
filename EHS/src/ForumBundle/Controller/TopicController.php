@@ -25,7 +25,7 @@ class TopicController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();//
 
         $topics = $em->getRepository('ForumBundle:Topic')->findAll();
 
@@ -47,6 +47,7 @@ class TopicController extends Controller
         $form->handleRequest($request);
         $id=$_GET['id'];
         $author=$this->get("security.token_storage")->getToken()->getUser();
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $forum=$em->getRepository('ForumBundle:Forum')->find($id);
@@ -80,11 +81,10 @@ class TopicController extends Controller
         $query = $em->createQuery(
             'SELECT a
                 FROM ForumBundle:Topic a
-                WHERE a.datePublication <= :date and a.online = 1
-                ORDER BY a.dateArticle ASC'
-        )->setParameter('date', $date);*/
+                ORDER BY a.dateEdit DESC'
+        )->setParameter('date', $date);
 
-        $articles = $query->getResult();
+        $topic = $query->getResult();*/
         
         
         return $this->render('topic/show.html.twig', array(

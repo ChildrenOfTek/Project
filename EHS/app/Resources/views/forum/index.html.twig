@@ -5,22 +5,29 @@
 
     <table class='table'>
         <thead>
+            
             <tr>
 
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Actions</th>
+                {% for forum in forums %}
+                    {% if forum.author.userName == 'admin' %}
+                        <th>Actions</th>
+                    {% endif %}
+                {% endfor %}
             </tr>
         </thead>
         <tbody>
-        {% for forum in forums %}
+            {% for forum in forums %}
             <tr>
 
                 <td><a href="{{ path('forum_show',{ 'id': forum.id })}}">{{ forum.libForum }}</td>
                 <td>{{ forum.description }}</td>
-                <td>
-                    <a href="{{ path('forum_edit', { 'id': forum.id }) }}">Modifier</a>
-                </td>
+                {% if forum.author.userName == 'admin' %}
+                    <td><a href="{{ path('forum_edit', { 'id': forum.id }) }}">Modifier</a></td>
+                    <td>{{forum.author.userName}}</td>
+                {% endif %}
+
             </tr>
         {% endfor %}
         </tbody>

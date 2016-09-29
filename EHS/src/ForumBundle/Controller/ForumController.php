@@ -45,9 +45,11 @@ class ForumController extends Controller
         $forum = new Forum();
         $form = $this->createForm('ForumBundle\Form\ForumType', $forum);
         $form->handleRequest($request);
+        $author=$this->get("security.token_storage")->getToken()->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $forum->setAuthor($author);
             $em->persist($forum);
             $em->flush();
 

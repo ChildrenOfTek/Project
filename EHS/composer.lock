@@ -4,9 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8d2fef6eb076a7bccde93f1c14225b32",
-    "content-hash": "d8505e709ce0ad9c9d6c140155448594",
+    "hash": "006c0e8c8c4c8195a06c8d3e6f843477",
+    "content-hash": "6742405bcacf3513f79c6e5bfbfe9b10",
     "packages": [
+        {
+            "name": "ancarebeca/full-calendar-bundle",
+            "version": "v2.0.2",
+            "target-dir": "AncaRebeca/FullCalendarBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ancarebeca/FullCalendarBundle.git",
+                "reference": "1b746dbefa2a10aaf3d965421cdb5948376cac01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ancarebeca/FullCalendarBundle/zipball/1b746dbefa2a10aaf3d965421cdb5948376cac01",
+                "reference": "1b746dbefa2a10aaf3d965421cdb5948376cac01",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/symfony": "~2.1"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.2"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "AncaRebeca\\FullCalendarBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rebeca Mora Anca",
+                    "email": "anca.rebeca@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony2 integration with the library FullCalendar.js",
+            "homepage": "https://github.com/ancarebeca/FullCalendarBundle",
+            "keywords": [
+                "calendar",
+                "fullcalendar",
+                "jquery calendar",
+                "symfony2 bundle",
+                "symfony2 calendar"
+            ],
+            "time": "2015-08-23 18:46:49"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",

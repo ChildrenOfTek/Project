@@ -3,6 +3,7 @@
 namespace CalendarBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AncaRebeca\FullCalendarBundle\Model\Event as BaseEvent;
 
 /**
  * Event
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="events")
  * @ORM\Entity(repositoryClass="CalendarBundle\Repository\EventRepository")
  */
-class Event
+class CalendarEvent extends BaseEvent
 {
     /**
      * @var int
@@ -19,28 +20,35 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="start", type="datetime")
      */
-    private $date;
+    protected $start;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end", type="datetime")
+     */
+    protected $end;
 
 
     /**
@@ -100,25 +108,48 @@ class Event
     }
 
     /**
-     * Set date
+     * Set start
      *
-     * @param \DateTime $date
+     * @param \DateTime $start
      * @return Event
      */
-    public function setDate($date)
+    public function setStart($start)
     {
-        $this->date = $date;
+        $this->start = $start;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get start
      *
      * @return \DateTime 
      */
-    public function getDate()
+    public function getStart()
     {
-        return $this->date;
+        return $this->start;
+    }
+
+    /**
+     * Set end
+     *
+     * @param \DateTime $end
+     * @return Event
+     */
+    public function setEnd($end)
+    {
+        $this->end = $end;
+
+        return $this;
+    }
+
+    /**
+     * Get end
+     *
+     * @return \DateTime 
+     */
+    public function getEnd()
+    {
+        return $this->end;
     }
 }

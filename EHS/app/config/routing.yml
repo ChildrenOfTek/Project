@@ -42,3 +42,6 @@ user:
     resource: "@UserBundle/Controller/"
     type:     annotation
     prefix:   /
+
+ancarebeca_fullcalendar:
+    resource: "@FullCalendarBundle/Resources/config/routing.yml"

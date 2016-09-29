@@ -17,3 +17,7 @@ services:
             class: ArticleBundle\Twig\Extension\UrlDecoder
             tags:
                 -  { name: twig.extension }
+    calendar_bundle.service.listener:
+        class: CalendarBundle\Listener\LoadDataListener
+        tags:
+            - { name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadData }

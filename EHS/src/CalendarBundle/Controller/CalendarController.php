@@ -11,7 +11,7 @@ use CalendarBundle\Entity\Calendar;
 /**
  * Calendar controller.
  *
- * @Route("/calendar")
+ * @Route("/evenements")
  */
 class CalendarController extends Controller
 {

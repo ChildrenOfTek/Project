@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use NewsletterBundle\Entity\Newsletter;
 use NewsletterBundle\Form\NewsletterType;
+use UserBundle\Entity\User;
 
 /**
  * Newsletter controller.
@@ -30,7 +31,7 @@ class NewsletterController extends Controller
         ));
     }
 
-    /**
+     /**
      * Creates a new Newsletter entity.
      *
      * @Route("/new", name="newsletter_new")
@@ -41,16 +42,20 @@ class NewsletterController extends Controller
         $form = $this->createForm('NewsletterBundle\Form\NewsletterType', $newsletter);
         $form->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('ArticleBundle:Article')->findNewArticles();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($newsletter);
             $em->flush();
 
             return $this->redirectToRoute('newsletter_show', array('id' => $newsletter->getId()));
-        }
+        };
 
         return $this->render('NewsletterBundle:Default:new.html.twig', array(
             'newsletter' => $newsletter,
+            'articles' => $articles,
             'form' => $form->createView(),
         ));
     }
@@ -137,14 +142,22 @@ class NewsletterController extends Controller
      */
     public function sendAction(Newsletter $newsletter) {
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject($newsletter->getSujet())
-            ->setFrom('guillossou.michele@gmail.com')
-            ->setTo('y@blzr.org')
-            ->setBody($newsletter->getTexte(), 'text/html');
-        $this->get('mailer')->send($message);
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('UserBundle:User')->findAll();
+        $checked = [];
 
-        return $this->redirectToRoute('newsletter_index');
+        foreach ($users as $user) {
+            $message = \Swift_Message::newInstance()
+                ->setSubject($newsletter->getSujet())
+                ->setFrom(array('guillossou.michele@gmail.com' => 'Michele Guillossou'))
+                ->setTo(array($user->getEmail() => $user->getPrenom() . " " . $user->getNom()))
+                ->setBody($newsletter->getTexte(), 'text/html');
+            $this->get('mailer')->send($message);
+            $checked[] = $user->getPrenom() . " " . $user->getNom();
+        }
+         return $this->render('NewsletterBundle:Default:send.html.twig', array(
+            'checked' => $checked,
+        ));
 
     }
 

@@ -26,7 +26,6 @@ article_article:
 newsletter:
     resource: "@NewsletterBundle/Controller/"
     type:     annotation
-    prefix:   /
 
 forum:
     resource: "@ForumBundle/Controller/"

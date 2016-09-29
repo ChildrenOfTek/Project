@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+    <h1>Newsletter sender list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>personnes</th>
+                <th>status</th>
+             </tr>
+        </thead>
+        <tbody>
+        {% for check in checked %}
+            <tr>
+                <td>{{ check }}</td>
+                <td><img src="{{ asset('public/img/check.png') }}"/></td>
+             </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('newsletter_index') }}">Back</a>
+        </li>
+    </ul>
+{% endblock %}

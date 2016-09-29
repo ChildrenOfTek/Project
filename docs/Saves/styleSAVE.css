@@ -1,0 +1,184 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300');
+body{
+    height:100%;
+    margin-top: 100px;
+    font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
+    background-color: #f4f4f4;
+
+
+}
+
+body a:link{
+  color: #CC0099;
+}
+
+body a:visited{
+  color: #fc5705;
+}
+
+
+.bg {
+  background: url(../img/handicap.jpg);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+
+}
+
+.crop {
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.panel{
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  color:#777;
+  border-style: none;
+}
+
+.panel .panel-heading{
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #8f3588;
+  color: #afafaf;
+  padding: 1px;
+}
+
+.panel .panel-heading a{
+  color: #ac7aa0;
+  font-weight: lighter;
+  font-size: 35px;
+  margin-left: 15px;
+}
+
+.panel .panel-heading a:hover{
+  text-decoration: none;
+  color: #c7a2bd;
+  text-shadow: 0px 0px 10px #c7a2bd;
+  -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.tagbox{
+  background-color: rgba(63, 28, 129, 0.31);
+  color: rgb(255, 255, 255);
+  border-style: none;
+  border-radius: 5px;
+}
+
+.tagbox:hover{
+  background-color: #761aeb;
+  text-shadow: 0px 0px 10px rgb(255, 255, 255);
+  box-shadow: 0 0px 10px 0 rgba(89, 0, 255, 1);
+  -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.onhover
+{
+    display:flex;
+    flex-flow: column nowrap;
+}
+
+#user div
+{
+    width:400px;
+}
+
+.top-div
+{
+width: 100%;
+}
+.logo img
+{
+
+   width:180px;
+}
+
+.navbar{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+border-style: none;
+background-color: #fff;
+
+}
+
+.container-fluid,
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 80px;
+    height: 80px;
+    padding-top: 0;
+    background-color: transparent;
+    color: #494949;
+    text-align: center;
+}
+.collapse{
+  background-color: #fff;
+  color: #CC0099;
+}
+
+.navbar-default .navbar-nav > li > a{
+  color: #494949;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #CC0099;
+    color: #fff;
+    font-weight: bold;
+    -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+}
+
+.dropdown-menu{
+  border-style: none;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 0px;
+}
+
+.dropdown-menu li a{
+  height: 50px;
+  line-height: 50px;
+}
+
+.dropdown-menu > li > a:hover{
+  background-color: #ff4d00;
+  color: #fff;
+  font-weight: bold;
+  -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+section {
+    width:94%;
+  	margin:0 auto;
+  	height:100%;
+	color:#fff;
+}
+
+section .row{
+  margin: 20px;
+}
+
+
+
+a:link, a:visited {
+	color:#eee;
+}
+
+.navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus {
+	background-color: transparent;
+}

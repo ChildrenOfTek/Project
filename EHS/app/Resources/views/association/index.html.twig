@@ -7,16 +7,15 @@
 <section>
       <div class="row">
         <h1 class="text-center"><i class="icon-fire icon-3x"></i></h1>
-        <h1 class="text-center"><strong>TOUS ENSEMBLES</strong></h1>
-        <p class="lead text-center">Débattons des vrais sujets</p>
+        <h1 class="text-center"><strong>ENSEMBLE</strong></h1>
+        <p class="lead text-center">Disputons nous</p>
       </div>
       <div class="row">
           <div class="col-md-4">
             <div class="text-center">
               <h1>Ethique</h1>
               <p>
-              Take a look at what we mixed up in our Bootstrap test labs.
-              Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor.</p>
+              L'éthique c'est vraiment top car c'est vraiment bien et en plus c'est génial.</p>
 
             </div>
           </div>
@@ -24,8 +23,7 @@
             <div class="text-center">
               <h1>Handicap</h1>
               <p>
-              Take a look at what we mixed up in our Bootstrap test labs.
-              Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor.</p>
+              Le handicap c'est pas terrible parce que c'est vraiment handicapant et en plus c'est très bof.</p>
 
             </div>
           </div>
@@ -33,8 +31,7 @@
             <div class="text-center">
               <h1>Société</h1>
               <p>
-              With all of the front-end frameworks at hand, why does Bootstrap lead?
-              Aliquam mauris arcu, tristique a, condimentum feugiat justo.</p>
+              La société elle à que des problèmes, la société elle à mauvaise haleine.</p>
 
             </div>
           </div>
@@ -55,7 +52,7 @@
                    <img class="img-responsive" src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="">
                   </div>
                   <div class="col-sm-8">
-                   {{ article.content}}
+                   {{ article.content | raw }}
                   </div>
                 </div>
                 <div class="panel-body">

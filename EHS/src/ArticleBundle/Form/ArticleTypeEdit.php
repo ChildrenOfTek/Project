@@ -38,9 +38,13 @@ class ArticleTypeEdit extends AbstractType
             ->add('titreArticle','text',array(
                 'label'=>'Titre de l\'article'))
 
-            ->add('content',TextareaType::class,array(
-                'attr'=>array('rows'=>15),
-                'label'=>'Contenu de l\'article'))
+            //->add('content',TextareaType::class,array(
+            //    'attr'=>array('rows'=>15),
+            //    'label'=>'Contenu de l\'article'))
+
+                ->add('content','ckeditor',array(
+                    'attr'=>array('rows'=>15),
+                    'label'=>'Contenu de l\'article'))
 
             ->add('datePublication',DateType::class,array(
                 'data'=> new \Datetime(),

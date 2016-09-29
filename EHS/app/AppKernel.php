@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new NewsletterBundle\NewsletterBundle(),
             new AssociationBundle\AssociationBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
-            new CalendarBundle\CalendarBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

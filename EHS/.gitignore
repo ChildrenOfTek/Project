@@ -14,3 +14,7 @@
 /.idea
 ../.idea
 /web/public/img/Articles
+/app/sqlite.db.cache
+/src/UserBundle/Tests
+/app/config/config_test.yml
+/coverage

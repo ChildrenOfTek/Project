@@ -17,7 +17,7 @@
 
             <!-- Author -->
             <p class="lead">
-                par <a href="{{ path('user_showpublic',{'id':article.user.id}) }}">{{ article.user.nom }}</a>
+                par <a href="{{ path('user_showpublic',{'id':article.user.id}) }}">{{ article.user.nom }} {{ article.user.prenom }}</a>
             </p>
 
             <hr>
@@ -66,6 +66,7 @@
         <li>
             <a href="{{ path('article_index') }}">Retourner à la liste</a>
         </li>
+        {% if is_granted('ROLE_ADMIN') %}
         <li>
             <a href="{{ path('article_edit', { 'id': article.id }) }}">Editer l'article</a>
         </li>
@@ -74,5 +75,6 @@
                 <input type="submit" value="Effacer l'article">
             {{ form_end(delete_form) }}
         </li>
+        {% endif %}
     </ul>
 {% endblock %}

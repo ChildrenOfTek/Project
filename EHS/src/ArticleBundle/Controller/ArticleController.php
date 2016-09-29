@@ -86,6 +86,9 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set('success',
+                'L\'article a bien été crée !');
+
             return $this->redirectToRoute('article_show', array('id' => $article->getId()));
         }
 
@@ -97,7 +100,6 @@ class ArticleController extends Controller
 
     /**
      * Finds and displays a Article entity.
-     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="article_show")
      * @Method("GET")
      */
@@ -126,13 +128,16 @@ class ArticleController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $data=$editForm->getData();
 
-            $article->setUser($data->getUser()->getUsername());
+            $article->setUser($data->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
+            $this->get('session')->getFlashBag()->set('success',
+                'L\'article a bien été mis à jour !');
+
+            return $this->redirectToRoute('article_show', array('id' => $article->getId()));
         }
 
         return $this->render('article/edit.html.twig', array(
@@ -158,6 +163,9 @@ class ArticleController extends Controller
             $em->remove($article);
             $em->flush();
         }
+
+        $this->get('session')->getFlashBag()->set('success',
+            'L\'article a bien été supprimé !');
 
         return $this->redirectToRoute('article_index');
     }

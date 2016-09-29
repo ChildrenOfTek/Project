@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+    <h1>Voici les articles correspondants au tag : {{ tags.libelle }}</h1>
+    {% if articles is empty %}
+        <h3>Il n'y a aucun article qui corresponde au tag: {{ tags.libelle }}</h3>
+        <ul>
+            <li>
+                <a href="{{ path('index') }}">Retour aux articles</a>
+            </li>
+        </ul>
+    {% endif %}
+
+    {% for article in articles %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-5 col-md-offset-1">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a></div>
+                        <div class="panel-body">
+                            {{ article.content}}<br/>
+                            {% for tag in article.tag %}
+                                <a href="{{ path('tags_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+                            {% endfor  %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    <ul>
+        <li>
+            <a href="{{ path('index') }}">Retour aux articles</a>
+        </li>
+    </ul>
+
+
+{% endblock %}

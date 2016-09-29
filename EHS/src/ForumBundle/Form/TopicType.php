@@ -16,7 +16,8 @@ class TopicType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('title','text',array('label'=>'Titre'))
+            ->add('content','text',array('label'=>'Contenu'))
             /*->add('forum', EntityType::class, array(
               'class'=>'ForumBundle:Forum',
               'property'=>'libForum',

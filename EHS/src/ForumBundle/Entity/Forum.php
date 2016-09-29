@@ -42,7 +42,7 @@ class Forum
      private $topics;
 
     public function __construct() {
-        $this->features = new ArrayCollection();
+        $this->topics = new ArrayCollection();
     }
     /**
      * Get id
@@ -122,5 +122,28 @@ class Forum
         $this->topics = $topics;
 
         return $this;
+    }
+
+    /**
+     * Add topics
+     *
+     * @param \ForumBundle\Entity\Topic $topics
+     * @return Forum
+     */
+    public function addTopic(\ForumBundle\Entity\Topic $topics)
+    {
+        $this->topics[] = $topics;
+
+        return $this;
+    }
+
+    /**
+     * Remove topics
+     *
+     * @param \ForumBundle\Entity\Topic $topics
+     */
+    public function removeTopic(\ForumBundle\Entity\Topic $topics)
+    {
+        $this->topics->removeElement($topics);
     }
 }

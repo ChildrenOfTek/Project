@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ArticleTypeEdit extends AbstractType
 {
@@ -35,7 +36,7 @@ class ArticleTypeEdit extends AbstractType
                 'label'=>'Date de création'
             ))
 
-            ->add('titreArticle','text',array(
+            ->add('titreArticle',TextType::class,array(
                 'label'=>'Titre de l\'article'))
 
             ->add('content',TextareaType::class,array(
@@ -61,7 +62,6 @@ class ArticleTypeEdit extends AbstractType
             ))
             ->add('online',CheckboxType::class, array(
                 'label'=>'L\'article doit-il être mis en ligne?'))
-            ->add('newsletter')
         ;
     }
 

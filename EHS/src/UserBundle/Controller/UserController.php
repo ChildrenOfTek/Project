@@ -10,6 +10,7 @@ use UserBundle\Entity\User;
 use UserBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 /**
@@ -46,13 +47,15 @@ class UserController extends Controller
         $user = new User();
         
         $form = $this->createForm('UserBundle\Form\UserType', $user);
+        $form->remove('password');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data=$form->getData();
             $em = $this->getDoctrine()->getManager();
             
-            $plainPassword = $data->getPassword();
+            $plainPassword = $user->generateStrongPassword(25);
+            //var_dump($plainPassword);die();
             $encoder = $this->container->get('security.password_encoder');
             $encoded = $encoder->encodePassword($user, $plainPassword);
 
@@ -60,9 +63,9 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            /* A decommenter lors de l'implémentation
-            pour envoyer un mail a l'inscription
-            $message = \Swift_Message::newInstance()
+            // A decommenter lors de l'implémentation
+            //pour envoyer un mail a l'inscription
+            /*$message = \Swift_Message::newInstance()
                 ->setSubject('Bienvenue')
                 ->setFrom('guillossou.michele@gmail.com')
                 // notre adresse mail
@@ -71,13 +74,17 @@ class UserController extends Controller
                 //ici nous allons utiliser un template pour pouvoir styliser notre mail si nous le souhaitons
                 ->setBody(
                     $this->renderView('association/newUser.html.twig', array(
-                            'user' => $user
+                            'user' => $user,
+                            'password'=>$plainPassword
                         )
                     ), 'text/html'
                 )
 
             ;
             $this->get('mailer')->send($message);*/
+
+            $this->get('session')->getFlashBag()->set('success',
+                'Utilisateur ajouté !');
 
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
@@ -123,7 +130,7 @@ class UserController extends Controller
 
     /**
      * Displays a form to edit an existing User entity, as his own profile.
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_USER')")
      * @Route("/{id}/edit", name="user_edit")
      * @Method({"GET", "POST"})
      */
@@ -134,7 +141,7 @@ class UserController extends Controller
         $editForm->remove('userRoles');
         $editForm->remove('password');
         $editForm->handleRequest($request);
-
+        //var_dump($editForm);die();
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -142,12 +149,23 @@ class UserController extends Controller
 
             return $this->redirectToRoute('index');
         }
+        //On verifie que l'utilisateur cherche bien à éditer son propre profil
+        if($this->get('security.token_storage')->getToken()->getUser()->getUsername()
+        == $editForm->getData()->getUsername())
+        {
+            $this->get('session')->getFlashBag()->set('success',
+                'Profil mis à jour !');
+            return $this->render('user/user.edit.html.twig', array(
+                'user' => $user,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            ));
+        }
+        //sinon on renvoie une erreur 403
+        else{
+            throw new AccessDeniedException();
+        }
 
-        return $this->render('user/user.edit.html.twig', array(
-            'user' => $user,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
     }
 
     /**
@@ -180,6 +198,9 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->set('success',
+                'Utilisateur mis à jour !');
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -199,14 +220,31 @@ class UserController extends Controller
     public function deleteAction(Request $request, User $user)
     {
         $form = $this->createDeleteForm($user);
-        $form->handleRequest($request);
+        $em=$this->getDoctrine()->getManager();
+        $repo=$em->getRepository('UserBundle:User');
+        //custom repo method for finding users with ROLE_ADMIN
+        $admins=$repo->findUserByRoles();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
+        if($user->getRoles()[0]->getRole() != 'ROLE_ADMIN')
+        {
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($user);
+                $em->flush();
+            }
+
+            $this->get('session')->getFlashBag()->set('success',
+                'Utilisateur '.$user->getUsername().' supprimé !');
+
+        }else if ($user->getRoles()[0]->getRole() == 'ROLE_ADMIN'
+        AND count($admins)==1){
+
+            $this->get('session')->getFlashBag()->set('error',
+                'Attention, ne supprimez pas le dernier compte Administrateur !');
+
         }
-
         return $this->redirectToRoute('user_index');
     }
 

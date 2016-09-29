@@ -1,13 +1,14 @@
 <?php
 
-namespace ForumBundle\Form;
+namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class PostType extends AbstractType
+
+class ResetType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,8 +17,8 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content','text',array('label'=>'Contenu'))
-            
+            ->setMethod('POST')
+            ->add('email',EmailType::class,array('label'=>'Entrez votre email :'))
         ;
     }
     
@@ -27,7 +28,7 @@ class PostType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ForumBundle\Entity\Post'
+            'data_class' => 'UserBundle\Form\Model\ResetPassword'
         ));
     }
 }

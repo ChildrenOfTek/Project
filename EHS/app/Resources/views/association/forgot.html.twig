@@ -1,13 +1,12 @@
 <p>Bonjour {{ user.nom }} {{ user.prenom }} !!</p>
 
-<p>Vous recevez ce message car votre inscription sur le site de l'association
-EHS a bien été pris en compte !</p>
-<p>Vous pouvez dès à présent vous connecter en utilisant ces informations : </p>
+<p>Vous recevez ce message après votre demande de réinitialisation de mot de passe !</p>
+<p>Un nouveau mot de passe vous a été généré : </p>
     <ul>
         <li style="list-style: none">Nom d'utilisateur : {{ user.username }}</li>
         <li style="list-style: none">Mot de passe : {{ password }}</li>
     </ul>
-<p>et en suivant ce lien :</p>
+<p>Connectez vous en suivant ce lien :</p>
 <a href="{{ path('login') }}">Se connecter</a>
 <p>Nous vous conseillons également de changer de mot de passe en utilisant la fonction
     présente dans l'encart "Espace personnel" onglet "Mon profil !</p>

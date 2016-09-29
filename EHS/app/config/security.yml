@@ -25,10 +25,10 @@ security:
             form_login:
                 login_path : /login
                 check_path : /login
-                default_target_path: /association/index
+                default_target_path: /index
             logout:
                 path: /logout
-                target: /association/index
+                target: /index
 
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -37,7 +37,7 @@ security:
 
     access_control:
         - { path: ^/admin, roles : ROLE_ADMIN }
-        - { path: ^/user, roles : [ROLE_ADMIN] }
+
             # activate different ways to authenticate
 
             # http_basic: ~

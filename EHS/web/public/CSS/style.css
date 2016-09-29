@@ -58,16 +58,15 @@ width: 100%;
 }
 .logo
 {
-   height:80px;
-   width:210px;
 
-   background: url(../img/wip_ehs.png) no-repeat center top;
-   background-size: 200px 80px;
+   width:350px;
+   margin-left: -100px;
+   margin-top: -25px;
 }
 
 
 .navbar{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 border-style: none;
 background-color: #fff;
 
@@ -135,9 +134,7 @@ section .row{
   margin: 20px;
 }
 
-.row .text-center{
-  margin: 50px;
-}
+
 
 a:link, a:visited {
 	color:#eee;
@@ -148,3 +145,4 @@ a:link, a:visited {
 .navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus {
 	background-color: transparent;
 }
+

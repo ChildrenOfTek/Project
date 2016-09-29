@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             new NewsletterBundle\NewsletterBundle(),
             new AssociationBundle\AssociationBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
-            new Dizda\CloudBackupBundle\DizdaCloudBackupBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

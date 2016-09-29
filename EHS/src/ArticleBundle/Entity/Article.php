@@ -92,7 +92,7 @@ class Article
 
     /**
      * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articles")
-     * @ORM\JoinTable(name="tags_articles")
+     * @ORM\JoinTable(name="tags_articles")git commit 
      */
     private $tag;
 

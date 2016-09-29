@@ -1,12 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block section %}
     <h1>Newsletter creation</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
+
+    <table>
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Contenu</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.titreArticle }}</a></td>
+                <td>{{ article.content }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
     <ul>
         <li>

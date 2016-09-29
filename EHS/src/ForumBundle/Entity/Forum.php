@@ -41,6 +41,12 @@ class Forum
      */
      private $topics;
 
+     /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */ 
+    private $author;
+
     public function __construct() {
         $this->topics = new ArrayCollection();
     }
@@ -120,6 +126,30 @@ class Forum
     public function setTopics($topics)
     {
         $this->topics = $topics;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of author.
+     *
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Sets the value of author.
+     *
+     * @param mixed $author the author
+     *
+     * @return self
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
 
         return $this;
     }

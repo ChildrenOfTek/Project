@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ForumBundle\Entity\Topic;
 use ForumBundle\Form\TopicType;
 use UserBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Topic controller.
@@ -25,7 +26,7 @@ class TopicController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();//
 
         $topics = $em->getRepository('ForumBundle:Topic')->findAll();
 
@@ -47,6 +48,7 @@ class TopicController extends Controller
         $form->handleRequest($request);
         $id=$_GET['id'];
         $author=$this->get("security.token_storage")->getToken()->getUser();
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $forum=$em->getRepository('ForumBundle:Forum')->find($id);
@@ -74,6 +76,17 @@ class TopicController extends Controller
     public function showAction(Topic $topic)
     {
         $deleteForm = $this->createDeleteForm($topic);
+
+        /*$em = $this->getDoctrine()->getManager();
+        $date=new \DateTime('now');
+        $query = $em->createQuery(
+            'SELECT a
+                FROM ForumBundle:Topic a
+                ORDER BY a.dateEdit DESC'
+        )->setParameter('date', $date);
+
+        $topic = $query->getResult();*/
+        
         
 
         return $this->render('topic/show.html.twig', array(
@@ -85,7 +98,7 @@ class TopicController extends Controller
 
     /**
      * Displays a form to edit an existing Topic entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="topic_edit")
      * @Method({"GET", "POST"})
      */
@@ -112,7 +125,7 @@ class TopicController extends Controller
 
     /**
      * Deletes a Topic entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="topic_delete")
      * @Method("DELETE")
      */

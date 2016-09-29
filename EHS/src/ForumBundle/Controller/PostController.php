@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ForumBundle\Entity\Post;
 use ForumBundle\Form\PostType;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Post controller.
@@ -36,7 +36,7 @@ class PostController extends Controller
 
     /**
      * Creates a new Post entity.
-     *
+     * 
      * @Route("/new", name="post_new")
      * @Method({"GET", "POST"})
      */
@@ -78,12 +78,13 @@ class PostController extends Controller
         return $this->render('post/show.html.twig', array(
             'post' => $post,
             'delete_form' => $deleteForm->createView(),
+            'user'=> $this->get('security.token_storage')->getToken()->getUser(),
         ));
     }
 
     /**
      * Displays a form to edit an existing Post entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="post_edit")
      * @Method({"GET", "POST"})
      */
@@ -131,7 +132,7 @@ class PostController extends Controller
 
     /**
      * Creates a form to delete a Post entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Post $post The Post entity
      *
      * @return \Symfony\Component\Form\Form The form

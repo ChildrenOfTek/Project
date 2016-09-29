@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ForumBundle\Entity\Topic;
 use ForumBundle\Form\TopicType;
 use UserBundle\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Topic controller.
@@ -96,7 +97,7 @@ class TopicController extends Controller
 
     /**
      * Displays a form to edit an existing Topic entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="topic_edit")
      * @Method({"GET", "POST"})
      */
@@ -123,7 +124,7 @@ class TopicController extends Controller
 
     /**
      * Deletes a Topic entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="topic_delete")
      * @Method("DELETE")
      */

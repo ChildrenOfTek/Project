@@ -1,24 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>{{ forum.libForum  }}</h1>
-    <p>{{ forum.description  }}</p>
-
-    <table class='table'>
-        <tbody>
-
-            {% for topic in forum.topics %}
-                <tr>
-                    <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
-                    <td>Publié par {{topic.author.prenom}} {{topic.author.nom}}</td>
-                    <td>Le {{ topic.dateCreated|date('d/m/Y') }} à {{ topic.dateCreated|date('H:i') }}</td>
-                    {% if(is_granted('ROLE_ADMIN')) %}
-                        <td><a href="{{ path('topic_edit', { 'id': topic.id}) }}">Modifier</a></td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    
+    <div class="contener-forum">
+        <div class="table-topic-show table-responsive">
+            <table class='table'>
+                <tbody>
+                        <tr>
+                            <h1>{{ forum.libForum  }}</h1>
+                        </tr>
+                    {% for topic in forum.topics %}
+                        <tr>
+                            <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
+                            <td>Publié par {{topic.author.prenom}} {{topic.author.nom}}</td>
+                            <td>Le {{ topic.dateCreated|date('d/m/Y') }} à {{ topic.dateCreated|date('H:i') }}</td>
+                            {% if(is_granted('ROLE_ADMIN')) %}
+                                <td><a href="{{ path('topic_edit', { 'id': topic.id}) }}">Modifier</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
     
     
 
@@ -30,10 +34,6 @@
         <li>
             <a href="{{ path('topic_new', { 'id': forum.id }) }}">Créer un nouveau topic</a>
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
+        
     </ul>
 {% endblock %}

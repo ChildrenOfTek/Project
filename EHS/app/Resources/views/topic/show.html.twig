@@ -1,28 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>{{ topic.title }}</h1>
 
-    <table class='table'>
-        <tbody>
-                <tr>
-                    <td>{{ topic.content }}</td>
-                    <td>Publié par {{ topic.author.prenom }} {{ topic.author.nom }}</td>
-                    <td>Le {{ topic.dateCreated|date('d/m/Y')}} à {{ topic.dateCreated|date('H:i')}}</td>
-                </tr>
+    <div class='table-forum table-responsive'>
+        <table class='table '>
+            <tbody>
+                    
+                    <th>
+                        <td colspan='3'><h3>{{ topic.title }}</h3></td>
+                    </th>
+                    <tr >
+                        <td rowspan='2'>{{ topic.author.prenom }} {{ topic.author.nom }}</td>
+                        <td>Le {{ topic.dateCreated|date('d/m/Y')}} à {{ topic.dateCreated|date('H:i')}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan='2'>{{ topic.content }}</td>
+                    </tr>
 
-            {% for post in topic.posts %}
-                <tr>
-                    <td>{{ post.content }}</td>
-                    <td>Publié par {{ post.author.prenom }} {{ post.author.nom }}</td>
-                    <td>Le {{ post.dateEdit|date('d/m/Y')}} à {{ post.dateEdit|date('H:i')}}</td>
-                    {% if(is_granted('ROLE_ADMIN')) %}
-                        <td><a href="{{ path('post_edit', { 'id': post.id}) }}">Modifier</a></td>
-                    {% endif %}
-                </tr>
-                {% endfor %}
-        </tbody>
-    </table>
+                {% for post in topic.posts %}
+                    <tr>
+                        <td rowspan='2'>{{ post.author.prenom }} {{ post.author.nom }}</td>
+                        <td>Le {{ post.dateEdit|date('d/m/Y')}} à {{ post.dateEdit|date('H:i')}}</td>
+                        {% if(is_granted('ROLE_ADMIN')) %}
+                            <td><a href="{{ path('post_edit', { 'id': post.id}) }}">Modifier</a></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td colspan='2'>{{ post.content }}</td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <ul>
         <li>
             <a href="{{ path('forum_show', { 'id': topic.forum.id }) }}">Retour</a>
@@ -30,11 +39,7 @@
         <li>
             <a href="{{ path('post_new', { 'id': topic.id }) }}">Commenter</a>
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
+        
         
     </ul>
 

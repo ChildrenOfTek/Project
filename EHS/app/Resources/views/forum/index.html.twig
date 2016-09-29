@@ -3,34 +3,36 @@
 {% block section %}
     <h1>Liste des forums</h1>
 
-    <table class='table'>
-        <thead>
-            
-            <tr>
+    <div class='index-forum'>
+        <div class="table-responsive">
+            <table class='table'>
+                <thead>
+                    
+                    <tr>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        {% if(is_granted('ROLE_ADMIN')) %}
+                            <th>Actions</th>
+                        {% endif %}
+                    </tr>
 
-                <th>Nom</th>
-                <th>Description</th>
-                {% for forum in forums %}
-                    {% if(is_granted('ROLE_ADMIN')) %}
-                        <th>Actions</th>
-                    {% endif %}
+                </thead>
+                <tbody>
+                    {% for forum in forums %}
+                    <tr>
+
+                        <td><a href="{{ path('forum_show',{ 'id': forum.id })}}">{{ forum.libForum }}</td>
+                        <td>{{ forum.description }}</td>
+                        {% if(is_granted('ROLE_ADMIN')) %}
+                            <td><a href="{{ path('forum_edit', { 'id': forum.id }) }}">Modifier</a></td>
+                        {% endif %}
+
+                    </tr>
                 {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for forum in forums %}
-            <tr>
-
-                <td><a href="{{ path('forum_show',{ 'id': forum.id })}}">{{ forum.libForum }}</td>
-                <td>{{ forum.description }}</td>
-                {% if(is_granted('ROLE_ADMIN')) %}
-                    <td><a href="{{ path('forum_edit', { 'id': forum.id }) }}">Modifier</a></td>
-                {% endif %}
-
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <form method="POST" action="{{ path('forum_new') }}">
             <input type="submit" value="Créer un nouveau sujet" >

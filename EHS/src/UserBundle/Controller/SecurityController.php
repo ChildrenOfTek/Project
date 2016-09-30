@@ -21,7 +21,7 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
-        $this->addFlash('notice','Merci de vous enregister !');
+        $this->addFlash('success','Merci de vous enregister !');
         $authenticationUtils = $this->get('security.authentication_utils');
 
     // get the login error if there is one

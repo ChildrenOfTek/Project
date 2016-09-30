@@ -106,3 +106,5 @@ ivory_ck_editor:
             - { name: "Alerte Warning", element: "div",  attributes: { class: "alert alert-warning", role: "alert" }}
             - { name: "Alerte Danger", element: "div",  attributes: { class: "alert alert-danger", role: "alert" }}
             - { name: "Badge", element: "span",  attributes: { class: "badge" }}
+
+gregwar_captcha: ~

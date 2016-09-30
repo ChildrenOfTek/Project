@@ -109,7 +109,7 @@ class DefaultController extends Controller
                 $this->get('session')->getFlashBag()->add('success', 'Merci pour votre email !');
             }else{
                 //si le formulaire n'est pas valide en plus des erreurs du form
-                $this->get('session')->getFlashBag()->add('danger', 'Désolé un problème est survenu.');
+                $this->get('session')->getFlashBag()->add('error', 'Désolé un problème est survenu.');
 
             }
         }

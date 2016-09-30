@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 
 class ResetType extends AbstractType
@@ -19,6 +20,11 @@ class ResetType extends AbstractType
         $builder
             ->setMethod('POST')
             ->add('email',EmailType::class,array('label'=>'Entrez votre email :'))
+            ->add('captcha', CaptchaType::class,array(
+                'invalid_message'=>'Veuillez faire correspondre votre saisie',
+                'reload'=>true,
+                'as_url'=>true
+            ));
         ;
     }
     

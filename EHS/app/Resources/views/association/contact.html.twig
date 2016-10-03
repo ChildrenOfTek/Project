@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
- {% block title %}
-     {#je recupere le contenu du block parent#}
-     {{ parent() }} - Contact
- {% endblock %}
+{% block title %}
+    Contact
+{% endblock %}
+
 {% block section %}
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -30,6 +30,10 @@
                     {{ form_label(formContact.contenu) }}
                     {{ form_widget(formContact.contenu) }}
                     {{ form_errors(formContact.contenu) }}
+
+                    {{ form_label(formContact.captcha) }}
+                    {{ form_widget(formContact.captcha) }}
+                    {{ form_errors(formContact.captcha) }}
                     <br/>
 
                     {#Ce dernier form widget vas nous permettre d'ajouter des que nous aurions pu oublier et SURTOUT le form token sans ça votre formulaire ne sera jamais valide !!#}

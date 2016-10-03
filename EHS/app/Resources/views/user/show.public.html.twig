@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Profil
+{% endblock %}
+
 {% block section %}
     <h1>Profil de {{ user.nom }} {{ user.prenom }}</h1>
 
@@ -29,9 +33,15 @@
 
     {% if app.user.username == user.username %}
         <ul>
+            {% if(is_granted('ROLE_ADMIN')) %}
+                <li>
+                    <a href="{{ path('user_editadmin',{"id":user.id}) }}">Editer son profil</a>
+                </li>
+            {% else %}
             <li>
                 <a href="{{ path('user_edit',{"id":user.id}) }}">Editer son profil</a>
             </li>
+            {% endif %}
             <li>
                 <a href="{{ path("password_change") }}">Changer de mot de passe</a>
             </li>

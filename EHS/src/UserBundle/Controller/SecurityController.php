@@ -21,6 +21,7 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
+        $this->addFlash('success','Merci de vous enregister !');
         $authenticationUtils = $this->get('security.authentication_utils');
 
     // get the login error if there is one
@@ -43,6 +44,7 @@ class SecurityController extends Controller
      */
     public function logoutAction()
     {
+        $this->addFlash('success','Vous êtes dorénavant déconnecté !');
         return $this->render('association/index.html.twig');
     }
 

@@ -1,4 +1,9 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}
+    Reinitialisation
+{% endblock %}
+
 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
 {% block section %}
@@ -6,6 +11,7 @@
 
     {{ form_start(form) }}
     {{ form_row(form.email) }}
+    {{ form_row(form.captcha) }}
     <input type="submit" value="Envoyer" />
     {{ form_end(form) }}
 

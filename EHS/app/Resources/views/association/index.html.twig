@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Accueil
+{% endblock %}
+
 {% block section %}
 
 <div class="bg"></div>
@@ -49,17 +53,26 @@
              <div class="panel-body">
                <div class="row">
                  <div class="col-sm-4">
-                   <img class="img-responsive" src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="">
-                  </div>
+
+                     {% if not article.imageName %}
+                         <img class="img-responsive" src="{{ asset('/public/img/article/handicap.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
+                     {% else %}
+                         <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
+                     {% endif %}
+
+                 </div>
                   <div class="col-sm-8">
                    {{ article.content | raw }}
                   </div>
                 </div>
                 <div class="panel-body">
-                   <h4>Tags:</h4>
-                   {% for tag in article.tag%}
+                   <h4>Tags:</h4>{% for tag in article.tag%}
                    <button class="tagbox">{{ tag.libelle}}</button>
                    {% endfor %}
+                    {% for tag in article.tag%}
+                        <a class="buttonlink tagbox" href="{{ path('tags_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+
+                    {% endfor %}
 
                 </div>
             </div>

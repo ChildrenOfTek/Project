@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Voir l'article
+{% endblock %}
+
 {% block section %}
 <section>
   <div class="row">
@@ -17,7 +21,11 @@
 
             <!-- Author -->
             <p class="lead">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 par <a href="{{ path('user_showpublic',{'id':article.user.id}) }}">{{ article.user.nom }} {{ article.user.prenom }}</a>
+                {% else %}
+                    par {{ article.user.nom }} {{ article.user.prenom }}
+                {% endif %}
             </p>
 
             <hr>
@@ -28,8 +36,11 @@
             <hr>
 
             <!-- Preview Image -->
-            <img class="img-responsive" src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
-
+          {% if not article.imageName %}
+              <img class="img-responsive" src="{{ asset('/public/img/article/handicap.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
+          {% else %}
+            <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
+          {% endif %}
             <hr>
 
             <!-- Post Content -->

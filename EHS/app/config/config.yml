@@ -87,6 +87,15 @@ vich_uploader:
             delete_on_remove:   true
             namer:              namer.media_file
             directory_namer:    namer.dir_name
+        archive_fichier:
+            uri_prefix:         /archives
+            upload_destination: %kernel.root_dir%/../archives
+
+            inject_on_load:     false
+            delete_on_update:   false
+            delete_on_remove:   true
+            namer:              namer.archive_file
+            directory_namer:    namer.archive_name
 
 ivory_ck_editor:
     default_config:                     my_custom_config    # Utiliser par defaut la configuration my_custom_config

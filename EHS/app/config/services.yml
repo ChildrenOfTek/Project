@@ -13,6 +13,13 @@ services:
             - { name: namer }
     namer.dir_name:
         class: ArticleBundle\Entity\DirNamer
+
+    namer.archive_name:
+        class: AssociationBundle\Entity\ArchiveNamer
+    namer.archive_file:
+        class: AssociationBundle\Entity\ArchiveUploader
+        tags:
+            - { name: namer }
     article.twig.extension:
             class: ArticleBundle\Twig\Extension\UrlDecoder
             tags:

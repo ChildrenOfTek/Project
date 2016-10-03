@@ -87,6 +87,7 @@
                         {% if(is_granted('ROLE_ADMIN')) %}
                             <li><a href="{{ path('user_new') }}">Ajouter un utilisateur</a></li>
                             <li><a href="{{ path('user_index') }}">Acceder à l'interface admin</a></li>
+                            <li><a href="{{ path('association_archive_index') }}">Gerer les archives</a></li>
                         {% endif %}
                         {% if(is_granted('ROLE_PRESS')) %}
 

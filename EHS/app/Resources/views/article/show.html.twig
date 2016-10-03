@@ -21,7 +21,11 @@
 
             <!-- Author -->
             <p class="lead">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 par <a href="{{ path('user_showpublic',{'id':article.user.id}) }}">{{ article.user.nom }} {{ article.user.prenom }}</a>
+                {% else %}
+                    par {{ article.user.nom }} {{ article.user.prenom }}
+                {% endif %}
             </p>
 
             <hr>

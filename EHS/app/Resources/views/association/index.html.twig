@@ -64,7 +64,8 @@
                    <button class="tagbox">{{ tag.libelle}}</button>
                    {% endfor %}
                     {% for tag in article.tag%}
-                        <a class="tagbox" href="{{ path('tags_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+                        <a class="buttonlink tagbox" href="{{ path('tags_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+
                     {% endfor %}
 
                 </div>

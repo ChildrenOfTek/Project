@@ -113,7 +113,7 @@ class UserController extends Controller
 
     /**
      * Finds and displays a User entity in public mode.
-     *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/{id}/profile", name="user_showpublic")
      * @Method("GET")
      */

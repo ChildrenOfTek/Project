@@ -64,9 +64,11 @@
                       <li><a href="#">Un autre truc</a></li>
                     </ul>
                   </li>
+                  {% if (is_granted('ROLE_USER'))%}
                   <li>
                   <a href="{{ path('forum_index') }}">Forum</a>
                   </li>
+                {% endif %}
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">

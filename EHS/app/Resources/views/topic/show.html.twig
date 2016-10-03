@@ -2,36 +2,40 @@
 
 {% block section %}
 
-    <div class='table-forum table-responsive'>
-        <table class='table '>
-            <tbody>
-                    
-                    <th>
-                        <td colspan='3'><h3>{{ topic.title }}</h3></td>
-                    </th>
-                    <tr >
-                        <td rowspan='2'>{{ topic.author.prenom }} {{ topic.author.nom }}</td>
-                        <td>Le {{ topic.dateCreated|date('d/m/Y')}} à {{ topic.dateCreated|date('H:i')}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan='2'>{{ topic.content }}</td>
-                    </tr>
+    <div class='contener'>
+        <div class='panel panel-default content-forum'>
+            <table class='table '>
+                <tbody>
+                        
+                        <tr>
+                            <td class='panel-heading' colspan='3'><h3>{{ topic.title }}</h3></td>
+                        </tr>
+                        <tr >
+                            <td rowspan='2'>{{ topic.author.prenom }} {{ topic.author.nom }}</td>
+                            <td>Le {{ topic.dateCreated|date('d/m/Y')}} à {{ topic.dateCreated|date('H:i')}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan='2'>{{ topic.content }}</td>
+                        </tr>
 
-                {% for post in topic.posts %}
-                    <tr>
-                        <td rowspan='2'>{{ post.author.prenom }} {{ post.author.nom }}</td>
-                        <td>Le {{ post.dateEdit|date('d/m/Y')}} à {{ post.dateEdit|date('H:i')}}</td>
-                        {% if(is_granted('ROLE_ADMIN')) %}
-                            <td><a href="{{ path('post_edit', { 'id': post.id}) }}">Modifier</a></td>
-                        {% endif %}
-                    </tr>
-                    <tr>
-                        <td colspan='2'>{{ post.content }}</td>
-                    </tr>
-                    {% endfor %}
-            </tbody>
-        </table>
+                    {% for post in topic.posts %}
+                        <tr>
+                            <td rowspan='2'>{{ post.author.prenom }} {{ post.author.nom }}</td>
+                            <td>Le {{ post.dateEdit|date('d/m/Y')}} à {{ post.dateEdit|date('H:i')}}</td>
+                            {% if(is_granted('ROLE_ADMIN')) %}
+                                <td><a href="{{ path('post_edit', { 'id': post.id}) }}">Modifier</a></td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td colspan='2'>{{ post.content }}</td>
+                        </tr>
+                        {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
     </div>
+
     <ul>
         <li>
             <a href="{{ path('forum_show', { 'id': topic.forum.id }) }}">Retour</a>

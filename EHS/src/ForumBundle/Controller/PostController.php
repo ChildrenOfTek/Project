@@ -19,7 +19,7 @@ class PostController extends Controller
 {
     /**
      * Lists all Post entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="post_index")
      * @Method("GET")
      */
@@ -36,7 +36,7 @@ class PostController extends Controller
 
     /**
      * Creates a new Post entity.
-     * 
+     * @Security("has_role('ROLE_USER')")
      * @Route("/new", name="post_new")
      * @Method({"GET", "POST"})
      */
@@ -67,7 +67,7 @@ class PostController extends Controller
 
     /**
      * Finds and displays a Post entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="post_show")
      * @Method("GET")
      */
@@ -112,7 +112,7 @@ class PostController extends Controller
 
     /**
      * Deletes a Post entity.
-     *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/{id}", name="post_delete")
      * @Method("DELETE")
      */

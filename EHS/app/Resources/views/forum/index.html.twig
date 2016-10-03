@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>Liste des forums</h1>
 
-    <div class='index-forum'>
-        <div class="table-responsive">
+    <div class='panel'>
+        <h1>Liste des forums</h1>
+        <div class="index-forum table-responsive">
             <table class='table'>
                 <thead>
                     
@@ -32,11 +32,14 @@
                 </tbody>
             </table>
         </div>
+        {% if(is_granted('ROLE_ADMIN')) %}
+        <form method="POST" action="{{ path('forum_new') }}">
+            <input type="submit" value="Créer un nouveau sujet" >
+        </form>
+        {% endif %}
     </div>
 
-    <form method="POST" action="{{ path('forum_new') }}">
-            <input type="submit" value="Créer un nouveau sujet" >
-    </form>
+    
 
     </ul>
 {% endblock %}

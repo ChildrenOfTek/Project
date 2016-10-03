@@ -19,7 +19,7 @@ class ForumController extends Controller
 {
     /**
      * Lists all Forum entities.
-     *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/", name="forum_index")
      * @Method("GET")
      */
@@ -65,7 +65,7 @@ class ForumController extends Controller
 
     /**
      * Finds and displays a Forum entity.
-     *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/{id}", name="forum_show")
      * @Method("GET")
      */

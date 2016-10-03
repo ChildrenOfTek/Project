@@ -26,7 +26,7 @@ class ArticleTypeEdit extends AbstractType
         $builder
             ->add('user',EntityType::class, array(
                 'class'=>'UserBundle:User',
-                'property'=>'username',
+                'property'=>'nom',
                 'label'=>'Auteur'))
 
             ->add('dateArticle', DateType::class, array(

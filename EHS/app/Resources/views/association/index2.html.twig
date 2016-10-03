@@ -8,7 +8,7 @@
       <div class="row">
         <h1 class="text-center"><i class="icon-fire icon-3x"></i></h1>
         <h1 class="text-center"><strong>ENSEMBLE</strong></h1>
-        <p class="lead text-center">Reprehenderit in voluptate</p>
+        <p class="lead text-center">Ut enim ad minim veniam</p>
       </div>
       <div class="row">
           <div class="col-md-4">
@@ -39,35 +39,56 @@
 </section>
 
 <section>
-  {% for article in articles %}
+
+  <div class="container">
+
+  	<hr>
+
+
+
       <div class="row">
+        {% for article in articles %}
 
-          <div class="panel panel-default">
-           <div class="panel-heading"><a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a>
-           </div>
-             <div class="panel-body">
-               <div class="row">
-                 <div class="col-sm-4">
-                   <img class="img-responsive" src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="">
-                  </div>
-                  <div class="col-sm-8">
-                   {{ article.content | raw }}
-                  </div>
-                </div>
-                <div class="panel-body">
-                   <h4>Tags:</h4>
-                   {% for tag in article.tag %}
-                   <button class="tagbox">{{ tag.libelle}}</button>
-                   {% endfor %}
 
-                </div>
-            </div>
-          </div>
 
+
+
+
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <div class="hovereffect">
+          <img class="img-responsive" src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="">
+              <div class="overlay">
+                  <h2>{{article.titreArticle}}</h2>
+  				<p>
+  					<a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a>
+  				</p>
+              </div>
+      </div>
+  </div>
+
+
+
+
+
+
+{% endfor %}
     </div>
-  {% endfor %}
+
+  </hr></div>
+
+
+
+
+
+
+
+
+
 </section>
 
+<section>
+
+</section>
 
 <section>
   <div class="row">

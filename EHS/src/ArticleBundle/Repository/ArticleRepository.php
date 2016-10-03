@@ -14,6 +14,7 @@ class ArticleRepository extends EntityRepository
 {
   public function findOnline()
   {
-      return $this->findBy(array('online'=>true));
+      return $this->findBy(array('online'=>true),array('datePublication'=>'DESC')
+    );
   }
 }

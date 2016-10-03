@@ -57,7 +57,7 @@ class ArticleType extends AbstractType
             ->add('datePublication',DateType::class,array(
                 'data'=> new \Datetime(),
                 'widget'=>'choice',
-                'format'=>'dd-MM-yyyy',
+                'format'=>'dd-MM-yyyy HH',
                 'label'=>'Date de publication'))
 
             ->add('imageFile',VichFileType::class,

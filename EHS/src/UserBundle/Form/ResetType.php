@@ -18,10 +18,12 @@ class ResetType extends AbstractType
     {
         $builder
             ->setMethod('POST')
-            ->add('email',EmailType::class,array('label'=>'Entrez votre email :'))
+            ->add('email',EmailType::class,array(
+              'label'=>"Réinitialisation du mot de passe:",
+            'attr'=>array('placeholder'=>'Entrez votre e-mail')))
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

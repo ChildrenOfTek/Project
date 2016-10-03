@@ -1,39 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>{{ forum.libForum  }}</h1>
-    <p>{{ forum.description  }}</p>
-
-    <table class='table'>
-        <tbody>
-
-            {% for topic in forum.topics %}
-                <tr>
-                    <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
-                    <td>Publié par {{topic.author.prenom}} {{topic.author.nom}}</td>
-                    <td>Le {{ topic.dateCreated|date('d/m/Y') }} à {{ topic.dateCreated|date('H:i') }}</td>
-                    {% if(is_granted('ROLE_ADMIN')) %}
-                        <td><a href="{{ path('topic_edit', { 'id': topic.id}) }}">Modifier</a></td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
     
+    <div class="contener">
+        <div class="panel panel-default content-forum">
+            <table class='table'>
+                <tbody>
+                        <tr class='panel-heading'>
+                            <td colspan='4'><h3>{{ forum.libForum  }}</h3></td>
+                        </tr>
+                    {% for topic in forum.topics %}
+                        <tr>
+                            <td><a href="{{ path('topic_show',{ 'id': topic.id })}}">{{ topic.title }}<td>
+                            <td>Publié par {{topic.author.prenom}} {{topic.author.nom}}
+                            le {{ topic.dateCreated|date('d/m/Y') }} à {{ topic.dateCreated|date('H:i') }}</td>
+                            {% if(is_granted('ROLE_ADMIN')) %}
+                                <td><a href="{{ path('topic_edit', { 'id': topic.id}) }}">Modifier</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                        <tr>
+                            <td colspan='3'><div class='forum-footer'>
+                                    <a href="{{ path('topic_new', { 'id': forum.id }) }}" class="btn btn-default">Créer un nouveau topic</a>
+                                    <a href="{{ path('forum_index') }}" class="btn btn-default">Retour</a>
+                            </div></td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     
-
-
-    <ul>
-        <li>
-            <a href="{{ path('forum_index') }}">Retour</a>
-        </li>
-        <li>
-            <a href="{{ path('topic_new', { 'id': forum.id }) }}">Créer un nouveau topic</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

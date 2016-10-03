@@ -5,12 +5,12 @@ namespace CalendarBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Calendar
+ * Events
  *
- * @ORM\Table(name="calendar")
- * @ORM\Entity(repositoryClass="CalendarBundle\Repository\CalendarRepository")
+ * @ORM\Table(name="events")
+ * @ORM\Entity(repositoryClass="CalendarBundle\Repository\EventsRepository")
  */
-class Calendar
+class Events
 {
     /**
      * @var int
@@ -49,6 +49,8 @@ class Calendar
      */
     private $end;
 
+    private $color;
+
 
     /**
      * Get id
@@ -64,7 +66,7 @@ class Calendar
      * Set title
      *
      * @param string $title
-     * @return Calendar
+     * @return Events
      */
     public function setTitle($title)
     {
@@ -87,7 +89,7 @@ class Calendar
      * Set description
      *
      * @param string $description
-     * @return Calendar
+     * @return Events
      */
     public function setDescription($description)
     {
@@ -110,7 +112,7 @@ class Calendar
      * Set start
      *
      * @param \DateTime $start
-     * @return Calendar
+     * @return Events
      */
     public function setStart($start)
     {
@@ -133,7 +135,7 @@ class Calendar
      * Set end
      *
      * @param \DateTime $end
-     * @return Calendar
+     * @return Events
      */
     public function setEnd($end)
     {

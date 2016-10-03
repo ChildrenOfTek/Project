@@ -12,14 +12,14 @@
       <div class="row">
         <h1 class="text-center"><i class="icon-fire icon-3x"></i></h1>
         <h1 class="text-center"><strong>ENSEMBLE</strong></h1>
-        <p class="lead text-center">Disputons nous</p>
+        <p class="lead text-center">Reprehenderit in voluptate</p>
       </div>
       <div class="row">
           <div class="col-md-4">
             <div class="text-center">
               <h1>Ethique</h1>
               <p>
-              L'éthique c'est vraiment top car c'est vraiment bien et en plus c'est génial.</p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
             </div>
           </div>
@@ -27,7 +27,7 @@
             <div class="text-center">
               <h1>Handicap</h1>
               <p>
-              Le handicap c'est pas terrible parce que c'est vraiment handicapant et en plus c'est très bof.</p>
+               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
             </div>
           </div>
@@ -35,7 +35,7 @@
             <div class="text-center">
               <h1>Société</h1>
               <p>
-              La société elle à que des problèmes, la société elle à mauvaise haleine.</p>
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
 
             </div>
           </div>
@@ -45,8 +45,7 @@
 <section>
   {% for article in articles %}
       <div class="row">
-       <div class="col-md-12">
-        <div class="col-md-8 col-md-offset-2">
+
           <div class="panel panel-default">
            <div class="panel-heading"><a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a>
            </div>
@@ -66,7 +65,10 @@
                   </div>
                 </div>
                 <div class="panel-body">
-                   <h4>Tags:</h4>{% for tag in article.tag%}
+
+                   <h4>Tags:</h4>
+                   {% for tag in article.tag %}
+                   
                    <button class="tagbox">{{ tag.libelle}}</button>
                    {% endfor %}
                     {% for tag in article.tag%}
@@ -77,30 +79,11 @@
                 </div>
             </div>
           </div>
-        </div>
-      </div>
+
     </div>
   {% endfor %}
 </section>
 
-<section>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="col-md-4">
-        <h2>Build</h2>
-          Bootply is a playground for Twitter Bootstrap.
-        </div>
-        <div class="col-md-4">
-        <h2>Design</h2>
-          Use Bootply to design, prototype, extend the Bootstrap framework.
-        </div>
-        <div class="col-md-4">
-        <h2>Test</h2>
-          Use Bootply to test and debug Bootstrap designs.
-        </div>
-      </div>
-      </div>
-</section>
 
 <section>
   <div class="row">

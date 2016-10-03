@@ -55,7 +55,9 @@
             <th>Tags</th>
             <td><!--Affichage des tags de l'article -->
                 {% for tag in article.tag %}
-                {{ tag.libelle }}
+
+                <button class="tagbox">{{ tag.libelle}}</button>
+              
                 {% endfor  %}
             </td>
 

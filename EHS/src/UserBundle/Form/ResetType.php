@@ -25,9 +25,10 @@ class ResetType extends AbstractType
                 'reload'=>true,
                 'as_url'=>true
             ));
+
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

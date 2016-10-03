@@ -13,11 +13,12 @@
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }} "/>
         <link rel="icon" type="image/png" href="{{ asset('favicon.ico') }}" />
+        <link type="text/css" rel="stylesheet" media="all" href="{{ asset('public/CSS/style2.css') }}" id="theme_css" />
 
         {% block stylesheets %}
 <!--{{ dump(app.user) }}-->
         {% endblock %}
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
       <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Retourner en haut de la page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
@@ -38,7 +39,7 @@
                 </button>
                 <a id="brand" class="navbar-brand" href="#">
 
-                  <img src="{{ asset('public/img/EHS.png') }}" alt="" />
+                  <img src="{{ asset('public/img/EHS2.png') }}" alt="" />
                 </a>
               </div>
 
@@ -78,9 +79,12 @@
                 <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace Personnel <span class="caret"></span></a>
+
                     <ul class="dropdown-menu">
+
                       <li>
                         <div class="login">
+
                             {% block login %}
 
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -101,13 +105,16 @@
 
                         {% endif %}
                         {% endblock %}
+
                         </div>
                         </li>
                     </ul>
                   </li>
                 </ul>
-              </div><!-- /.navbar-collapse -->
+              </div>
+            <!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
+
           </nav>
         </div>
         {% endblock %}
@@ -141,6 +148,7 @@
         <script type="text/javascript" src="{{ asset('public/script/parallax.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/script/navbarplus.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/script/backtotop.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/script/theming.js') }}"></script>
         {% block javascripts %}
         {% endblock %}
     </body>

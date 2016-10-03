@@ -4,15 +4,17 @@
     Reinitialisation
 {% endblock %}
 
-{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-
 {% block section %}
-    <h1>Entrez votre adresse mail pour reinitialiser votre mot de passe: </h1>
-
-    {{ form_start(form) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.captcha) }}
-    <input type="submit" value="Envoyer" />
-    {{ form_end(form) }}
-
+    <div class="bg"></div>
+                  <div class="login-page">
+                    <div class="form">
+                      <form class="login-form">
+                        {{ form_start(form) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.captcha) }}
+                        <input type="submit" value="Envoyer" />
+                        {{ form_end(form) }}
+                      </form>
+                    </div>
+                  </div>
 {% endblock %}

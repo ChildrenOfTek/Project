@@ -7,15 +7,17 @@
             <table class='table '>
                 <tbody>
                         
-                        <tr>
-                            <td class='panel-heading' colspan='3'><h3>{{ topic.title }}</h3></td>
+                        <tr class='panel-heading'>
+                            <td colspan='3'><p><h3>{{ topic.title }}</h3></td>
+                                </span></a>
+                            </td>
                         </tr>
                         <tr >
                             <td rowspan='2'>{{ topic.author.prenom }} {{ topic.author.nom }}</td>
                             <td>Le {{ topic.dateCreated|date('d/m/Y')}} à {{ topic.dateCreated|date('H:i')}}</td>
                         </tr>
                         <tr>
-                            <td colspan='2'>{{ topic.content }}</td>
+                            <td colspan='3'>{{ topic.content }}</td>
                         </tr>
 
                     {% for post in topic.posts %}
@@ -27,30 +29,20 @@
                             {% endif %}
                         </tr>
                         <tr>
-                            <td colspan='2'>{{ post.content }}</td>
+                            <td colspan='3'>{{ post.content }}</td>
                         </tr>
                         {% endfor %}
+                        <tr>
+                            <td colspan="2">
+                                <div class='commenter'>
+                                    <a href="{{ path('post_new', { 'id': topic.id }) }}" class="btn btn-default">Commenter</a>
+                                    <a href="{{ path('forum_show', { 'id': topic.forum.id }) }}" class="btn btn-default">Retour</a>
+                                </div></td>
+                        </tr>
 
                 </tbody>
             </table>
         </div>
     </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('forum_show', { 'id': topic.forum.id }) }}">Retour</a>
-        </li>
-        <li>
-            <a href="{{ path('post_new', { 'id': topic.id }) }}">Commenter</a>
-        </li>
-        
-        
-    </ul>
-
-
-
-
-
-
-    
 {% endblock %}

@@ -1,4 +1,4 @@
 services:
 #    calendar.example:
-#        class: CalendarBundle\Example
+#        class: EventsBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]

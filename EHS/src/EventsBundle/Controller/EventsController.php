@@ -1,13 +1,13 @@
 <?php
 
-namespace CalendarBundle\Controller;
+namespace EventsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use CalendarBundle\Entity\Events;
-use CalendarBundle\Form\EventsType;
+use EventsBundle\Entity\Events;
+use EventsBundle\Form\EventsType;
 
 /**
  * Events controller.
@@ -26,7 +26,7 @@ class EventsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('CalendarBundle:Events')->findAll();
+        $events = $em->getRepository('EventsBundle:Events')->findAll();
 
         return $this->render('events/index.html.twig', array(
             'events' => $events,
@@ -42,7 +42,7 @@ class EventsController extends Controller
     public function newAction(Request $request)
     {
         $event = new Events();
-        $form = $this->createForm('CalendarBundle\Form\EventsType', $event);
+        $form = $this->createForm('EventsBundle\Form\EventsType', $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +84,7 @@ class EventsController extends Controller
     public function editAction(Request $request, Events $event)
     {
         $deleteForm = $this->createDeleteForm($event);
-        $editForm = $this->createForm('CalendarBundle\Form\EventsType', $event);
+        $editForm = $this->createForm('EventsBundle\Form\EventsType', $event);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

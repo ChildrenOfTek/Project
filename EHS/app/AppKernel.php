@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new AssociationBundle\AssociationBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-            new CalendarBundle\CalendarBundle(),
+            new EventsBundle\EventsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

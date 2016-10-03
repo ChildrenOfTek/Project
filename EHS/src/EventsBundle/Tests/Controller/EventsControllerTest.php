@@ -1,6 +1,6 @@
 <?php
 
-namespace CalendarBundle\Tests\Controller;
+namespace EventsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

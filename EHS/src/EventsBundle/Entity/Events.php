@@ -1,6 +1,6 @@
 <?php
 
-namespace CalendarBundle\Entity;
+namespace EventsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Events
  *
  * @ORM\Table(name="events")
- * @ORM\Entity(repositoryClass="CalendarBundle\Repository\EventsRepository")
+ * @ORM\Entity(repositoryClass="EventsBundle\Repository\EventsRepository")
  */
 class Events
 {

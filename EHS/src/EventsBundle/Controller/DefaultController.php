@@ -1,6 +1,6 @@
 <?php
 
-namespace CalendarBundle\Controller;
+namespace EventsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

@@ -1,5 +1,5 @@
-calendar:
-    resource: "@CalendarBundle/Controller/"
+events:
+    resource: "@EventsBundle/Controller/"
     type:     annotation
     prefix:   /
 

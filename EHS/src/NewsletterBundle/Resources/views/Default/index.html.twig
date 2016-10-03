@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>Newsletter list</h1>
+    <h1>newsletter - liste</h1>
 
     <table>
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Date</th>
                 <th>Sujet</th>
                 <th>Texte</th>
@@ -22,13 +21,13 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('newsletter_send', { 'id': newsletter.id }) }}">send</a>
+                            <a href="{{ path('newsletter_send', { 'id': newsletter.id }) }}">envoyer</a>
                         </li>
                         <li>
-                            <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">edit</a>
+                            <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">éditer</a>
                         </li>
                         <li>
-                            <a href="{{ path('newsletter_delete', { 'id': newsletter.id }) }}">delete</a>
+                            <a href="{{ path('newsletter_delete', { 'id': newsletter.id }) }}">supprimer</a>
                         </li>
                     </ul>
                 </td>
@@ -39,7 +38,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('newsletter_new') }}">Create a new entry</a>
+            <a href="{{ path('newsletter_new') }}">créer une nouvelle newsletter</a>
         </li>
     </ul>
 {% endblock %}

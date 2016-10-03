@@ -1,14 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>Newsletter</h1>
+    <h1>newsletter - affichage</h1>
 
     <table>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ newsletter.id }}</td>
-            </tr>
             <tr>
                 <th>Date</th>
                 <td>{% if newsletter.date %}{{ newsletter.date|date('d-m-Y') }}{% endif %}</td>
@@ -26,16 +22,16 @@
 
     <ul>
         <li>
-            <a href="{{ path('newsletter_send', { 'id': newsletter.id }) }}">Send</a>
+            <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">éditer</a>
         </li>
         <li>
-            <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">Edit</a>
+            <a href="{{ path('newsletter_send', { 'id': newsletter.id }) }}">envoyer</a>
         </li>
         <li>
-            <a href="{{ path('newsletter_delete', { 'id': newsletter.id }) }}">Delete</a>
+            <a href="{{ path('newsletter_delete', { 'id': newsletter.id }) }}">supprimer</a>
         </li>
         <li>
-            <a href="{{ path('newsletter_index') }}">Back to the list</a>
+            <a href="{{ path('newsletter_index') }}">retour à la liste</a>
         </li>
     </ul>
 {% endblock %}

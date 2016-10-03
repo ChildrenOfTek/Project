@@ -43,10 +43,13 @@ class ArchiveController extends Controller
     {
         $archive = new Archive();
         $form = $this->createForm('AssociationBundle\Form\ArchiveType', $archive);
+        $form->remove('dateCreation');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $date= new \DateTime();
+            $archive->setDateCreation($date);
             $em->persist($archive);
             $em->flush();
 

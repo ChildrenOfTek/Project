@@ -1,3 +1,8 @@
+sondage:
+    resource: "@SondageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 association:
     resource: "@AssociationBundle/Controller/"
     type:     annotation

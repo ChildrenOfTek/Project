@@ -33,7 +33,7 @@ class Topic
     /**
      * @var text
      *
-     * @ORM\Column(name="content", type="text", length=10000)
+     * @ORM\Column(name="content", type="text", length=5000)
      */
     private $content;
 

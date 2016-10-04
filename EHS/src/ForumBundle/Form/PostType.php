@@ -17,7 +17,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('content','ckeditor',array(
-              'attr'=>array('rows'=>15),
+              'attr'=>array('rows'=>5),
               'label'=>'Contenu du commentaire'))
 
         ;

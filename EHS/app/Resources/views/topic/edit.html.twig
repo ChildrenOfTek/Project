@@ -5,16 +5,22 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Modification et suppression du topic</h1>
+<div class='contener'>
+  <div class="panel panel-default edit-forum">
+    <div class="panel-heading">
+      <h3>Modification et suppression du topic</h3>
+    </div>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Modifier" />
+    {{ form_widget(edit_form) }}
+        <input type="submit" value="Modifier" class="btn btn-default"/>
     {{ form_end(edit_form) }}
     {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
+        <input type="submit" value="Supprimer" class="btn btn-default">
+    {{ form_end(delete_form) }}
 
-            <a href="{{ path('forum_show', { 'id': topic.forum.id }) }}">Retour</a>
-
+    <a href="{{ path('forum_show', { 'id': topic.forum.id }) }}"
+    class="btn btn-default">Retour</a>
+  </div>
+</div>
 {% endblock %}

@@ -8,18 +8,13 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="jumbotron">
-                <h1>Page contact</h1>
+                <h1>Nous contacter</h1>
 
                 <form action="{{ path('contact') }}" method="post">
 
                     {{ form_label(formContact.email) }}
                     {{ form_widget(formContact.email) }}
                     {{ form_errors(formContact.email) }}
-                    <br/>
-
-                    {{ form_label(formContact.username) }}
-                    {{ form_widget(formContact.username) }}
-                    {{ form_errors(formContact.username) }}
                     <br/>
 
                     {{ form_label(formContact.sujet) }}

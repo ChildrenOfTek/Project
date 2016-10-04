@@ -91,17 +91,20 @@ class ArchiveController extends Controller
     {
         $deleteForm = $this->createDeleteForm($archive);
         $editForm = $this->createForm('AssociationBundle\Form\ArchiveType', $archive);
+        $editForm->remove('dateCreation');
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $data=$editForm->getData();
+            $archive->setUpdatedAt(new \DateTime());
             $em->persist($archive);
             $em->flush();
 
             $this->addFlash('success',
                 'L\'archive a bien été mise à jour !');
 
-            return $this->redirectToRoute('association_archive_edit', array('id' => $archive->getId()));
+            return $this->redirectToRoute('association_archive_index', array('id' => $archive->getId()));
         }
 
         return $this->render('archive/edit.html.twig', array(

@@ -73,6 +73,9 @@
                   <li>
                   <a href="{{ path('forum_index') }}">Forum</a>
                   </li>
+                      <li>
+                          <a href="{{ path('contact') }}">Nous contacter</a>
+                      </li>
                 {% endif %}
                 </ul>
 
@@ -89,11 +92,11 @@
 
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li><a href="{{ path('user_showpublic',{"id":app.user.id}) }}">Mon profil</a></li>
-                        <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
                         {% if(is_granted('ROLE_ADMIN')) %}
                             <li><a href="{{ path('user_new') }}">Ajouter un utilisateur</a></li>
                             <li><a href="{{ path('user_index') }}">Acceder à l'interface admin</a></li>
                             <li><a href="{{ path('association_archive_index') }}">Gerer les archives</a></li>
+                            <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
                         {% endif %}
                         {% if(is_granted('ROLE_PRESS')) %}
 

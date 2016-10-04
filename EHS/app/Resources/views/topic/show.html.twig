@@ -10,7 +10,7 @@
         <div class='panel panel-default content-forum'>
             <table class='table '>
                 <tbody>
-                        
+
                         <tr class='panel-heading'>
                             <td colspan='3'><p><h3>{{ topic.title }}</h3></td>
                                 </span></a>
@@ -21,7 +21,7 @@
                             <td>Le {{ topic.dateCreated|date('d/m/Y')}} à {{ topic.dateCreated|date('H:i')}}</td>
                         </tr>
                         <tr>
-                            <td colspan='3'>{{ topic.content }}</td>
+                            <td colspan='3'>{{ topic.content|raw }}</td>
                         </tr>
 
                     {% for post in topic.posts %}
@@ -33,7 +33,7 @@
                             {% endif %}
                         </tr>
                         <tr>
-                            <td colspan='3'>{{ post.content }}</td>
+                            <td colspan='3'>{{ post.content|raw }}</td>
                         </tr>
                         {% endfor %}
                         <tr>

@@ -16,11 +16,13 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content','text',array('label'=>'Contenu'))
-            
+            ->add('content','ckeditor',array(
+              'attr'=>array('rows'=>15),
+              'label'=>'Contenu du commentaire'))
+
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

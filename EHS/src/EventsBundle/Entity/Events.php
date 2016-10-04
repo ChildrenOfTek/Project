@@ -3,6 +3,7 @@
 namespace EventsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Events
@@ -49,13 +50,29 @@ class Events
      */
     private $end;
 
-    private $color;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="places", type="integer")
+     */
+    private $places;
+
+    /**
+     * 
+     *
+     * 
+     * @ORM\Column(name="registrations", nullable = true)
+     * @ORM\OneToMany(targetEntity="Registration", mappedBy="events",cascade={"persist"})
+     *
+     */
+    private $registrations;
 
     // Permet l'affichage par défaut de la date actuelle dans le formulaire de création
     public function __construct()
     {
         $this->start = new \DateTime();
         $this->end = new \DateTime();
+        $this->registrations = new ArrayCollection();
     }
 
     /**
@@ -158,5 +175,51 @@ class Events
     public function getEnd()
     {
         return $this->end;
+    }
+
+    /**
+     * Set registrations
+     *
+     * @param integer $registrations
+     * @return Events
+     */
+    public function setRegistrations($registrations)
+    {
+        $this->registrations = $registrations;
+
+        return $this;
+    }
+
+    /**
+     * Get registrations
+     *
+     * @return integer 
+     */
+    public function getRegistrations()
+    {
+        return $this->registrations;
+    }
+
+    /**
+     * Set places
+     *
+     * @param integer $places
+     * @return Events
+     */
+    public function setPlaces($places)
+    {
+        $this->places = $places;
+
+        return $this;
+    }
+
+    /**
+     * Get places
+     *
+     * @return integer 
+     */
+    public function getPlaces()
+    {
+        return $this->places;
     }
 }

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EventsType extends AbstractType
+class RegistrationType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,10 @@ class EventsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
-            ->add('start', 'datetime')
-            ->add('end', 'datetime')
-            ->add('places', 'integer')
+            ->add('prenom')
+            ->add('nom')
+            ->add('email')
+            ->add('telephone')
         ;
     }
     
@@ -29,7 +28,7 @@ class EventsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'EventsBundle\Entity\Events'
+            'data_class' => 'EventsBundle\Entity\Registration'
         ));
     }
 }

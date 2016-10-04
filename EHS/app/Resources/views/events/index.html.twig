@@ -1,9 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link href="{{ asset('bundles/events/css/events.css') }}" type="text/css" rel="stylesheet" />
-{% endblock %}
-
 {% block section %}
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
@@ -16,15 +12,19 @@
         <div class="event_block">
             <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
             <div class="date">
-                <h4>{% if event.start %}{{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL à HH:mm") }}{% endif %}</h4>
+                <h4>
+                {% if event.start %}{{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL à HH:mm") }}{% endif %}
+                </h4>
             </div>
-            {{ event.description }}
+            {{ event.description }}<br/>
+            {{ event.places }}
+            {{dump(event)}}
+            <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
         </div>
     {% endfor %}
 
     <hr>
     <a href="{{ path('events_new') }}">Créer un événement</a>
-
 </div>
 
 {% endblock %}

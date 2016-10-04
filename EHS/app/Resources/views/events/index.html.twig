@@ -14,23 +14,17 @@
 
     {% for event in events %}
         <div class="event_block">
-        <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
-        <h4>{% if event.start %}{{ event.start|date('d/m/Y H:i:s') }}{% endif %}
-
-        {# {% if event.end %}
-            {% if event.start|date('d/m/Y') != event.end|date('d/m/Y') %}
-                {{ event.end|date('> d/m/Y H:i:s') }}
-            {% else %}
-                {{ event.end|date('> H:i:s') }}
-            {% endif %}
-        {% endif %} #}
-
-        </h4>
-        {{ event.description }}
+            <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
+            <div class="date">
+                <h4>{% if event.start %}{{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL à HH:mm") }}{% endif %}</h4>
+            </div>
+            {{ event.description }}
         </div>
     {% endfor %}
 
     <hr>
     <a href="{{ path('events_new') }}">Créer un événement</a>
+
+</div>
 
 {% endblock %}

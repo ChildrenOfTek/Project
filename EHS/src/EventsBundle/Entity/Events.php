@@ -51,6 +51,12 @@ class Events
 
     private $color;
 
+    // Permet l'affichage par défaut de la date actuelle dans le formulaire de création
+    public function __construct()
+    {
+        $this->start = new \DateTime();
+        $this->end = new \DateTime();
+    }
 
     /**
      * Get id

@@ -11,58 +11,26 @@
         <div class="panel-heading">Liste des événements</div>
         <div class="panel-body">
 <div class="container">
-    <table class="table table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for event in events %}
-            <tr>
-                <td><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.id }}</a></td>
-                <td>{{ event.title }}</td>
-                <td>{{ event.description }}</td>
-                <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if event.end %}{{ event.end|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('events_show', { 'id': event.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('events_edit', { 'id': event.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <ul>
-        <li>
-            <a href="{{ path('events_new') }}">Create a new entry</a>
-        </li>
-    </ul>
 
     {% for event in events %}
         <div class="event_block">
-        <h1>{{ event.title }}</h1>
-        <h4>{% if event.start %}{{ event.start|date('d-m-Y H:i:s') }}{% endif %}
-        {% if event.end %}
-            {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
-                {{ event.end|date('> d-m-Y H:i:s') }}
+        <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
+        <h4>{% if event.start %}{{ event.start|date('d/m/Y H:i:s') }}{% endif %}
+
+        {# {% if event.end %}
+            {% if event.start|date('d/m/Y') != event.end|date('d/m/Y') %}
+                {{ event.end|date('> d/m/Y H:i:s') }}
             {% else %}
                 {{ event.end|date('> H:i:s') }}
             {% endif %}
-        {% endif %}</h4>
-        <br/>{{ event.description }}
+        {% endif %} #}
+
+        </h4>
+        {{ event.description }}
         </div>
     {% endfor %}
+
+    <hr>
+    <a href="{{ path('events_new') }}">Créer un événement</a>
 
 {% endblock %}

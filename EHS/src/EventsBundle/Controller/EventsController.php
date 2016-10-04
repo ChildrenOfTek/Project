@@ -26,7 +26,7 @@ class EventsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('EventsBundle:Events')->findAll();
+        $events = $em->getRepository('EventsBundle:Events')->findBy(array(), array('start' => 'ASC'));
 
         return $this->render('events/index.html.twig', array(
             'events' => $events,

@@ -38,7 +38,7 @@
                 <td>{{ article.datePublication | date('d-m-Y H:i:s') }}</td>
 
                 {% if not article.imageName %}
-                    <td><img class="img-responsive" src="{{ asset('/public/img/article/handicap.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
+                    <td><img class="img-responsive" src="{{ asset('/public/img/article/default.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
                 {% else %}
                     <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
                 {% endif %}

@@ -5,16 +5,18 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Création de forum</h1>
+<div class='contener'>
+  <div class="panel panel-default edit-forum">
+    <div class="panel-heading">
+      <h3>Création de forum</h3>
+    </div>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Créer" />
+        <input type="submit" value="Créer" class="btn btn-default"/>
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('forum_index') }}">Retour</a>
-        </li>
-    </ul>
+    <a href="{{ path('forum_index') }}" class="btn btn-default">Retour</a>
+  </div>
+</div>
 {% endblock %}

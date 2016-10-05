@@ -5,16 +5,16 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Création de Topic</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Créer" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="javascript:history.go(-1)">Annuler</a>
-        </li>
-    </ul>
+<div class='contener'>
+  <div class="panel panel-default edit-forum">
+    <div class="panel-heading">
+        <h3>Création de Topic</h3>
+    </div>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit" value="Créer" class="btn btn-default"/>
+        {{ form_end(form) }}
+        <a href="javascript:history.go(-1)" class="btn btn-default">Annuler</a>
+    </div>
+  </div>
 {% endblock %}

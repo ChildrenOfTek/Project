@@ -17,12 +17,10 @@ class TopicType extends AbstractType
     {
         $builder
             ->add('title','text',array('label'=>'Titre'))
-            ->add('content','text',array('label'=>'Contenu'))
-            /*->add('forum', EntityType::class, array(
-              'class'=>'ForumBundle:Forum',
-              'property'=>'libForum',
-              'label'=>'Sujet'
-            ))*/
+            ->add('content','ckeditor',array(
+              'attr'=>array('row'=>15),
+              'label'=>'Contenu du topic'))
+
         ;
     }
 

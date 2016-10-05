@@ -5,6 +5,7 @@ namespace ForumBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ForumType extends AbstractType
 {
@@ -15,8 +16,10 @@ class ForumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libForum','text',array('label'=>'Intitulé du forum'))
-            ->add('description')
+            ->add('libForum','text',array('label'=>'Intitulé du sujet'))
+            ->add('description','ckeditor',array(
+                'attr'=>array('rows'=>5),
+                'label'=>'Description du sujet'))
         ;
     }
     

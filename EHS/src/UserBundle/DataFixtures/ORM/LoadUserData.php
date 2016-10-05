@@ -37,7 +37,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userAdmin->setNom('Guillossou');
         $userAdmin->setPrenom('Michelle');
         $userAdmin->setAdresse('test');
-        $userAdmin->setCp('test');
+        $userAdmin->setCp('44000');
         $userAdmin->setVille('test');
         $userAdmin->setTelephone('0123456789');
         $userAdmin->setEmail('vincent.lene.dl@gmail.com');
@@ -54,7 +54,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userUser->setNom('user');
         $userUser->setPrenom('user');
         $userUser->setAdresse('user');
-        $userUser->setCp('user');
+        $userUser->setCp('44000');
         $userUser->setVille('user');
         $userUser->setTelephone('0123456789');
         $userUser->setEmail('test@test.fr');

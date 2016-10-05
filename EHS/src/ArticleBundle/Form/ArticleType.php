@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -46,18 +47,14 @@ class ArticleType extends AbstractType
             ->add('titreArticle',TextType::class,array(
                 'label'=>'Titre de l\'article'))
 
-            //->add('content',TextareaType::class,array(
-            //    'attr'=>array('rows'=>15),
-            //    'label'=>'Contenu de l\'article'))
-
                 ->add('content','ckeditor',array(
                     'attr'=>array('rows'=>15),
                     'label'=>'Contenu de l\'article'))
 
             ->add('datePublication',DateType::class,array(
-                'data'=> new \Datetime(),
+                'data'=> new \Datetime('now'),
                 'widget'=>'choice',
-                'format'=>'dd-MM-yyyy',
+                'format'=>'dd-MM-yyyy HH',
                 'label'=>'Date de publication'))
 
             ->add('imageFile',VichFileType::class,

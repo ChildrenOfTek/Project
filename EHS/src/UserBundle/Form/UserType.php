@@ -33,15 +33,15 @@ class UserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
-            ->add('cp',TextType::class,array('attr'=> array('minlength'=>'4','maxlength'=>'5')))s
+            ->add('cp',TextType::class,array('label'=>'Code Postal'),array('attr'=> array('minlength'=>'4','maxlength'=>'5')))
             ->add('ville')
-            ->add('telephone',TextType::class,array('attr'=> array('maxlength'=>'10')))
+            ->add('telephone',TextType::class,array('label'=>'Téléphone'),array('attr'=> array('maxlength'=>'10')))
             ->add('email',EmailType::class)
             ->add('newsletter')
             ->add('birthDate', BirthdayType::class,array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

@@ -80,13 +80,22 @@ vich_uploader:
     mappings:
         article_image:
             uri_prefix:         /article
-            upload_destination: %kernel.root_dir%/../web/public/img/Articles
+            upload_destination: %kernel.root_dir%/../web/public/img/article
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer:              namer.media_file
+            directory_namer:    namer.dir_name
+        archive_fichier:
+            uri_prefix:         /archives
+            upload_destination: %kernel.root_dir%/../archives
 
             inject_on_load:     false
             delete_on_update:   false
             delete_on_remove:   true
-            namer:              namer.media_file
-            directory_namer:    namer.dir_name
+            namer:              namer.archive_file
+            directory_namer:    namer.archive_name
 
 ivory_ck_editor:
     default_config:                     my_custom_config    # Utiliser par defaut la configuration my_custom_config
@@ -106,3 +115,5 @@ ivory_ck_editor:
             - { name: "Alerte Warning", element: "div",  attributes: { class: "alert alert-warning", role: "alert" }}
             - { name: "Alerte Danger", element: "div",  attributes: { class: "alert alert-danger", role: "alert" }}
             - { name: "Badge", element: "span",  attributes: { class: "badge" }}
+
+gregwar_captcha: ~

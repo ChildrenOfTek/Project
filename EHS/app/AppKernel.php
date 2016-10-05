@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new AssociationBundle\AssociationBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new EventsBundle\EventsBundle(),
         );
 

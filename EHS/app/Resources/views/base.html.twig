@@ -10,10 +10,15 @@
         <link href="{{ asset('public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }} "/>
+        <link rel="icon" type="image/png" href="{{ asset('favicon.ico') }}" />
+        <link type="text/css" rel="stylesheet" media="all" href="{{ asset('public/CSS/style2.css') }}" id="theme_css" />
+
         {% block stylesheets %}
 <!--{{ dump(app.user) }}-->
         {% endblock %}
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
       <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Retourner en haut de la page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
@@ -34,7 +39,7 @@
                 </button>
                 <a id="brand" class="navbar-brand" href="#">
 
-                  <img src="{{ asset('public/img/EHS.png') }}" alt="" />
+                  <img src="{{ asset('public/img/EHS2.png') }}" alt="" />
                 </a>
               </div>
 
@@ -63,42 +68,58 @@
                       <li role="separator" class="divider"></li>
                       <li><a href="#">Un autre truc</a></li>
                     </ul>
+                  </li>
+                  {% if (is_granted('ROLE_USER'))%}
                   </li> -->
                   <li class="inactive"><a href="{{ path('events_index') }}">Événements</a></li>
                   <li>
                   <a href="{{ path('forum_index') }}">Forum</a>
                   </li>
+                      <li>
+                          <a href="{{ path('contact') }}">Nous contacter</a>
+                      </li>
+                {% endif %}
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace Personnel <span class="caret"></span></a>
+
                     <ul class="dropdown-menu">
+
                       <li>
                         <div class="login">
-                           {% block login %}
 
-                              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                              <li><a href="#">{{ app.user.username }}</a></li>
-                              <li><a href="{{ path("user_security_logout") }}">Se déconnecter</a></li>
-                              {% else %}
-                              <li><a href="{{ path("login") }}">Se connecter</a></li>
-                              {% if(is_granted('ROLE_ADMIN')) %}
-                              <ul>
-                                 <li><a href="#">Acceder à l'interface admin</a></li>
-                              </ul>
-                              {% endif %}
-                              {% if(is_granted('ROLE_PRESS')) %}
-                              {% endif %}
-                           {% endif %}
-                           {% endblock %}
+                            {% block login %}
+
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('user_showpublic',{"id":app.user.id}) }}">Mon profil</a></li>
+                        {% if(is_granted('ROLE_ADMIN')) %}
+                            <li><a href="{{ path('user_new') }}">Ajouter un utilisateur</a></li>
+                            <li><a href="{{ path('user_index') }}">Acceder à l'interface admin</a></li>
+                            <li><a href="{{ path('association_archive_index') }}">Gerer les archives</a></li>
+                            <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
+                        {% endif %}
+                        {% if(is_granted('ROLE_PRESS')) %}
+
+                        {% endif %}
+
+                        {% else %}
+                            <li><a href="{{ path("login") }}">Se connecter</a></li>
+                            <li><a href="{{ path("forgot_password") }}">Mot de passe oublie?</a></li>
+
+                        {% endif %}
+                        {% endblock %}
+
                         </div>
                         </li>
                     </ul>
                   </li>
                 </ul>
-              </div><!-- /.navbar-collapse -->
+              </div>
+            <!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
+
           </nav>
         </div>
         {% endblock %}
@@ -132,6 +153,7 @@
         <script type="text/javascript" src="{{ asset('public/script/parallax.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/script/navbarplus.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/script/backtotop.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/script/theming.js') }}"></script>
         {% block javascripts %}
         {% endblock %}
     </body>

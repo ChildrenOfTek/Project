@@ -1,40 +1,51 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Forum
+{% endblock %}
+
 {% block section %}
-    <h1>Liste des forums</h1>
 
-    <table class='table'>
-        <thead>
-            
-            <tr>
+    <div class='contener'>
+            <div class="panel panel-default content-forum">
+                <table class='table'>
+                    <thead>
+                        <tr class='panel-heading'>
+                            <td colspan="3"><h3>Liste des forums</h3></td>
+                        </tr>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            {% if(is_granted('ROLE_ADMIN')) %}
+                                <th>Actions</th>
+                            {% endif %}
+                        </tr>
 
-                <th>Nom</th>
-                <th>Description</th>
-                {% for forum in forums %}
-                    {% if(is_granted('ROLE_ADMIN')) %}
-                        <th>Actions</th>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for forum in forums %}
-            <tr>
+                    </thead>
+                    <tbody>
+                        {% for forum in forums %}
+                        <tr>
 
-                <td><a href="{{ path('forum_show',{ 'id': forum.id })}}">{{ forum.libForum }}</td>
-                <td>{{ forum.description }}</td>
-                {% if(is_granted('ROLE_ADMIN')) %}
-                    <td><a href="{{ path('forum_edit', { 'id': forum.id }) }}">Modifier</a></td>
-                {% endif %}
+                            <td><a href="{{ path('forum_show',{ 'id': forum.id })}}">
+                                {{ forum.libForum }}</a></td>
+                            <td>{{ forum.description }}</td>
+                            {% if(is_granted('ROLE_ADMIN')) %}
+                                <td><a href="{{ path('forum_edit', { 'id': forum.id }) }}">Modifier</a></td>
+                            {% endif %}
 
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        </tr>
+                    {% endfor %}
+                        <tr>
+                            {% if(is_granted('ROLE_ADMIN')) %}
+                            <td><form method="POST" action="{{ path('forum_new') }}">
+                            <button class="btn btn-default" type="submit" value="Créer un nouveau sujet">
+                            Créer un nouveau sujet</button>
+                            </form>
+                            {% endif %}
+                        </div></tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
 
-    <form method="POST" action="{{ path('forum_new') }}">
-            <input type="submit" value="Créer un nouveau sujet" >
-    </form>
-
-    </ul>
 {% endblock %}

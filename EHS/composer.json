@@ -19,6 +19,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "vich/uploader-bundle": "^0.14.0",
         "egeloen/ckeditor-bundle": "^4.0",
+        "gregwar/captcha-bundle": "^2.0",
         "twig/extensions": "^1.4"
     },
     "require-dev": {

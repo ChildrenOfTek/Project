@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">Liste des événements</div>
+        <div class="panel-body">
+<div class="container">
+
+    {% for event in events %}
+        <div class="event_block">
+            <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
+            <div class="date">
+                <h4>
+                {% if event.start %}{{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL à HH:mm") }}{% endif %}
+                </h4>
+            </div>
+            {{ event.description }}<br/>
+            {% if is_granted('ROLE_ADMIN') %}
+            {% for registration in event.registrations %}
+                {{ registration.email }}</br>
+            {% endfor %}
+            {% endif %}
+            {% if event.registrations|length < event.places %}
+            <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
+            {% else %}
+            <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    {% if(is_granted('ROLE_ADMIN')) %}
+        <hr>
+        <a href="{{ path('events_new') }}">Créer un événement</a>
+    {% endif %}
+</div>
+
+{% endblock %}

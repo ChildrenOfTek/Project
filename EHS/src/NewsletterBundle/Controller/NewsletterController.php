@@ -38,12 +38,10 @@ class NewsletterController extends Controller
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request) {
-        $newsletter = new Newsletter();
-        $form = $this->createForm('NewsletterBundle\Form\NewsletterType', $newsletter);
-        $form->handleRequest($request);
-
         $em = $this->getDoctrine()->getManager();
-        $articles = $em->getRepository('ArticleBundle:Article')->findNewArticles();
+        $newsletter = new Newsletter();
+        $form = $this->createForm(new NewsletterType($em), $newsletter);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -55,7 +53,6 @@ class NewsletterController extends Controller
 
         return $this->render('NewsletterBundle:Default:new.html.twig', array(
             'newsletter' => $newsletter,
-            'articles' => $articles,
             'form' => $form->createView(),
         ));
     }
@@ -66,8 +63,7 @@ class NewsletterController extends Controller
      * @Route("/{id}", name="newsletter_show")
      * @Method("GET")
      */
-    public function showAction(Newsletter $newsletter)
-    {
+    public function showAction(Newsletter $newsletter) {
         $deleteForm = $this->createDeleteForm($newsletter);
 
         return $this->render('NewsletterBundle:Default:show.html.twig', array(
@@ -81,10 +77,10 @@ class NewsletterController extends Controller
      * @Route("/edit/{id}", name="newsletter_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Newsletter $newsletter)
-    {
+    public function editAction(Request $request, Newsletter $newsletter)  {
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($newsletter);
-        $editForm = $this->createForm('NewsletterBundle\Form\NewsletterType', $newsletter);
+        $editForm = $this->createForm(new NewsletterTypeEdit($em), $newsletter);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

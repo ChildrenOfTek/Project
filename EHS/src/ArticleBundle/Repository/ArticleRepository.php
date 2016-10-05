@@ -15,8 +15,8 @@ class ArticleRepository extends EntityRepository {
 
     public function findNewArticles() {
         return $this->createQueryBuilder('a')
-            ->where('a.newsletter IS NULL')
-            ->andWhere('a.online = :status')
+            //->where('a.newsletter IS NULL')
+            ->where('a.online = :status')
             ->setParameter('status', '1')
             ->getQuery()
             ->getResult();

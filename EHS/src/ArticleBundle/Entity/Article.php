@@ -91,12 +91,12 @@ class Article
 
     /**
      * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articles",cascade={"persist"})
-     * @ORM\JoinTable(name="tags_articles")s
+     * @ORM\JoinTable(name="tags_articles")
      */
     private $tag;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Newsletter")
+     * @ORM\ManyToMany(targetEntity="NewsletterBundle\Entity\Newsletter", mappedBy="article")
      */
     private $newsletter;
 

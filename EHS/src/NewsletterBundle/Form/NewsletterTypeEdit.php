@@ -10,10 +10,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use ArticleBundle\Form\ArticleType;
 
-class NewsletterType extends AbstractType
+class NewsletterTypeEdit extends AbstractType
 {
-
     private $em;
 
     public function __construct(EntityManager $em){
@@ -39,7 +40,7 @@ class NewsletterType extends AbstractType
             ->add('article',ChoiceType::class, array(
                 'label'=>'Articles à ajouter',
                 'label_attr'=>array('class'=>'checkbox'),
-                'choices'=>$this->fillArticles(),
+                'choices'=>$this->getArticles(),
                 'attr'=>array('class'=>CheckboxType::class),
                 'choices_as_values'=>true,
                 'expanded'=>true,
@@ -56,17 +57,9 @@ class NewsletterType extends AbstractType
             'data_class' => 'NewsletterBundle\Entity\Newsletter'
         ));
     }
-
-    private function fillArticles() {
-        //On reccup la liste des articles, on push dans un array,
-        // et on renvoie à ChoiceType
-        $articles = $this->em->getRepository('ArticleBundle:Article')->findNewArticles();
-
-        $articlesTitre = [];
-        foreach($articles as $article){
-            $articlesTitre[$article->getTitreArticle()] = $article;
-        }
-        return $articlesTitre;
+    public function getArticles()
+    {
+        $this->em
     }
 
 }

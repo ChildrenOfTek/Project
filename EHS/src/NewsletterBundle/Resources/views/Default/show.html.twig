@@ -2,8 +2,9 @@
 
 {% block section %}
     <h1>newsletter - affichage</h1>
+<div class="container">
 
-    <table>
+    <table class="table table-hover table-bordered">
         <tbody>
             <tr>
                 <th>Date</th>
@@ -17,9 +18,20 @@
                 <th>Texte</th>
                 <td>{{ newsletter.texte }}</td>
             </tr>
+            <tr>
+                <th>Articles</th>
+                <td>
+                    {% for article in newsletter.article %}
+                        {{ article.titreArticle }}
+                        <br>
+                    {% endfor  %}
+                </td>
+            </tr>
+
+
         </tbody>
     </table>
-
+</div>
     <ul>
         <li>
             <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">éditer</a>

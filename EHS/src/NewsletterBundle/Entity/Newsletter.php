@@ -3,6 +3,7 @@
 namespace NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Newsletter
@@ -42,6 +43,15 @@ class Newsletter
      */
     private $texte;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="ArticleBundle\Entity\Article", inversedBy="newsletter", cascade={"persist"})
+     * @ORM\JoinTable(name="newsletters_articles")
+     */
+    private $article;
+
+    public function __construct() {
+        $this->article = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -121,4 +131,22 @@ class Newsletter
     {
         return $this->texte;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param mixed $article
+     */
+    public function setArticle($article)
+    {
+        $this->article = $article;
+    }
+
+
 }

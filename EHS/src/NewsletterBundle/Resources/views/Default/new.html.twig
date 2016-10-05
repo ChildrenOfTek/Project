@@ -2,29 +2,15 @@
 
 {% block section %}
     <h1>newsletter - création</h1>
+<div class="container">
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="créer" />
     {{ form_end(form) }}
 
-    <table>
-        <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Contenu</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.titreArticle }}</a></td>
-                <td>{{ article.content }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
+</div>
     <ul>
         <li>
             <a href="{{ path('newsletter_index') }}">retour à la liste</a>

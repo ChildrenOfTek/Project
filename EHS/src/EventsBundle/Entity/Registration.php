@@ -3,6 +3,7 @@
 namespace EventsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Registration
@@ -44,7 +45,10 @@ class Registration
 
     /**
      * @var string
-     *
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=true,
+     *     message="Un numero de téléphone doit etre composé de chiffres.")
      * @ORM\Column(name="telephone", type="string", length=255)
      */
     private $telephone;

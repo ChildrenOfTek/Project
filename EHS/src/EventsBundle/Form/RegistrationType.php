@@ -5,6 +5,8 @@ namespace EventsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RegistrationType extends AbstractType
 {
@@ -15,10 +17,12 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prenom')
-            ->add('nom')
-            ->add('email')
-            ->add('telephone')
+            ->add('prenom',TextType::class)
+            ->add('nom',TextType::class)
+            ->add('email',EmailType::class)
+            ->add('telephone',TextType::class,array(
+                'label'=>'Téléphone',
+                'attr'=> array('maxlength'=>'10')))
         ;
     }
     

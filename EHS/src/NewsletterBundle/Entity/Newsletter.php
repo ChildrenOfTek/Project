@@ -149,4 +149,27 @@ class Newsletter
     }
 
 
+
+    /**
+     * Add article
+     *
+     * @param \ArticleBundle\Entity\Article $article
+     * @return Newsletter
+     */
+    public function addArticle(\ArticleBundle\Entity\Article $article)
+    {
+        $this->article[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \ArticleBundle\Entity\Article $article
+     */
+    public function removeArticle(\ArticleBundle\Entity\Article $article)
+    {
+        $this->article->removeElement($article);
+    }
 }

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use NewsletterBundle\Entity\Newsletter;
 use NewsletterBundle\Form\NewsletterType;
+use NewsletterBundle\Form\NewsletterTypeEdit;
 use UserBundle\Entity\User;
 
 /**
@@ -80,7 +81,7 @@ class NewsletterController extends Controller
     public function editAction(Request $request, Newsletter $newsletter)  {
         $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($newsletter);
-        $editForm = $this->createForm(new NewsletterTypeEdit($em), $newsletter);
+        $editForm = $this->createForm(new NewsletterTypeEdit($em,$newsletter->getId()), $newsletter);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

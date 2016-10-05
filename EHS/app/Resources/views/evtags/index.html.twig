@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>EvTags list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evTag in evTags %}
+            <tr>
+                <td><a href="{{ path('evtags_show', { 'id': evTag.id }) }}">{{ evTag.id }}</a></td>
+                <td>{{ evTag.libelle }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('evtags_show', { 'id': evTag.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('evtags_edit', { 'id': evTag.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('evtags_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

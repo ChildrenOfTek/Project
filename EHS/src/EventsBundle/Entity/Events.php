@@ -76,7 +76,11 @@ class Events
      */
     private $registrations;
 
-
+    /**
+     * @ORM\ManyToMany(targetEntity="EvTags", inversedBy="events",cascade={"persist"})
+     * @ORM\JoinTable(name="tags_events")
+     */
+    private $evtag;
 
     // Permet l'affichage par défaut de la date actuelle dans le formulaire de création
     public function __construct()
@@ -277,5 +281,38 @@ class Events
     public function getRegistrations()
     {
         return $this->registrations;
+    }
+
+    /**
+     * Add evtag
+     *
+     * @param \EventsBundle\Entity\EvTags $evtag
+     * @return Events
+     */
+    public function addTag(\EventsBundle\Entity\EvTags $evtag)
+    {
+        $this->evtag[] = $evtag;
+
+        return $this;
+    }
+
+    /**
+     * Remove evtag
+     *
+     * @param \EventsBundle\Entity\EvTags $evtag
+     */
+    public function removeTag(\EventsBundle\Entity\EvTags $evtag)
+    {
+        $this->evtag->removeElement($evtag);
+    }
+
+    /**
+     * Get evtag
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTag()
+    {
+        return $this->evtag;
     }
 }

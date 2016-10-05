@@ -100,10 +100,6 @@ class Article
      */
     private $newsletter;
 
-    public function __construct() {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     /**
      * Get id
      *

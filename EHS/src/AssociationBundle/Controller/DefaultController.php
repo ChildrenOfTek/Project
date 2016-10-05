@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use AssociationBundle\Form\ContactType;
+use AssociationBundle\Form\DemandeType;
 
 
 /**
@@ -117,6 +118,65 @@ class DefaultController extends Controller
         return $this->render('association/contact.html.twig', array(
             // on renvoi dans la vue "la vue" du formulaire
             'formContact' => $formContact->createView(),
+            'user'=>$user,
+        ));
+    }
+
+    /**
+     * Generates a inscription form.
+     *
+     * @Route("/association/inscription", name="association_inscription")
+     * @Method({"GET","POST"})
+     */
+    public function demandeAction(Request $r)
+    {
+
+        $user=$this->get('security.token_storage')->getToken()->getUser();
+
+        // on créer le formulaire à partir de notre formType
+        $formDemande = $this->createForm(new DemandeType());
+
+        // on vérifie si c'est une méthode post
+        if($r->isMethod('post')){
+            // on récupére les informations du formulaire soumis et on set les différents champs de notre formulaile avec, donc la class Contact.
+            $formDemande->handleRequest($r);
+
+            //on vérifi si le formulaire est valide, souvenez vous des différents validateurs que nous avons mis en place sur notre entitée contact
+            if($formDemande->isValid()){
+
+                // Ici on récupére la class Demande qui a été préalablement Set avec les champs du formulaire
+                $demande = $formDemande->getData();
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Demande d\'inscription')
+                    ->setFrom($demande->getEmail())
+                    // notre adresse mail
+                    ->setTo('guillossou.michele@gmail.com')
+                    //->setContentType('text/html')
+                    //ici nous allons utiliser un template pour pouvoir styliser notre mail si nous le souhaitons
+                    ->setBody(
+                        $this->renderView('association/email.html.twig', array(
+                                'demande' => $demande
+                            )
+                        ), 'text/html'
+                    )
+                ;
+
+                // nous appelons le service swiftmailer et on envoi :)
+                $this->get('mailer')->send($message);
+
+                // on retourne une message flash pour l'utilisateur pour le prévenir que son mail est bien parti
+                $this->get('session')->getFlashBag()->add('success', 'Votre demande d\'inscription a bien été prise en compte !');
+            }else{
+                //si le formulaire n'est pas valide en plus des erreurs du form
+                $this->get('session')->getFlashBag()->add('error', 'Désolé un problème est survenu.');
+
+            }
+        }
+
+        return $this->render('association/demande.html.twig', array(
+            // on renvoi dans la vue "la vue" du formulaire
+            'formContact' => $formDemande->createView(),
             'user'=>$user,
         ));
     }

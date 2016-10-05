@@ -5,6 +5,7 @@ namespace EventsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class EventsType extends AbstractType
 {
@@ -16,7 +17,9 @@ class EventsType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('description')
+            ->add('description','ckeditor',array(
+              'attr'=>array('rows'=>5),
+              'label'=>'Description de l\'évènement'))
             ->add('start', 'datetime')
             ->add('end', 'datetime')
             ->add('places', 'integer')

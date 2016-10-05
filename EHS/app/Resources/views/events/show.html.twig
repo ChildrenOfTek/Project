@@ -31,7 +31,6 @@
                 </p>
             {% endif %}
 
-
             <!-- Remaining Places-->
             {% if event.registrations|length < event.places %}
                 <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
@@ -43,7 +42,7 @@
 
             <!-- Post Content -->
 
-            {{ event.description|nl2br }}
+            {{ event.description|raw }}
 
             </div>
             </div>

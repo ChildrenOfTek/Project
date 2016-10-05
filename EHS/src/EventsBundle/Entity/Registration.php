@@ -51,7 +51,7 @@ class Registration
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Events", inversedBy="registrations",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Events", inversedBy="registrations",cascade={"persist","remove"})
      * @ORM\JoinColumn(name="events_id", referencedColumnName="id")
      *
      */

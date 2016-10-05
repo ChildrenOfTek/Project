@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block section %}
     <h1>Registration list</h1>
 
     <table>
@@ -11,7 +11,6 @@
                 <th>Nom</th>
                 <th>Email</th>
                 <th>Telephone</th>
-                <th>Places</th>
                 <th>Events</th>
                 <th>Actions</th>
             </tr>
@@ -24,8 +23,7 @@
                 <td>{{ registration.nom }}</td>
                 <td>{{ registration.email }}</td>
                 <td>{{ registration.telephone }}</td>
-                <td>{{ registration.places }}</td>
-                <td>{{ registration.events }}</td>
+                <td>{{ registration.events.title }}</td>
                 <td>
                     <ul>
                         <li>

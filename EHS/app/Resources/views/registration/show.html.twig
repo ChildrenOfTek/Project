@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block section %}
     <h1>Registration</h1>
 
     <table>
@@ -36,13 +36,15 @@
         <li>
             <a href="{{ path('registration_index') }}">Back to the list</a>
         </li>
-        <li>
-            <a href="{{ path('registration_edit', { 'id': registration.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
+        {% if(is_granted('ROLE_ADMIN')) %}
+            <li>
+                <a href="{{ path('registration_edit', { 'id': registration.id }) }}">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+        {% endif %}
     </ul>
 {% endblock %}

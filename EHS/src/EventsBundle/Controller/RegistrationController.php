@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EventsBundle\Entity\Registration;
 use EventsBundle\Form\RegistrationType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Registration controller.
@@ -42,23 +43,41 @@ class RegistrationController extends Controller
     public function newAction(Request $request, $id)
     {
         $registration = new Registration();
-        $form = $this->createForm('EventsBundle\Form\RegistrationType', $registration);
+        $form = $this->createForm('EventsBundle\Form\RegistrationType', $registration);            
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $repo= $em->getRepository('EventsBundle:Events');
-            $event=$repo->findOneBy(array('id'=> $id));
-            $registration->setEvents($event);
-            $em->persist($registration);
-            $em->flush();
+            $repoE= $em->getRepository('EventsBundle:Events');
+            $eventE=$repoE->findOneBy(array('id'=> $id));
 
-            return $this->redirectToRoute('registration_show', array('id' => $registration->getId()));
+            $repoR= $em->getRepository('EventsBundle:Registration');
+            $eventR=$repoR->findRegistration($id);
+
+        if(count($eventR) >= $eventE->getPlaces())
+            {
+                $this->addFlash('error',
+                'Il n\'y a plus de place disponible pour cet évènement  !');
+                return $this->redirectToRoute('events_index');                
+            }else{
+
+        if ($form->isSubmitted() && $form->isValid()) {            
+            
+
+                $registration->setEvents($eventE);
+                $em->persist($registration);
+                $em->flush();
+                $this->addFlash('success',
+                'Votre inscription a bien été prise en compte !');
+
+                return $this->redirectToRoute('events_show', array('id' => $registration->getEvents()->getId()));
+                
+            } 
         }
 
         return $this->render('registration/new.html.twig', array(
             'registration' => $registration,
             'form' => $form->createView(),
+            'event' => $eventE
         ));
     }
 

@@ -17,14 +17,23 @@
                 </h4>
             </div>
             {{ event.description }}<br/>
-            {{ event.places }}
-            {{dump(event)}}
+            {% if is_granted('ROLE_ADMIN') %}
+            {% for registration in event.registrations %}
+                {{ registration.email }}</br>
+            {% endfor %}
+            {% endif %}
+            {% if event.registrations|length < event.places %}
             <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
+            {% else %}
+            <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
+            {% endif %}
         </div>
     {% endfor %}
 
-    <hr>
-    <a href="{{ path('events_new') }}">Créer un événement</a>
+    {% if(is_granted('ROLE_ADMIN')) %}
+        <hr>
+        <a href="{{ path('events_new') }}">Créer un événement</a>
+    {% endif %}
 </div>
 
 {% endblock %}

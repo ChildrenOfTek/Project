@@ -58,12 +58,7 @@ class Events
     private $places;
 
     /**
-     * 
-     *
-     * 
-     * @ORM\Column(name="registrations", nullable = true)
-     * @ORM\OneToMany(targetEntity="Registration", mappedBy="events",cascade={"persist"})
-     *
+     * @ORM\OneToMany(targetEntity="Registration", mappedBy="events",cascade={"persist","remove"})
      */
     private $registrations;
 
@@ -72,7 +67,6 @@ class Events
     {
         $this->start = new \DateTime();
         $this->end = new \DateTime();
-        $this->registrations = new ArrayCollection();
     }
 
     /**

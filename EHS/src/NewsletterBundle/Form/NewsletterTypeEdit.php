@@ -10,18 +10,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use ArticleBundle\Form\ArticleTypeEdit;
+
 
 class NewsletterTypeEdit extends AbstractType
 {
     private $em;
     private $id;
 
-    public function __construct(EntityManager $em,$id){
+    public function __construct(EntityManager $em){
         $this->em = $em;
-        $this->id = $id;
     }
 
     /**
@@ -40,16 +39,12 @@ class NewsletterTypeEdit extends AbstractType
             ->add('texte', TextareaType::class, array(
                 'attr'=>array('rows'=>15),
             ))
-            ->add('article',CollectionType::class,array(
-                'entry_type'=>ChoiceType::class,
-                'entry_options'=>
-                array(
-                'choices'=>$this->getArticles(),
-                'attr'=>array('class'=>CheckboxType::class),
-                'choices_as_values'=>true,
+            ->add('article',EntityType::class, array(
+                'class'=>'ArticleBundle:Article',
+                'choice_label'=>'titreArticle',
                 'expanded'=>true,
                 'multiple'=>true
-            )));
+            ));
     }
     
     /**
@@ -61,19 +56,6 @@ class NewsletterTypeEdit extends AbstractType
             'data_class' => 'NewsletterBundle\Entity\Newsletter'
         ));
     }
-    public function getArticles()
-    {
-        //On reccup la liste des articles, on push dans un array,
-        // et on renvoie à ChoiceType
-        $articles = $this->em->getRepository('NewsletterBundle:Newsletter')->findOneBy(array('id'=>$this->id))->getArticle();
 
-var_dump($articles);die();
-        $articlesTitre = [];
-        foreach($articles as $article){
-            $articlesTitre[$article->getTitreArticle()] = $article;
-        }
-        return $articlesTitre;
-
-    }
 
 }

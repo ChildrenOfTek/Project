@@ -29,8 +29,7 @@ class NewsletterType extends AbstractType
         $builder
             ->add('date', DateType::class, array(
                 'data' => new \Datetime(),
-                'widget' => 'single_text',
-                'disabled' => true
+                'widget' => 'single_text'
             ))
             ->add('sujet')
             ->add('texte', TextareaType::class, array(

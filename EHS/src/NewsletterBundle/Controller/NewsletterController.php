@@ -46,6 +46,7 @@ class NewsletterController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($newsletter);
             $em->flush();
 
@@ -81,7 +82,7 @@ class NewsletterController extends Controller
     public function editAction(Request $request, Newsletter $newsletter)  {
         $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($newsletter);
-        $editForm = $this->createForm(new NewsletterTypeEdit($em,$newsletter->getId()), $newsletter);
+        $editForm = $this->createForm(new NewsletterTypeEdit($em), $newsletter);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

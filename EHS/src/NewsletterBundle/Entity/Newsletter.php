@@ -49,9 +49,7 @@ class Newsletter
      */
     private $article;
 
-    public function __construct() {
-        $this->article = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+
 
     /**
      * Get id

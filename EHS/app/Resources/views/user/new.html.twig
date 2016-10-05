@@ -8,29 +8,32 @@
 
 
 {% block section %}
-<section>
+
+
+
+
+
+
 <div class="row">
-<div class="col-md-10">
-  <div class="panel">
-             <div class="panel-heading">Création d'un utilisateur</div>
-             <div class="panel-body">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">Création d'un utilisateur</div>
+        <div class="panel-body">
+          <div class="container col-md-8 col-md-offset-1">
+
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <button type="submit" value="Ajouter" />AJOUTER UN UTILISATEUR</button>
     {{ form_end(form) }}
+    <div class="buttonLink">
+        <a href="{{ path('user_index') }}">ANNULER</a>
     </div>
-
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-</div>
-</section>
-    <ul>
-      <div class="buttonLink">
-          <a href="{{ path('user_index') }}">Retour à la liste des utilisateurs</a>
-      </div>
 
-
-
-    </ul>
 {% endblock %}

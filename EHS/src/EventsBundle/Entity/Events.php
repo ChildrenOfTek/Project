@@ -32,7 +32,7 @@ class Events
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -61,6 +61,13 @@ class Events
      * @ORM\OneToMany(targetEntity="Registration", mappedBy="events",cascade={"persist","remove"})
      */
     private $registrations;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255)
+     */  
+    private $address;
 
     // Permet l'affichage par défaut de la date actuelle dans le formulaire de création
     public function __construct()
@@ -215,5 +222,28 @@ class Events
     public function getPlaces()
     {
         return $this->places;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Events
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

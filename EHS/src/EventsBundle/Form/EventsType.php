@@ -20,6 +20,7 @@ class EventsType extends AbstractType
             ->add('start', 'datetime')
             ->add('end', 'datetime')
             ->add('places', 'integer')
+            ->add('address')
         ;
     }
     

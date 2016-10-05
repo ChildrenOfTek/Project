@@ -24,11 +24,26 @@
                 </p>
             {% endif %}
 
+            <!-- Address -->
+            {% if event.address %}
+                <p><span class="glyphicon glyphicon-home"></span>
+                    {{ event.address }}
+                </p>
+            {% endif %}
+
+
+            <!-- Remaining Places-->
+            {% if event.registrations|length < event.places %}
+                <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
+            {% else %}
+                <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
+            {% endif %}
+
             <hr>
 
             <!-- Post Content -->
 
-            {{ event.description | raw }}
+            {{ event.description|nl2br }}
 
             </div>
             </div>

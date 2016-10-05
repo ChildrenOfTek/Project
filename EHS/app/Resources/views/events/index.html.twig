@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
+
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
-        <div class="panel-heading">Liste des événements</div>
+        <div class="panel-heading">Liste des évènements</div>
         <div class="panel-body">
 <div class="container">
 
@@ -18,14 +19,15 @@
             </div>
             {{ event.description }}<br/>
             {% if is_granted('ROLE_ADMIN') %}
-            {% for registration in event.registrations %}
-                {{ registration.email }}</br>
-            {% endfor %}
+                {% for registration in event.registrations %}
+                    {{ registration.email }}</br>
+                {% endfor %}
             {% endif %}
+
             {% if event.registrations|length < event.places %}
-            <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
+                <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
             {% else %}
-            <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
+                <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
             {% endif %}
         </div>
     {% endfor %}

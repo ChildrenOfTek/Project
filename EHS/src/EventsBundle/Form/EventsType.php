@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class EventsType extends AbstractType
 {
@@ -24,6 +25,9 @@ class EventsType extends AbstractType
             ->add('end', 'datetime')
             ->add('places', 'integer')
             ->add('address')
+            ->add('showcase', CheckboxType::class, array(
+                'label'    => 'Afficher l\'évènement sur la page d\'accueil ?',
+                'required' => false))
         ;
     }
     

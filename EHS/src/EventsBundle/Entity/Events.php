@@ -51,6 +51,20 @@ class Events
     private $end;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255)
+     */  
+    private $address;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="showcase", type="boolean")
+     */
+    private $showcase;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="places", type="integer")
@@ -62,12 +76,7 @@ class Events
      */
     private $registrations;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="address", type="string", length=255)
-     */  
-    private $address;
+
 
     // Permet l'affichage par défaut de la date actuelle dans le formulaire de création
     public function __construct()
@@ -179,26 +188,49 @@ class Events
     }
 
     /**
-     * Set registrations
+     * Set address
      *
-     * @param integer $registrations
+     * @param string $address
      * @return Events
      */
-    public function setRegistrations($registrations)
+    public function setAddress($address)
     {
-        $this->registrations = $registrations;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Get registrations
+     * Get address
      *
-     * @return integer 
+     * @return string 
      */
-    public function getRegistrations()
+    public function getAddress()
     {
-        return $this->registrations;
+        return $this->address;
+    }
+
+    /**
+     * Set showcase
+     *
+     * @param boolean $showcase
+     * @return Events
+     */
+    public function setShowcase($showcase)
+    {
+        $this->showcase = $showcase;
+
+        return $this;
+    }
+
+    /**
+     * Get showcase
+     *
+     * @return boolean 
+     */
+    public function getShowcase()
+    {
+        return $this->showcase;
     }
 
     /**
@@ -225,25 +257,25 @@ class Events
     }
 
     /**
-     * Set address
+     * Set registrations
      *
-     * @param string $address
+     * @param integer $registrations
      * @return Events
      */
-    public function setAddress($address)
+    public function setRegistrations($registrations)
     {
-        $this->address = $address;
+        $this->registrations = $registrations;
 
         return $this;
     }
 
     /**
-     * Get address
+     * Get registrations
      *
-     * @return string 
+     * @return integer 
      */
-    public function getAddress()
+    public function getRegistrations()
     {
-        return $this->address;
+        return $this->registrations;
     }
 }

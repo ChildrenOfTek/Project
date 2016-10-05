@@ -35,12 +35,7 @@ class Answer
      */
     private $value;
 
-    /**
-     * 
-     * @ORM\ManyToOne(targetEntity="Question", inversedBy="answers")
-     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
-     */
-    private $question;
+    
 
 
     /**
@@ -97,5 +92,28 @@ class Answer
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Set question
+     *
+     * @param integer $question
+     * @return Answer
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \SondageBundle\Entity\Question 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
     }
 }

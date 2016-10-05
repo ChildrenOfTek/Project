@@ -29,8 +29,11 @@ class Question
     private $entitled;
 
     /**
-     * @ORM\OneToMany(targetEntity="Answer", mappedBy="question",cascade={"persist","remove","merge"})
-     * 
+     * @ORM\ManyToMany(targetEntity="Answer")
+     * @ORM\JoinTable(name="answers",
+     *      joinColumns={@ORM\JoinColumn(name="question_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="answer_id", referencedColumnName="id")}
+     *      )
      */
     private $answers;
 
@@ -66,5 +69,45 @@ class Question
     public function getEntitled()
     {
         return $this->entitled;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add answers
+     *
+     * @param \SondageBundle\Entity\Answer $answers
+     * @return Question
+     */
+    public function addAnswer(\SondageBundle\Entity\Answer $answers)
+    {
+        $this->answers[] = $answers;
+
+        return $this;
+    }
+
+    /**
+     * Remove answers
+     *
+     * @param \SondageBundle\Entity\Answer $answers
+     */
+    public function removeAnswer(\SondageBundle\Entity\Answer $answers)
+    {
+        $this->answers->removeElement($answers);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
     }
 }

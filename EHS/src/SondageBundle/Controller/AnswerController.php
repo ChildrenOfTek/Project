@@ -44,9 +44,11 @@ class AnswerController extends Controller
         $answer = new Answer();
         $form = $this->createForm('SondageBundle\Form\AnswerType', $answer);
         $form->handleRequest($request);
+        $value = 1;
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $answer->setValue($value);
             $em->persist($answer);
             $em->flush();
 

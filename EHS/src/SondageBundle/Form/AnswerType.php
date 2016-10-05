@@ -16,11 +16,11 @@ class AnswerType extends AbstractType
     {
         $builder
             ->add('content')
-            ->add('value')
-            ->add('question')
+            
+
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

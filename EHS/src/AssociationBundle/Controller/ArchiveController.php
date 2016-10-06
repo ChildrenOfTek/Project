@@ -18,7 +18,7 @@ class ArchiveController extends Controller
 {
     /**
      * Lists all Archive entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="association_archive_index")
      * @Method("GET")
      */

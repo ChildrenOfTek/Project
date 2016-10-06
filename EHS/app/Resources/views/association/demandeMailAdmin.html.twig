@@ -5,27 +5,28 @@
 
 <ul>
     <li>
-        {{ demande.email }}
+        Email : {{ demande.email }}
     </li>
     <li>
-        {{ demande.nom }}
+        Nom : {{ demande.nom }}
     </li>
     <li>
-        {{ demande.prenom }}
+        Prenom : {{ demande.prenom }}
     </li>
     <li>
-        {{ demande.adresse }}
+        Adresse : {{ demande.adresse }}
     </li>
     <li>
-        {{ demande.cp }}
+        Code Postal : {{ demande.cp }}
     </li>
     <li>
-        {{ demande.ville }}
+        Ville : {{ demande.ville }}
     </li>
     <li>
-        {{ demande.telephone }}
+        Telephone : {{ demande.telephone }}
     </li>
     <li>
-        {{ demande.birthDate }}
+        Date de naissance : {{ demande.birthDate|date('d-m-y') }}
     </li>
+    <a href="{{ path('login') }}">Aller sur le site</a>
 </ul>

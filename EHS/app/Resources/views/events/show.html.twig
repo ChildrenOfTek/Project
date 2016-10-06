@@ -22,9 +22,14 @@
             <hr>
 
             <!-- Duration -->
-            {% if event.start %}
+            {% if event.start and event.end %}
                 <p><span class="glyphicon glyphicon-time"></span>
-                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL à HH:mm") }}
+                {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
+                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                    au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                {% else %}
+                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
+                {% endif %}
                 </p>
             {% endif %}
 

@@ -8,12 +8,58 @@
         <div class="panel-heading">Liste des évènements</div>
         <div class="panel-body">
 <div class="container">
-    {% if events %}
-        {% for event in events %}
-            <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
-            {% if event.start %}
+{% if futureevents %}
+    <h1>Évènements à venir</h1><hr>
+    {% for event in futureevents %}
+        <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
+            {% if event.start and event.end %}
                 <p><span class="glyphicon glyphicon-time"></span>
-                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL à HH:mm") }}
+                {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
+                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                    au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                {% else %}
+                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
+                {% endif %}
+                </p>
+            {% endif %}
+        {% if event.address %}
+            <p><span class="glyphicon glyphicon-home"></span>
+                {{ event.address }}
+            </p>
+        {% endif %}
+        {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}
+        <br/>
+        <!-- Tags -->
+        Mots-clés :
+        {% for evtag in event.evtag %}
+            <a href="{{ path('evtags_search',{"libelle":evtag.libelle}) }}">{{ evtag.libelle}}</a>
+            <!-- <button class="tagbox" type="submit">{{ evtag.libelle}}</button> -->
+        {% endfor %}
+        <br/>
+        {% if event.registrations|length < event.places %}
+            <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
+        {% else %}
+            <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
+        {% endif %}
+        <hr>
+    {% endfor %}
+{% else %}
+    Il n'y a actuellement pas d'événement de programmé.
+    <hr>
+{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+    {% if pastevents %}
+        <h1>Évènements passés</h1><hr>
+        {% for event in pastevents %}
+            <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
+            {% if event.start and event.end %}
+                <p><span class="glyphicon glyphicon-time"></span>
+                {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
+                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                    au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                {% else %}
+                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
+                {% endif %}
                 </p>
             {% endif %}
             {% if event.address %}
@@ -21,12 +67,7 @@
                     {{ event.address }}
                 </p>
             {% endif %}
-            {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}<br/>
-            {# {% if is_granted('ROLE_ADMIN') %}
-                {% for registration in event.registrations %}
-                    {{ registration.email }}</br>
-                {% endfor %}
-            {% endif %} #}
+            {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}
             <br/>
             <!-- Tags -->
             Mots-clés :
@@ -46,6 +87,7 @@
         Il n'y a actuellement pas d'événement de programmé.
         <hr>
     {% endif %}
+{% endif %}
     {% if(is_granted('ROLE_ADMIN')) %}
         <a href="{{ path('events_new') }}">Créer un événement</a>
     {% endif %}

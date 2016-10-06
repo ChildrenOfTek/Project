@@ -29,11 +29,12 @@ class EventsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('EventsBundle:Events')->findBy(array(), array('start' => 'ASC'))
-        ;
+        $pastevents = $em->getRepository('EventsBundle:Events')->findPastEvents();
+        $futureevents = $em->getRepository('EventsBundle:Events')->findFutureEvents();
 
         return $this->render('events/index.html.twig', array(
-            'events' => $events,
+            'pastevents' => $pastevents,
+            'futureevents' => $futureevents
         ));
     }
 

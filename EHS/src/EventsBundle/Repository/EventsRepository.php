@@ -12,4 +12,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventsRepository extends EntityRepository
 {
+    public function findPastEvents() {
+        return $this->createQueryBuilder('e')
+            ->where('e.end < :now')
+            ->setParameter('now', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
+            ->orderBy('e.start', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findFutureEvents() {
+        return $this->createQueryBuilder('e')
+            ->where('e.end >= :now')
+            ->setParameter('now', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
+            ->orderBy('e.start', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

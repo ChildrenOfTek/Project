@@ -1,17 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>EvTags</h1>
+{% block section %}
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">Tags d'évènements</div>
+        <div class="panel-body">
+<div class="container">
+    <h1>Evtags</h1>
 
     <table>
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ evTag.id }}</td>
+                <td>{{ evtag.id }}</td>
             </tr>
             <tr>
                 <th>Libelle</th>
-                <td>{{ evTag.libelle }}</td>
+                <td>{{ evtag.libelle }}</td>
             </tr>
         </tbody>
     </table>
@@ -21,7 +28,7 @@
             <a href="{{ path('evtags_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('evtags_edit', { 'id': evTag.id }) }}">Edit</a>
+            <a href="{{ path('evtags_edit', { 'id': evtag.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
@@ -29,4 +36,6 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+</div>
+
 {% endblock %}

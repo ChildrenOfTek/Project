@@ -6,18 +6,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use EventsBundle\Entity\EvTags;
-use EventsBundle\Form\EvTagsType;
+use EventsBundle\Entity\Evtags;
+use EventsBundle\Form\EvtagsType;
 
 /**
- * EvTags controller.
+ * Evtags controller.
  *
  * @Route("/evtags")
  */
-class EvTagsController extends Controller
+class EvtagsController extends Controller
 {
     /**
-     * Lists all EvTags entities.
+     * Lists all Evtags entities.
      *
      * @Route("/", name="evtags_index")
      * @Method("GET")
@@ -26,96 +26,126 @@ class EvTagsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $evTags = $em->getRepository('EventsBundle:EvTags')->findAll();
+        $evtags = $em->getRepository('EventsBundle:Evtags')->findAll();
 
         return $this->render('evtags/index.html.twig', array(
-            'evTags' => $evTags,
+            'evtags' => $evtags,
         ));
     }
 
     /**
-     * Creates a new EvTags entity.
+     * Gives a view with events matching clicked tag.
+     *
+     * @Route("/{libelle}/search", name="evtags_search")
+     * @Method("GET")
+     */
+    public function evtagMatchAction($libelle)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $evtags = $em->getRepository('EventsBundle:Evtags')->findOneBy(array('libelle'=>$libelle));
+
+        $query = $em->createQuery('
+                                    SELECT e
+                                    FROM EventsBundle:Events e
+                                    JOIN e.evtag t
+                                    WHERE t.libelle = :libelle
+                                ');
+
+        $query->setParameter('libelle', $libelle);
+
+        $events= $query->getResult();
+        //var_dump($query->getResult());die();
+
+        return $this->render('evtags/search.html.twig', array(
+            'evtags' => $evtags,
+            'events'=>$events
+        ));
+    }
+
+    /**
+     * Creates a new Evtags entity.
      *
      * @Route("/new", name="evtags_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
-        $evTag = new EvTags();
-        $form = $this->createForm('EventsBundle\Form\EvTagsType', $evTag);
+        $evtag = new Evtags();
+        $form = $this->createForm('EventsBundle\Form\EvtagsType', $evtag);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($evTag);
+            $em->persist($evtag);
             $em->flush();
 
-            return $this->redirectToRoute('evtags_show', array('id' => $evTag->getId()));
+            return $this->redirectToRoute('evtags_show', array('id' => $evtag->getId()));
         }
 
         return $this->render('evtags/new.html.twig', array(
-            'evTag' => $evTag,
+            'evtag' => $evtag,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a EvTags entity.
+     * Finds and displays a Evtags entity.
      *
      * @Route("/{id}", name="evtags_show")
      * @Method("GET")
      */
-    public function showAction(EvTags $evTag)
+    public function showAction(Evtags $evtag)
     {
-        $deleteForm = $this->createDeleteForm($evTag);
+        $deleteForm = $this->createDeleteForm($evtag);
 
         return $this->render('evtags/show.html.twig', array(
-            'evTag' => $evTag,
+            'evtag' => $evtag,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing EvTags entity.
+     * Displays a form to edit an existing Evtags entity.
      *
      * @Route("/{id}/edit", name="evtags_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, EvTags $evTag)
+    public function editAction(Request $request, Evtags $evtag)
     {
-        $deleteForm = $this->createDeleteForm($evTag);
-        $editForm = $this->createForm('EventsBundle\Form\EvTagsType', $evTag);
+        $deleteForm = $this->createDeleteForm($evtag);
+        $editForm = $this->createForm('EventsBundle\Form\EvtagsType', $evtag);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($evTag);
+            $em->persist($evtag);
             $em->flush();
 
-            return $this->redirectToRoute('evtags_edit', array('id' => $evTag->getId()));
+            return $this->redirectToRoute('evtags_edit', array('id' => $evtag->getId()));
         }
 
         return $this->render('evtags/edit.html.twig', array(
-            'evTag' => $evTag,
+            'evtag' => $evtag,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a EvTags entity.
+     * Deletes a Evtags entity.
      *
      * @Route("/{id}", name="evtags_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, EvTags $evTag)
+    public function deleteAction(Request $request, Evtags $evtag)
     {
-        $form = $this->createDeleteForm($evTag);
+        $form = $this->createDeleteForm($evtag);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($evTag);
+            $em->remove($evtag);
             $em->flush();
         }
 
@@ -123,16 +153,16 @@ class EvTagsController extends Controller
     }
 
     /**
-     * Creates a form to delete a EvTags entity.
+     * Creates a form to delete a Evtags entity.
      *
-     * @param EvTags $evTag The EvTags entity
+     * @param Evtags $evtag The Evtags entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(EvTags $evTag)
+    private function createDeleteForm(Evtags $evtag)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('evtags_delete', array('id' => $evTag->getId())))
+            ->setAction($this->generateUrl('evtags_delete', array('id' => $evtag->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

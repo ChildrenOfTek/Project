@@ -9,7 +9,7 @@
             </tr>
             <tr>
                 <th>Description</th>
-                <td>{{ event.description }}</td>
+                <td>{{ event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}</td>
             </tr>
             <tr>
                 <th>Start</th>

@@ -2,6 +2,13 @@
 
 
 {% block section %}
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">Liste des évènements</div>
+        <div class="panel-body">
+<div class="container">
 {% include('events/showReg.html.twig') %}
     <h1>Registration creation</h1>
 
@@ -12,7 +19,9 @@
 
     <ul>
         <li>
-            <a href="{{ path('registration_index') }}">Back to the list</a>
+            <a href="{{ path('events_index') }}">Retour à la liste des évènements</a>
         </li>
     </ul>
+</div>
+
 {% endblock %}

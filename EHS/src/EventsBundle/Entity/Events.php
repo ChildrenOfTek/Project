@@ -58,13 +58,6 @@ class Events
     private $address;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="showcase", type="boolean")
-     */
-    private $showcase;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="places", type="integer")
@@ -77,7 +70,7 @@ class Events
     private $registrations;
 
     /**
-     * @ORM\ManyToMany(targetEntity="EvTags", inversedBy="events",cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Evtags", inversedBy="events",cascade={"persist"})
      * @ORM\JoinTable(name="tags_events")
      */
     private $evtag;
@@ -215,29 +208,6 @@ class Events
     }
 
     /**
-     * Set showcase
-     *
-     * @param boolean $showcase
-     * @return Events
-     */
-    public function setShowcase($showcase)
-    {
-        $this->showcase = $showcase;
-
-        return $this;
-    }
-
-    /**
-     * Get showcase
-     *
-     * @return boolean 
-     */
-    public function getShowcase()
-    {
-        return $this->showcase;
-    }
-
-    /**
      * Set places
      *
      * @param integer $places
@@ -286,10 +256,10 @@ class Events
     /**
      * Add evtag
      *
-     * @param \EventsBundle\Entity\EvTags $evtag
+     * @param \EventsBundle\Entity\Evtags $evtag
      * @return Events
      */
-    public function addTag(\EventsBundle\Entity\EvTags $evtag)
+    public function addEvtag(\EventsBundle\Entity\Evtags $evtag)
     {
         $this->evtag[] = $evtag;
 
@@ -299,9 +269,9 @@ class Events
     /**
      * Remove evtag
      *
-     * @param \EventsBundle\Entity\EvTags $evtag
+     * @param \EventsBundle\Entity\Evtags $evtag
      */
-    public function removeTag(\EventsBundle\Entity\EvTags $evtag)
+    public function removeEvtag(\EventsBundle\Entity\Evtags $evtag)
     {
         $this->evtag->removeElement($evtag);
     }
@@ -311,7 +281,7 @@ class Events
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTag()
+    public function getEvtag()
     {
         return $this->evtag;
     }

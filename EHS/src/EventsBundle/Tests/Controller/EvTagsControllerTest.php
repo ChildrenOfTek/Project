@@ -4,7 +4,7 @@ namespace EventsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class EvTagsControllerTest extends WebTestCase
+class EvtagsControllerTest extends WebTestCase
 {
     /*
     public function testCompleteScenario()

@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">Création d'un évènement</div>
+        <div class="panel-body">
+<div class="container">
     <h1>Créer un événement</h1>
 
     {{ form_start(form) }}
@@ -13,4 +20,6 @@
             <a href="{{ path('events_index') }}">Back to the list</a>
         </li>
     </ul>
+</div>
+
 {% endblock %}

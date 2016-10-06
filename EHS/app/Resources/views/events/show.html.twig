@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Voir l'évènement
+{% endblock %}
+
 {% block section %}
 <section>
   <div class="row">
@@ -43,6 +47,13 @@
             <!-- Post Content -->
 
             {{ event.description|raw }}
+
+            <!-- Tags -->
+            Mots-clés :
+            {% for evtag in event.evtag %}
+                <a href="{{ path('evtags_search',{"libelle":evtag.libelle}) }}">{{ evtag.libelle}}</a>
+                <!-- <button class="tagbox" type="submit">{{ evtag.libelle}}</button> -->
+            {% endfor %}
 
             </div>
             </div>

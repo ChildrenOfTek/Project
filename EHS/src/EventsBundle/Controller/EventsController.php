@@ -8,11 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EventsBundle\Entity\Events;
 use EventsBundle\Form\EventsType;
+use Symfony\Component\HttpFoundation\Response;
+// use Symfony\Component\Validator\Constraints\DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Events controller.
  *
- * @Route("/evenements")
+ * @Route("/events")
  */
 class EventsController extends Controller
 {
@@ -26,7 +29,8 @@ class EventsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('EventsBundle:Events')->findBy(array(), array('start' => 'ASC'));
+        $events = $em->getRepository('EventsBundle:Events')->findBy(array(), array('start' => 'ASC'))
+        ;
 
         return $this->render('events/index.html.twig', array(
             'events' => $events,
@@ -41,8 +45,10 @@ class EventsController extends Controller
      */
     public function newAction(Request $request)
     {
+    	$em=$this->getDoctrine()->getEntityManager();    	
         $event = new Events();
-        $form = $this->createForm('EventsBundle\Form\EventsType', $event);
+        // $form = $this->createForm('EventsBundle\Form\EventsType', $event);
+        $form = $this->createForm(new EventsType($em), $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,20 +83,23 @@ class EventsController extends Controller
 
     /**
      * Displays a form to edit an existing Events entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="events_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Events $event)
     {
         $deleteForm = $this->createDeleteForm($event);
-        $editForm = $this->createForm('EventsBundle\Form\EventsType', $event);
+        $editForm = $this->createForm('EventsBundle\Form\EventsTypeEdit', $event);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush();
+
+            $this->addFlash('success',
+                'L\'évènement a bien été mis à jour !');
 
             return $this->redirectToRoute('events_edit', array('id' => $event->getId()));
         }

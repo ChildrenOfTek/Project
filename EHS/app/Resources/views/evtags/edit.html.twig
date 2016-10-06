@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>EvTags edit</h1>
+{% block section %}
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">Edition d'un tag d'évènements</div>
+        <div class="panel-body">
+<div class="container">
+    <h1>Evtags edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -18,4 +25,6 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+</div>
+
 {% endblock %}

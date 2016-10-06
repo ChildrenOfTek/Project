@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>EvTags list</h1>
+{% block section %}
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">Liste des tags d'évènements</div>
+        <div class="panel-body">
+<div class="container">
+    <h1>Evtags list</h1>
 
     <table>
         <thead>
@@ -12,17 +19,17 @@
             </tr>
         </thead>
         <tbody>
-        {% for evTag in evTags %}
+        {% for evtag in evtags %}
             <tr>
-                <td><a href="{{ path('evtags_show', { 'id': evTag.id }) }}">{{ evTag.id }}</a></td>
-                <td>{{ evTag.libelle }}</td>
+                <td><a href="{{ path('evtags_show', { 'id': evtag.id }) }}">{{ evtag.id }}</a></td>
+                <td>{{ evtag.libelle }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('evtags_show', { 'id': evTag.id }) }}">show</a>
+                            <a href="{{ path('evtags_show', { 'id': evtag.id }) }}">Voir ce tag</a>
                         </li>
                         <li>
-                            <a href="{{ path('evtags_edit', { 'id': evTag.id }) }}">edit</a>
+                            <a href="{{ path('evtags_edit', { 'id': evtag.id }) }}">Editer ce tag</a>
                         </li>
                     </ul>
                 </td>
@@ -33,7 +40,9 @@
 
     <ul>
         <li>
-            <a href="{{ path('evtags_new') }}">Create a new entry</a>
+            <a href="{{ path('evtags_new') }}">Créer un nouveau tag</a>
         </li>
     </ul>
+</div>
+
 {% endblock %}

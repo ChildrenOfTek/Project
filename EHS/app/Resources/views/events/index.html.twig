@@ -21,24 +21,32 @@
                     {{ event.address }}
                 </p>
             {% endif %}
-            {{ event.description|length > 100 ? event.description|striptags|slice(0, 100) ~ '...' : event.description|raw  }}<br/>
+            {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}<br/>
             {# {% if is_granted('ROLE_ADMIN') %}
                 {% for registration in event.registrations %}
                     {{ registration.email }}</br>
                 {% endfor %}
             {% endif %} #}
-
+            <br/>
+            <!-- Tags -->
+            Mots-clés :
+            {% for evtag in event.evtag %}
+                <a href="{{ path('evtags_search',{"libelle":evtag.libelle}) }}">{{ evtag.libelle}}</a>
+                <!-- <button class="tagbox" type="submit">{{ evtag.libelle}}</button> -->
+            {% endfor %}
+            <br/>
             {% if event.registrations|length < event.places %}
                 <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
             {% else %}
                 <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
             {% endif %}
+            <hr>
         {% endfor %}
     {% else %}
         Il n'y a actuellement pas d'événement de programmé.
+        <hr>
     {% endif %}
     {% if(is_granted('ROLE_ADMIN')) %}
-        <hr>
         <a href="{{ path('events_new') }}">Créer un événement</a>
     {% endif %}
 

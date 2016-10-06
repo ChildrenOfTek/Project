@@ -5,12 +5,12 @@ namespace EventsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * EvTags
+ * Evtags
  *
- * @ORM\Table(name="ev_tags")
- * @ORM\Entity(repositoryClass="EventsBundle\Repository\EvTagsRepository")
+ * @ORM\Table(name="evtags")
+ * @ORM\Entity(repositoryClass="EventsBundle\Repository\EvtagsRepository")
  */
-class EvTags
+class Evtags
 {
     /**
      * @var int
@@ -35,7 +35,7 @@ class EvTags
 
     public function __construct() {
             $this->events = new \Doctrine\Common\Collections\ArrayCollection();
-        }
+    }
 
     /**
      * Get id
@@ -51,7 +51,7 @@ class EvTags
      * Set libelle
      *
      * @param string $libelle
-     * @return EvTags
+     * @return Evtags
      */
     public function setLibelle($libelle)
     {

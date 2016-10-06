@@ -147,6 +147,7 @@ class DefaultController extends Controller
                 // Ici on récupére la class Demande qui a été préalablement Set avec les champs du formulaire
                 $demande = $formDemande->getData();
 
+                //On envoie le message à l'admin pour le prevenir d'une demande
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Demande d\'inscription')
                     ->setFrom($demande->getEmail())
@@ -155,7 +156,23 @@ class DefaultController extends Controller
                     //->setContentType('text/html')
                     //ici nous allons utiliser un template pour pouvoir styliser notre mail si nous le souhaitons
                     ->setBody(
-                        $this->renderView('association/email.html.twig', array(
+                        $this->renderView('association/demandeMailAdmin.html.twig', array(
+                                'demande' => $demande
+                            )
+                        ), 'text/html'
+                    )
+                ;
+
+                //On envoie le message à la personne qui fait la demamnde
+                $message2 = \Swift_Message::newInstance()
+                    ->setSubject('Demande d\'inscription')
+                    ->setFrom('guillossou.michele@gmail.com')
+                    // notre adresse mail
+                    ->setTo($demande->getEmail())
+                    //->setContentType('text/html')
+                    //ici nous allons utiliser un template pour pouvoir styliser notre mail si nous le souhaitons
+                    ->setBody(
+                        $this->renderView('association/demandeMail.html.twig', array(
                                 'demande' => $demande
                             )
                         ), 'text/html'
@@ -164,9 +181,10 @@ class DefaultController extends Controller
 
                 // nous appelons le service swiftmailer et on envoi :)
                 $this->get('mailer')->send($message);
+                $this->get('mailer')->send($message2);
 
                 // on retourne une message flash pour l'utilisateur pour le prévenir que son mail est bien parti
-                $this->get('session')->getFlashBag()->add('success', 'Votre demande d\'inscription a bien été prise en compte !');
+                $this->get('session')->getFlashBag()->add('success', 'Votre demande d\'inscription a bien été prise en compte ! Vous serez contacté prochainement.');
             }else{
                 //si le formulaire n'est pas valide en plus des erreurs du form
                 $this->get('session')->getFlashBag()->add('error', 'Désolé un problème est survenu.');
@@ -174,7 +192,7 @@ class DefaultController extends Controller
             }
         }
 
-        return $this->render('association/demande.html.twig', array(
+        return $this->render('association/demandeForm.html.twig', array(
             // on renvoi dans la vue "la vue" du formulaire
             'formContact' => $formDemande->createView(),
             'user'=>$user,

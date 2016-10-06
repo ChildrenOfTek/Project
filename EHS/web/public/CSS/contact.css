@@ -1,0 +1,22 @@
+.container
+{
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+}
+.blocGauche
+{
+    padding-top:-50px;
+    flex:2;
+}
+.blocDroite ul
+{
+    list-style: none;
+    flex: 0.5;
+    padding-right:20px;
+    font-size: 25px;
+    font-weight: lighter;
+    background: linear-gradient(to right, #25c397 20%, #7ec725 100%);
+    color: #FFFFFF;
+}

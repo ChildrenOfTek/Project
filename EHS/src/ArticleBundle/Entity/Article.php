@@ -96,7 +96,7 @@ class Article
     private $tag;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Newsletter")
+     * @ORM\ManyToOne(targetEntity="NewsletterBundle\Entity\Newsletter")
      */
     private $newsletter;
 

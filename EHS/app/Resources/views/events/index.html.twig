@@ -13,13 +13,13 @@
             <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
             <div class="date">
                 <h4>
-                {% if event.start %}{{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL à HH:mm") }}{% endif %}
+                {% if event.start %}{{ event.start|date('d-m-y') }}{% endif %}
                 </h4>
             </div>
             {{ event.description }}<br/>
             {% if is_granted('ROLE_ADMIN') %}
             {% for registration in event.registrations %}
-                {{ registration.email }}</br>
+                {{ registration.email }} </br>
             {% endfor %}
             {% endif %}
             {% if event.registrations|length < event.places %}

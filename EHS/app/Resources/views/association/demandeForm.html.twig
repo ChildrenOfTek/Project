@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Demande d'inscription
+{% endblock %}
+
+{% block section %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="jumbotron">
+                <h1>Faire une demande d'inscription</h1>
+
+                <form action="{{ path('association_inscription') }}" method="post">
+
+                    {{ form_label(formContact.email) }}
+                    {{ form_widget(formContact.email) }}
+                    {{ form_errors(formContact.email) }}
+                    <br/>
+
+                    {{ form_label(formContact.nom) }}
+                    {{ form_widget(formContact.nom) }}
+                    {{ form_errors(formContact.nom) }}
+                    <br/>
+
+                    {{ form_label(formContact.prenom) }}
+                    {{ form_widget(formContact.prenom) }}
+                    {{ form_errors(formContact.prenom) }}
+                    <br/>
+
+                    {{ form_label(formContact.adresse) }}
+                    {{ form_widget(formContact.adresse) }}
+                    {{ form_errors(formContact.adresse) }}
+                    <br/>
+
+                    {{ form_label(formContact.cp) }}
+                    {{ form_widget(formContact.cp) }}
+                    {{ form_errors(formContact.cp) }}
+                    <br/>
+
+                    {{ form_label(formContact.ville) }}
+                    {{ form_widget(formContact.ville) }}
+                    {{ form_errors(formContact.ville) }}
+                    <br/>
+
+                    {{ form_label(formContact.telephone) }}
+                    {{ form_widget(formContact.telephone) }}
+                    {{ form_errors(formContact.telephone) }}
+                    <br/>
+
+                    {{ form_label(formContact.birthDate) }}
+                    {{ form_widget(formContact.birthDate) }}
+                    {{ form_errors(formContact.birthDate) }}
+                    <br/>
+
+                    {{ form_label(formContact.captcha) }}
+                    {{ form_widget(formContact.captcha) }}
+                    {{ form_errors(formContact.captcha) }}
+                    <br/>
+
+                    {#Ce dernier form widget vas nous permettre d'ajouter des que nous aurions pu oublier et SURTOUT le form token sans ça votre formulaire ne sera jamais valide !!#}
+                    {{ form_widget(formContact) }}
+                    {{ form_errors(formContact) }}
+                    <button class="btn btn-success btn-big">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

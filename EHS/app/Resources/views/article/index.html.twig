@@ -46,7 +46,10 @@
                 <td>{% if article.online %}Oui{% else %}Non{% endif %}</td>
                 <td><!--Affichage des tags de l'article -->
                     {% for tag in article.tag %}
-                        {{ tag.libelle }}<br/>
+                        <div class="buttonLink">
+                            <a href="{{ path('tags_search', { 'libelle': tag.libelle }) }}">{{ tag.libelle }}</a>
+                        </div>
+
                     {% endfor  %}
                 </td>
                 <td>

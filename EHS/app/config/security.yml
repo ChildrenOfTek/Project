@@ -16,7 +16,6 @@ security:
         db_provider:
             entity:
                 class: UserBundle:User
-                property: username
 
     firewalls:
         secured_area:

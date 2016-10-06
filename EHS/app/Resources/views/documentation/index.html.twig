@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Documentation
+{% endblock %}
+
+{% block section %}
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">Liste des sujets</div>
+        <div class="panel-body">
+<div class="container">
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Utilisateurs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('documentation_show',{'doc':'userNew'}) }}">Créer un utilisateur</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('documentation_show',{'doc':'userEdit'}) }}">Editer un utilisateur</a>
+                    </li>
+                    <li>
+                        Supprimer un utilisateur
+                    </li>
+                </ul>
+            </td>
+        </tbody>
+    </table>
+</div></div></div></div></div>
+    <div class="buttonLink">
+        <a href="javascript:window.history.go(-1)">Retour</a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edition d'utilisateurs
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Documentation pour les utilisateurs :</div>
+                <div class="panel-body">
+
+                    <div class="bloc">
+                        <div class="blocGauche">
+                            <img src="{{ asset('public/doc/userEdit.png') }}" alt ="Edition d'un utilisateur"/>
+                        </div>
+                        <div class="blocDroite">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Modifications</div>
+                                        <div class="panel-body">
+
+                            <p>Le nom d'utilisateur sera utilisé pour la connexion,
+                            tout comme le mail qui sont tout deux uniques.</p>
+
+                            <p>
+                                <strong>La suite des champs a été enlevé, ils ne nécessitent pas d'explications.</strong>
+                            </p></br>
+                            <p>
+                                Ici, le mot de passe apparait en <strong>crypté</strong>.
+                                Un formulaire de "Mot de passe oublié" est à disposition des utilisateurs.
+                            </p>
+                            <p>
+                                Si toutefois vous vouliez changer <strong>manuellement</strong> le mot de passe, entrez le ici,
+                                il sera automatiquement <strong>crypté</strong> à nouveau, il ne vous reste qu'à le transmettre
+                                à la personne concernée.
+                            </p>
+                            <p>
+                                Si vous ne changez rien, le mot de passe actuel restera <strong>inchangé</strong>
+                            </p>
+                            <p>
+                               Vous pouvez ensuite valider l'edition en cliquant sur le bouton *Editer*.
+                            </p>
+                            <p>
+                                Vous pouvez <strong>supprimer</strong> un utilisateur en cliquand sur le bouton *Supprimer*
+                            </p>
+                </div></div></div></div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    </div></div></div></div>
+
+{% endblock %}
+{%  block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/CSS/doc.css') }}"
+{% endblock %}

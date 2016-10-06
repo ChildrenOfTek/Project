@@ -226,7 +226,7 @@ class UserController extends Controller
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository('UserBundle:User');
         //custom repo method for finding users with ROLE_ADMIN
-        $admins=$repo->findUserByRoles();
+        $admins=$repo->findAdmins();
 
         if($user->getRoles()[0]->getRole() != 'ROLE_ADMIN')
         {

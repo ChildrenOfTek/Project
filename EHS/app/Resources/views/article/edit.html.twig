@@ -5,8 +5,15 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Edition d'article</h1>
-
+    <div class="buttonLink">
+        <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'articleEdit'}) }}')">Voir l'aide</a>
+    </div>
+    <section>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Edition d'article</div>
+            <div class="panel-body">
     {{ form_start(edit_form) }}
         {{ form_row(edit_form.user) }}
         {{ form_row(edit_form.dateArticle) }}
@@ -37,7 +44,8 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
-
+</div></div></div></div></div>
+</section>
 {% endblock %}
 {% block javascripts %}
             <script type="text/javascript" src="{{ asset('public/script/DynamicTagging.js') }}"></script>

@@ -1,0 +1,11 @@
+.bloc{
+    display:flex;
+
+}
+.blocGauche{
+
+}
+.blocDroite{
+    padding-left:50px;
+
+}

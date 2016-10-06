@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use AssociationBundle\Form\ContactType;
 use AssociationBundle\Form\DemandeType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 
 /**
@@ -196,6 +198,105 @@ class DefaultController extends Controller
             // on renvoi dans la vue "la vue" du formulaire
             'formContact' => $formDemande->createView(),
             'user'=>$user,
+        ));
+    }
+
+    /**
+     * Generates a phone book.
+     * @Security("has_role('ROLE_PRESS')")
+     * @Route("/association/annuaire", name="association_annuaire")
+     */
+    public function annuaireAction()
+    {
+        $em=$this->getDoctrine()->getManager();
+        $repo=$em->getRepository('UserBundle:User');
+        $annuaire=$repo->findAnnuaire();
+
+        return $this->render('press/annuaire.html.twig', array(
+            'annuaire' => $annuaire,
+        ));
+
+    }
+
+    /**
+     * Finds and displays a User entity in phone book mode.
+     * @Security("has_role('ROLE_PRESS')")
+     * @Route("/association/presse/{id}/profile", name="association_annuaire_profile")
+     * @Method("GET")
+     */
+    public function showPressAction($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $repo=$em->getRepository('UserBundle:User');
+        $user=$repo->findOneBy(array('id'=>$id));
+
+        return $this->render('press/press.profile.html.twig', array(
+            'user' => $user,
+        ));
+    }
+
+    /**
+     * Generates a contact form for Press.
+     *
+     * @Route("/association/presse/{id}/contact", name="contact_presse")
+     * @Method({"GET","POST"})
+     */
+    public function contactPresseAction(Request $r,$id)
+    {
+        $user=$this->get('security.token_storage')->getToken()->getUser();
+        $formContact = $this->createForm(new ContactType());
+        $formContact->remove('email');
+        $formContact->add('email',EmailType::class,array(
+            'data'=>$user->getEmail(),
+            'label'=>'Votre email pour la réponse: '));
+
+        $em=$this->getDoctrine()->getManager();
+        $destinataire=$em->getRepository('UserBundle:User')
+            ->findOneBy(array('id'=>$id));
+
+        //on verifie que user != destinataire
+        if($user->getId() == $destinataire->getId())
+        {
+            $this->get('session')->getFlashBag()->add('error', 'Désolé, vous etes le destinateur et le destinataire.');
+            return $this->redirectToRoute('association_annuaire');
+        }
+
+        if($r->isMethod('post')){
+            $formContact->handleRequest($r);
+
+            if($formContact->isValid()){
+                $contact = $formContact->getData();
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject($contact->getSujet())
+                    ->setFrom($contact->getEmail())
+                    ->setTo($destinataire->getEmail())
+                    ->setBody(
+                        $this->renderView('press/contactPress.mail.html.twig', array(
+                                'contact' => $contact,
+                                'user' => $user
+                            )
+                        ), 'text/html'
+                    )
+                ;
+
+                $this->get('mailer')->send($message);
+
+                // on retourne une message flash pour l'utilisateur pour le prévenir que son mail est bien parti
+                $this->get('session')->getFlashBag()->add('success', 'Votre email a bien été envoyé a '.$destinataire->getEmail());
+                return $this->redirectToRoute('association_annuaire');
+            }else{
+                //si le formulaire n'est pas valide en plus des erreurs du form
+                $this->get('session')->getFlashBag()->add('error', 'Désolé un problème est survenu.');
+                return $this->redirectToRoute('contact_presse', array('id' => $destinataire->getId()));
+            }
+        }
+
+        return $this->render('press/contactPress.html.twig', array(
+            // on renvoie dans la vue "la vue" du formulaire
+            'formContact' => $formContact->createView(),
+            'user'=>$user,
+            'destinataire'=>$destinataire
         ));
     }
 }

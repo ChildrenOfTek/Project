@@ -20,7 +20,21 @@ class UserRepository extends EntityRepository
             ->innerJoin('u.userRoles', 'r', 'WITH', 'r.role = ?1')
             ->setParameter(1, 'ROLE_ADMIN');
 
- return $qb->getQuery()->getResult();
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findAnnuaire()
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('u')
+            ->from('\UserBundle\Entity\User', 'u')
+            ->innerJoin('u.userRoles', 'r', 'WITH', $qb->expr()->orX(
+                $qb->expr()->eq('r.role', '?1'),
+                $qb->expr()->eq('r.role', '?2')))
+            ->setParameter(1, 'ROLE_ADMIN')
+            ->setParameter(2, 'ROLE_PRESS');
+
+        return $qb->getQuery()->getResult();
     }
 
 }

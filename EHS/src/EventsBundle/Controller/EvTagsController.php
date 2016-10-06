@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EventsBundle\Entity\Evtags;
 use EventsBundle\Form\EvtagsType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Evtags controller.
@@ -65,7 +66,7 @@ class EvtagsController extends Controller
 
     /**
      * Creates a new Evtags entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/new", name="evtags_new")
      * @Method({"GET", "POST"})
      */
@@ -107,7 +108,7 @@ class EvtagsController extends Controller
 
     /**
      * Displays a form to edit an existing Evtags entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="evtags_edit")
      * @Method({"GET", "POST"})
      */
@@ -134,7 +135,7 @@ class EvtagsController extends Controller
 
     /**
      * Deletes a Evtags entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="evtags_delete")
      * @Method("DELETE")
      */
@@ -154,7 +155,7 @@ class EvtagsController extends Controller
 
     /**
      * Creates a form to delete a Evtags entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Evtags $evtag The Evtags entity
      *
      * @return \Symfony\Component\Form\Form The form

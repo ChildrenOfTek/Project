@@ -1,27 +1,56 @@
-    <h1>Events</h1>
+<section>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+        <div class="panel-body">
 
-    <table>
-        <tbody>
+        <!-- Blog Post Content Column -->
 
-            <tr>
-                <th>Title</th>
-                <td>{{ event.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}</td>
-            </tr>
-            <tr>
-                <th>Start</th>
-                <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>End</th>
-                <td>{% if event.end %}{{ event.end|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-             <tr>
-                <th>Places restantes</th>
-                <td>{{ (event.places -event.registrations| length) }}</td>
-            </tr>
-        </tbody>
-    </table>
+
+            <!-- Blog Post -->
+
+            <!-- Title -->
+            <h1>{{ event.title }}</h1>
+
+            <hr>
+
+            <!-- Duration -->
+            {% if event.start %}
+                <p><span class="glyphicon glyphicon-time"></span>
+                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL à HH:mm") }}
+                </p>
+            {% endif %}
+
+            <!-- Address -->
+            {% if event.address %}
+                <p><span class="glyphicon glyphicon-home"></span>
+                    {{ event.address }}
+                </p>
+            {% endif %}
+
+            <!-- Remaining Places-->
+            {% if event.registrations|length < event.places %}
+                {{ event.places - event.registrations|length }} places restantes
+            {% else %}
+                <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
+            {% endif %}
+
+            <hr>
+
+            <!-- Post Content -->
+
+            {{ event.description|raw }}
+
+            <!-- Tags -->
+            Mots-clés :
+            {% for evtag in event.evtag %}
+                <a href="{{ path('evtags_search',{"libelle":evtag.libelle}) }}">{{ evtag.libelle}}</a>
+                <!-- <button class="tagbox" type="submit">{{ evtag.libelle}}</button> -->
+            {% endfor %}
+
+            </div>
+            </div>
+
+</div>
+        </div>
+</section>

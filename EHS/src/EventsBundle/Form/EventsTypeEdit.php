@@ -4,14 +4,21 @@ namespace EventsBundle\Form;
 
 use Symfony\Bridge\Doctrine\Tests\Form\Type\EntityTypeTest;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityManager;
 
 class EventsTypeEdit extends AbstractType
 {
+    private $em;
+
+    public function __construct(EntityManager $em){
+        $this->em = $em;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -27,11 +34,11 @@ class EventsTypeEdit extends AbstractType
             ->add('end', 'datetime')
             ->add('places', 'integer')
             ->add('address')
-            ->add('evtag',CollectionType::class,array(
-                'entry_type'=>EvtagsType::class,
-                'allow_add'=>true,
-                'allow_delete'=>true,
-                'by_reference'=>false,
+            ->add('evtag',EntityType::class,array(
+                'class'=>'EventsBundle:Evtags',
+                'choice_label'=>'libelle',
+                'expanded'=>true,
+                'multiple'=>true
             ))
         ;
     }

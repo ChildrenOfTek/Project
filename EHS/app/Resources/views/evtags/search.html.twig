@@ -34,6 +34,7 @@
                                     {{ registration.email }}</br>
                                 {% endfor %}
                             {% endif %} #}
+                            Mots-clés :
                             {% for evtag in event.evtag %}
                                 <a href="{{ path('evtags_search',{"libelle":evtag.libelle}) }}">{{ evtag.libelle}}</a>
                             {% endfor  %}

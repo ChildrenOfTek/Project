@@ -8,8 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EventsBundle\Entity\Events;
 use EventsBundle\Form\EventsType;
+use EventsBundle\Form\EventsTypeEdit;
 use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\Validator\Constraints\DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
@@ -21,7 +21,7 @@ class EventsController extends Controller
 {
     /**
      * Lists all Events entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="events_index")
      * @Method("GET")
      */
@@ -89,8 +89,10 @@ class EventsController extends Controller
      */
     public function editAction(Request $request, Events $event)
     {
+        $em=$this->getDoctrine()->getEntityManager();
+
         $deleteForm = $this->createDeleteForm($event);
-        $editForm = $this->createForm('EventsBundle\Form\EventsTypeEdit', $event);
+        $editForm = $this->createForm(new EventsTypeEdit($em), $event);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -113,7 +115,7 @@ class EventsController extends Controller
 
     /**
      * Deletes a Events entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="events_delete")
      * @Method("DELETE")
      */
@@ -133,7 +135,7 @@ class EventsController extends Controller
 
     /**
      * Creates a form to delete a Events entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Events $event The Events entity
      *
      * @return \Symfony\Component\Form\Form The form

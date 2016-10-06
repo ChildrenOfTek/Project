@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EventsBundle\Entity\Registration;
 use EventsBundle\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Registration controller.
@@ -36,7 +37,7 @@ class RegistrationController extends Controller
 
     /**
      * Creates a new Registration entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/new", name="registration_new")
      * @Method({"GET", "POST"})
      */
@@ -99,7 +100,7 @@ class RegistrationController extends Controller
 
     /**
      * Displays a form to edit an existing Registration entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="registration_edit")
      * @Method({"GET", "POST"})
      */
@@ -126,7 +127,7 @@ class RegistrationController extends Controller
 
     /**
      * Deletes a Registration entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="registration_delete")
      * @Method("DELETE")
      */
@@ -146,7 +147,7 @@ class RegistrationController extends Controller
 
     /**
      * Creates a form to delete a Registration entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Registration $registration The Registration entity
      *
      * @return \Symfony\Component\Form\Form The form

@@ -149,12 +149,24 @@ class NewsletterController extends Controller
             $corps = "</body></html>";
         } else {
             foreach ($newsletter->getArticle() as $nl) {
-                $corps = $corps . "<hr><h4>" .
-                    $nl->getTitreArticle() .
-                    "</h4><p><img src=\"http://localhost" .
-                    $this->getRequest()->getBasePath() . "/public/img/Articles/Article_" .
-                    $nl->getDateArticle()->format("d_m_y") . "/" . $nl->getImageName() .
-                    "\" width=\"150\" style=\"float:left; padding:10px\">" . $nl->getContent() . "</p>";
+                if($nl->getImageName()== null )
+                {
+                    $corps = $corps . "<hr><h4>" .
+                        $nl->getTitreArticle() .
+                        "</h4><p><img src=\"http://localhost" .
+                        $this->getRequest()->getBasePath() . "/public/img/article/default.jpg
+                         width=\"150\" style=\"float:left; padding:10px\">" .
+                        $nl->getContent() . "</p>";
+
+                }else{
+                    $corps = $corps . "<hr><h4>" .
+                        $nl->getTitreArticle() .
+                        "</h4><p><img src=\"http://localhost" .
+                        $this->getRequest()->getBasePath() . "/public/img/article/Article_" .
+                        $nl->getDateArticle()->format("d_m_y") . "/" . $nl->getImageName() .
+                        "\" width=\"150\" style=\"float:left; padding:10px\">" . $nl->getContent() . "</p>";
+
+                }
             }
         }
 

@@ -36,12 +36,13 @@ class NewsletterTypeEdit extends AbstractType
                 'disabled' => true
             ))
             ->add('sujet')
-            ->add('texte', TextareaType::class, array(
+            ->add('texte', 'ckeditor', array(
                 'attr'=>array('rows'=>15),
             ))
             ->add('article',EntityType::class, array(
                 'class'=>'ArticleBundle:Article',
                 'choice_label'=>'titreArticle',
+                'choices'=>$this->fillArticles(),
                 'expanded'=>true,
                 'multiple'=>true
             ));
@@ -57,5 +58,14 @@ class NewsletterTypeEdit extends AbstractType
         ));
     }
 
+    private function fillArticles() {
+        $articles = $this->em->getRepository('ArticleBundle:Article')->findNewArticles();
+
+        $articlesTitre = [];
+        foreach($articles as $article){
+            $articlesTitre[$article->getTitreArticle()] = $article;
+        }
+        return $articlesTitre;
+    }
 
 }

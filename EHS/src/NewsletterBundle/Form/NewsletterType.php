@@ -32,8 +32,8 @@ class NewsletterType extends AbstractType
                 'widget' => 'single_text'
             ))
             ->add('sujet')
-            ->add('texte', TextareaType::class, array(
-                'attr'=>array('rows'=>15),
+            ->add('texte', 'ckeditor', array(
+                'attr'=>array('rows'=>10),
             ))
             ->add('article',ChoiceType::class, array(
                 'label'=>'Articles à ajouter',

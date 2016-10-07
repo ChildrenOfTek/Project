@@ -143,13 +143,30 @@ class NewsletterController extends Controller
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('UserBundle:User')->findAll();
         $checked = [];
+        $corps = "";
+
+        if ($newsletter->getArticle()->isEmpty()) {
+            $corps = "</body></html>";
+        } else {
+            foreach ($newsletter->getArticle() as $nl) {
+                $corps = $corps . "<hr><h4>" .
+                    $nl->getTitreArticle() .
+                    "</h4><p><img src=\"http://localhost" .
+                    $this->getRequest()->getBasePath() . "/public/img/Articles/Article_" .
+                    $nl->getDateArticle()->format("d_m_y") . "/" . $nl->getImageName() .
+                    "\" width=\"150\" style=\"float:left; padding:10px\">" . $nl->getContent() . "</p>";
+            }
+        }
 
         foreach ($users as $user) {
             $message = \Swift_Message::newInstance()
                 ->setSubject($newsletter->getSujet())
                 ->setFrom(array('guillossou.michele@gmail.com' => 'Michele Guillossou'))
                 ->setTo(array($user->getEmail() => $user->getPrenom() . " " . $user->getNom()))
-                ->setBody($newsletter->getTexte(), 'text/html');
+                ->setBody("<html><head></head><body><center><h1>" .
+                    $newsletter->getSujet() . "</h1></center><p>" .
+                    $newsletter->getTexte() . "</p>" . $corps,
+                    'text/html');
             $this->get('mailer')->send($message);
             $checked[] = $user->getPrenom() . " " . $user->getNom();
         }

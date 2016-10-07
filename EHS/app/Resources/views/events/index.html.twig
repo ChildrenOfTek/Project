@@ -8,8 +8,8 @@
         <div class="panel-heading">Liste des évènements</div>
         <div class="panel-body">
 <div class="container">
+<h1>Évènements à venir</h1><hr>
 {% if futureevents %}
-    <h1>Évènements à venir</h1><hr>
     {% for event in futureevents %}
         <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
             {% if event.start and event.end %}
@@ -83,9 +83,6 @@
             {% endif %}
             <hr>
         {% endfor %}
-    {% else %}
-        Il n'y a actuellement pas d'événement de programmé.
-        <hr>
     {% endif %}
 {% endif %}
     {% if(is_granted('ROLE_ADMIN')) %}

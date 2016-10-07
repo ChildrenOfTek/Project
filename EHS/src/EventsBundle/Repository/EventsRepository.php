@@ -31,4 +31,15 @@ class EventsRepository extends EntityRepository
             ->getResult()
         ;
     }
+
+    public function findThreeNextEvents() {
+        return $this->createQueryBuilder('e')
+            ->where('e.end >= :now')
+            ->setParameter('now', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
+            ->orderBy('e.start', 'ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

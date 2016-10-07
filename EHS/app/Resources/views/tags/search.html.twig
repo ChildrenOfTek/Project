@@ -46,7 +46,7 @@
             <div class="panel-body">
     <div class="container"> 
     {% if futureevents %}
-        <h1>Évènements à venir</h1><hr>
+        <h1>Évènements en cours ou à venir</h1><hr>
         {% for event in futureevents %}
             <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
                 {% if event.start and event.end %}

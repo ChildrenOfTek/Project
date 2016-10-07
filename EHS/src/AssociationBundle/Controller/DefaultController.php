@@ -25,7 +25,11 @@ class DefaultController extends Controller
     {
         $em=$this->getDoctrine()->getManager();
         $articles=$em->getRepository('ArticleBundle:Article')->findOnline();
-        return $this->render('association/index.html.twig',array('articles'=>$articles));
+        $events=$em->getRepository('EventsBundle:Events')->findThreeNextEvents();
+        return $this->render('association/index.html.twig',array(
+            'articles'=>$articles,
+            'events'=>$events
+        ));
     }
 
     /**

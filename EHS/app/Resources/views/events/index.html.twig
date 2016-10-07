@@ -8,7 +8,7 @@
         <div class="panel-heading">Liste des évènements</div>
         <div class="panel-body">
 <div class="container">
-<h1>Évènements à venir</h1><hr>
+<h1>Évènements en cours ou à venir</h1><hr>
 {% if futureevents %}
     {% for event in futureevents %}
         <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>

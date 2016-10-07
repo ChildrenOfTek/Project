@@ -1,4 +1,24 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300');
+html{
+    height:100%;
+}
 
+body{
+    height:100%;
+    margin-top: 120px;
+    font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
+    background-color: #f4f4f4;
+
+
+}
+
+body a:link{
+    color: #0AC375;
+}
+
+body a:visited{
+    color: #BF37B4;
+}
 .carousel {
     margin-top: -120px;
     height: 60%;

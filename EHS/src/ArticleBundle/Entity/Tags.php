@@ -5,6 +5,8 @@ namespace ArticleBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use EventsBundle\Entity\Events;
+
 /**
  * Tags
  *
@@ -34,8 +36,14 @@ class Tags
      */
     private $articles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="EventsBundle\Entity\Events", mappedBy="tag")
+     */
+    private $events;
+
     public function __construct() {
             $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+            $this->events = new \Doctrine\Common\Collections\ArrayCollection();
         }
 
 
@@ -103,5 +111,38 @@ class Tags
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * Add events
+     *
+     * @param \EventsBundle\Entity\Events $events
+     * @return Tags
+     */
+    public function addEvents(\EventsBundle\Entity\Events $events)
+    {
+        $this->events[] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Remove events
+     *
+     * @param \EventsBundle\Entity\Events $events
+     */
+    public function removeEvents(\EventsBundle\Entity\Events $events)
+    {
+        $this->events->removeElement($events);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

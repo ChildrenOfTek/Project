@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
+
+{% if articles is defined %}
     <h1>Voici les articles correspondants au tag : {{ tags.libelle }}</h1>
     {% if articles is empty %}
         <h3>Il n'y a aucun article qui corresponde au tag: {{ tags.libelle }}</h3>
@@ -10,7 +12,6 @@
             </li>
         </ul>
     {% endif %}
-
     {% for article in articles %}
         <div class="row">
             <div class="col-md-12">
@@ -34,6 +35,88 @@
             <a href="{{ path('index') }}">Retour aux articles</a>
         </li>
     </ul>
+{% endif %}
 
+
+{% if futureevents is defined %}
+     <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">Liste des évènements</div>
+        <div class="panel-body">
+<div class="container">   
+    <h1>Évènements à venir</h1><hr>
+    {% for event in futureevents %}
+        <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
+            {% if event.start and event.end %}
+                <p><span class="glyphicon glyphicon-time"></span>
+                {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
+                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                    au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                {% else %}
+                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
+                {% endif %}
+                </p>
+            {% endif %}
+        {% if event.address %}
+            <p><span class="glyphicon glyphicon-home"></span>
+                {{ event.address }}
+            </p>
+        {% endif %}
+        {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}
+        <br/>
+        <!-- Tags -->
+        Mots-clés :
+        {% for tag in event.tag %}
+            <a href="{{ path('tags_events_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+            <!-- <button class="tagbox" type="submit">{{ tag.libelle}}</button> -->
+        {% endfor %}
+        <br/>
+        {% if event.registrations|length < event.places %}
+            <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
+        {% else %}
+            <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
+        {% endif %}
+        <hr>
+    {% endfor %}
+{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+    {% if pastevents is defined %}
+        <h1>Évènements passés</h1><hr>
+        {% for event in pastevents %}
+            <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
+            {% if event.start and event.end %}
+                <p><span class="glyphicon glyphicon-time"></span>
+                {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
+                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                    au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                {% else %}
+                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
+                {% endif %}
+                </p>
+            {% endif %}
+            {% if event.address %}
+                <p><span class="glyphicon glyphicon-home"></span>
+                    {{ event.address }}
+                </p>
+            {% endif %}
+            {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}
+            <br/>
+            <!-- Tags -->
+            Mots-clés :
+            {% for tag in event.tag %}
+                <a href="{{ path('tags_events_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+                <!-- <button class="tagbox" type="submit">{{ tag.libelle}}</button> -->
+            {% endfor %}
+            <br/>
+            {% if event.registrations|length < event.places %}
+                <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
+            {% else %}
+                <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
+            {% endif %}
+            <hr>
+        {% endfor %}
+    {% endif %}
+{% endif %}
 
 {% endblock %}

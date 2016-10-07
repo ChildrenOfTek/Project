@@ -21,7 +21,7 @@ class EventsController extends Controller
 {
     /**
      * Lists all Events entities.
-     * @Security("has_role('ROLE_ADMIN')")
+     *
      * @Route("/", name="events_index")
      * @Method("GET")
      */
@@ -40,7 +40,7 @@ class EventsController extends Controller
 
     /**
      * Creates a new Events entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/new", name="events_new")
      * @Method({"GET", "POST"})
      */

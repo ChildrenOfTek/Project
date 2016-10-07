@@ -35,10 +35,10 @@ class EventsType extends AbstractType
             ->add('end', 'datetime')
             ->add('places', 'integer')
             ->add('address')
-            ->add('evtag',ChoiceType::class,array(
+            ->add('tag',ChoiceType::class,array(
                 'label'=>'Tags à ajouter',
                 'label_attr'=>array('class'=>'checkbox-inline'),
-                'choices'=>$this->fillEvtags(),
+                'choices'=>$this->fillTags(),
                 'attr'=>array('class'=>CheckboxType::class),
                 'choices_as_values'=>true,
                 'expanded'=>true,
@@ -57,17 +57,16 @@ class EventsType extends AbstractType
         ));
     }
 
-    private function fillEvtags() {
+    private function fillTags() {
         //On reccup la liste des tags, on push dans un array,
         // et on renvoie à ChoiceType
-        $evtags=$this->em->getRepository('EventsBundle:Evtags')->findAll();
+        $tags=$this->em->getRepository('ArticleBundle:Tags')->findAll();
 
-        $evtagsLib = [];
-        foreach($evtags as $evtag){
-            //if($evtag->getLibelle()!=)
-            $evtagsLib[$evtag->getLibelle()] = $evtag;
+        $tagsLib = [];
+        foreach($tags as $tag){
+            //if($tag->getLibelle()!=)
+            $tagsLib[$tag->getLibelle()] = $tag;
         }
-        // var_dump($evtagsLib); die();
-        return $evtagsLib;
+        return $tagsLib;
     }
 }

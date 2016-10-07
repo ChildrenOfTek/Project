@@ -43,9 +43,9 @@
 
             <!-- Tags -->
             Mots-clés :
-            {% for evtag in event.evtag %}
-                <a href="{{ path('evtags_search',{"libelle":evtag.libelle}) }}">{{ evtag.libelle}}</a>
-                <!-- <button class="tagbox" type="submit">{{ evtag.libelle}}</button> -->
+            {% for tag in event.tag %}
+                <a href="{{ path('tags_events_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+                <!-- <button class="tagbox" type="submit">{{ tag.libelle}}</button> -->
             {% endfor %}
 
             </div>

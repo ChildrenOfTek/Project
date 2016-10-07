@@ -37,7 +37,7 @@ class RegistrationController extends Controller
 
     /**
      * Creates a new Registration entity.
-     * @Security("has_role('ROLE_ADMIN')")
+     *
      * @Route("/{id}/new", name="registration_new")
      * @Method({"GET", "POST"})
      */

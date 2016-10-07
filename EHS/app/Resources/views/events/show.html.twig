@@ -53,32 +53,26 @@
 
             {{ event.description|raw }}
 
+            <hr>
+
             <!-- Tags -->
             Mots-clés :
-            {% for evtag in event.evtag %}
-                <a href="{{ path('evtags_search',{"libelle":evtag.libelle}) }}">{{ evtag.libelle}}</a>
-                <!-- <button class="tagbox" type="submit">{{ evtag.libelle}}</button> -->
+            {% for tag in event.tag %}
+                <a href="{{ path('tags_events_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+                <!-- <button class="tagbox" type="submit">{{ tag.libelle}}</button> -->
             {% endfor %}
 
+            <br/><a href="{{ path('events_index') }}">Retourner à la liste</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <br/><a href="{{ path('events_edit', { 'id': event.id }) }}">Editer l'évènement</a>
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Effacer l'évènement">
+                {{ form_end(delete_form) }}
+            {% endif %}            
             </div>
             </div>
 
 </div>
         </div>
 </section>
-    <ul>
-        <li>
-            <a href="{{ path('events_index') }}">Retourner à la liste</a>
-        </li>
-        {% if is_granted('ROLE_ADMIN') %}
-        <li>
-            <a href="{{ path('events_edit', { 'id': event.id }) }}">Editer l'évènement</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Effacer l'évènement">
-            {{ form_end(delete_form) }}
-        </li>
-        {% endif %}
-    </ul>
 {% endblock %}

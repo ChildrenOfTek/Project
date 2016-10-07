@@ -9,15 +9,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Doctrine\ORM\EntityManager;
 
 class EventsTypeEdit extends AbstractType
 {
-    private $em;
-
-    public function __construct(EntityManager $em){
-        $this->em = $em;
-    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -34,8 +28,10 @@ class EventsTypeEdit extends AbstractType
             ->add('end', 'datetime')
             ->add('places', 'integer')
             ->add('address')
-            ->add('evtag',EntityType::class,array(
-                'class'=>'EventsBundle:Evtags',
+            ->add('tag',EntityType::class,array(
+                'label'=>'Mots-clés',
+                'label_attr'=>array('class'=>'checkbox-inline'),
+                'class'=>'ArticleBundle:Tags',
                 'choice_label'=>'libelle',
                 'expanded'=>true,
                 'multiple'=>true

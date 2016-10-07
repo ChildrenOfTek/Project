@@ -37,7 +37,6 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
             $articles[$i]->setContent($content[$i]);
             $articles[$i]->setUpdatedAt(new \DateTime());
             $articles[$i]->setOnline(true);
-            $articles[$i]->setImageName('raté');
             $articles[$i]->setUser($this->getReference($user[$i]));
             $articles[$i]->addTag($this->getReference('Santé'));
             $articles[$i]->addTag($this->getReference('Informations'));

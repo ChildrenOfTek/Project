@@ -1,9 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block section %}
-    <h1>Liste des utilisateurs</h1>
+{% block title %}
+    Gestion des utilisateurs
+{% endblock %}
 
-    <table>
+{% block section %}
+<div class="wrapper">
+    <div class="buttonLink">
+        <a href="{{ path('user_new') }}">Ajouter un nouvel utilisateur</a>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+          <div class="panel-heading">Gestion des utilisateurs</div>
+            <div class="panel-body">
+              <div class="container col-md-10 col-md-offset-1">
+                <div class="table-responsive">
+    <table class="table table-hover table-bordered table-striped">
         <thead>
             <tr>
                 <th>Id</th>
@@ -17,7 +31,7 @@
                 <th>Telephone</th>
                 <th>Email</th>
                 <th>Newsletter</th>
-                <th>Birthdate</th>
+                <th>Date de naissance</th>
 
                 <th>Actions</th>
             </tr>
@@ -41,23 +55,21 @@
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
                 <!-- H:i:s-->
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('user_show', { 'id': user.id }) }}">Voir</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
-                        </li>
-                    </ul>
+                    <div class="buttonLink">
+                        <a href="{{ path('user_show', { 'id': user.id }) }}">Voir</a>
+                    </div>
+                    <div class="buttonLink">
+                        <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+</div></div></div></div></div>
 
-    <ul>
-        <li>
-            <a href="{{ path('user_new') }}">Ajouter un nouvel utilisateur</a>
-        </li>
-    </ul>
+  </div>
+  </div>
+
+
 {% endblock %}

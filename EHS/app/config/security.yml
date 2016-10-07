@@ -16,7 +16,6 @@ security:
         db_provider:
             entity:
                 class: UserBundle:User
-                property: username
 
     firewalls:
         secured_area:
@@ -37,6 +36,8 @@ security:
 
     access_control:
         - { path: ^/admin, roles : ROLE_ADMIN }
+        - { path: ^/efconnect, roles: ROLE_ADMIN }
+        - { path: ^/elfinder, roles: ROLE_ADMIN }
 
             # activate different ways to authenticate
 

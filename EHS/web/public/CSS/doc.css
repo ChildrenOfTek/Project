@@ -1,0 +1,27 @@
+.bloc{
+    display:flex;
+
+}
+.blocGauche{
+
+}
+.blocDroite{
+    padding-left:50px;
+
+}
+.blocColumn{
+    display:flex;
+    flex-flow: column nowrap;
+
+}
+.blocHaut{
+
+
+}
+.blocHaut img{
+
+width:100%;
+}
+.blocBas{
+
+}

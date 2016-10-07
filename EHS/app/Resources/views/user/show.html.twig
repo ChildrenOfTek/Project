@@ -1,10 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block section %}
-    <h1>User</h1>
+{% block title %}
+    Voir un utilisateur
+{% endblock %}
 
-    <table>
-        <tbody>
+{% block section %}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Utilisateur : {{ user.username }}</div>
+            <div class="panel-body">
+                <div class="container">
+                    <table class="table table-hover table-bordered">
+
+
+                        <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ user.id }}</td>
@@ -58,20 +69,23 @@
                 <th>Date de naissance</th>
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
+                        <tr>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('user_index') }}">Retour à la liste </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
+                                </li>
+                                <li>
+                                    {{ form_start(delete_form) }}
+                                    <input type="submit" value="Supprimer">
+                                    {{ form_end(delete_form) }}
+                                </li>
+                            </ul>
+                        </tr>
         </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('user_index') }}">Retour à la liste </a>
-        </li>
-        <li>
-            <a href="{{ path('user_edit', { 'id': user.id }) }}">Editer</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                        </table></div></div></div></div></div>
+
 {% endblock %}

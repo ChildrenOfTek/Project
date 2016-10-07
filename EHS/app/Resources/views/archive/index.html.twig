@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+
+<div class="wrapper">
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Liste des archives</div>
+            <div class="panel-body">
+                <div class="container">
+                    <div class="buttonLink">
+                        <a href="{{ path('association_archive_new') }}">Créer une nouvelle archive</a>
+                    </div>
+                    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date de création</th>
+                <th>Titre de l'archive</th>
+                <th>Nom du fichier</th>
+                <th>Dernière mise à jour</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for archive in archives %}
+            <tr>
+                <td><a href="{{ path('association_archive_show', { 'id': archive.id }) }}">{{ archive.id }}</a></td>
+                <td>{% if archive.dateCreation %}{{ archive.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ archive.titreArchive }}</td>
+                <td><a href="{{ app.request.basePath }}{{ vich_uploader_asset(archive, 'imageFile') }}" download>{{ archive.imageName }}</a></td>
+                <td>{% if archive.updatedAt %}{{ archive.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('association_archive_show', { 'id': archive.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('association_archive_edit', { 'id': archive.id }) }}">Editer</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div></div></div></div></div></div>
+{% endblock %}

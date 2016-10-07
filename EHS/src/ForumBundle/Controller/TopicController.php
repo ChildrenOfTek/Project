@@ -20,7 +20,7 @@ class TopicController extends Controller
 {
     /**
      * Lists all Topic entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="topic_index")
      * @Method("GET")
      */
@@ -37,7 +37,7 @@ class TopicController extends Controller
 
     /**
      * Creates a new Topic entity.
-     *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/new", name="topic_new")
      * @Method({"GET", "POST"})
      */
@@ -69,7 +69,7 @@ class TopicController extends Controller
 
     /**
      * Finds and displays a Topic entity.
-     *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/{id}", name="topic_show")
      * @Method("GET")
      */

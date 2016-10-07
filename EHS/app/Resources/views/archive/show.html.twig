@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Voir une archive
+{% endblock %}
+
+{% block section %}
+    <h1>Archive</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ archive.id }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{% if archive.dateCreation %}{{ archive.dateCreation|date('d-m-Y H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Titre de l'archive</th>
+                <td>{{ archive.titreArchive }}</td>
+            </tr>
+            <tr>
+                <th>Nom du fichier</th>
+                <td><a href="{{ vich_uploader_asset(archive, 'imageFile') }}" download>{{ archive.imageName }}</a></td>
+            </tr>
+            <tr>
+                <th>Dernière mise à jour</th>
+                <td>{% if archive.updatedAt %}{{ archive.updatedAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('association_archive_edit', { 'id': archive.id }) }}">Editer</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

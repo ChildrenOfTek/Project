@@ -21,7 +21,7 @@ class UserController extends Controller
 {
     /**
      * Lists all User entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="user_index")
      * @Method("GET")
      */
@@ -83,7 +83,7 @@ class UserController extends Controller
             ;
             $this->get('mailer')->send($message);*/
 
-            $this->get('session')->getFlashBag()->set('success',
+            $this->addFlash('success',
                 'Utilisateur ajouté !');
 
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
@@ -113,7 +113,7 @@ class UserController extends Controller
 
     /**
      * Finds and displays a User entity in public mode.
-     *
+     * @Security("has_role('ROLE_USER')")
      * @Route("/{id}/profile", name="user_showpublic")
      * @Method("GET")
      */
@@ -140,6 +140,7 @@ class UserController extends Controller
         $editForm = $this->createForm('UserBundle\Form\UserType', $user);
         $editForm->remove('userRoles');
         $editForm->remove('password');
+        $editForm->remove('username');
         $editForm->handleRequest($request);
         //var_dump($editForm);die();
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -147,14 +148,15 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash('success',
+                'Profil mis à jour !');
+
             return $this->redirectToRoute('index');
         }
         //On verifie que l'utilisateur cherche bien à éditer son propre profil
         if($this->get('security.token_storage')->getToken()->getUser()->getUsername()
         == $editForm->getData()->getUsername())
         {
-            $this->get('session')->getFlashBag()->set('success',
-                'Profil mis à jour !');
             return $this->render('user/user.edit.html.twig', array(
                 'user' => $user,
                 'edit_form' => $editForm->createView(),
@@ -178,9 +180,10 @@ class UserController extends Controller
     {
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('UserBundle\Form\UserType', $user);
-        $editForm->remove('userRoles');
+
         $editForm->remove('password');
-        $editForm->add('password');
+        $editForm->add('password','text',array('label'=>'(Si vous voulez changer le mot de passe, écrivez en un nouveau.
+         Sinon, ne touchez rien !)'));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -198,7 +201,7 @@ class UserController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->set('success',
+            $this->addFlash('success',
                 'Utilisateur mis à jour !');
 
             return $this->redirectToRoute('user_index');
@@ -223,7 +226,7 @@ class UserController extends Controller
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository('UserBundle:User');
         //custom repo method for finding users with ROLE_ADMIN
-        $admins=$repo->findUserByRoles();
+        $admins=$repo->findAdmins();
 
         if($user->getRoles()[0]->getRole() != 'ROLE_ADMIN')
         {
@@ -235,7 +238,7 @@ class UserController extends Controller
                 $em->flush();
             }
 
-            $this->get('session')->getFlashBag()->set('success',
+            $this->addFlash('success',
                 'Utilisateur '.$user->getUsername().' supprimé !');
 
         }else if ($user->getRoles()[0]->getRole() == 'ROLE_ADMIN'

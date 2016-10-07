@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Connection
+{% endblock %}
+
 {% block section %}
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -8,8 +12,11 @@
               <div class="login-page">
                 <div class="form">
                   <form action="{{ path('login') }}" method="post" class="login-form">
+
                     <input class="form-control" type="text" id="username" name="_username" value="{{(last_username is defined) ? last_username : ""}}" placeholder="Nom d'utilisateur"/>
+
                     <input class="form-control"  type="password" id="password" name="_password" placeholder="Mot de passe"/>
+
                     <button type="submit">Se connecter</button>
                   </form>
                 </div>

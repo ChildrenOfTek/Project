@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Contact Presse
+{% endblock %}
+
+{% block section %}
+    <div class="buttonLink">
+        <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'annuaireMail'}) }}')">Voir l'aide</a>
+    </div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Contacter {{ destinataire.nom }} {{ destinataire.prenom }}</div>
+            <div class="panel-body">
+
+                <form action="{{ path('contact_presse',{'id':destinataire.id}) }}" method="post">
+
+                    {{ form_row(formContact.email) }}
+
+                    {{ form_label(formContact.sujet) }}
+                    {{ form_widget(formContact.sujet) }}
+                    {{ form_errors(formContact.sujet) }}
+                    <br/>
+
+                    {{ form_label(formContact.contenu) }}
+                    {{ form_widget(formContact.contenu) }}
+                    {{ form_errors(formContact.contenu) }}
+
+                    {{ form_label(formContact.captcha) }}
+                    {{ form_widget(formContact.captcha) }}
+                    {{ form_errors(formContact.captcha) }}
+                    <br/>
+
+                    {#Ce dernier form widget vas nous permettre d'ajouter des que nous aurions pu oublier et SURTOUT le form token sans ça votre formulaire ne sera jamais valide !!#}
+                    {{ form_widget(formContact) }}
+                    {{ form_errors(formContact) }}
+                    <button class="btn btn-success btn-big">Envoyer</button>
+                </form>
+            </div>
+
+            </div></div></div>
+        </div>
+
+{% endblock %}
+{% block stylesheets %}
+
+    <link href="{{ asset('public/CSS/contact.css') }}" rel="stylesheet" type="text/css"/>
+
+{% endblock %}

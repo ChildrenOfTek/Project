@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Profil
+{% endblock %}
+
+{% block section %}
+    <div class="buttonLink">
+        <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'annuaireProfil'}) }}')">Voir l'aide</a>
+    </div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Profil de {{ user.nom }} {{ user.prenom }}</div>
+            <div class="panel-body">
+                <div class="container">
+                    <table class="table table-hover table-bordered">
+        <tbody>
+        <tr>
+            <th>Nom</th>
+            <td>{{ user.nom }}</td>
+        </tr>
+        <tr>
+            <th>Prenom</th>
+            <td>{{ user.prenom }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ user.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Cp</th>
+            <td>{{ user.cp }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ user.ville }}</td>
+        </tr>
+        <tr>
+            <th>Telephone</th>
+            <td>{{ user.telephone }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>
+                {% if user.id != app.user.id %}
+                    Cliquez ici pour contacter : <a style="color:#0AC375" href="{{ path('contact_presse',{'id':user.id}) }}">{{ user.email }}</a>
+                {% else %}
+                    {{ user.email }}
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="buttonLink">
+        <a href="{{ path('association_annuaire') }}">Retour annuaire</a>
+    </div>
+
+{% endblock %}

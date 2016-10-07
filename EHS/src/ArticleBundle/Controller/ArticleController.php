@@ -69,24 +69,26 @@ class ArticleController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user=$this->get('security.token_storage')->getToken()->getUser();
         $em=$this->getDoctrine()->getEntityManager();
         $article = new Article();
         //On passe l'entity manager au formulaire
         $form = $this->createForm(new ArticleType($em),$article );
+        $form->add('user','text',array('data'=>$user->getNom().' '.$user->getPrenom(),'disabled'=>true,'label'=>'Auteur'));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data=$form->getData();
             $date=new \DateTime('now');
 
-            $article->setUser($data->getUser());
+            $article->setUser($user);
             $article->setDateArticle($date);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->set('success',
+            $this->addFlash('success',
                 'L\'article a bien été crée !');
 
             return $this->redirectToRoute('article_show', array('id' => $article->getId()));
@@ -121,20 +123,22 @@ class ArticleController extends Controller
      */
     public function editAction(Request $request, Article $article)
     {
+        $user=$this->get('security.token_storage')->getToken()->getUser();
         $deleteForm = $this->createDeleteForm($article);
         $editForm = $this->createForm('ArticleBundle\Form\ArticleTypeEdit', $article);
+        $editForm->add('user','text',array('data'=>$user->getNom().' '.$user->getPrenom(),'disabled'=>true,'label'=>'Auteur'));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $data=$editForm->getData();
 
-            $article->setUser($data->getUser());
+            $article->setUser($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->set('success',
+            $this->addFlash('success',
                 'L\'article a bien été mis à jour !');
 
             return $this->redirectToRoute('article_show', array('id' => $article->getId()));
@@ -164,7 +168,7 @@ class ArticleController extends Controller
             $em->flush();
         }
 
-        $this->get('session')->getFlashBag()->set('success',
+        $this->addFlash('success',
             'L\'article a bien été supprimé !');
 
         return $this->redirectToRoute('article_index');

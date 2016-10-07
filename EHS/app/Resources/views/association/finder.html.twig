@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Voir les fichiers présents
+{% endblock %}
+
+{% block section %}
+    <div class="buttonLink">
+        <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'finder'}) }}')">Voir l'aide</a>
+    </div>
+    <div id="top"></div>
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+    <div class="panel-heading">Liste des dossiers et fichiers</div>
+
+
+
+{% if dirs is empty %}
+    {{ "Il n'y a encore aucun dossier crée !" }}
+{% else %}
+    <div class="panel-body">Accès rapide :
+        <select name="dropdpown" size="1" id="select-anchor">
+            {% for dir in dirs %}
+                <option value="#{{ dir.basename }}">{{ dir.basename[8:8] }}</option>
+            {% endfor %}
+        </select>
+
+    </div>
+    {% for dir in dirs %}
+        <table class="table table-hover table-bordered">
+            <thead>
+            <h3 id="{{ dir.basename  }}">Liste des fichiers présents dans <strong>{{ dir.basename }}</strong> :</h3>
+            <a href="#top" class="btn"><span class="glyphicon glyphicon-chevron-up"></span></a>
+            <tr>
+                <th>Nom de l'image</th>
+                <th>Aperçu</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            {% if files|length == 1%}
+            <tr>
+                <td>
+                    {{ "Il n'y a encore aucun fichier crée !" }}
+                </td>
+            </tr>
+
+            {% else %}
+            {% for file in files %}
+
+            {% if file.path == dir.pathname %}
+            <tr>
+                <td>{{ file.filename }}</td>
+                <td><img class="img-responsive" src="{{ app.request.basePath }}/public/img/article/{{ dir.basename }}/{{ file.filename }}" style="width:100px;height:50px;"></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ app.request.basePath }}/public/img/article/{{ dir.basename }}/{{ file.filename }}" download>Telecharger</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('association_archive_finder_delete',{"name":file.filename,"dir":dir.basename}) }}">Supprimer l'image</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+                {% endif %}
+
+            {% endfor %}
+            {% endif %}
+
+</table>
+    {% endfor %}
+{% endif %}
+</div></div></div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $('#select-anchor').change( function () {
+                var targetPosition = $($(this).val()).offset().top;
+                $('html,body').animate({ scrollTop: targetPosition}, 'slow');
+            });
+        });
+    </script>
+{% endblock %}

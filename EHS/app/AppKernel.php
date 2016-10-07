@@ -22,6 +22,9 @@ class AppKernel extends Kernel
             new AssociationBundle\AssociationBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
+            new EventsBundle\EventsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

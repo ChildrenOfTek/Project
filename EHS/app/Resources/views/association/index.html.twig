@@ -1,101 +1,79 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-
-<div class="bg"></div>
-
-<section>
-      <div class="row">
-        <h1 class="text-center"><i class="icon-fire icon-3x"></i></h1>
-        <h1 class="text-center"><strong>ENSEMBLE</strong></h1>
-        <p class="lead text-center">Disputons nous</p>
-      </div>
-      <div class="row">
-          <div class="col-md-4">
-            <div class="text-center">
-              <h1>Ethique</h1>
-              <p>
-              L'éthique c'est vraiment top car c'est vraiment bien et en plus c'est génial.</p>
-
+<div id="myCarousel" class="carousel slide">
+<!-- Half Page Image Background Carousel Header -->
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for Slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <!-- Set the first background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('http://www.hesam.eu/labexhastec/files/conf%C3%A9rence.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>24/12 Conférence sur le Lorem Ipsum</h2>
+                <a href="#">Voir les détails et s'inscrire</a>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="text-center">
-              <h1>Handicap</h1>
-              <p>
-              Le handicap c'est pas terrible parce que c'est vraiment handicapant et en plus c'est très bof.</p>
-
+        </div>
+        <div class="item">
+            <!-- Set the second background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('http://ispaconference.info/wp-content/uploads/2015/09/conference.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>17/01 Conférence sur le Nemo enim ipsam</h2>
+                <a href="#">Voir les détails et s'inscrire</a>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="text-center">
-              <h1>Société</h1>
-              <p>
-              La société elle à que des problèmes, la société elle à mauvaise haleine.</p>
-
+        </div>
+        <div class="item">
+            <!-- Set the third background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('http://www.darleyflyingstart.com/wp-content/uploads/2015/11/conference2.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>09/02 Conférence sur le Sit amet</h2>
+                <a href="#">Voir les détails et s'inscrire</a>
             </div>
-          </div>
+        </div>
     </div>
-</section>
-
-<section>
-  {% for article in articles %}
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</div>
+<div class="container">
+    	<hr></hr>
+<p class="lead text-center">Les derniers articles:</p>
       <div class="row">
-       <div class="col-md-12">
-        <div class="col-md-8 col-md-offset-2">
-          <div class="panel panel-default">
-           <div class="panel-heading"><a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a>
-           </div>
-             <div class="panel-body">
-               <div class="row">
-                 <div class="col-sm-4">
-                   <img class="img-responsive" src="{{ asset('public/img/Articles/Article_'~article.dateArticle| date('d_m_y')~'/'~article.imageName ) }}" alt="{{ article.titreArticle }}" style="">
-                  </div>
-                  <div class="col-sm-8">
-                   {{ article.content | raw }}
-                  </div>
-                </div>
-                <div class="panel-body">
-                   <h4>Tags:</h4>
-                   {% for tag in article.tag%}
-                   <button class="tagbox">{{ tag.libelle}}</button>
-                   {% endfor %}
 
-                </div>
-            </div>
-          </div>
-        </div>
+        {% for article in articles %}
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <div class="hovereffect">
+        {% if not article.imageName %}
+            <img class="img-responsive" src="{{ asset('/public/img/article/handicap.jpg') }}" alt="{{ article.titreArticle }}" style="">
+        {% else %}
+            <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="">
+        {% endif %}
+              <div class="overlay">
+                  <h2>{{article.titreArticle}}</h2>
+  				<p>
+  					<a href="{{path('article_show',{'id':article.id})}}">Lire l'Article</a>
+  				</p>
+              </div>
       </div>
-    </div>
-  {% endfor %}
-</section>
 
-<section>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="col-md-4">
-        <h2>Build</h2>
-          Bootply is a playground for Twitter Bootstrap.
-        </div>
-        <div class="col-md-4">
-        <h2>Design</h2>
-          Use Bootply to design, prototype, extend the Bootstrap framework.
-        </div>
-        <div class="col-md-4">
-        <h2>Test</h2>
-          Use Bootply to test and debug Bootstrap designs.
-        </div>
-      </div>
-      </div>
-</section>
-
-<section>
-  <div class="row">
-    <div class="text-center">
-      <a href="http://www.bootply.com"><i class="icon-facebook icon-3x"></i> </a> &nbsp;
-      <a href="http://twitter.com/bootply"><i class="icon-twitter icon-3x"></i></a> &nbsp;
-      <a href="http://pinterest.com/in1"><i class="icon-pinterest icon-3x"></i></a>
-    </div>
   </div>
-</section>
+{% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
 {% endblock %}

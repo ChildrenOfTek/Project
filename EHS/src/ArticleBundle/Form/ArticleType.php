@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -14,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Doctrine\ORM\EntityRepository;
 
 class ArticleType extends AbstractType
 {
@@ -30,10 +32,6 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user',EntityType::class, array(
-                'class'=>'UserBundle:User',
-                'property'=>'nom',
-                'label'=>'Auteur'))
 
             ->add('dateArticle', DateType::class, array(
                 'data' => new \Datetime(),
@@ -46,30 +44,26 @@ class ArticleType extends AbstractType
             ->add('titreArticle',TextType::class,array(
                 'label'=>'Titre de l\'article'))
 
-            //->add('content',TextareaType::class,array(
-            //    'attr'=>array('rows'=>15),
-            //    'label'=>'Contenu de l\'article'))
-
                 ->add('content','ckeditor',array(
                     'attr'=>array('rows'=>15),
                     'label'=>'Contenu de l\'article'))
 
-            ->add('datePublication',DateType::class,array(
-                'data'=> new \Datetime(),
+            ->add('datePublication',DateTimeType::class,array(
+                'data'=> new \Datetime('now'),
                 'widget'=>'choice',
-                'format'=>'dd-MM-yyyy',
+                'format'=>'dd-MM-yyyy HH',
                 'label'=>'Date de publication'))
 
             ->add('imageFile',VichFileType::class,
                 array('required'=>false,
                     'label'=>'Choisissez un fichier à ajouter'))
 
-            ->add('tag',ChoiceType::class,array(
-                'label'=>'Tags à ajouter',
+            ->add('tag',EntityType::class,array(
+                'class'=>'ArticleBundle:Tags',
+                'choice_label'=>'libelle',
+                'label'=>'Articles à ajouter',
                 'label_attr'=>array('class'=>'checkbox-inline'),
-                'choices'=>$this->fillTags(),
                 'attr'=>array('class'=>CheckboxType::class),
-                'choices_as_values'=>true,
                 'expanded'=>true,
                 'multiple'=>true
                 ))

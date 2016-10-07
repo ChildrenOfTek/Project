@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edition des articles
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Documentation pour les articles :</div>
+                <div class="panel-body">
+
+                    <div class="bloc">
+                        <div class="blocGauche">
+                            <img src="{{ asset('doc/articleEdit.png') }}" alt ="Index des articles"/>
+                        </div>
+                        <div class="blocDroite">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Edition</div>
+                                        <div class="panel-body">
+
+                            <p>
+                                <strong>Les premiers champs etant explicites, ils ne nécessitent pas d'explications.</strong>
+                            </p>
+                            <p>
+                                En bas de la page d'edition, vous trouverez ceci.
+                            </p>
+                            <p>
+                                Cela vous permet de modifier <strong>dynamiquement</strong> les <strong>mots-clés</strong>.
+                            </p>
+                            <p>
+                                Si un mot clé ne vous semble plus pertinent, changez son nom ici, à la validation,
+                                il sera mis à jour pour <strong>TOUT</strong> les articles le possedant.
+                            </p>
+                            <p>
+                               Vous pouvez aussi supprimer le mot-clé d'un article.</br><strong>A savoir</strong>:
+                                le mot-clé ne sera enlevé que de cet article et restera <strong>disponible</strong>.
+                            </p>
+                            <p>
+                                En cliquant sur <a href="#">Ajouter un tag</a>, un nouveau champ vide apparaitra,
+                                ajoutez un nouveau <strong>mot-clé</strong> et il sera à la fois
+                                <strong>lié à cet article</strong>, et <strong>disponible par la suite pour les autres</strong>.
+                            </p>
+                </div></div></div></div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    </div></div></div></div>
+
+{% endblock %}
+{%  block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/CSS/doc.css') }}"
+{% endblock %}
+{% block footer %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Création d'archive
+{% endblock %}
+
+{% block section %}
+<h1>Création d'une archive</h1>
+{{ form_start(form) }}
+        {{ form_row(form.titreArchive) }}
+<div class="vich-file">
+    {{ form_widget(form.imageFile) }}
+</div>
+
+    <input type="submit" value="Créer une archive" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
+        </li>
+    </ul>
+    {% endblock %}

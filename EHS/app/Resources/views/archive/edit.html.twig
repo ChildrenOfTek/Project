@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block section %}
+    <h1>Edition d'archive</h1>
+
+    {{ form_start(edit_form) }}
+    {{ form_row(edit_form.titreArchive) }}
+    <div class="vich-file">
+        {{ form_widget(edit_form.imageFile) }}
+    </div>
+
+    <input type="submit" value="Editer une archive" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

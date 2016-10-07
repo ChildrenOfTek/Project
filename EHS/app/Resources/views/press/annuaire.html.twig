@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Annuaire
+{% endblock %}
+
+{% block section %}
+<section>
+<div class="bg"></div>
+    <div class="top"></div>
+
+
+
+    <div class="row">
+        <div class="buttonLink">
+            <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'annuaireList'}) }}')">Voir l'aide</a>
+        </div>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-body">{% for letter in 'A'..'Z' %}
+                        * <a href="#{{ letter }}">{{ letter }}</a>
+                    {% endfor %}</div>
+
+
+          </div></div>
+          </div>
+    </div>
+</section>
+<section>
+{% for letter in 'A'..'Z' %}
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+    <div id="{{ letter }}" class="panel-heading">** {{ letter }} ** <a href="#top" class="btn"><span class="glyphicon glyphicon-chevron-up"></span></a></div>
+
+
+    <div class="container">
+    <table class="table table-hover table-bordered">
+        <tbody>
+
+    {% for user in annuaire %}
+        {% if(user.nom[0:1]|lower == letter|lower) %}
+                        <tr>
+                            <td class="annuaireLink">* <a href="{{ path('association_annuaire_profile',{'id':user.id }) }}">{{ user.nom }} {{ user.prenom }}</a></td>
+                        </tr>
+        {% endif %}
+    {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+{% endfor %}
+
+</section>
+
+
+
+<section>
+  <div class="row">
+    <div class="text-center">
+      <a href="http://www.bootply.com"><i class="icon-facebook icon-3x"></i> </a> &nbsp;
+      <a href="http://twitter.com/bootply"><i class="icon-twitter icon-3x"></i></a> &nbsp;
+      <a href="http://pinterest.com/in1"><i class="icon-pinterest icon-3x"></i></a>
+    </div>
+  </div>
+</section>
+{% endblock %}

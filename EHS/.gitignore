@@ -19,3 +19,4 @@
 /app/config/config_test.yml
 /coverage
 /archives/*
+/web/uploads/img/filemanager/*

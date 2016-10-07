@@ -51,7 +51,8 @@ class ArticleTypeEdit extends AbstractType
 
             ->add('imageFile',VichFileType::class,
                 array('required'=>false,
-                    'label'=>'Choisissez un fichier à ajouter'))
+                    'label'=>'Choisissez un fichier pour remplacer',
+                    'download_link' => false))
             ->add('online')
             ->add('tag',CollectionType::class,array(
                 'entry_type'=>TagsType::class,

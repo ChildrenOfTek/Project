@@ -18,20 +18,19 @@
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Editer" />
+        <input class="btn btn-success" type="submit" value="Editer" />
 
-    {{ form_end(edit_form) }}
-                <ul>
-                    <li>
+
+                {{ form_end(edit_form) }}
+                <div class="buttonLink">
                         <a href="{{ path('user_index') }}">Retour à la liste</a>
-                    </li>
-                    <li>
+                </div>
                         {{ form_start(delete_form) }}
-                        <input type="submit" value="Supprimer">
+                        <input class="btn btn-danger" type="submit" value="Supprimer">
                         {{ form_end(delete_form) }}
-                    </li>
-                </ul>
+
             </div></div></div></div>
+
 
     </section>
 {% endblock %}

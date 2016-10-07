@@ -29,7 +29,8 @@ class ArchiveType extends AbstractType
 
             ->add('imageFile',VichFileType::class,
                 array('required'=>false,
-                    'label'=>'Choisissez un fichier à ajouter'))
+                    'download_link' => false,
+                    'label'=>'Choisissez un fichier pour remplacer'))
         ;
     }
     

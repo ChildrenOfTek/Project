@@ -321,7 +321,7 @@ class DefaultController extends Controller
     /**
      * Lists all images in the web folder.
      * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/finder", name="association_archive_finder")
+     * @Route("/finder", name="association_finder")
      * @Method("GET")
      */
     public function finderAction()
@@ -335,7 +335,7 @@ class DefaultController extends Controller
         $finder2=new Finder();
         //ce finder reccupere les fichiers
         $finder->files()->in($this->get('kernel'
-            )->getRootDir() . '/../web/public/img/article')->sort($sort);
+            )->getRootDir() . '/../web/public/img/article')->notName('default.jpg')->sort($sort);
         //ce finder reccupere les dossiers
         $finder2->directories()->in($this->get('kernel'
             )->getRootDir() . '/../web/public/img/article')->sort($sort);
@@ -358,10 +358,10 @@ class DefaultController extends Controller
     /**
      * Deletes an image corresponding to an article.
      * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/finder/{name}/{dir}/delete", name="association_archive_finder_delete")
+     * @Route("/finder/{name}/{dir}/delete", name="association_finder_deleteFile")
      * @Method("GET")
      */
-    public function finderDeleteAction($name,$dir)
+    public function finderFileDeleteAction($name,$dir)
     {
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository('ArticleBundle:Article');
@@ -380,7 +380,6 @@ class DefaultController extends Controller
                 $this->addFlash('success','L\'image a bien été supprimée !');
             }else{
                 $this->addFlash('error','L\'image n\'a pas été trouvée !');
-                return $this->finderAction();
             }
 
             return $this->finderAction();
@@ -391,6 +390,49 @@ class DefaultController extends Controller
 
         }
 
+
+    }
+
+    /**
+     * Deletes an empty folder.
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Route("/finder/{dir}/delete", name="association_finder_deleteDir")
+     * @Method("GET")
+     */
+    public function finderDirDeleteAction($dir,Request $request)
+    {
+        function is_dir_empty($dir) {
+            if (!is_readable($dir)) return NULL;
+            $handle = opendir($dir);
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        }
+        $finder=new Finder();
+        $doss=$this->get('kernel')->getRootDir() . '/../web/public/img/article/'.$dir;
+            $finder->directories()->in($doss);
+
+           if($finder)
+           {
+               if(is_dir_empty($doss)){
+
+               rmdir($doss);
+               $this->addFlash('success','Le dossier a bien été supprimée !');
+
+               }else{
+
+                   $this->addFlash('error','Le dossier n\'est pas vide !');
+               }
+
+            }else{
+               $this->addFlash('error','Le dossier n\'a pas été trouvé !');
+                return $this->finderAction();
+            }
+
+            return $this->finderAction();
 
     }
 }

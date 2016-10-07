@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Doctrine\ORM\EntityRepository;
 
@@ -54,7 +54,7 @@ class ArticleType extends AbstractType
                 'format'=>'dd-MM-yyyy HH',
                 'label'=>'Date de publication'))
 
-            ->add('imageFile',VichFileType::class,
+            ->add('imageFile',VichImageType::class,
                 array('required'=>false,
                     'label'=>'Choisissez un fichier à ajouter'))
 

@@ -30,13 +30,12 @@
         {{ form_row(form.online) }}
 
 
-    <input type="submit" value="Créer un article" />
+    <input class="btn btn-success" type="submit" value="Créer un article" />
     {{ form_end(form) }}
+            <div class="buttonLink">
+                <a href="{{ path('article_index') }}">Retour à la liste</a>
+            </div>
         </div></div></div></div></div>
-    <ul>
-        <li>
-            <a href="{{ path('article_index') }}">Retour à la liste</a>
-        </li>
-    </ul>
+
     </div>
 {% endblock %}

@@ -5,21 +5,21 @@
 
     {{ form_start(edit_form) }}
     {{ form_row(edit_form.titreArchive) }}
+    {% if archive.imageName %}
+        <strong>Fichier actuel de l'archive :</strong> {{ archive.imagename }} </br></br>
+    {% endif %}
     <div class="vich-file">
         {{ form_widget(edit_form.imageFile) }}
     </div>
 
-    <input type="submit" value="Editer une archive" />
+    <input class="btn btn-success" type="submit" value="Editer une archive" />
     {{ form_end(edit_form) }}
+    <div class="buttonLink">
+        <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {{ form_start(delete_form) }}
+        <input class="btn btn-danger" type="submit" value="Supprimer">
+    {{ form_end(delete_form) }}
+
 {% endblock %}

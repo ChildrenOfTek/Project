@@ -29,22 +29,17 @@
     {% for dir in dirs %}
         <table class="table table-hover table-bordered">
             <thead>
-            <h3 id="{{ dir.basename  }}">Liste des fichiers présents dans <strong>{{ dir.basename }}</strong> :</h3>
-            <a href="#top" class="btn"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
             <tr>
-                <th>Nom de l'image</th>
+                <th id="{{ dir.basename  }}">Liste des fichiers présents dans <strong>{{ dir.basename }}</strong> :
+            <a href="#top" class="btn"><span class="glyphicon glyphicon-chevron-up"></span></a></th>
                 <th>Aperçu</th>
-                <th>Actions</th>
+                <th>Actions:
+                        <a href="{{ path('association_finder_deleteDir',{"dir":dir.basename}) }}">Supprimer le dossier (Doit etre vide)</a>
+                    </th>
             </tr>
             </thead>
-            {% if files|length == 1%}
-            <tr>
-                <td>
-                    {{ "Il n'y a encore aucun fichier crée !" }}
-                </td>
-            </tr>
 
-            {% else %}
             {% for file in files %}
 
             {% if file.path == dir.pathname %}
@@ -60,15 +55,15 @@
                             <a href="{{ app.request.basePath }}/public/img/article/{{ dir.basename }}/{{ file.filename }}" download>Telecharger</a>
                         </li>
                         <li>
-                            <a href="{{ path('association_archive_finder_delete',{"name":file.filename,"dir":dir.basename}) }}">Supprimer l'image (<strong>Attention</strong> définitif, voir Aide)</a>
+                            <a href="{{ path('association_finder_deleteFile',{"name":file.filename,"dir":dir.basename}) }}">Supprimer l'image (<strong>Attention</strong> définitif, voir Aide)</a>
                         </li>
+
                     </ul>
                 </td>
             </tr>
                 {% endif %}
 
             {% endfor %}
-            {% endif %}
 
 </table>
     {% endfor %}

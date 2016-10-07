@@ -55,12 +55,14 @@
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
                 <!-- H:i:s-->
                 <td>
-                    <div class="buttonLink">
-                        <a href="{{ path('user_show', { 'id': user.id }) }}">Voir</a>
-                    </div>
-                    <div class="buttonLink">
-                        <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
-                    </div>
+                    <ul>
+                        <li>
+                            <a href="{{ path('user_show', { 'id': user.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
+                        </li>
+                    </ul>
                 </td>
             </tr>
         {% endfor %}

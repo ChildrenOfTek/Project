@@ -1,97 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Accueil
-{% endblock %}
-
 {% block section %}
-
-<div class="bg"></div>
-
-<section>
+<div id="myCarousel" class="carousel slide">
+<!-- Half Page Image Background Carousel Header -->
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for Slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <!-- Set the first background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('http://www.hesam.eu/labexhastec/files/conf%C3%A9rence.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>24/12 Conférence sur le Lorem Ipsum</h2>
+                <a href="#">Voir les détails et s'inscrire</a>
+            </div>
+        </div>
+        <div class="item">
+            <!-- Set the second background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('http://ispaconference.info/wp-content/uploads/2015/09/conference.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>17/01 Conférence sur le Nemo enim ipsam</h2>
+                <a href="#">Voir les détails et s'inscrire</a>
+            </div>
+        </div>
+        <div class="item">
+            <!-- Set the third background image using inline CSS below. -->
+            <div class="fill" style="background-image:url('http://www.darleyflyingstart.com/wp-content/uploads/2015/11/conference2.jpg');"></div>
+            <div class="carousel-caption">
+                <h2>09/02 Conférence sur le Sit amet</h2>
+                <a href="#">Voir les détails et s'inscrire</a>
+            </div>
+        </div>
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</div>
+<div class="container">
+    	<hr></hr>
+<p class="lead text-center">Les derniers articles:</p>
       <div class="row">
-        <h1 class="text-center"><i class="icon-fire icon-3x"></i></h1>
-        <h1 class="text-center"><strong>ENSEMBLE</strong></h1>
-        <p class="lead text-center">Reprehenderit in voluptate</p>
+        {% for article in articles %}
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <div class="hovereffect">
+        {% if not article.imageName %}
+            <img class="img-responsive" src="{{ asset('/public/img/article/handicap.jpg') }}" alt="{{ article.titreArticle }}" style="">
+        {% else %}
+            <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="">
+        {% endif %}
+              <div class="overlay">
+                  <h2>{{article.titreArticle}}</h2>
+  				<p>
+  					<a href="{{path('article_show',{'id':article.id})}}">Lire l'Article</a>
+  				</p>
+              </div>
       </div>
-      <div class="row">
-          <div class="col-md-4">
-            <div class="text-center">
-              <h1>Ethique</h1>
-              <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="text-center">
-              <h1>Handicap</h1>
-              <p>
-               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="text-center">
-              <h1>Société</h1>
-              <p>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-
-            </div>
-          </div>
-    </div>
-</section>
-
-<section>
-  {% for article in articles %}
-      <div class="row">
-
-          <div class="panel panel-default">
-           <div class="panel-heading"><a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a>
-           </div>
-             <div class="panel-body">
-               <div class="row">
-                 <div class="col-sm-4">
-
-                     {% if not article.imageName %}
-                         <img class="img-responsive" src="{{ asset('/public/img/article/handicap.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
-                     {% else %}
-                         <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
-                     {% endif %}
-
-                 </div>
-                  <div class="col-sm-8">
-                   {{ article.content | raw }}
-                  </div>
-                </div>
-                <div class="panel-body">
-
-                   <h4>Tags:</h4>
-                   {% for tag in article.tag %}
-                   
-                   <button class="tagbox">{{ tag.libelle}}</button>
-                   {% endfor %}
-                    {% for tag in article.tag%}
-                        <a class="buttonlink tagbox" href="{{ path('tags_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
-
-                    {% endfor %}
-
-                </div>
-            </div>
-          </div>
-
-    </div>
-  {% endfor %}
-</section>
-
-
-<section>
-  <div class="row">
-    <div class="text-center">
-      <a href="http://www.bootply.com"><i class="icon-facebook icon-3x"></i> </a> &nbsp;
-      <a href="http://twitter.com/bootply"><i class="icon-twitter icon-3x"></i></a> &nbsp;
-      <a href="http://pinterest.com/in1"><i class="icon-pinterest icon-3x"></i></a>
-    </div>
   </div>
-</section>
+{% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
 {% endblock %}

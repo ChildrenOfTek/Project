@@ -51,7 +51,7 @@ class ArticleType extends AbstractType
                     'attr'=>array('rows'=>15),
                     'label'=>'Contenu de l\'article'))
 
-            ->add('datePublication',DateType::class,array(
+            ->add('datePublication',DateTimeType::class,array(
                 'data'=> new \Datetime('now'),
                 'widget'=>'choice',
                 'format'=>'dd-MM-yyyy HH',

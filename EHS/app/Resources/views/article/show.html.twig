@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block section %}
-<section>
+
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-default">
@@ -57,7 +57,7 @@
                 {% for tag in article.tag %}
 
                 <button class="tagbox">{{ tag.libelle}}</button>
-              
+
                 {% endfor  %}
             </td>
 
@@ -74,7 +74,7 @@
 
 </div>
         </div>
-</section>
+
     <ul>
         <li>
             <a href="{{ path('article_index') }}">Retourner à la liste</a>

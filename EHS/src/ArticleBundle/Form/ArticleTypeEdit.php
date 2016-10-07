@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ArticleTypeEdit extends AbstractType
 {
@@ -47,7 +48,7 @@ class ArticleTypeEdit extends AbstractType
                     'attr'=>array('rows'=>15),
                     'label'=>'Contenu de l\'article'))
 
-            ->add('datePublication',DateType::class,array(
+            ->add('datePublication',DateTimeType::class,array(
                 'data'=> new \Datetime(),
                 'widget'=>'choice',
                 'format'=>'dd-MM-yyyy',

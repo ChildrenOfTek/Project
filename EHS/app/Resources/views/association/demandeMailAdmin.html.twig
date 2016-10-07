@@ -1,0 +1,32 @@
+<p>Bonjour Michelle !!</p>
+
+<p>Vous recevez ce message après une demande d'inscription !</p>
+<p>La personne faisant la demande est la suivante : </p>
+
+<ul>
+    <li>
+        Email : {{ demande.email }}
+    </li>
+    <li>
+        Nom : {{ demande.nom }}
+    </li>
+    <li>
+        Prenom : {{ demande.prenom }}
+    </li>
+    <li>
+        Adresse : {{ demande.adresse }}
+    </li>
+    <li>
+        Code Postal : {{ demande.cp }}
+    </li>
+    <li>
+        Ville : {{ demande.ville }}
+    </li>
+    <li>
+        Telephone : {{ demande.telephone }}
+    </li>
+    <li>
+        Date de naissance : {{ demande.birthDate|date('d-m-y') }}
+    </li>
+    <a href="{{ path('login') }}">Aller sur le site</a>
+</ul>

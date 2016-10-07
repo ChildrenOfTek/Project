@@ -61,12 +61,12 @@ class ArticleType extends AbstractType
                 array('required'=>false,
                     'label'=>'Choisissez un fichier à ajouter'))
 
-            ->add('tag',ChoiceType::class,array(
-                'label'=>'Tags à ajouter',
+            ->add('tag',EntityType::class,array(
+                'class'=>'ArticleBundle:Tags',
+                'choice_label'=>'libelle',
+                'label'=>'Articles à ajouter',
                 'label_attr'=>array('class'=>'checkbox-inline'),
-                'choices'=>$this->fillTags(),
                 'attr'=>array('class'=>CheckboxType::class),
-                'choices_as_values'=>true,
                 'expanded'=>true,
                 'multiple'=>true
                 ))

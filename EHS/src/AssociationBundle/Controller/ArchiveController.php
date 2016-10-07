@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AssociationBundle\Entity\Archive;
 use AssociationBundle\Form\ArchiveType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Archive controller.
@@ -18,7 +19,7 @@ class ArchiveController extends Controller
 {
     /**
      * Lists all Archive entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="association_archive_index")
      * @Method("GET")
      */
@@ -91,17 +92,20 @@ class ArchiveController extends Controller
     {
         $deleteForm = $this->createDeleteForm($archive);
         $editForm = $this->createForm('AssociationBundle\Form\ArchiveType', $archive);
+        $editForm->remove('dateCreation');
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $data=$editForm->getData();
+            $archive->setUpdatedAt(new \DateTime());
             $em->persist($archive);
             $em->flush();
 
             $this->addFlash('success',
                 'L\'archive a bien été mise à jour !');
 
-            return $this->redirectToRoute('association_archive_edit', array('id' => $archive->getId()));
+            return $this->redirectToRoute('association_archive_index', array('id' => $archive->getId()));
         }
 
         return $this->render('archive/edit.html.twig', array(

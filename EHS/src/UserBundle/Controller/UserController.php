@@ -21,7 +21,7 @@ class UserController extends Controller
 {
     /**
      * Lists all User entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="user_index")
      * @Method("GET")
      */
@@ -180,7 +180,7 @@ class UserController extends Controller
     {
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('UserBundle\Form\UserType', $user);
-        $editForm->remove('userRoles');
+
         $editForm->remove('password');
         $editForm->add('password','text',array('label'=>'(Si vous voulez changer le mot de passe, écrivez en un nouveau.
          Sinon, ne touchez rien !)'));
@@ -226,7 +226,7 @@ class UserController extends Controller
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository('UserBundle:User');
         //custom repo method for finding users with ROLE_ADMIN
-        $admins=$repo->findUserByRoles();
+        $admins=$repo->findAdmins();
 
         if($user->getRoles()[0]->getRole() != 'ROLE_ADMIN')
         {

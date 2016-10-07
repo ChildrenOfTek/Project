@@ -1,5 +1,5 @@
 <?php
-namespace UserBundle\Entity;
+namespace AssociationBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -17,11 +17,6 @@ class Contact
     /**
      * @Assert\NotBlank()
      */
-    protected $username;
-
-    /**
-     * @Assert\NotBlank()
-     */
     protected $sujet;
 
     /**
@@ -35,14 +30,6 @@ class Contact
 
     public function setEmail($email){
         $this->email = $email;
-    }
-
-    public function getUsername(){
-        return $this->username;
-    }
-
-    public function setUsername($nom){
-        $this->username = $nom;
     }
 
     public function getSujet(){

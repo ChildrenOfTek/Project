@@ -43,15 +43,21 @@
                 <td>{{ article.datePublication | date('d-m-Y H:i:s') }}</td>
 
                 {% if not article.imageName %}
-                    <td><img class="img-responsive" src="{{ asset('/public/img/article/handicap.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
+                    <td><img class="img-responsive" src="{{ asset('/public/img/article/default.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
                 {% else %}
                     <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
                 {% endif %}
-
-                <td>{% if article.online %}Oui{% else %}Non{% endif %}</td>
+                {% if article.online %}
+                <td style="background-color: green"></td>
+                    {% else %}
+                    <td style="background-color: red"></td>
+                    {% endif %}
                 <td><!--Affichage des tags de l'article -->
                     {% for tag in article.tag %}
-                        {{ tag.libelle }}<br/>
+                        <div class="buttonLink">
+                            <a href="{{ path('tags_search', { 'libelle': tag.libelle }) }}">{{ tag.libelle }}</a>
+                        </div>
+
                     {% endfor  %}
                 </td>
                 <td>

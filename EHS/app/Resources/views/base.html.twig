@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>
+<head>
+    <meta charset="UTF-8" />
+    <title>
         {% block title %}
-        Bienvenue !
+            Bienvenue !
         {% endblock %}
+
         </title>
         <link href="{{ asset('public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css') }}" rel="stylesheet" type="text/css"/>
@@ -22,7 +23,6 @@
     <body>
       <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Retourner en haut de la page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
         {% block body %}
-        {% if app.request.requestUri != "/EHS/EHS/web/app_dev.php/user/new" %}
         <div class="top-div">
           {% block nav %}
           <nav id="header" class="navbar navbar-fixed-top">
@@ -69,7 +69,19 @@
                       <li><a href="#">Un autre truc</a></li>
                     </ul>
                   </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ path('contact') }}">Nous contacter</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('association_inscription') }}">Faire une demande d'inscription</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
+
                 <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace Personnel <span class="caret"></span></a>
@@ -77,33 +89,38 @@
                       <li>
                         <div class="login">
                             {% block login %}
+
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li><a href="{{ path('user_showpublic',{"id":app.user.id}) }}">Mon profil</a></li>
-                        <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
-                        {% if(is_granted('ROLE_ADMIN')) %}
-                            <li><a href="{{ path('user_new') }}">Ajouter un utilisateur</a></li>
-                            <li><a href="{{ path('user_index') }}">Acceder à l'interface admin</a></li>
-                            <li><a href="{{ path('association_archive_index') }}">Gerer les archives</a></li>
-                        {% endif %}
+
                         {% if(is_granted('ROLE_PRESS')) %}
+                            <li><a href="{{ path("association_annuaire") }}">Annuaire</a></li>
                         {% endif %}
+
+                        {% if(is_granted('ROLE_ADMIN')) %}
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ path('user_index') }}">Interface Utilisateurs</a></li>
+                            <li><a href="{{ path('article_index') }}">Interface Articles</a></li>
+                            <li><a href="{{ path('association_archive_index') }}">Interface archives</a></li>
+                            <li><a href="{{ path('association_archive_finder') }}">Interface fichiers</a></li>
+                            <li role="separator" class="divider"></li>
+
+                        {% endif %}
+
+                        <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
                         {% else %}
                             <li><a href="{{ path("login") }}">Se connecter</a></li>
                             <li><a href="{{ path("forgot_password") }}">Mot de passe oublie?</a></li>
+
                         {% endif %}
                         {% endblock %}
-                        </div>
-                        </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            <!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                        </ul></li></ul></div>
+
+
+             </div>
           </nav>
         </div>
         {% endblock %}
-        {% endif %}
         {% block flashbag %}
                 {% for flash in app.session.flashbag.get('success') %}
                     <div class="alert alert-success">
@@ -175,14 +192,16 @@
         </div>
 </div>
 {% endblock %}
-        <script type="text/javascript" src="{{ asset('public/script/jquery-3.1.0.min.js') }}"></script>
-        <script src="{{ asset('public/script/bootstrap.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('public/script/menuDeroulant.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('public/script/parallax.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('public/script/navbarplus.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('public/script/backtotop.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('public/script/theming.js') }}"></script>
-        {% block javascripts %}
-        {% endblock %}
-    </body>
+
+<script type="text/javascript" src="{{ asset('public/script/jquery-3.1.0.min.js') }}"></script>
+<script src="{{ asset('public/script/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/script/menuDeroulant.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/script/parallax.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/script/navbarplus.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/script/backtotop.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/script/theming.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/script/ouvreDoc.js') }}"></script>
+{% block javascripts %}
+{% endblock %}
+</body>
 </html>

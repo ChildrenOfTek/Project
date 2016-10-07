@@ -37,7 +37,7 @@
 
             <!-- Preview Image -->
           {% if not article.imageName %}
-              <img class="img-responsive" src="{{ asset('/public/img/article/handicap.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
+              <img class="img-responsive" src="{{ asset('/public/img/article/default.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
           {% else %}
             <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
           {% endif %}

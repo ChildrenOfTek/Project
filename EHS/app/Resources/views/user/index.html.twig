@@ -6,6 +6,9 @@
 
 {% block section %}
 <div class="wrapper">
+    <div class="buttonLink">
+        <a href="{{ path('user_new') }}">Ajouter un nouvel utilisateur</a>
+    </div>
 
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
@@ -52,33 +55,21 @@
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
                 <!-- H:i:s-->
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('user_show', { 'id': user.id }) }}">Voir</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
-                        </li>
-                    </ul>
+                    <div class="buttonLink">
+                        <a href="{{ path('user_show', { 'id': user.id }) }}">Voir</a>
+                    </div>
+                    <div class="buttonLink">
+                        <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-
-      <div class="buttonLink">
-        <a href="{{ path('user_new') }}">Ajouter un nouvel utilisateur</a>
-      </div>
-
-
-
+</div></div></div></div></div>
 
   </div>
   </div>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+
 {% endblock %}

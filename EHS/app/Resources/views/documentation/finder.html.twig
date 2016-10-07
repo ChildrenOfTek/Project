@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Parcourir
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Documentation pour le parcours de fichiers :</div>
+                <div class="panel-body">
+
+                    <div class="blocColumn">
+                        <div class="blocHaut">
+                            <img src="{{ asset('doc/finder.png') }}" alt ="Creation d'un article"/>
+                        </div>
+                        <div class="blocBas">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Parcourir</div>
+                                        <div class="panel-body">
+
+                            <p>Voici la liste des <strong>dossiers</strong>,
+                                et des <strong>fichiers</strong> présents sur le serveur.
+                            </p>
+                            <p><strong>A noter:</strong> un menu déroulant permet de <strong>naviguer</strong>
+                                directement en fonction de la <strong>date</strong>.
+                            </p>
+
+                            <p>
+                                A gauche, le nom de l'image. Au milieu, un aperçu de l'image.
+                                A droite, un lien pour <strong>telecharger</strong> directement l'image,
+                                un autre pour <strong>supprimer</strong> l'image, sur le <strong>serveur</strong>
+                                 et pour <strong>l'article</strong> qui lui correspond.
+                            </p>
+                            <p>
+                                <strong>Attention,
+                                cette suppression est définitive.</strong>
+                            </p>
+                            <p>
+                                Pour remettre une image a <strong>l'article</strong>,
+                                passer par <strong>l'interface article</strong>, rubrique <strong>Edition</strong>.
+                            </p>
+                            <p>
+                                Celle-ci sera <strong>automatiquement</strong> ajoutée
+                            à nouveau dans le dossier correspondant à la <strong>date du jour</strong></p>
+                            <p>
+                                Enfin, pour revenir au menu deroulant, cliquer sur le <strong>chevron</strong>
+                            </p>
+                </div></div></div></div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    </div></div></div></div>
+
+{% endblock %}
+{%  block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/CSS/doc.css') }}"
+{% endblock %}
+{% block footer %}
+{% endblock %}

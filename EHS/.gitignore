@@ -12,7 +12,7 @@
 /composer.phar
 /nbproject
 /.idea
-../.idea
+../.idea/*
 /web/public/img/article/*
 /app/sqlite.db.cache
 /src/UserBundle/Tests

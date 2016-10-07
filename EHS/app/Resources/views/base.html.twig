@@ -101,8 +101,8 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ path('user_index') }}">Interface Utilisateurs</a></li>
                             <li><a href="{{ path('article_index') }}">Interface Articles</a></li>
-                            <li><a href="{{ path('association_archive_index') }}">Interface archives</a></li>
-                            <li><a href="{{ path('association_archive_finder') }}">Interface fichiers</a></li>
+                            <li><a href="{{ path('association_archive_index') }}">Interface Archives</a></li>
+                            <li><a href="{{ path('association_archive_finder') }}">Interface Fichiers</a></li>
                             <li role="separator" class="divider"></li>
 
                         {% endif %}
@@ -121,7 +121,7 @@
           </nav>
         </div>
         {% endblock %}
-        {% block flashbag %}
+            {% block flashbag %}
                 {% for flash in app.session.flashbag.get('success') %}
                     <div class="alert alert-success">
                         <p align="center">{{ flash }}</p>

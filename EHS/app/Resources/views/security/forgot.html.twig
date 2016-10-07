@@ -11,7 +11,10 @@
                       <form class="login-form">
                         {{ form_start(form) }}
                         {{ form_row(form.email) }}
-                        {{ form_row(form.captcha) }}
+                          {{ form_label(form.captcha) }}
+                          {{ form_widget(form.captcha) }}
+                          {{ form_errors(form.captcha) }}
+                          <br/>
                         <input type="submit" value="Envoyer" />
                         {{ form_end(form) }}
                       </form>

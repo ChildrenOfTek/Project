@@ -334,7 +334,7 @@ class DefaultController extends Controller
         $finder2=new Finder();
         //ce finder reccupere les fichiers
         $finder->files()->in($this->get('kernel'
-            )->getRootDir() . '/../web/public/img/article/')->sort($sort);
+            )->getRootDir() . '/../web/public/img/article')->sort($sort);
         //ce finder reccupere les dossiers
         $finder2->directories()->in($this->get('kernel'
             )->getRootDir() . '/../web/public/img/article')->sort($sort);

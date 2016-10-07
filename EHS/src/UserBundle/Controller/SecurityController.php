@@ -56,16 +56,17 @@ class SecurityController extends Controller
      */
     public function newForgotPassword(Request $request)
     {
-        $form=$this->createForm('UserBundle\Form\ResetType');
-        $form->handleRequest($request);
+
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository('UserBundle:User');
+        $form=$this->createForm('UserBundle\Form\ResetType');
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
             $data=$form->getData();
-            $user=$repo->findOneByEmail($data->getEmail());
-            //var_dump($data);var_dump($user);die();
+            $user=$repo->findOneBy(array('email'=>$data->getEmail()));
+            var_dump($data);var_dump($user);die();
             if($user != null)
             {
                 $password=$user->generateStrongPassword(25);

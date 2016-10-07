@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block section %}
-<section>
 <div class="bg"></div>
     <div class="top"></div>
 
@@ -18,7 +17,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="panel-body">{% for letter in 'A'..'Z' %}
+                    <div class="panel-body annuaireLetters">{% for letter in 'A'..'Z' %}
                         * <a href="#{{ letter }}">{{ letter }}</a>
                     {% endfor %}</div>
 
@@ -26,7 +25,6 @@
           </div></div>
           </div>
     </div>
-</section>
 <section>
 {% for letter in 'A'..'Z' %}
     <div class="row">

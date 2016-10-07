@@ -1,23 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-
-
-
-
-
 <div id="myCarousel" class="carousel slide">
-
-
 <!-- Half Page Image Background Carousel Header -->
-
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
-
     <!-- Wrapper for Slides -->
     <div class="carousel-inner">
         <div class="item active">
@@ -45,7 +36,6 @@
             </div>
         </div>
     </div>
-
     <!-- Controls -->
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
         <span class="icon-prev"></span>
@@ -53,19 +43,12 @@
     <a class="right carousel-control" href="#myCarousel" data-slide="next">
         <span class="icon-next"></span>
     </a>
-
 </div>
-
-
-  <div class="container">
-
-  	<hr></hr>
+<div class="container">
+    	<hr></hr>
 <p class="lead text-center">Les derniers articles:</p>
-
-
       <div class="row">
         {% for article in articles %}
-
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
       <div class="hovereffect">
         {% if not article.imageName %}
@@ -83,16 +66,12 @@
   </div>
 {% endfor %}
     </div>
-
 </div>
-
 {% endblock %}
-
 {% block javascripts %}
 <script>
     $('.carousel').carousel({
         interval: 5000 //changes the speed
     })
     </script>
-
 {% endblock %}

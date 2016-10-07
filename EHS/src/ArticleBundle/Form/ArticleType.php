@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Doctrine\ORM\EntityRepository;
 
 class ArticleType extends AbstractType
 {
@@ -31,10 +32,6 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user',EntityType::class, array(
-                'class'=>'UserBundle:User',
-                'property'=>'nom',
-                'label'=>'Auteur'))
 
             ->add('dateArticle', DateType::class, array(
                 'data' => new \Datetime(),

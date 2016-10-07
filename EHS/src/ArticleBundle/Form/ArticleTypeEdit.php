@@ -25,11 +25,6 @@ class ArticleTypeEdit extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user',EntityType::class, array(
-                'class'=>'UserBundle:User',
-                'property'=>'nom',
-                'label'=>'Auteur'))
-
             ->add('dateArticle', DateType::class, array(
                 'data' => new \Datetime(),
                 'widget'=>'choice',

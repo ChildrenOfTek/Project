@@ -45,7 +45,7 @@
             <th>Email</th>
             <td>
                 {% if user.id != app.user.id %}
-                    Cliquez ici pour contacter : <a href="{{ path('contact_presse',{'id':user.id}) }}">{{ user.email }}</a>
+                    Cliquez ici pour contacter : <a style="color:#0AC375" href="{{ path('contact_presse',{'id':user.id}) }}">{{ user.email }}</a>
                 {% else %}
                     {{ user.email }}
                 {% endif %}
@@ -58,10 +58,8 @@
         </div>
     </div>
 </div>
+    <div class="buttonLink">
+        <a href="{{ path('association_annuaire') }}">Retour annuaire</a>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('association_annuaire') }}">Retour annuaire</a>
-        </li>
-    </ul>
 {% endblock %}

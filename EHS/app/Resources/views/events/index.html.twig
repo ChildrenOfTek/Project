@@ -29,6 +29,13 @@
         {% endif %}
         {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}
         <br/>
+        <!-- Image -->
+        {{ event.imageName }}
+        {% if not event.imageName %}
+            <td><img class="img-responsive" src="{{ asset('/public/img/article/default.jpg') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
+        {% else %}
+            <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
+        {% endif %}
         <!-- Tags -->
         Mots-clés :
         {% for tag in event.tag %}

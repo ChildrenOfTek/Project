@@ -28,6 +28,10 @@ article_article:
     resource: "@ArticleBundle/Controller/ArticleController.php"
     type:     annotation
 
+events_events:
+    resource: "@EventsBundle/Controller/EventsController.php"
+    type:     annotation
+
 newsletter:
     resource: "@NewsletterBundle/Controller/"
     type:     annotation

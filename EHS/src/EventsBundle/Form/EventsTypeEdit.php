@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class EventsTypeEdit extends AbstractType
 {
@@ -26,6 +27,9 @@ class EventsTypeEdit extends AbstractType
               'label'=>'Description de l\'évènement'))
             ->add('start', 'datetime')
             ->add('end', 'datetime')
+            ->add('imageFile',VichFileType::class,
+                array('required'=>false,
+                    'label'=>'Choisissez un fichier à ajouter'))
             ->add('places', 'integer')
             ->add('address')
             ->add('tag',EntityType::class,array(

@@ -15,7 +15,11 @@ class Uploader implements NamerInterface
     public function name($object, PropertyMapping $mapping)
     {
         $file = $mapping->getFile($object);
-        $name = $object->getDateFileArticle('H','i','s').'_file_';
+        if (get_class($object) == 'ArticleBundle\Entity\Article') {
+            $name = $object->getDateFileArticle('H','i','s').'_file_';
+        } else if (get_class($object) == 'EventsBundle\Entity\Events') {
+            $name = $object->getDateFileEvents('H','i','s').'_file_';
+        }
 
         return $name.$file->getClientOriginalName();
     }

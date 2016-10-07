@@ -34,6 +34,9 @@ class EventsType extends AbstractType
               'label'=>'Description de l\'évènement'))
             ->add('start', 'datetime')
             ->add('end', 'datetime')
+            ->add('imageFile',VichFileType::class,
+                array('required'=>false,
+                    'label'=>'Choisissez un fichier à ajouter'))
             ->add('places', 'integer')
             ->add('address')
             ->add('tag',ChoiceType::class,array(

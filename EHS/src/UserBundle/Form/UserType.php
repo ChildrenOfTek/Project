@@ -29,7 +29,9 @@ class UserType extends AbstractType
             ->add('userRoles',EntityType::class, array(
                 'class'=>'UserBundle:Role',
                 'choice_label'=>'name',
-                'label'=>'Role à attribuer'
+                'label'=>'Role à attribuer',
+                'multiple'=>true,
+                'expanded'=>true
                 ))
             ->add('nom')
             ->add('prenom')

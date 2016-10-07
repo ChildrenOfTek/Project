@@ -332,25 +332,17 @@ class DefaultController extends Controller
 
         $finder = new Finder();
         $finder2=new Finder();
-
+        //ce finder reccupere les fichiers
         $finder->files()->in($this->get('kernel'
             )->getRootDir() . '/../web/public/img/article')->sort($sort);
+        //ce finder reccupere les dossiers
         $finder2->directories()->in($this->get('kernel'
             )->getRootDir() . '/../web/public/img/article')->sort($sort);
         $files=[];
         $dirs=[];
-
+        //on crée deux tableaux pour chacunes des entrées
         foreach ($finder as $file) {
             $files[]=$file;
-            // Dump the absolute path
-            //var_dump($file->getRealPath());
-
-            // Dump the relative path to the file, omitting the filename
-            //var_dump($file->getRelativePath());
-
-            // Dump the relative path to the file
-            //var_dump($file->getRelativePathname());
-
         }
         foreach ($finder2 as $dir) {
             $dirs[]=$dir;
@@ -373,16 +365,31 @@ class DefaultController extends Controller
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository('ArticleBundle:Article');
         $article=$repo->findOneBy(array('imageName'=>$name));
+        //on verifie que l'article existe, sinon on lance une erreur
+        if($article){
+            $file=$this->get('kernel'
+                )->getRootDir() . '/../web/public/img/article/'.$dir.'/'.$name;
+            //on verifie que le fichier existe, sinon on lance une erreur
+            if($file){
+                unlink($file);
+                //var_dump($article);die();
+                $article->setImageName('');
+                $em->persist($article);
+                $em->flush();
+                $this->addFlash('success','L\'image a bien été supprimée !');
+            }else{
+                $this->addFlash('error','L\'image n\'a pas été trouvée !');
+                return $this->finderAction();
+            }
+
+            return $this->finderAction();
+
+        }else{
+            $this->addFlash('error','L\'article n\'existe pas !');
+            return $this->finderAction();
+
+        }
 
 
-        $file=$this->get('kernel'
-        )->getRootDir() . '/../web/public/img/article/'.$dir.'/'.$name;
-        unlink($file);
-        //var_dump($article);die();
-        $article->setImageName('');
-        $em->persist($article);
-        $em->flush();
-        $this->addFlash('success','L\'image a bien été supprimée !');
-        return $this->finderAction();
     }
 }

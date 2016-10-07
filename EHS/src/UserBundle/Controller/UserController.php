@@ -180,7 +180,7 @@ class UserController extends Controller
     {
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('UserBundle\Form\UserType', $user);
-        $editForm->remove('userRoles');
+
         $editForm->remove('password');
         $editForm->add('password','text',array('label'=>'(Si vous voulez changer le mot de passe, écrivez en un nouveau.
          Sinon, ne touchez rien !)'));

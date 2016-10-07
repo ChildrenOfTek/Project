@@ -44,8 +44,11 @@
                 {% else %}
                     <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
                 {% endif %}
-
-                <td>{% if article.online %}Oui{% else %}Non{% endif %}</td>
+                {% if article.online %}
+                <td style="background-color: green"></td>
+                    {% else %}
+                    <td style="background-color: red"></td>
+                    {% endif %}
                 <td><!--Affichage des tags de l'article -->
                     {% for tag in article.tag %}
                         <div class="buttonLink">

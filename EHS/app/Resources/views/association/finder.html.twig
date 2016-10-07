@@ -5,11 +5,20 @@
 {% endblock %}
 
 {% block section %}
+    <div class="buttonLink">
+        <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'finder'}) }}')">Voir l'aide</a>
+    </div>
     <div id="top"></div>
     <div class="row">
     <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-default">
     <div class="panel-heading">Liste des dossiers et fichiers</div>
+
+
+
+{% if dirs is empty %}
+    {{ "Il n'y a encore aucun dossier crée !" }}
+{% else %}
     <div class="panel-body">Accès rapide :
         <select name="dropdpown" size="1" id="select-anchor">
             {% for dir in dirs %}
@@ -18,11 +27,6 @@
         </select>
 
     </div>
-
-
-{% if dirs is empty %}
-    {{ "Il n'y a encore aucun dossier crée !" }}
-{% else %}
     {% for dir in dirs %}
         <table class="table table-hover table-bordered">
             <thead>

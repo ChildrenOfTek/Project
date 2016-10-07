@@ -48,7 +48,6 @@ class SecurityController extends Controller
         return $this->render('association/index.html.twig');
     }
 
-    //envoyer un mail sur une route reset avec l'id du mail
     /**
      * Generates another random password.
      * @Route("/forgot_password", name="forgot_password")
@@ -66,7 +65,6 @@ class SecurityController extends Controller
         {
             $data=$form->getData();
             $user=$repo->findOneBy(array('email'=>$data->getEmail()));
-            var_dump($data);var_dump($user);die();
             if($user != null)
             {
                 $password=$user->generateStrongPassword(25);

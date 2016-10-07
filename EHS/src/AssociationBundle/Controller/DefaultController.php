@@ -111,6 +111,7 @@ class DefaultController extends Controller
 
                 // on retourne une message flash pour l'utilisateur pour le prévenir que son mail est bien parti
                 $this->get('session')->getFlashBag()->add('success', 'Merci pour votre email !');
+                return $this->redirectToRoute('index');
             }else{
                 //si le formulaire n'est pas valide en plus des erreurs du form
                 $this->get('session')->getFlashBag()->add('error', 'Désolé un problème est survenu.');
@@ -181,7 +182,7 @@ class DefaultController extends Controller
                     )
                 ;
 
-                //On envoie le message à la personne qui fait la demamnde
+                //On envoie le message à la personne qui fait la demande
                 $message2 = \Swift_Message::newInstance()
                     ->setSubject('Demande d\'inscription')
                     ->setFrom($this->getParameter('mailer_user'))

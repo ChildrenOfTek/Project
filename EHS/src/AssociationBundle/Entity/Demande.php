@@ -34,7 +34,7 @@ class Demande
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=true,
-     *     message="Un code postal doit être composé de nombres."
+     *     message="Un code postal doit être composé de chiffres."
      * )
      */
     protected $cp;

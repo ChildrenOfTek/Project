@@ -9,12 +9,11 @@
         </title>
         <link href="{{ asset('public/CSS/bootstrap.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('public/CSS/style.css') }}" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }} "/>
         <link rel="icon" type="image/png" href="{{ asset('favicon.ico') }}" />
-        <link type="text/css" rel="stylesheet" media="all" href="{{ asset('public/CSS/style2.css') }}" id="theme_css" />
-
+        <link type="text/css" rel="stylesheet" media="all" href="{{ asset('public/CSS/style.css') }}" id="theme_css" />
         {% block stylesheets %}
 <!--{{ dump(app.user) }}-->
         {% endblock %}
@@ -22,7 +21,6 @@
     </head>
     <body>
       <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Retourner en haut de la page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
-
         {% block body %}
         {% if app.request.requestUri != "/EHS/EHS/web/app_dev.php/user/new" %}
         <div class="top-div">
@@ -38,11 +36,9 @@
                   <span class="icon-bar"></span>
                 </button>
                 <a id="brand" class="navbar-brand" href="#">
-
-                  <img src="{{ asset('public/img/EHS2.png') }}" alt="" />
+                  <img src="{{ asset('public/img/EHS3.png') }}" alt="" />
                 </a>
               </div>
-
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -56,8 +52,12 @@
                       <li><a href="{{ path('association_presentation') }}">Comment adhérer?</a></li>
                     </ul>
                   </li>
-
-<!--                   <li class="dropdown">
+                  <li>
+                    {% if (is_granted('ROLE_USER'))%}
+                  <a href="{{ path('forum_index') }}">Forum</a>
+                  {% endif %}
+                  </li>
+                  <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agenda<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                       <li><a href="#">Ateliers</a></li>
@@ -68,26 +68,15 @@
                       <li role="separator" class="divider"></li>
                       <li><a href="#">Un autre truc</a></li>
                     </ul>
-                  </li> -->
-                  <li class="inactive"><a href="{{ path('events_index') }}">Événements</a></li>
-                  {% if (is_granted('ROLE_USER'))%}
-                  <li>
-                  <a href="{{ path('forum_index') }}">Forum</a>
                   </li>
-                {% endif %}
                 </ul>
-
                 <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace Personnel <span class="caret"></span></a>
-
                     <ul class="dropdown-menu">
-
                       <li>
                         <div class="login">
-
                             {% block login %}
-
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li><a href="{{ path('user_showpublic',{"id":app.user.id}) }}">Mon profil</a></li>
                         <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
@@ -97,16 +86,12 @@
                             <li><a href="{{ path('association_archive_index') }}">Gerer les archives</a></li>
                         {% endif %}
                         {% if(is_granted('ROLE_PRESS')) %}
-
                         {% endif %}
-
                         {% else %}
                             <li><a href="{{ path("login") }}">Se connecter</a></li>
                             <li><a href="{{ path("forgot_password") }}">Mot de passe oublie?</a></li>
-
                         {% endif %}
                         {% endblock %}
-
                         </div>
                         </li>
                     </ul>
@@ -115,7 +100,6 @@
               </div>
             <!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
-
           </nav>
         </div>
         {% endblock %}
@@ -136,13 +120,61 @@
                         <p align="center">{{ flash }}</p>
                     </div>
                 {% endfor %}
-
             {% endblock %}
         {% block section %}
         {% endblock %}
         {% block dropzone %}
         {% endblock %}
         {% endblock %}
+{% block footer %}
+<div class="footer-container">
+        <div class="footer-distributed">
+          <div class="footer-left">
+            <h3>Ethique Handicap et Société</h3>
+            <p class="footer-links">
+              <a href="#">Accueil</a>
+              ·
+              <a href="#">Articles</a>
+              ·
+              <a href="#">L'Association</a>
+              ·
+              <a href="#">Agenda</a>
+              ·
+              <a href="#">Forum</a>
+              ·
+              <a href="#">Mentions Légales</a>
+            </p>
+            <p class="footer-company-name">Ethique Handicap et Société &copy; 2016</p>
+          </div>
+          <div class="footer-center">
+            <div>
+              <i class="fa fa-map-marker"></i>
+              <p><span>21 Rue du Lorem</span>44000 Nantes</p>
+            </div>
+            <div>
+              <i class="fa fa-phone"></i>
+              <p>01 23 45 67 89</p>
+            </div>
+            <div>
+              <i class="fa fa-envelope"></i>
+              <p><a href="mailto:support@company.com">support@company.com</a></p>
+            </div>
+          </div>
+          <div class="footer-right">
+            <p class="footer-company-about">
+              <span>A propos de nous</span>
+              Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+            </p>
+            <div class="footer-icons">
+              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="#"><i class="fa fa-linkedin"></i></a>
+              <a href="#"><i class="fa fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+</div>
+{% endblock %}
         <script type="text/javascript" src="{{ asset('public/script/jquery-3.1.0.min.js') }}"></script>
         <script src="{{ asset('public/script/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/script/menuDeroulant.js') }}"></script>

@@ -20,10 +20,11 @@ class AppKernel extends Kernel
             new ArticleBundle\ArticleBundle(),
             new NewsletterBundle\NewsletterBundle(),
             new AssociationBundle\AssociationBundle(),
+            new EventsBundle\EventsBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
-            new EventsBundle\EventsBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

@@ -97,10 +97,70 @@ vich_uploader:
             namer:              namer.archive_file
             directory_namer:    namer.archive_name
 
+fm_elfinder:
+    instances:
+        default:
+            locale: %locale% # defaults to current request locale
+            editor: ckeditor # other options are tinymce, tinymce4, form, custom and simple
+            fullscreen: true
+            theme: smoothness # jquery theme
+            include_assets: true
+            connector:
+                debug: false
+                binds:
+                  upload.presave:
+                  - Plugin.AutoResize.onUpLoadPreSave
+                plugins:
+                  AutoResize: # global resize options, applies to root which don't have his own resize configuraion
+                    enable: true
+                    maxWidth: 500
+                    maxHeight: 500
+                    quality: 95 # JPEG image save quality
+                roots:       # at least one root must be defined
+                    uploads:
+                        show_hidden: false
+                        driver: LocalFileSystem
+                        path: uploads/img/filemanager
+                        plugins:
+                          AutoResize:
+                            enable: true
+                            maxWidth: 500
+                            maxHeight: 500
+                            quality: 95 # JPEG image save quality
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+                    resize1:
+                        driver: LocalFileSystem
+                        path: uploads/img/filemanager
+                        plugins:
+                          AutoResize:
+                              enable: true
+                              maxWidth: 500 # Path to Water mark image
+                              maxHeight: 500 # Margin right pixel
+                              quality: 95 # JPEG image save quality
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+                    resize2:
+                        driver: LocalFileSystem
+                        path: uploads/img/filemanager
+                        plugins:
+                          AutoResize:
+                            enable: true
+                            maxWidth: 500
+                            maxHeight: 500
+                            quality: 95
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+
 ivory_ck_editor:
     default_config:                     my_custom_config    # Utiliser par defaut la configuration my_custom_config
     configs:
         my_custom_config:
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []
             language:                   %locale%
             toolbar:                    standard            # Charger la toolbar tollbar_1 (voir plus bas)
             stylesSet:                  my_styles           # Chargement des styles personnalisables my_styles (voir plus bas)

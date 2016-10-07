@@ -10,6 +10,7 @@ use AssociationBundle\Form\ContactType;
 use AssociationBundle\Form\DemandeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Finder\Finder;
 
 
 /**
@@ -314,5 +315,74 @@ class DefaultController extends Controller
             'user'=>$user,
             'destinataire'=>$destinataire
         ));
+    }
+
+    /**
+     * Lists all images in the web folder.
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Route("/finder", name="association_archive_finder")
+     * @Method("GET")
+     */
+    public function finderAction()
+    {
+        $sort = function (\SplFileInfo $a, \SplFileInfo $b)
+        {
+            return strcmp($b->getCTime(), $a->getCTime());
+        };
+
+        $finder = new Finder();
+        $finder2=new Finder();
+
+        $finder->files()->in($this->get('kernel'
+            )->getRootDir() . '/../web/public/img/article')->sort($sort);
+        $finder2->directories()->in($this->get('kernel'
+            )->getRootDir() . '/../web/public/img/article')->sort($sort);
+        $files=[];
+        $dirs=[];
+
+        foreach ($finder as $file) {
+            $files[]=$file;
+            // Dump the absolute path
+            //var_dump($file->getRealPath());
+
+            // Dump the relative path to the file, omitting the filename
+            //var_dump($file->getRelativePath());
+
+            // Dump the relative path to the file
+            //var_dump($file->getRelativePathname());
+
+        }
+        foreach ($finder2 as $dir) {
+            $dirs[]=$dir;
+        }
+        return $this->render('association/finder.html.twig', array(
+            // on renvoie dans la vue "la vue" du formulaire
+            'files'=>$files,
+            'dirs'=>$dirs
+        ));
+    }
+
+    /**
+     * Deletes an image corresponding to an article.
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Route("/finder/{name}/{dir}/delete", name="association_archive_finder_delete")
+     * @Method("GET")
+     */
+    public function finderDeleteAction($name,$dir)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $repo=$em->getRepository('ArticleBundle:Article');
+        $article=$repo->findOneBy(array('imageName'=>$name));
+
+
+        $file=$this->get('kernel'
+        )->getRootDir() . '/../web/public/img/article/'.$dir.'/'.$name;
+        unlink($file);
+        //var_dump($article);die();
+        $article->setImageName('');
+        $em->persist($article);
+        $em->flush();
+        $this->addFlash('success','L\'image a bien été supprimée !');
+        return $this->finderAction();
     }
 }

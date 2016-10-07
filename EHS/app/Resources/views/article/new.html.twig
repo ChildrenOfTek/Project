@@ -5,7 +5,14 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Création d'un article</h1>
+<div class="buttonLink">
+    <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'articleNew'}) }}')">Voir l'aide</a>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Création d'un article</div>
+            <div class="panel-body">
     {{ form_start(form) }}
         {{ form_row(form.user) }}
         {{ form_row(form.dateArticle) }}
@@ -23,7 +30,7 @@
 
     <input type="submit" value="Créer un article" />
     {{ form_end(form) }}
-
+        </div></div></div></div></div>
     <ul>
         <li>
             <a href="{{ path('article_index') }}">Retour à la liste</a>

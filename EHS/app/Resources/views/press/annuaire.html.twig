@@ -8,29 +8,32 @@
 
 <div class="bg"></div>
     <div class="top"></div>
+<div class="buttonLink">
+    <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'annuaireList'}) }}')">Voir l'aide</a>
+</div>
 
-<section>
-  <div class="row">
-    <h1 class="text-center"><i class="icon-fire icon-3x"></i></h1>
-    <h1 class="text-center"><strong>Annuaire</strong></h1>
-    <p class="lead text-center">
-      <div class="panel panel-default">
-      <div class="panel-heading">
-        {% for letter in 'A'..'Z' %}
-            * <a href="#{{ letter }}">{{ letter }}</a>
-        {% endfor %}
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-body">{% for letter in 'A'..'Z' %}
+                        * <a href="#{{ letter }}">{{ letter }}</a>
+                    {% endfor %}</div>
+
+
+          </div></div>
           </div>
-          </div>
-    </p>
+    </div></div></div>
   </div>
-</section>
+<section>
 {% for letter in 'A'..'Z' %}
     <div class="row">
     <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-default">
     <div id="{{ letter }}" class="panel-heading">** {{ letter }} ** <a href="#top" class="btn"><span class="glyphicon glyphicon-chevron-up"></span></a></div>
 
-    <div class="panel-body">
+
     <div class="container">
     <table class="table table-hover table-bordered">
         <tbody>
@@ -51,7 +54,7 @@
     </div>
 {% endfor %}
 
-
+</section>
 
 
 

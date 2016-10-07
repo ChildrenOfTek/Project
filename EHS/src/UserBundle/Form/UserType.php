@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints\Length;
 
 
 class UserType extends AbstractType
@@ -33,7 +34,7 @@ class UserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
-            ->add('cp',TextType::class,array('label'=>'Code Postal'),array('attr'=> array('minlength'=>'4','maxlength'=>'5')))
+            ->add('cp',TextType::class,array('label'=>'Code Postal','constraints'=> new Length(array('min' => 4,'max' => 5))))
             ->add('ville')
             ->add('telephone',TextType::class,array('label'=>'Téléphone'),array('attr'=> array('maxlength'=>'10')))
             ->add('email',EmailType::class)

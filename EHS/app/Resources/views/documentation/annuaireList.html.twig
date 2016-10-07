@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Annuaire
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Documentation pour l'annuaire :</div>
+                <div class="panel-body">
+
+                    <div class="blocColumn">
+                        <div class="blocHaut">
+                            <img src="{{ asset('doc/annuaireList.png') }}" alt ="Creation d'un article"/>
+                        </div>
+                        <div class="blocBas">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Annuaire</div>
+                                        <div class="panel-body">
+
+                            <p>Pour <strong>naviguer</strong>, cliquer sur la lettre qui vous interesse.
+                            </p>
+
+                            <p>
+                                Ensuite, cliquez sur un <strong>profil</strong> pour acceder à ses informations.
+                            </p>
+                            <p>
+                                Enfin, pour retourner en <strong>haut</strong> de l'annuaire, cliquez sur le  <strong>chevron</strong> situé sur le coté des lettres.
+                            </p>
+
+                </div></div></div></div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    </div></div></div></div>
+
+{% endblock %}
+{%  block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/CSS/doc.css') }}"
+{% endblock %}

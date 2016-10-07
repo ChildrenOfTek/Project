@@ -99,12 +99,12 @@
                                         <li><a href="{{ path('article_index') }}">Interface Articles</a></li>
                                         <li><a href="{{ path('user_index') }}">Acceder à l'interface admin</a></li>
                                         <li><a href="{{ path('association_archive_index') }}">Gerer les archives</a></li>
-                                        <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
+
                                     {% endif %}
                                     {% if(is_granted('ROLE_PRESS')) %}
-
+                                        <li><a href="{{ path("association_annuaire") }}">Annuaire</a></li>
                                     {% endif %}
-
+                                        <li><a href="{{ path("user_security_logout") }}">Se deconnecter</a></li>
                                     {% else %}
                                         <li><a href="{{ path("login") }}">Se connecter</a></li>
                                         <li><a href="{{ path("forgot_password") }}">Mot de passe oublie?</a></li>

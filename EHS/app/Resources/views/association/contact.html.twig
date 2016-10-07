@@ -5,12 +5,13 @@
 {% endblock %}
 
 {% block section %}
-    <div class="container">
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Nous contacter par mail : </div>
+            <div class="panel-body">
+                <div class="container">
         <div class="blocGauche">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="jumbotron">
-                <h1>Nous contacter par mail : </h1>
 
                 <form action="{{ path('contact') }}" method="post">
 
@@ -40,9 +41,6 @@
                 </form>
             </div>
 
-            </div>
-        </div>
-    </div>
         <div class="blocDroite">
             <ul>
                 <h3>Nous contacter par courrier</h3>
@@ -61,7 +59,10 @@
             </ul>
 
         </div>
+    </div></div>
+        </div>
     </div>
+</div>
 
 {% endblock %}
 {% block stylesheets %}

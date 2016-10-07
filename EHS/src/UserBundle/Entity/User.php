@@ -96,7 +96,13 @@ class User implements UserInterface, \Serializable
      *     match=true,
      *     message="Un numero de téléphone doit être composé de chiffres."
      * )
-     * @ORM\Column(name="telephone", type="string", length=30)
+     * @Assert\Length(
+     *      min = 9,
+     *      max = 10,
+     *      minMessage = "Votre telephone doit comprendre au moins {{ limit }} caractères",
+     *      maxMessage = "Votre telephone ne doit pas depasser {{ limit }} caractères"
+     * )
+     * @ORM\Column(name="telephone", type="string", length=15)
      */
     protected $telephone;
     

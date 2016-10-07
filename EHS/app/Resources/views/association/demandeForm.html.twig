@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block section %}
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="jumbotron">
-                <h1>Faire une demande d'inscription</h1>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Faire une demande d'inscription</div>
+            <div class="panel-body">
+                <div class="container">
 
                 <form action="{{ path('association_inscription') }}" method="post">
 
@@ -65,6 +67,7 @@
             </div>
         </div>
     </div>
+        </div></div>
 
 {% endblock %}
 

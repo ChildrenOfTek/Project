@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Annuaire
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Documentation pour l'annuaire :</div>
+                <div class="panel-body">
+
+                    <div class="bloc">
+                        <div class="blocGauche">
+                            <img src="{{ asset('doc/annuaireMail.png') }}" alt ="Creation d'un article"/>
+                        </div>
+                        <div class="blocDroite">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Contacter</div>
+                                        <div class="panel-body">
+
+                            <p>Ici, l'email qui sera specifié pour que la personne <strong>puisse vous répondre</strong>.
+                            </p></br>
+
+                            <p>
+                                Le sujet de votre mail.
+                            </p></br></br></br>
+                            <p>
+                                Le contenu du mail qui sera envoyé.
+                            </p></br></br></br></br></br></br>
+                            <p>
+                                Le captcha est à remplir <strong>à l'identique</strong>, afin de prévenir les envois de mails abusifs.
+                                Si celui-ci est <strong>illisible</strong>, cliquer sur <a href="#">Renouveler</a>
+                                permettra d'en générer un nouveau.
+                            </p>
+
+                </div></div></div></div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    </div></div></div></div>
+
+{% endblock %}
+{%  block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/CSS/doc.css') }}"
+{% endblock %}

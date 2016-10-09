@@ -16,7 +16,7 @@
             <div class="panel-body">
 
                 <form action="{{ path('contact_presse',{'id':destinataire.id}) }}" method="post">
-
+                    <p>Envoyer à : {{ destinataire.email }}</p>
                     {{ form_row(formContact.email) }}
 
                     {{ form_label(formContact.sujet) }}

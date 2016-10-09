@@ -43,8 +43,8 @@
                 <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
                 <td>{{ user.username }}</td>
                 <td>
-                {% for user in user.userRoles %}
-                     {{ user.name }}
+                {% for role in user.userRoles %}
+                     {{ role.name }}
                 {% endfor %}
                 </td>
                 <td>{{ user.nom }}</td>
@@ -53,7 +53,7 @@
                 <td>{{ user.cp }}</td>
                 <td>{{ user.ville }}</td>
                 <td>{{ user.telephone }}</td>
-                <td>{{ user.email }}</td>
+                <td>Contacter : <a style="color:#0AC375" href="{{ path('contact_presse',{'id':user.id}) }}">{{ user.email }}</a></td>
                 <td>{% if user.newsletter %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d') }}{% endif %}</td>
                 <!-- H:i:s-->

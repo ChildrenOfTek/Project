@@ -256,7 +256,7 @@ class DefaultController extends Controller
     /**
      * Generates a contact form for Press.
      * @Security("has_role('ROLE_PRESS')")
-     * @Route("/association/presse/{id}/contact", name="contact_presse")
+     * @Route("/association/in/{id}/contact", name="contact_presse")
      * @Method({"GET","POST"})
      */
     public function contactPresseAction(Request $r,$id)

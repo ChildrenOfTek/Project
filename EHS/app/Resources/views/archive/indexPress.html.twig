@@ -13,18 +13,18 @@
         <thead>
             <tr>
                 <th>Date de création</th>
+                <th>Dernière mise à jour</th>
                 <th>Titre de l'archive</th>
                 <th>Nom du fichier (Cliquer pour télécharger)</th>
-                <th>Dernière mise à jour</th>
             </tr>
         </thead>
         <tbody>
         {% for archive in archives %}
             <tr>
-                <td>{% if archive.dateCreation %}{{ archive.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if archive.dateCreation %}{{ archive.dateCreation|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if archive.updatedAt %}{{ archive.updatedAt|date('d-m-Y H:i:s') }}{% endif %}</td>
                 <td>{{ archive.titreArchive }}</td>
                 <td><a href="{{ app.request.basePath }}/..{{ vich_uploader_asset(archive, 'imageFile') }}" download>{{ archive.imageName }}</a></td>
-                <td>{% if archive.updatedAt %}{{ archive.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>

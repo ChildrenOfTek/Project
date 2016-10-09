@@ -854,3 +854,6 @@ a:link, a:visited {
 .annuaireLetters{
     font-size:20px;
 }
+.buttonInfo{
+    position: fixed;
+}

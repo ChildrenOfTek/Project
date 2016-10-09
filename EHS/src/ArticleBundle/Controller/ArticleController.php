@@ -22,7 +22,7 @@ class ArticleController extends Controller
 {
     /**
      * Lists all Article entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="article_index")
      * @Method("GET")
      */

@@ -3,6 +3,7 @@
 namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -40,7 +41,7 @@ class UserType extends AbstractType
             ->add('ville')
             ->add('telephone',TextType::class,array('label'=>'Téléphone'),array('attr'=> array('maxlength'=>'10')))
             ->add('email',EmailType::class)
-            ->add('newsletter')
+            ->add('newsletter',CheckboxType::class,array('label'=>'Veut être inscrit à la neswletter'))
             ->add('birthDate', BirthdayType::class,array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
         ;
     }

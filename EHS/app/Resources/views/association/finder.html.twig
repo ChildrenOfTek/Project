@@ -18,7 +18,7 @@
 {% if dirs is empty %}
     {{ "Il n'y a encore aucun dossier crée !" }}
 {% else %}
-    <div class="panel-body">Accès rapide :
+    <div class="panel-body" style="font-size:30px;">Accès rapide :
         <select name="dropdpown" size="1" id="select-anchor">
             {% for dir in dirs %}
                 <option value="#{{ dir.basename }}">{{ dir.basename[8:8] }}</option>

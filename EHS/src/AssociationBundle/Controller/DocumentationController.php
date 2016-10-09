@@ -13,36 +13,33 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 /**
  * Documentation controller.
- * @Security("has_role('ROLE_ADMIN')")
+ *
  * @Route("/documentation")
  */
 class DocumentationController extends Controller
 {
-    /**
-     * Lists all documentations availables.
-     * @Route("/", name="association_archivedocumentation_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $archives = $em->getRepository('AssociationBundle:Archive')->findAll();
-
-        return $this->render('documentation/index.html.twig', array(
-
-        ));
-    }
 
     /**
      * Finds and displays a documentation.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{doc}", name="documentation_show")
      * @Method("GET")
      */
     public function showAction($doc)
     {
         return $this->render('documentation/'.$doc.'.html.twig', array(
+        ));
+    }
+
+    /**
+     * Finds and displays a documentation.
+     * @Security("has_role('ROLE_PRESS')")
+     * @Route("/{doc}/press", name="documentation_show_press")
+     * @Method("GET")
+     */
+    public function showPressAction($doc)
+    {
+        return $this->render('documentation/'.$doc.'.press.html.twig', array(
         ));
     }
 }

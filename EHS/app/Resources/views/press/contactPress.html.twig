@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block section %}
-    <div class="buttonLink">
-        <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'annuaireMail'}) }}')">Voir l'aide</a>
-    </div>
+    <button class="btn btn-info buttonInfo">
+        <a style="color:white;text-decoration: none;" href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'annuaireMail'}) }}')">Voir l'aide</a>
+    </button>
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
@@ -28,10 +28,6 @@
                     {{ form_widget(formContact.contenu) }}
                     {{ form_errors(formContact.contenu) }}
 
-                    {{ form_label(formContact.captcha) }}
-                    {{ form_widget(formContact.captcha) }}
-                    {{ form_errors(formContact.captcha) }}
-                    <br/>
 
                     {#Ce dernier form widget vas nous permettre d'ajouter des que nous aurions pu oublier et SURTOUT le form token sans ça votre formulaire ne sera jamais valide !!#}
                     {{ form_widget(formContact) }}

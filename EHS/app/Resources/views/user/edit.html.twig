@@ -6,9 +6,9 @@
 
 {% block section %}
     <section>
-    <div class="buttonLink">
-        <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'userEdit'}) }}')">Voir l'aide</a>
-    </div>
+        <button class="btn btn-info buttonInfo">
+            <a style="color:white;text-decoration: none;" href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'userEdit'}) }}')">Voir l'aide</a>
+        </button>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
@@ -22,12 +22,13 @@
 
 
                 {{ form_end(edit_form) }}
-                <div class="buttonLink">
-                        <a href="{{ path('user_index') }}">Retour à la liste</a>
-                </div>
+
                         {{ form_start(delete_form) }}
                         <input class="btn btn-danger" type="submit" value="Supprimer">
                         {{ form_end(delete_form) }}
+                <div class="buttonLink">
+                    <a href="{{ path('user_index') }}">Retour à la liste</a>
+                </div>
 
             </div></div></div></div>
 

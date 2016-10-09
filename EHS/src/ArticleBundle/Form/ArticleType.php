@@ -61,8 +61,7 @@ class ArticleType extends AbstractType
             ->add('tag',EntityType::class,array(
                 'class'=>'ArticleBundle:Tags',
                 'choice_label'=>'libelle',
-                'label'=>'Articles à ajouter',
-                'label_attr'=>array('class'=>'checkbox-inline'),
+                'label'=>'Tags à ajouter',
                 'attr'=>array('class'=>CheckboxType::class),
                 'expanded'=>true,
                 'multiple'=>true

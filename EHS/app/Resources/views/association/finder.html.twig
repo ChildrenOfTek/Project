@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block section %}
-    <div class="buttonLink">
-        <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'finder'}) }}')">Voir l'aide</a>
-    </div>
+    <button class="btn btn-info buttonInfo">
+        <a style="color:white;text-decoration: none;" href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'finder'}) }}')">Voir l'aide</a>
+    </button>
     <div id="top"></div>
     <div class="row">
     <div class="col-md-10 col-md-offset-1">
@@ -33,7 +33,7 @@
             <tr>
                 <th id="{{ dir.basename  }}">Liste des fichiers présents dans <strong>{{ dir.basename }}</strong> :
             <a href="#top" class="btn"><span class="glyphicon glyphicon-chevron-up"></span></a></th>
-                <th>Aperçu</th>
+                <th>Aperçu (cliquez pour agrandir)</th>
                 <th>Actions:
                         <a href="{{ path('association_finder_deleteDir',{"dir":dir.basename}) }}">Supprimer le dossier (Doit etre vide)</a>
                     </th>

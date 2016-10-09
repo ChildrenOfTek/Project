@@ -6,9 +6,7 @@
 
 {% block section %}
 <div class="wrapper">
-    <div class="buttonLink">
-        <a href="{{ path('user_new') }}">Ajouter un nouvel utilisateur</a>
-    </div>
+
 
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
@@ -16,6 +14,9 @@
           <div class="panel-heading">Gestion des utilisateurs</div>
             <div class="panel-body">
               <div class="container col-md-10 col-md-offset-1">
+                  <div class="buttonLink">
+                      <a href="{{ path('user_new') }}">Ajouter un nouvel utilisateur</a>
+                  </div>
                 <div class="table-responsive">
     <table class="table table-hover table-bordered table-striped">
         <thead>
@@ -41,9 +42,11 @@
             <tr>
                 <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
                 <td>{{ user.username }}</td>
+                <td>
                 {% for user in user.userRoles %}
-                <td>{{ user.name }}</td>
+                     {{ user.name }}
                 {% endfor %}
+                </td>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.adresse }}</td>

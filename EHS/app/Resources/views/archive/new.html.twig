@@ -5,19 +5,24 @@
 {% endblock %}
 
 {% block section %}
-<h1>Création d'une archive</h1>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Création d'une archive</div>
+            <div class="panel-body">
+                <div class="container col-md-10 col-md-offset-1">
 {{ form_start(form) }}
         {{ form_row(form.titreArchive) }}
 <div class="vich-file">
     {{ form_widget(form.imageFile) }}
 </div>
 
-    <input type="submit" value="Créer une archive" />
+    <input class="btn btn-success" type="submit" value="Créer une archive" />
     {{ form_end(form) }}
+    <div class="buttonLink">
+        <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
-        </li>
-    </ul>
-    {% endblock %}
+</div></div></div></div></div>
+
+{% endblock %}

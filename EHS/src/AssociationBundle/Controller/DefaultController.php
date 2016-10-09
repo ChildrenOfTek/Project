@@ -264,6 +264,7 @@ class DefaultController extends Controller
         $user=$this->get('security.token_storage')->getToken()->getUser();
         $formContact = $this->createForm(new ContactType());
         $formContact->remove('email');
+        $formContact->remove('captcha');
         $formContact->add('email',EmailType::class,array(
             'data'=>$user->getEmail(),
             'label'=>'Votre email pour la réponse: '));

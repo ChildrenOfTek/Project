@@ -64,6 +64,14 @@ class DefaultController extends Controller
         return $this->render('association/presentation.html.twig');
     }
 
+    /**
+     * @Route("/association/mentions", name="association_mentions")
+     */
+    public function mentionAction()
+    {
+        return $this->render('association/mentions.html.twig');
+    }
+
     /* A SUIVRE ACTIONS PLUS SPECIFIQUES COMME FORMULAIRE DE CONTACT, DEMANDE D'INSCRIPTION,... */
 
     /**

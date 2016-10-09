@@ -1909,6 +1909,7 @@
                 "psr-3"
             ],
             "time": "2016-09-19 16:02:08"
+<<<<<<< HEAD
         },
         {
             "name": "robloach/component-installer",
@@ -1957,6 +1958,8 @@
             ],
             "description": "Allows installation of Components via Composer.",
             "time": "2015-08-10 12:35:38"
+=======
+>>>>>>> forum
         },
         {
             "name": "sensio/distribution-bundle",
@@ -2987,6 +2990,7 @@
         },
         {
             "name": "twig/twig",
+<<<<<<< HEAD
             "version": "v1.26.1",
             "source": {
                 "type": "git",
@@ -2997,6 +3001,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/twigphp/Twig/zipball/a09d8ee17ac1cfea29ed60c83960ad685c6a898d",
                 "reference": "a09d8ee17ac1cfea29ed60c83960ad685c6a898d",
+=======
+            "version": "v1.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "f16a634ab08d87e520da5671ec52153d627f10f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/f16a634ab08d87e520da5671ec52153d627f10f6",
+                "reference": "f16a634ab08d87e520da5671ec52153d627f10f6",
+>>>>>>> forum
                 "shasum": ""
             },
             "require": {
@@ -3010,6 +3026,7 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.26-dev"
+
                 }
             },
             "autoload": {
@@ -3044,6 +3061,7 @@
             "keywords": [
                 "templating"
             ],
+<<<<<<< HEAD
             "time": "2016-10-05 18:57:41"
         },
         {
@@ -3116,6 +3134,9 @@
                 "upload"
             ],
             "time": "2014-12-12 10:26:46"
+=======
+            "time": "2016-09-21 23:05:12"
+>>>>>>> forum
         }
     ],
     "packages-dev": [

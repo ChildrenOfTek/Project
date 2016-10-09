@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use ArticleBundle\Entity\Article;
 
+
 /**
  * User
  *
@@ -131,6 +132,7 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="ArticleBundle\Entity\Article",mappedBy="user", cascade={"persist","remove"})
      *
      */
+
     private $article;
 
     /**
@@ -138,6 +140,7 @@ class User implements UserInterface, \Serializable
      *
      */
     private $topic;
+
     
     public function __construct()
     {

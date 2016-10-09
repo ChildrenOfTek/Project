@@ -34,7 +34,7 @@ class Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateArticle", type="datetimetz")
+     * @ORM\Column(name="dateArticle", type="datetime")
      */
     private $dateArticle;
 
@@ -55,7 +55,7 @@ class Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datePublication", type="datetimetz")
+     * @ORM\Column(name="datePublication", type="datetime")
      */
     private $datePublication;
 

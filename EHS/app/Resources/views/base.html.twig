@@ -46,9 +46,9 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">L'Association <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ path('association_status') }}">Notre équipe</a></li>
+                        <li><a href="{{ path('association_presentation') }}">Présentation</a></li>
+                      <li><a href="{{ path('association_status') }}">Les statuts</a></li>
                       <li><a href="{{ path('association_office') }}">Nos actions</a></li>
-                      <li><a href="{{ path('association_presentation') }}">Comment adhérer?</a></li>
                     </ul>
                   </li>
                   <li>
@@ -59,13 +59,10 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agenda<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href="#">Ateliers</a></li>
-                      <li><a href="#">Rencontres</a></li>
-                      <li><a href="#">Spectacles</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">Contributions</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">Un autre truc</a></li>
+                      <li><a href="{{ path('events_index') }}">Evenements</a></li>
+                        {% if(is_granted('ROLE_PRESS')) %}
+                            <li><a href="{{ path('association_annuaire') }}">Annuaire</a></li>
+                        {% endif %}
                     </ul>
                   </li>
                     <li class="dropdown">
@@ -83,8 +80,12 @@
 
                 <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
+                      {% if is_granted('ROLE_ADMIN') %}
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu administration <span class="caret"></span></a>
+                      {% else %}
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Espace Personnel <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                      {% endif %}
+                      <ul class="dropdown-menu">
                       <li>
                         <div class="login">
                             {% block login %}
@@ -93,8 +94,6 @@
                         <li><a href="{{ path('user_showpublic',{"id":app.user.id}) }}">Mon profil</a></li>
 
                         {% if(is_granted('ROLE_PRESS')) %}
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{{ path('association_annuaire') }}">Annuaire</a></li>
                             {% if(not is_granted('ROLE_ADMIN')) %}
                             <li><a href="{{ path('association_archive_press') }}">Archives</a></li>
                              {% endif %}
@@ -102,11 +101,15 @@
                         {% endif %}
 
                         {% if(is_granted('ROLE_ADMIN')) %}
-                            <li><a href="{{ path('user_index') }}">Interface Utilisateurs</a></li>
-                            <li><a href="{{ path('article_index') }}">Interface Articles</a></li>
-                            <li><a href="{{ path('events_index') }}">Interface Evenements</a></li>
-                            <li><a href="{{ path('association_archive_index') }}">Interface Archives</a></li>
-                            <li><a href="{{ path('association_finder') }}">Interface Fichiers</a></li>
+
+                            <li><a href="{{ path('article_index') }}">Articles</a></li>
+                            <li><a href="{{ path('events_index') }}">Evenements</a></li>
+                            <hr>
+                            <li><a href="{{ path('newsletter_index') }}">Newsletter</a></li>
+                            <li><a href="{{ path('association_archive_index') }}">Archives</a></li>
+                            <hr>
+                            <li><a href="{{ path('user_index') }}">Utilisateurs</a></li>
+                            <li><a href="{{ path('association_finder') }}">Fichiers</a></li>
                             <li role="separator" class="divider"></li>
 
                         {% endif %}

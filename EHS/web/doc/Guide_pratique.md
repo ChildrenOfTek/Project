@@ -25,4 +25,6 @@ Si accès SSH
     * installe les asstes dans le dossier web
 5. composer dump-autoload --optimize
     * optimise l'autoloader de composer pour la produciton
-6. 
+6. verifier le php.ini
+    * upload limit
+    * extension intl

@@ -28,7 +28,6 @@ class ArticleTypeEdit extends AbstractType
             ->add('dateArticle', DateType::class, array(
                 'data' => new \Datetime(),
                 'widget'=>'choice',
-                'format'=>'dd-MM-yyyy',
                 'label'=>'Date de création'
             ))
 
@@ -46,7 +45,6 @@ class ArticleTypeEdit extends AbstractType
             ->add('datePublication',DateTimeType::class,array(
                 'data'=> new \Datetime(),
                 'widget'=>'choice',
-                'format'=>'dd-MM-yyyy',
                 'label'=>'Date de publication'))
 
             ->add('imageFile',VichFileType::class,

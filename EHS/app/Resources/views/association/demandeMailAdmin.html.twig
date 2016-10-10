@@ -3,30 +3,31 @@
 <p>Vous recevez ce message après une demande d'inscription !</p>
 <p>La personne faisant la demande est la suivante : </p>
 
-<ul>
-    <li>
-        Email : {{ demande.email }}
-    </li>
-    <li>
-        Nom : {{ demande.nom }}
-    </li>
-    <li>
-        Prenom : {{ demande.prenom }}
-    </li>
-    <li>
-        Adresse : {{ demande.adresse }}
-    </li>
-    <li>
-        Code Postal : {{ demande.cp }}
-    </li>
-    <li>
-        Ville : {{ demande.ville }}
-    </li>
-    <li>
-        Telephone : {{ demande.telephone }}
-    </li>
-    <li>
-        Date de naissance : {{ demande.birthDate|date('d-m-y') }}
-    </li>
+<table class="table table-hover table-bordered">
+    <tr>
+        <td>Nom : </td>
+        <td>{{ demande.nom }}</td>
+    </tr>
+    <tr>
+        <td>Prenom : </td>
+        <td>{{ demande.prenom }}</td>
+    </tr>
+    <tr>
+        <td>Adresse : </td><td>{{ demande.adresse }}</td>
+    </tr>
+    <tr>
+        <td>Code Postal : </td><td>{{ demande.cp }}</td>
+    </tr>
+    <tr>
+        <td>Ville : </td><td>{{ demande.ville }}</td>
+    </tr>
+    <tr>
+        <td>Telephone : </td><td>{{ demande.telephone }}</td>
+    </tr>
+
+    <tr>
+        <td> Date de naissance : </td><td>{{ demande.birthDate|date('d-m-y') }}</td>
+    </tr>
+
     <a href="{{ path('login') }}">Aller sur le site</a>
-</ul>
+</table>

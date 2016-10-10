@@ -35,6 +35,23 @@ class ArchiveController extends Controller
     }
 
     /**
+     * Lists all Archive entities.
+     * @Security("has_role('ROLE_PRESS')")
+     * @Route("/press", name="association_archive_press")
+     * @Method("GET")
+     */
+    public function indexPresseAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $archives = $em->getRepository('AssociationBundle:Archive')->findAll();
+
+        return $this->render('archive/indexPress.html.twig', array(
+            'archives' => $archives,
+        ));
+    }
+
+    /**
      * Creates a new Archive entity.
      *
      * @Route("/new", name="association_archive_new")

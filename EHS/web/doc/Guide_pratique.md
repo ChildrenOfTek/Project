@@ -7,7 +7,7 @@ Si accès SSH
     * A la génération du parameters.yml,
     entrer les informations relatives au serveur
     et a la base de données de l'hebergement
-        * database_host: **Adresse du SQL serveur**
+        * database_host: **Adresse du serveur SQL**
         * database_port: **Port**
         * database_name: **Nom base de donnée (ex:ehs)**
         * database_user: **Nom de l'administrateur**
@@ -18,7 +18,13 @@ Si accès SSH
         * mailer_password: **Mot de passe de l'adrese mail**
         * secret: **Changer le token par defaut**
 2. php app/console doctrine:schema:update --force
+    * permet de mettre à jour la BDD
 3. php app/console doctrine:fixtures:load
+    * charge le lot de données pour la marche du site
 4. php app/console assets:install
+    * installe les asstes dans le dossier web
 5. composer dump-autoload --optimize
-6. 
+    * optimise l'autoloader de composer pour la produciton
+6. verifier le php.ini
+    * upload limit
+    * extension intl

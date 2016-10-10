@@ -119,6 +119,7 @@ class DefaultController extends Controller
 
                 // on retourne une message flash pour l'utilisateur pour le prévenir que son mail est bien parti
                 $this->get('session')->getFlashBag()->add('success', 'Merci pour votre email !');
+                return $this->redirectToRoute('index');
             }else{
                 //si le formulaire n'est pas valide en plus des erreurs du form
                 $this->get('session')->getFlashBag()->add('error', 'Désolé un problème est survenu.');
@@ -189,7 +190,7 @@ class DefaultController extends Controller
                     )
                 ;
 
-                //On envoie le message à la personne qui fait la demamnde
+                //On envoie le message à la personne qui fait la demande
                 $message2 = \Swift_Message::newInstance()
                     ->setSubject('Demande d\'inscription')
                     ->setFrom($this->getParameter('mailer_user'))
@@ -263,7 +264,7 @@ class DefaultController extends Controller
     /**
      * Generates a contact form for Press.
      * @Security("has_role('ROLE_PRESS')")
-     * @Route("/association/presse/{id}/contact", name="contact_presse")
+     * @Route("/association/in/{id}/contact", name="contact_presse")
      * @Method({"GET","POST"})
      */
     public function contactPresseAction(Request $r,$id)
@@ -271,6 +272,7 @@ class DefaultController extends Controller
         $user=$this->get('security.token_storage')->getToken()->getUser();
         $formContact = $this->createForm(new ContactType());
         $formContact->remove('email');
+        $formContact->remove('captcha');
         $formContact->add('email',EmailType::class,array(
             'data'=>$user->getEmail(),
             'label'=>'Votre email pour la réponse: '));
@@ -328,7 +330,7 @@ class DefaultController extends Controller
     /**
      * Lists all images in the web folder.
      * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/finder", name="association_archive_finder")
+     * @Route("/finder", name="association_finder")
      * @Method("GET")
      */
     public function finderAction()
@@ -342,7 +344,7 @@ class DefaultController extends Controller
         $finder2=new Finder();
         //ce finder reccupere les fichiers
         $finder->files()->in($this->get('kernel'
-            )->getRootDir() . '/../web/public/img/article/')->sort($sort);
+            )->getRootDir() . '/../web/public/img/article')->notName('default.jpg')->sort($sort);
         //ce finder reccupere les dossiers
         $finder2->directories()->in($this->get('kernel'
             )->getRootDir() . '/../web/public/img/article')->sort($sort);
@@ -365,14 +367,18 @@ class DefaultController extends Controller
     /**
      * Deletes an image corresponding to an article.
      * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/finder/{name}/{dir}/delete", name="association_archive_finder_delete")
+     * @Route("/finder/{name}/{dir}/delete", name="association_finder_deleteFile")
      * @Method("GET")
      */
-    public function finderDeleteAction($name,$dir)
+    public function finderFileDeleteAction($name,$dir)
     {
         $em=$this->getDoctrine()->getManager();
-        $repo=$em->getRepository('ArticleBundle:Article');
-        $article=$repo->findOneBy(array('imageName'=>$name));
+
+        $repoEvent=$em->getRepository('EventsBundle:Events');
+        $event=$repoEvent->findOneBy(array('imageName'=>$name));
+
+        $repoArticle=$em->getRepository('ArticleBundle:Article');
+        $article=$repoArticle->findOneBy(array('imageName'=>$name));
         //on verifie que l'article existe, sinon on lance une erreur
         if($article){
             $file=$this->get('kernel'
@@ -387,17 +393,81 @@ class DefaultController extends Controller
                 $this->addFlash('success','L\'image a bien été supprimée !');
             }else{
                 $this->addFlash('error','L\'image n\'a pas été trouvée !');
-                return $this->finderAction();
             }
 
             return $this->finderAction();
 
-        }else{
-            $this->addFlash('error','L\'article n\'existe pas !');
+        }
+        elseif($event)
+        {
+                $file=$this->get('kernel'
+                    )->getRootDir() . '/../web/public/img/article/'.$dir.'/'.$name;
+                //on verifie que le fichier existe, sinon on lance une erreur
+                if($file){
+                    unlink($file);
+                    //var_dump($article);die();
+                    $event->setImageName('');
+                    $em->persist($event);
+                    $em->flush();
+                    $this->addFlash('success','L\'image a bien été supprimée !');
+                }else{
+                    $this->addFlash('error','L\'image n\'a pas été trouvée !');
+                }
+
+                return $this->finderAction();
+
+
+
+        }
+        else{
+            $this->addFlash('error','Aucun élément ne correspond');
             return $this->finderAction();
 
         }
 
+
+    }
+
+    /**
+     * Deletes an empty folder.
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Route("/finder/{dir}/delete", name="association_finder_deleteDir")
+     * @Method("GET")
+     */
+    public function finderDirDeleteAction($dir,Request $request)
+    {
+        function is_dir_empty($dir) {
+            if (!is_readable($dir)) return NULL;
+            $handle = opendir($dir);
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        }
+        $finder=new Finder();
+        $doss=$this->get('kernel')->getRootDir() . '/../web/public/img/article/'.$dir;
+            $finder->directories()->in($doss);
+
+           if($finder)
+           {
+               if(is_dir_empty($doss)){
+
+               rmdir($doss);
+               $this->addFlash('success','Le dossier a bien été supprimée !');
+
+               }else{
+
+                   $this->addFlash('error','Le dossier n\'est pas vide !');
+               }
+
+            }else{
+               $this->addFlash('error','Le dossier n\'a pas été trouvé !');
+                return $this->finderAction();
+            }
+
+            return $this->finderAction();
 
     }
 }

@@ -8,11 +8,16 @@
     <div class="bg"></div>
                   <div class="login-page">
                     <div class="form">
-                      <form class="login-form">
+                        <form method="post" class="login-form">
                         {{ form_start(form) }}
                         {{ form_row(form.email) }}
-                        {{ form_row(form.captcha) }}
+                          {{ form_label(form.captcha) }}
+                          {{ form_widget(form.captcha) }}
+                          {{ form_errors(form.captcha) }}
+                          <br/>
                         <input type="submit" value="Envoyer" />
+                          {{ form_widget(form) }}
+                          {{ form_errors(form) }}
                         {{ form_end(form) }}
                       </form>
                     </div>

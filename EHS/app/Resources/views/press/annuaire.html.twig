@@ -5,20 +5,18 @@
 {% endblock %}
 
 {% block section %}
-<section>
 <div class="bg"></div>
     <div class="top"></div>
 
-
+    <button class="btn btn-info buttonInfo">
+        <a style="color:white;text-decoration: none;" href="javascript:ouvre_doc('{{path('documentation_show_press',{'doc':'annuaireList'}) }}')">Voir l'aide</a>
+    </button>
 
     <div class="row">
-        <div class="buttonLink">
-            <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'annuaireList'}) }}')">Voir l'aide</a>
-        </div>
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="panel-body">{% for letter in 'A'..'Z' %}
+                    <div class="panel-body annuaireLetters">{% for letter in 'A'..'Z' %}
                         * <a href="#{{ letter }}">{{ letter }}</a>
                     {% endfor %}</div>
 
@@ -26,7 +24,6 @@
           </div></div>
           </div>
     </div>
-</section>
 <section>
 {% for letter in 'A'..'Z' %}
     <div class="row">

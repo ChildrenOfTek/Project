@@ -23,7 +23,11 @@ class ResetType extends AbstractType
             ->add('captcha', CaptchaType::class,array(
                 'invalid_message'=>'Veuillez faire correspondre votre saisie',
                 'reload'=>true,
-                'as_url'=>true
+                'as_url'=>true,
+                'width' => 300,
+                'height' => 100,
+                'length' => 6,
+                'label'=>'Captcha 6 caractères'
             ));
 
         ;

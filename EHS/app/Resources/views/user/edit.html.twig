@@ -6,9 +6,9 @@
 
 {% block section %}
     <section>
-    <div class="buttonLink">
-        <a href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'userEdit'}) }}')">Voir l'aide</a>
-    </div>
+        <button class="btn btn-info buttonInfo">
+            <a style="color:white;text-decoration: none;" href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'userEdit'}) }}')">Voir l'aide</a>
+        </button>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
@@ -18,20 +18,21 @@
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Editer" />
+                <hr>
+        <input class="btn btn-success" type="submit" value="Editer" />
 
-    {{ form_end(edit_form) }}
-                <ul>
-                    <li>
-                        <a href="{{ path('user_index') }}">Retour à la liste</a>
-                    </li>
-                    <li>
+
+                {{ form_end(edit_form) }}
+
                         {{ form_start(delete_form) }}
-                        <input type="submit" value="Supprimer">
+                        <input class="btn btn-danger" type="submit" value="Supprimer">
                         {{ form_end(delete_form) }}
-                    </li>
-                </ul>
+                <div class="buttonLink">
+                    <a href="{{ path('user_index') }}">Retour à la liste</a>
+                </div>
+
             </div></div></div></div>
+
 
     </section>
 {% endblock %}

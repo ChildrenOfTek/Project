@@ -70,22 +70,22 @@
                 <td>{% if user.birthDate %}{{ user.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
                         <tr>
-                            <ul>
-                                <li>
-                                    <a href="{{ path('user_index') }}">Retour à la liste </a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
-                                </li>
-                                <li>
-                                    {{ form_start(delete_form) }}
-                                    <input type="submit" value="Supprimer">
-                                    {{ form_end(delete_form) }}
-                                </li>
-                            </ul>
+
                         </tr>
         </tbody>
 
                         </table></div></div></div></div></div>
+    <ul>
+        <div class="buttonLink">
+            <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
+        </div>
+            {{ form_start(delete_form) }}
+            <input class="btn btn-danger" type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+        <div class="buttonLink">
+            <a href="{{ path('user_index') }}">Retour à la liste </a>
+        </div>
+    </ul>
 
 {% endblock %}

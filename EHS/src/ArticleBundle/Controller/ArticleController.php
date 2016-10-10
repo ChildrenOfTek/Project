@@ -22,7 +22,7 @@ class ArticleController extends Controller
 {
     /**
      * Lists all Article entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="article_index")
      * @Method("GET")
      */
@@ -127,6 +127,9 @@ class ArticleController extends Controller
         $deleteForm = $this->createDeleteForm($article);
         $editForm = $this->createForm('ArticleBundle\Form\ArticleTypeEdit', $article);
         $editForm->add('user','text',array('data'=>$user->getNom().' '.$user->getPrenom(),'disabled'=>true,'label'=>'Auteur'));
+        $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+        $path = $helper->asset($article, 'imageFile');
+        //var_dump($path);die();
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

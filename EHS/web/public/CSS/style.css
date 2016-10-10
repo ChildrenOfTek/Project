@@ -865,4 +865,11 @@ a:link, a:visited {
 }
 .annuaireLink a{
     color:#98d44e;
+    font-size:40px;
+}
+.annuaireLetters{
+    font-size:20px;
+}
+.buttonInfo{
+    position: fixed;
 }

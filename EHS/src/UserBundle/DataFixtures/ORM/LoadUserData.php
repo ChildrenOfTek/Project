@@ -36,9 +36,9 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userAdmin->setPassword($encoded);
         $userAdmin->setNom('Guillossou');
         $userAdmin->setPrenom('Michelle');
-        $userAdmin->setAdresse('test');
+        $userAdmin->setAdresse('6 avenue de la Devinière');
         $userAdmin->setCp('44000');
-        $userAdmin->setVille('test');
+        $userAdmin->setVille('Nantes');
         $userAdmin->setTelephone('0123456789');
         $userAdmin->setEmail('vincent.lene.dl@gmail.com');
         $userAdmin->setNewsletter(false);

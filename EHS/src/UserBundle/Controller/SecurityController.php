@@ -48,7 +48,6 @@ class SecurityController extends Controller
         return $this->render('association/index.html.twig');
     }
 
-    //envoyer un mail sur une route reset avec l'id du mail
     /**
      * Generates another random password.
      * @Route("/forgot_password", name="forgot_password")
@@ -56,16 +55,16 @@ class SecurityController extends Controller
      */
     public function newForgotPassword(Request $request)
     {
-        $form=$this->createForm('UserBundle\Form\ResetType');
-        $form->handleRequest($request);
+
         $em=$this->getDoctrine()->getManager();
         $repo=$em->getRepository('UserBundle:User');
+        $form=$this->createForm('UserBundle\Form\ResetType');
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
             $data=$form->getData();
-            $user=$repo->findOneByEmail($data->getEmail());
-            //var_dump($data);var_dump($user);die();
+            $user=$repo->findOneBy(array('email'=>$data->getEmail()));
             if($user != null)
             {
                 $password=$user->generateStrongPassword(25);

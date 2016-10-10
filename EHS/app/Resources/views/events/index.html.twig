@@ -13,7 +13,7 @@
             <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
             <div class="date">
                 <h4>
-                {% if event.start %}{{ event.start|date('d-m-y') }}{% endif %}
+                {% if event.start %}{{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}{% endif %}
                 </h4>
             </div>
             {{ event.description }}<br/>

@@ -12,10 +12,11 @@
 /composer.phar
 /nbproject
 /.idea
-../.idea
+../.idea/*
 /web/public/img/article/*
 /app/sqlite.db.cache
 /src/UserBundle/Tests
 /app/config/config_test.yml
 /coverage
 /archives/*
+/web/uploads/img/filemanager/*

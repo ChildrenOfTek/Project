@@ -2,39 +2,49 @@
 
 {% block section %}
 <div id="myCarousel" class="carousel slide">
+{% if events is defined %}
 <!-- Half Page Image Background Carousel Header -->
     <!-- Indicators -->
     <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
+        {% if events|length > 1 %}
+            {% for event in events %}
+                {% if loop.first %}
+                    <li data-target="#myCarousel" data-slide-to="{{ loop.index0 }}" class="active"></li>
+                {% else %}
+                    <li data-target="#myCarousel" data-slide-to="{{ loop.index0 }}"></li>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </ol>
     <!-- Wrapper for Slides -->
     <div class="carousel-inner">
-        <div class="item active">
-            <!-- Set the first background image using inline CSS below. -->
-            <div class="fill" style="background-image:url('http://www.hesam.eu/labexhastec/files/conf%C3%A9rence.jpg');"></div>
-            <div class="carousel-caption">
-                <h2>24/12 Conférence sur le Lorem Ipsum</h2>
-                <a href="#">Voir les détails et s'inscrire</a>
-            </div>
-        </div>
-        <div class="item">
-            <!-- Set the second background image using inline CSS below. -->
-            <div class="fill" style="background-image:url('http://ispaconference.info/wp-content/uploads/2015/09/conference.jpg');"></div>
-            <div class="carousel-caption">
-                <h2>17/01 Conférence sur le Nemo enim ipsam</h2>
-                <a href="#">Voir les détails et s'inscrire</a>
-            </div>
-        </div>
-        <div class="item">
-            <!-- Set the third background image using inline CSS below. -->
-            <div class="fill" style="background-image:url('http://www.darleyflyingstart.com/wp-content/uploads/2015/11/conference2.jpg');"></div>
-            <div class="carousel-caption">
-                <h2>09/02 Conférence sur le Sit amet</h2>
-                <a href="#">Voir les détails et s'inscrire</a>
-            </div>
-        </div>
+        {% for event in events %}
+            {% if loop.first %}
+                <div class="item active">
+                    {% if not event.imageName %}
+                        <div class="fill" style="background-image:url('{{ asset('/public/img/handicap2.jpg') }}');"></div>
+                    {% else %}
+                        <div class="fill" style="background-image:url('{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}');"></div>
+                    {% endif %}
+                    <div class="carousel-caption">
+                        <h2>{{ event.start|date('d/m') }} {{ event.title }}</h2>
+                        <a href="{{ path('events_show', { 'id': event.id }) }}">Voir les détails et s'inscrire</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="item">
+                    {% if not event.imageName %}
+                        <div class="fill" style="background-image:url('{{ asset('/public/img/handicap2.jpg') }}');"></div>
+                    {% else %}
+                        <div class="fill" style="background-image:url('{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}');"></div>
+                    {% endif %}
+                    <div class="carousel-caption">
+                        <h2>{{ event.start|date('d/m') }} {{ event.title }}</h2>
+                        <a href="{{ path('events_show', { 'id': event.id }) }}">Voir les détails et s'inscrire</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
     <!-- Controls -->
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -43,12 +53,12 @@
     <a class="right carousel-control" href="#myCarousel" data-slide="next">
         <span class="icon-next"></span>
     </a>
+{% endif %}
 </div>
 <div class="container">
     	<hr>
 <p class="lead text-center">Les derniers articles:</p>
       <div class="row">
-
         {% for article in articles %}
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
       <div class="hovereffect">
@@ -64,7 +74,6 @@
   				</p>
               </div>
       </div>
-
   </div>
 {% endfor %}
     </div>

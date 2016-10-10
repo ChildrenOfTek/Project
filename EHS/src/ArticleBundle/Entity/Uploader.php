@@ -26,11 +26,19 @@ class Uploader implements NamerInterface
         }
 
         $file = $mapping->getFile($object);
-        $name = $object->getDateFileArticle('H','i','s').'_file_';
-        
-        $nameFinal=wd_remove_accents($name.$file->getClientOriginalName());
 
+        if (get_class($object) == 'ArticleBundle\Entity\Article') {
+
+            $name = $object->getDateFileArticle('H','i','s').'_file_';
+            $nameFinal=wd_remove_accents($name.$file->getClientOriginalName());
+        }
+        else if (get_class($object) == 'EventsBundle\Entity\Events') {
+
+            $name=$object->getDateFileEvents('H','i','s').'_file_';
+            $nameFinal=wd_remove_accents($name.$file->getClientOriginalName());
+        }
         return ($nameFinal);
+
 
     }
 

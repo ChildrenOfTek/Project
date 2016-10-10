@@ -17,8 +17,8 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prenom',TextType::class)
             ->add('nom',TextType::class)
+            ->add('prenom',TextType::class)            
             ->add('email',EmailType::class)
             ->add('telephone',TextType::class,array(
                 'label'=>'Téléphone',

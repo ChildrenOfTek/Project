@@ -1,18 +1,24 @@
 {% extends 'base.html.twig' %}
-
-
+{% block title%}
+    S'inscrire
+{% endblock %}
 {% block section %}
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">S'inscrire à l'évènement {{ event.title }}</div>
+        <div class="panel-body">
+<div class="container">
 {% include('events/showReg.html.twig') %}
-    <h1>Registration creation</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input class="btn btn-success" type="submit" value="S'inscrire" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('registration_index') }}">Back to the list</a>
-        </li>
-    </ul>
+<div class="buttonLink">
+            <a href="{{ path('events_index') }}">Retour à la liste des évènements</a>
+</div></div>
+
 {% endblock %}

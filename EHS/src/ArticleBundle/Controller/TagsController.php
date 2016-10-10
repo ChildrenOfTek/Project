@@ -64,6 +64,51 @@ class TagsController extends Controller
     }
 
     /**
+     * Gives a view with events matching clicked tag.
+     *
+     * @Route("/{libelle}/events/search", name="tags_events_search")
+     * @Method("GET")
+     */
+    public function tagEventsMatchAction($libelle)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tags = $em->getRepository('ArticleBundle:Tags')->findOneBy(array('libelle'=>$libelle));
+
+        $query1 = $em->createQuery('
+                                    SELECT e
+                                    FROM EventsBundle:Events e
+                                    JOIN e.tag t
+                                    WHERE t.libelle = :libelle
+                                    AND e.end < :now
+                                    ORDER BY e.start DESC
+                                ');
+        $query2 = $em->createQuery('
+                                    SELECT e
+                                    FROM EventsBundle:Events e
+                                    JOIN e.tag t
+                                    WHERE t.libelle = :libelle
+                                    AND e.end >= :now
+                                    ORDER BY e.start ASC
+                                ');
+
+        $query1->setParameter('libelle', $libelle);
+        $query1->setParameter('now', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME);
+        $query2->setParameter('libelle', $libelle);
+        $query2->setParameter('now', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME);
+
+        $pastevents= $query1->getResult();
+        $futureevents= $query2->getResult();
+        //var_dump($query->getResult());die();
+
+        return $this->render('tags/search.html.twig', array(
+            'tags' => $tags,
+            'pastevents' => $pastevents,
+            'futureevents' => $futureevents
+        ));
+    }
+
+    /**
      * Creates a new Tags entity.
      *
      * @Route("/new", name="tags_new")

@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EventsBundle\Entity\Registration;
 use EventsBundle\Form\RegistrationType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Registration controller.
@@ -53,32 +54,41 @@ class RegistrationController extends Controller
             $repoR= $em->getRepository('EventsBundle:Registration');
             $eventR=$repoR->findRegistration($id);
 
-        if(count($eventR) >= $eventE->getPlaces())
-            {
-                $this->addFlash('error',
-                'Il n\'y a plus de place disponible pour cet évènement  !');
-                return $this->redirectToRoute('events_index');                
-            }else{
+        $now = new \DateTime();
 
-        if ($form->isSubmitted() && $form->isValid()) {            
-            
+        if ( $eventE->getEnd() > $now ) {
+            if(count($eventR) >= $eventE->getPlaces())
+                {
+                    $this->addFlash('error',
+                    'Il n\'y a plus de place disponible pour cet évènement  !');
+                    return $this->redirectToRoute('events_index');                
+                }else{
 
-                $registration->setEvents($eventE);
-                $em->persist($registration);
-                $em->flush();
-                $this->addFlash('success',
-                'Votre inscription a bien été prise en compte !');
-
-                return $this->redirectToRoute('events_show', array('id' => $registration->getEvents()->getId()));
+            if ($form->isSubmitted() && $form->isValid()) {            
                 
-            } 
-        }
 
-        return $this->render('registration/new.html.twig', array(
-            'registration' => $registration,
-            'form' => $form->createView(),
-            'event' => $eventE
-        ));
+                    $registration->setEvents($eventE);
+                    $em->persist($registration);
+                    $em->flush();
+                    $this->addFlash('success',
+                    'Votre inscription a bien été prise en compte !');
+
+                    return $this->redirectToRoute('events_show', array('id' => $registration->getEvents()->getId()));
+                    
+                } 
+            }
+
+            return $this->render('registration/new.html.twig', array(
+                'registration' => $registration,
+                'form' => $form->createView(),
+                'event' => $eventE
+            ));            
+        } else {
+            $this->addFlash('error',
+                'Cet évènement est terminé.');
+
+            return $this->redirectToRoute('events_index');
+        }
     }
 
     /**
@@ -99,7 +109,7 @@ class RegistrationController extends Controller
 
     /**
      * Displays a form to edit an existing Registration entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="registration_edit")
      * @Method({"GET", "POST"})
      */
@@ -126,7 +136,7 @@ class RegistrationController extends Controller
 
     /**
      * Deletes a Registration entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="registration_delete")
      * @Method("DELETE")
      */
@@ -146,7 +156,7 @@ class RegistrationController extends Controller
 
     /**
      * Creates a form to delete a Registration entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Registration $registration The Registration entity
      *
      * @return \Symfony\Component\Form\Form The form

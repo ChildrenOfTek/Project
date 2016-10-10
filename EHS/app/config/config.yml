@@ -87,6 +87,15 @@ vich_uploader:
             delete_on_remove:   true
             namer:              namer.media_file
             directory_namer:    namer.dir_name
+        events_image:
+            uri_prefix:         /events
+            upload_destination: %kernel.root_dir%/../web/public/img/events
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
+            namer:              namer.media_file
+            directory_namer:    namer.dir_name
         archive_fichier:
             uri_prefix:         /archives
             upload_destination: %kernel.root_dir%/../archives
@@ -161,7 +170,6 @@ ivory_ck_editor:
         my_custom_config:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
-            skin: "office2013"
             language:                   %locale%
             toolbar:                    "my_toolbar_1"            # Charger la toolbar tollbar_1 (voir plus bas)
             uiColor:                    "#cccccc"           # Couleur de fond de l'interface

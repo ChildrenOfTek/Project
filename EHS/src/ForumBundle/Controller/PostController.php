@@ -40,6 +40,9 @@ class PostController extends Controller
             $em->persist($post);
             $em->flush();
 
+            $this->addFlash('success',
+                'Un nouveau post a bien été crée !');
+
             return $this->redirectToRoute('topic_show', array('id' => $_GET['id'] ));
         }
 

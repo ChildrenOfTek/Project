@@ -42,6 +42,9 @@ class TopicController extends Controller
             $topic->setAuthor($author);
             $em->persist($topic);
             $em->flush();
+
+            $this->addFlash('success',
+                'Un nouveau topic a bien été crée !');
             
             return $this->redirectToRoute('forum_show', array('id' => $_GET['id']));
         }

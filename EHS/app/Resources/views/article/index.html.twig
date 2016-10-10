@@ -39,7 +39,7 @@
                 <td>{{ article.user.nom }} {{ article.user.prenom }}</td>
                 <td>{{ article.dateArticle | date('d-m-Y H:i:s') }}</td>
                 <td>{{ article.titreArticle }}</td>
-                <td>{{ article.content }}</td>
+                <td>{{ article.content | raw }}</td>
                 <td>{{ article.datePublication | date('d-m-Y H:i:s') }}</td>
 
                 {% if not article.imageName %}

@@ -41,7 +41,7 @@ class UserType extends AbstractType
             ->add('ville')
             ->add('telephone',TextType::class,array('label'=>'Téléphone'),array('attr'=> array('maxlength'=>'10')))
             ->add('email',EmailType::class)
-            ->add('newsletter',CheckboxType::class,array('label'=>'Veut être inscrit à la neswletter'))
+            ->add('newsletter',CheckboxType::class,array('label'=>'Veut être inscrit à la neswletter','required'=>false))
             ->add('birthDate', BirthdayType::class,array('format'=>'dd-MM-yyyy','label'=>'Date de naissance'))
         ;
     }

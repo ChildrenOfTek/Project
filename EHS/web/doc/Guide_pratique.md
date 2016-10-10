@@ -19,12 +19,15 @@ Si accès SSH
         * secret: **Changer le token par defaut**
 2. php app/console doctrine:schema:update --force
     * permet de mettre à jour la BDD
-3. php app/console doctrine:fixtures:load
+3. changer les parametres de fixtures
+    * mot de passe admin et nom du compte admin a changer
+4. php app/console doctrine:fixtures:load
     * charge le lot de données pour la marche du site
-4. php app/console assets:install
+5. php app/console assets:install
     * installe les assets dans le dossier web
-5. composer dump-autoload --optimize
+6. composer dump-autoload --optimize
     * optimise l'autoloader de composer pour la production
-6. verifier le php.ini
+7. verifier le php.ini
     * upload limit pour les fichiers
     * extension intl à decommenter
+8. changer le nom du site dans les mentions légales

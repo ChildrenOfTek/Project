@@ -75,9 +75,11 @@ class SecurityController extends Controller
                 $em->persist($user);
                 $em->flush();
 
+                $mail=$this->getParameter('mailer_user');
+
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Demande de nouveau mot de passe')
-                    ->setFrom('guillossou.michele@gmail.com')
+                    ->setFrom($mail)
                     // notre adresse mail
                     ->setTo($user->getEmail())
                     //->setContentType('text/html')

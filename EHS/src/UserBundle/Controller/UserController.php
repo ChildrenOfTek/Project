@@ -62,12 +62,13 @@ class UserController extends Controller
             $user->setPassword($encoded);
             $em->persist($user);
             $em->flush();
+            $mail=$this->getParameter('mailer_user');
 
             // A decommenter lors de l'implémentation
             //pour envoyer un mail a l'inscription
-            /*$message = \Swift_Message::newInstance()
+            $message = \Swift_Message::newInstance()
                 ->setSubject('Bienvenue')
-                ->setFrom('guillossou.michele@gmail.com')
+                ->setFrom($mail)
                 // notre adresse mail
                 ->setTo($data->getEmail())
                 //->setContentType('text/html')
@@ -81,7 +82,7 @@ class UserController extends Controller
                 )
 
             ;
-            $this->get('mailer')->send($message);*/
+            $this->get('mailer')->send($message);
 
             $this->addFlash('success',
                 'Utilisateur ajouté !');

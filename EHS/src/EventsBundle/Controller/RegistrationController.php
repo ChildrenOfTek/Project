@@ -54,32 +54,41 @@ class RegistrationController extends Controller
             $repoR= $em->getRepository('EventsBundle:Registration');
             $eventR=$repoR->findRegistration($id);
 
-        if(count($eventR) >= $eventE->getPlaces())
-            {
-                $this->addFlash('error',
-                'Il n\'y a plus de place disponible pour cet évènement  !');
-                return $this->redirectToRoute('events_index');                
-            }else{
+        $now = new \DateTime();
 
-        if ($form->isSubmitted() && $form->isValid()) {            
-            
+        if ( $eventE->getEnd() > $now ) {
+            if(count($eventR) >= $eventE->getPlaces())
+                {
+                    $this->addFlash('error',
+                    'Il n\'y a plus de place disponible pour cet évènement  !');
+                    return $this->redirectToRoute('events_index');                
+                }else{
 
-                $registration->setEvents($eventE);
-                $em->persist($registration);
-                $em->flush();
-                $this->addFlash('success',
-                'Votre inscription a bien été prise en compte !');
-
-                return $this->redirectToRoute('events_show', array('id' => $registration->getEvents()->getId()));
+            if ($form->isSubmitted() && $form->isValid()) {            
                 
-            } 
-        }
 
-        return $this->render('registration/new.html.twig', array(
-            'registration' => $registration,
-            'form' => $form->createView(),
-            'event' => $eventE
-        ));
+                    $registration->setEvents($eventE);
+                    $em->persist($registration);
+                    $em->flush();
+                    $this->addFlash('success',
+                    'Votre inscription a bien été prise en compte !');
+
+                    return $this->redirectToRoute('events_show', array('id' => $registration->getEvents()->getId()));
+                    
+                } 
+            }
+
+            return $this->render('registration/new.html.twig', array(
+                'registration' => $registration,
+                'form' => $form->createView(),
+                'event' => $eventE
+            ));            
+        } else {
+            $this->addFlash('error',
+                'Cet évènement est terminé.');
+
+            return $this->redirectToRoute('events_index');
+        }
     }
 
     /**

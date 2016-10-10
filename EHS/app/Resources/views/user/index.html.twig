@@ -6,16 +6,22 @@
 
 {% block section %}
 <div class="wrapper">
-
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
-          <div class="panel-heading">Gestion des utilisateurs</div>
-            <div class="panel-body">
+          <table class="table table-hover table-striped">
+            <thead>
+          <tr class="panel-heading">
+            <td colspan="4"><h3>Gestion des utilisateurs</h3></td>
+            <td colspan="6">
+            <div class="buttonLinkTop">
+              <a href="{{ path('user_new') }}">Ajouter un nouvel utilisateur</a>
+            </div>
+            </td>
+            <td colspan="3"></td>
+        </tr>
               <div class="container col-md-10 col-md-offset-1">
                 <div class="table-responsive">
-    <table class="table table-hover table-bordered table-striped">
-        <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom d'utilisateur</th>
@@ -67,16 +73,14 @@
     </table>
 
 
-      <div class="buttonLink">
-        <a href="{{ path('user_new') }}">Ajouter un nouvel utilisateur</a>
-      </div>
+
 
 
 
 
   </div>
   </div>
-</div>
+
 </div>
 </div>
 </div>

@@ -1,39 +1,35 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}
     Créer un utilisateur
 {% endblock %}
-
 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-
-
 {% block section %}
-
-
-
-
-
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-heading">Création d'un utilisateur</div>
-        <div class="panel-body">
-          <div class="container col-md-8 col-md-offset-1">
-
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit" value="Ajouter" />AJOUTER UN UTILISATEUR</button>
-    {{ form_end(form) }}
-    <div class="buttonLink">
-        <a href="{{ path('user_index') }}">ANNULER</a>
-    </div>
-          </div>
+<div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">Création d'un utilisateur</div>
+      <div class="panel-body">
+        <div class="container col-md-8 col-md-offset-1">
+          {{ form_start(form) }}
+          {{ form_widget(form) }}
+        <hr>
+          <table>
+            <tr>
+              <td>
+                <input type="submit" value="Ajouter" class="button">
+                {{ form_end(form) }}
+              </td>
+              <td>
+                <div class="buttonLink">
+                <a href="{{ path('user_index') }}">Annuler</a>
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+{% block footer %}
+{% endblock %}
 {% endblock %}

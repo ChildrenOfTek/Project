@@ -161,13 +161,16 @@ ivory_ck_editor:
         my_custom_config:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
+            skin: "office2013"
             language:                   %locale%
-            toolbar:                    standard            # Charger la toolbar tollbar_1 (voir plus bas)
-            stylesSet:                  my_styles           # Chargement des styles personnalisables my_styles (voir plus bas)
-            uiColor:                    "#FCFCFC"           # Couleur de fond de l'interface
-            height:                     '600px'             # Hauteur par défaut
+            toolbar:                    "my_toolbar_1"            # Charger la toolbar tollbar_1 (voir plus bas)
+            uiColor:                    "#cccccc"           # Couleur de fond de l'interface
+            height:                     '300px'             # Hauteur par défaut
             # Utiliser les styles css suivants dans le contenu de l'éditeur. Permet de voir le rendu en temps réeem
-            contentsCss:                ['bundles/app/css/style.css']
+            contentsCss:                ['public/css/styleCK.css']
+    toolbars:
+        configs:
+            my_toolbar_1: [ [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','-', 'Image','Table','HorizontalRule','Smiley','SpecialChar'],"/",[ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','Format','-','RemoveFormat' ][ 'NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-']]
     styles:         # Configuration des styles personnalisables
         my_styles:
             - { name: "Alerte Success", element: "div",  attributes: { class: "alert alert-success", role: "alert" }}

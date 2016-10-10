@@ -6,19 +6,20 @@
 
 {% block section %}
 
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-      <div class="panel panel-default">
-        <div class="panel-heading">Liste des articles</div>
-        <div class="panel-body">
-<div class="container">
 
-      <div class="buttonLink">
-          <a href="{{ path('article_new') }}">Créer un nouvel article</a>
-  </div>
-
-    <table class="table table-hover table-bordered table-striped">
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-default">
+    <table class="table">
         <thead>
+            <tr class='panel-heading'>
+                <td colspan="6"><h3>Liste des articles</h3></td>
+                <td colspan="4">
+                  <div class="buttonLinkTop">
+      <a href="{{ path('article_new') }}">Créer un nouvel article</a>
+        </div>
+                </td>
+            </tr>
             <tr>
                 <th>Id</th>
                 <th>Utilisateur / Nom Prénom</th>
@@ -32,6 +33,7 @@
                 <th>Actions</th>
             </tr>
         </thead>
+
         <tbody>
         {% for article in articles %}
             <tr>
@@ -72,6 +74,8 @@
         {% endfor %}
         </tbody>
     </table>
-</div></div></div></div></div>
+</div></div></div>
+{% block footer %}
+{% endblock %}
 
 {% endblock %}

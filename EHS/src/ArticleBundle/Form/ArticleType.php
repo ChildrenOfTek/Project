@@ -59,7 +59,7 @@ class ArticleType extends AbstractType
 
             ->add('imageFile',VichFileType::class,
                 array('required'=>false,
-                    'label'=>'Choisissez un fichier à ajouter'))
+                    'label'=>'Choisissez Une Image de Couverture'))
 
             ->add('tag',ChoiceType::class,array(
                 'label'=>'Tags à ajouter',

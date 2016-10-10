@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Edition d'article</h1>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">Edition d'article</div>
+        <div class="panel-body">
+          <div class="container col-md-10 col-md-offset-1">
+
 
     {{ form_start(edit_form) }}
         {{ form_row(edit_form.user) }}
@@ -24,20 +30,25 @@
             <li>{{ form_row(oneTag.libelle) }}</li>
         {% endfor %}
     </ul>
-    <input type="submit" value="Editer" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('article_index') }}">Retour à la liste</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-
+    <hr>
+    <table>
+      <tr>
+        <td><input type="submit" value="Editer" class="button" >
+    {{ form_end(edit_form) }}</td>
+        <td>{{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer" class="button">
+            {{ form_end(delete_form) }}</td>
+        <td><div class="buttonLink">
+<a href="{{ path('article_index') }}">Retour à la liste</a>
+    </div></td>
+      </tr>
+    </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}
 {% block javascripts %}
             <script type="text/javascript" src="{{ asset('public/script/DynamicTagging.js') }}"></script>

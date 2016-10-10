@@ -62,8 +62,24 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $userUser->setBirthDate(new \DateTime());
         $userUser->setUserRoles($this->getReference('user-group'));
 
+        $userPress = new User();
+
+        $userPress->setUsername('usero');
+        $userPress->setPassword($encoded);
+        $userPress->setNom('user');
+        $userPress->setPrenom('user');
+        $userPress->setAdresse('user');
+        $userPress->setCp('44000');
+        $userPress->setVille('user');
+        $userPress->setTelephone('0123456789');
+        $userPress->setEmail('testo@test.fr');
+        $userPress->setNewsletter(false);
+        $userPress->setBirthDate(new \DateTime());
+        $userPress->setUserRoles($this->getReference('press-group'));
+
         $manager->persist($userAdmin);
         $manager->persist($userUser);
+        $manager->persist($userPress);
         $manager->flush();
 
         $this->addReference('admin-user', $userAdmin);

@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Création d'évènement
+{% endblock %}
+
 {% block section %}
 
     <div class="row">
@@ -8,7 +12,6 @@
         <div class="panel-heading">Création d'un évènement</div>
         <div class="panel-body">
 <div class="container">
-    <h1>Créer un événement</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -17,9 +20,44 @@
 
     <ul>
         <li>
-            <a href="{{ path('events_index') }}">Back to the list</a>
+            <a href="{{ path('events_index') }}">Retourner à la liste des évènements</a>
         </li>
     </ul>
 </div>
 
+{% endblock %}
+
+{% block section %}
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">Création d'un évènement</div>
+        <div class="panel-body">
+          <div class="container col-md-10 col-md-offset-1">
+
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(edit_form.start) }}
+        {{ form_row(edit_form.end) }}
+        {% if event.imageName %}
+             <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}" style="width:304px;height:228px;">
+        {% endif %}
+        {{ form_row(edit_form.places) }}
+        {{ form_row(edit_form.address) }}
+        <div class="vich-file">
+            {{ form_widget(form.imageFile) }}
+            <hr>
+        {{ form_row(form.tag) }}
+<hr>
+
+<hr>
+    <input class="btn btn-success" type="submit" value="Créer un article" />
+    {{ form_end(form) }}
+            <div class="buttonLink">
+                <a href="{{ path('article_index') }}">Retour à la liste</a>
+            </div>
+        </div></div></div></div></div>
+
+    </div>
 {% endblock %}

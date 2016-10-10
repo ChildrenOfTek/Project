@@ -21,7 +21,11 @@
         {% for event in events %}
             {% if loop.first %}
                 <div class="item active">
-                    <div class="fill" style="background-image:url('http://ispaconference.info/wp-content/uploads/2015/09/conference.jpg');"></div>
+                    {% if not event.imageName %}
+                        <div class="fill" style="background-image:url('{{ asset('/public/img/event/handicap.jpg') }}');"></div>
+                    {% else %}
+                        <div class="fill" style="background-image:url('{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}');"></div>
+                    {% endif %}
                     <div class="carousel-caption">
                         <h2>{{ event.start|date('d/m') }} {{ event.title }}</h2>
                         <a href="{{ path('events_show', { 'id': event.id }) }}">Voir les détails et s'inscrire</a>
@@ -29,7 +33,7 @@
                 </div>
             {% else %}
                 <div class="item">
-                    <div class="fill" style="background-image:url('http://ispaconference.info/wp-content/uploads/2015/09/conference.jpg');"></div>
+                    <div class="fill" style="background-image:url('{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}');"></div>
                     <div class="carousel-caption">
                         <h2>{{ event.start|date('d/m') }} {{ event.title }}</h2>
                         <a href="{{ path('events_show', { 'id': event.id }) }}">Voir les détails et s'inscrire</a>

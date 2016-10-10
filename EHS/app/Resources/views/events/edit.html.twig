@@ -5,30 +5,42 @@
 {% endblock %}
 
 {% block section %}
-
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-      <div class="panel panel-default">
-        <div class="panel-heading">Edition d'évènement</div>
-        <div class="panel-body">
-<div class="container">
-    <h1>Edition d'évènement</h1>
-
+    <section>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Edition d'évènement</div>
+            <div class="panel-body">
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Enregistrer les modifications" />
+        {{ form_row(edit_form.title) }}
+        {{ form_row(edit_form.description) }}
+        {{ form_row(edit_form.start) }}
+        {{ form_row(edit_form.end) }}
+                {% if event.imageName %}
+                     <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}" style="width:304px;height:228px;">
+                {% endif %}
+        <div class="vich-file">
+            {{ form_widget(edit_form.imageFile) }}
+        </div>
+        {{ form_row(edit_form.places) }}
+        {{ form_row(edit_form.address) }}
+    <h3>Tags</h3>
+
+                <hr>
+    <input class="btn btn-success" type="submit" value="Editer" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('events_index') }}">Retourner à la liste</a>
-        </li>
-        <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer l'évènement">
+                <input class="btn btn-danger" type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
-</div>
+            <div class="buttonLink">
+                <a href="{{ path('events_index') }}">Retour à la liste</a>
+            </div>
+                </hr>
+</div></div></div></div>
+</section>
+{% endblock %}
 
+{% block javascripts %}
+            <script type="text/javascript" src="{{ asset('public/script/DynamicTagging.js') }}"></script>
 {% endblock %}

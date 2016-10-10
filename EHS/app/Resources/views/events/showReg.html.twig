@@ -30,12 +30,20 @@
 
             <!-- Remaining Places-->
             {% if event.registrations|length < event.places %}
-                {{ event.places - event.registrations|length }} places restantes
+                {{ event.places - event.registrations|length }} {{ (event.places - event.registration|length) > 1 ? 'places restantes.' : 'place restante.' }}
             {% else %}
                 <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
             {% endif %}
 
             <hr>
+
+            <!-- Image -->
+
+            {% if not event.imageName %}
+                <td><img class="img-responsive" src="{{ asset('/public/img/article/default.jpg') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
+            {% else %}
+                <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
+            {% endif %}
 
             <!-- Post Content -->
 

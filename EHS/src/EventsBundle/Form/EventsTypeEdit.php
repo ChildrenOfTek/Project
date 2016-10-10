@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
@@ -24,9 +25,15 @@ class EventsTypeEdit extends AbstractType
             ->add('title')
             ->add('description','ckeditor',array(
               'attr'=>array('rows'=>5),
-              'label'=>'Description de l\'évènement'))
-            ->add('start', 'datetime')
-            ->add('end', 'datetime')
+              'label'=>'Présentation de l\'évènement'))
+            ->add('start', DateTimeType::class, array(
+                'widget'=>'choice',
+                'label'=>'Début de l\'évènement'
+            ))
+            ->add('end', DateTimeType::class, array(
+                'widget'=>'choice',
+                'label'=>'Fin de l\'évènement'
+            ))
             ->add('imageFile',VichFileType::class,
                 array('required'=>false,
                     'label'=>'Choisissez un fichier à ajouter'))

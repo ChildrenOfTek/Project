@@ -49,6 +49,14 @@
 
             <hr>
 
+            <!-- Image -->
+
+            {% if not event.imageName %}
+                <td><img class="img-responsive" src="{{ asset('/public/img/events/default.jpg') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
+            {% else %}
+                <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
+            {% endif %}
+
             <!-- Post Content -->
 
             {{ event.description|raw }}
@@ -59,8 +67,9 @@
             Mots-clés :
             {% for tag in event.tag %}
                 <a href="{{ path('tags_events_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
-                <!-- <button class="tagbox" type="submit">{{ tag.libelle}}</button> -->
+                <!-- <button class="tagbox" type="submit">{{ tag.libelle }}</button> -->
             {% endfor %}
+            </div>
 
             <br/><a href="{{ path('events_index') }}">Retourner à la liste</a>
             {% if is_granted('ROLE_ADMIN') %}

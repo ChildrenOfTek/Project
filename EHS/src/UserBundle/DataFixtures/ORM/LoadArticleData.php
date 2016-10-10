@@ -18,13 +18,13 @@ class LoadArticleData extends AbstractFixture implements OrderedFixtureInterface
 
         ];
         $content=[
-            'We love Vendée !',
+            'Article démo',
             'Un petit article de présentation tout simple !'
 
         ];
         $user=[
             'admin-user',
-            'user-user'
+            'admin-user'
         ];
 
         $articles=[];

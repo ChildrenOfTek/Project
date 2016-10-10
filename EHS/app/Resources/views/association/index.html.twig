@@ -63,7 +63,7 @@
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
       <div class="hovereffect">
         {% if not article.imageName %}
-            <img class="img-responsive" src="{{ asset('/public/img/article/handicap.jpg') }}" alt="{{ article.titreArticle }}" style="">
+            <img class="img-responsive" src="{{ asset('/public/img/article/default.jpg') }}" alt="{{ article.titreArticle }}" style="">
         {% else %}
             <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="">
         {% endif %}

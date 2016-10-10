@@ -7,6 +7,6 @@ function ouvre_doc(page) {
         " status=no," +
         " scrollbars=no," +
         " menubar=no," +
-        " width=1000," +
+        " width=1100," +
         " height=900");
 }

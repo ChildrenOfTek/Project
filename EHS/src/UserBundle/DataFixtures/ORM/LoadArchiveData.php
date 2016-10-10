@@ -29,20 +29,20 @@ class LoadArchiveDta extends AbstractFixture implements OrderedFixtureInterface,
         $date = new \DateTime();
         $archive->setDateCreation($date);
         $archive->setTitreArchive('Statuts');
-        $archive->setImageName('STATUTS_ DECLARATION_MG-FB.doc');
+        $archive->setImageName('STATUTS_DECLARATION_MG-FB.doc');
         $archive->setUpdatedAt($date);
 
         $archive1=new Archive();
         $archive1->setDateCreation($date);
         $archive1->setTitreArchive('Communiqué du 23 Janvier');
         $archive1->setUpdatedAt($date);
-        $archive1->setImageName('communiqué _bilan_du_23_janvier.docx');
+        $archive1->setImageName('communique_bilan_du_23_janvier.docx');
 
         $archive2=new Archive();
         $archive2->setDateCreation($date);
         $archive2->setTitreArchive('PV AG CONSTITUTIVE 17déc 2015');
         $archive2->setUpdatedAt($date);
-        $archive2->setImageName('PV_AG_CONSTITUTIVE_17déc_2015signée_FB.pdf');
+        $archive2->setImageName('PV_AG_CONSTITUTIVE_17dec_2015signee_FB.pdf');
 
         $archive3=new Archive();
         $archive3->setDateCreation($date);

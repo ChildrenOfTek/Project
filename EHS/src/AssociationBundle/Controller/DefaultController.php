@@ -374,9 +374,6 @@ class DefaultController extends Controller
     {
         $em=$this->getDoctrine()->getManager();
 
-        $repoEvent=$em->getRepository('EventsBundle:Events');
-        $event=$repoEvent->findOneBy(array('imageName'=>$name));
-
         $repoArticle=$em->getRepository('ArticleBundle:Article');
         $article=$repoArticle->findOneBy(array('imageName'=>$name));
         //on verifie que l'article existe, sinon on lance une erreur
@@ -396,27 +393,6 @@ class DefaultController extends Controller
             }
 
             return $this->finderAction();
-
-        }
-        elseif($event)
-        {
-                $file=$this->get('kernel'
-                    )->getRootDir() . '/../web/public/img/article/'.$dir.'/'.$name;
-                //on verifie que le fichier existe, sinon on lance une erreur
-                if($file){
-                    unlink($file);
-                    //var_dump($article);die();
-                    $event->setImageName('');
-                    $em->persist($event);
-                    $em->flush();
-                    $this->addFlash('success','L\'image a bien été supprimée !');
-                }else{
-                    $this->addFlash('error','L\'image n\'a pas été trouvée !');
-                }
-
-                return $this->finderAction();
-
-
 
         }
         else{

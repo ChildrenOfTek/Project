@@ -15,14 +15,13 @@
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-striped">
 
-        <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ archive.id }}</td>
             </tr>
             <tr>
                 <th>Date de création</th>
-                <td>{% if archive.dateCreation %}{{ archive.dateCreation|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if archive.dateCreation %}{{ archive.dateCreation|localizeddate("medium", "none", null, null, "d LLL Y HH:MM") }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Titre de l'archive</th>
@@ -34,11 +33,15 @@
             </tr>
             <tr>
                 <th>Dernière mise à jour</th>
-                <td>{% if archive.updatedAt %}{{ archive.updatedAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if archive.updatedAt %}{{ archive.updatedAt|localizeddate("medium", "none", null, null, "d LLL Y HH:MM") }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Telecharger</th>
-                <td><a href="{{ app.request.basePath }}/../{{ vich_uploader_asset(archive, 'imageFile') }}" download>Cliquez ici</a></td>
+                {% if archive.imageName matches '/^[0-9]/' %}
+                    <td><a href="{{ app.request.basePath }}/..{{ vich_uploader_asset(archive, 'imageFile') }}" download>Cliquez ici</a></td>
+                {% else %}
+                    <td><a href="{{ app.request.basePath }}/../archives/association/{{ archive.imageName }}" download>Cliquez ici</a></td>
+                {% endif %}
             </tr>
 
         </tbody>

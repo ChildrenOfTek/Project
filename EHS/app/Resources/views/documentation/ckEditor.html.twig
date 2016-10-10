@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edition des articles
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Documentation pour CK Editor :</div>
+                <div class="panel-body">
+
+                    <div class="bloc">
+                        <div class="bloc">
+                            <img src="{{ asset('doc/ckEditor.png') }}" alt ="Documentation pour CK Editor "/>
+                        </div>
+                        <div class="bloc">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">CK Editor</div>
+                                        <div class="panel-body">
+
+                            <p>
+                                Pour savoir ce que fait un <strong>bouton</strong>,laissez votre souris <strong>Dessus</strong>
+                            </p>
+                            <p>
+                                Pour afficher le texte en <strong>Gras</strong>,cliquez sur <strong>B</strong>
+                            </p>
+                            <p>
+                                Pour afficher le texte en <strong>Italique</strong>,cliquez sur <strong>I</strong>
+                            </p>
+                            <p>
+                                Pour afficher le texte en <strong>Barré</strong>,cliquez sur <strong>S</strong>
+                            </p>
+                            <p>
+                                Pour supprimer la <strong>mise en forme</strong>,cliquez sur <strong>T</strong>
+                            </p>
+                            <p>
+                                Si un mot clé ne vous semble plus pertinent, changez son nom ici, à la validation,
+                                il sera mis à jour pour <strong>TOUT</strong> les articles le possedant.
+                            </p>
+                            <p>
+                               Vous pouvez aussi supprimer le mot-clé d'un article.</br><strong>A savoir</strong>:
+                                le mot-clé ne sera enlevé que de cet article et restera <strong>disponible</strong>.
+                            </p>
+                            <p>
+                                En cliquant sur <a href="#">Ajouter un tag</a>, un nouveau champ vide apparaitra,
+                                ajoutez un nouveau <strong>mot-clé</strong> et il sera à la fois
+                                <strong>lié à cet article</strong>, et <strong>disponible par la suite pour les autres</strong>.
+                            </p>
+                                            <a href="javascript:history.go(-1)">Retour</a>
+                </div></div></div></div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    </div></div></div></div>
+
+{% endblock %}
+{%  block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/CSS/doc.css') }}"
+{% endblock %}
+{% block footer %}
+{% endblock %}

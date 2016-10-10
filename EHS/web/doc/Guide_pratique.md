@@ -26,5 +26,5 @@ Si accès SSH
 5. composer dump-autoload --optimize
     * optimise l'autoloader de composer pour la produciton
 6. verifier le php.ini
-    * upload limit
-    * extension intl
+    * upload limit pour les fichiers
+    * extension intl à decommenter

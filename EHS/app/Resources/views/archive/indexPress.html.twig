@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Archives Presse
+{% endblock %}
+
 {% block section %}
 
 <div class="wrapper">
@@ -21,10 +25,14 @@
         <tbody>
         {% for archive in archives %}
             <tr>
-                <td>{% if archive.dateCreation %}{{ archive.dateCreation|date('d-m-Y H:i:s') }}{% endif %}</td>
-                <td>{% if archive.updatedAt %}{{ archive.updatedAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if archive.dateCreation %}{{ archive.dateCreation|localizeddate("medium", "none", null, null, "d LLL Y HH:MM") }}{% endif %}</td>
+                <td>{% if archive.updatedAt %}{{ archive.updatedAt|localizeddate("medium", "none", null, null, "d LLL Y HH:MM") }}{% endif %}</td>
                 <td>{{ archive.titreArchive }}</td>
-                <td><a href="{{ app.request.basePath }}/..{{ vich_uploader_asset(archive, 'imageFile') }}" download>{{ archive.imageName }}</a></td>
+                {% if archive.imageName matches '/^[0-9]/' %}
+                    <td><a href="{{ app.request.basePath }}/..{{ vich_uploader_asset(archive, 'imageFile') }}" download>{{ archive.imageName }}</a></td>
+                {% else %}
+                    <td><a href="{{ app.request.basePath }}/../archives/association/{{ archive.imageName }}" download>{{ archive.imageName }}</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>

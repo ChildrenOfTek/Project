@@ -939,4 +939,5 @@ a:link, a:visited {
 }
 .buttonInfo{
     position: fixed;
+    z-index:2;
 }

@@ -77,16 +77,29 @@
 <hr>
 
     {% if is_granted('ROLE_ADMIN') %}
-        <div class="buttonLink">
-            <a href="{{ path('article_edit', { 'id': article.id }) }}">Editer l'article</a>
-        </div>
-        {{ form_start(delete_form) }}
-        <input class="btn btn-danger"  type="submit" value="Effacer l'article">
-        {{ form_end(delete_form) }}
+        <table>
+            <tr>
+                <td>
+                    <div class="buttonLink">
+                        <a href="{{ path('article_edit', { 'id': article.id }) }}">Editer l'article</a>
+                    </div>
+                </td>
+                <td>
+                    {{ form_start(delete_form) }}
+                    <input class="buttonDanger"  type="submit" value="Effacer l'article">
+                    {{ form_end(delete_form) }}
+                </td>
+                <td>
+                    <div class="buttonLink">
+                        <a href="{{ path('article_index') }}">Retourner à la liste</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
-        <div class="buttonLink">
-            <a href="{{ path('article_index') }}">Retourner à la liste</a>
-        </div>
+
+
+
     {% endif %}
           </hr>
     </div></div>

@@ -125,6 +125,26 @@ button:hover{
     transition: all 0.2s ease-in-out;
 }
 
+.buttonDanger{
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-style: none;
+    background-color: rgba(255, 0, 0, 0.72);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.buttonDanger:hover{
+    background-color: red;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+
 
 .buttonLink{
     margin-top: 10px;

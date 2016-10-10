@@ -22,9 +22,9 @@ Si accès SSH
 3. php app/console doctrine:fixtures:load
     * charge le lot de données pour la marche du site
 4. php app/console assets:install
-    * installe les asstes dans le dossier web
+    * installe les assets dans le dossier web
 5. composer dump-autoload --optimize
-    * optimise l'autoloader de composer pour la produciton
+    * optimise l'autoloader de composer pour la production
 6. verifier le php.ini
     * upload limit pour les fichiers
     * extension intl à decommenter

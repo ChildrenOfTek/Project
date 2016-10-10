@@ -47,17 +47,32 @@
         </tbody>
     </table>
                         <hr>
-                        <div class="buttonLink">
-                            <a href="{{ path('association_archive_edit', { 'id': archive.id }) }}">Editer</a>
-                        </div>
+<table>
+    <tr>
+        <td>
 
-                        {{ form_start(delete_form) }}
-                        <input class="btn btn-danger" type="submit" value="Supprimer">
-                        {{ form_end(delete_form) }}
+            <div class="buttonLink">
+                <a href="{{ path('association_archive_edit', { 'id': archive.id }) }}">Editer</a>
+            </div>
+        </td>
+        <td>
+            {{ form_start(delete_form) }}
+            <input class="button" type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </td>
+        <td>
+            <div class="buttonLink">
+                <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
+            </div>
+        </td>
+    </tr>
 
-                        <div class="buttonLink">
-                            <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
-                        </div>
+</table>
+
+
+
+
+
 </div></div></div></div></div></div>
 
 

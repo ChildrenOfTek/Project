@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <th>Date de naissance</th>
-                <td>{% if user.birthDate %}{{ user.birthDate|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if user.birthDate %}{{ user.birthDate | localizeddate("medium", "none", null, null, "d LLL Y") }}{% endif %}</td>
             </tr>
         </tbody>
 

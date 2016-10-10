@@ -1,44 +1,115 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Voir l'évènement
+{% endblock %}
+
 {% block section %}
-    <h1>Events</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ event.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ event.description }}</td>
-            </tr>
-            <tr>
-                <th>Start</th>
-                <td>{% if event.start %}{{ event.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>End</th>
-                <td>{% if event.end %}{{ event.end|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-body">
 
-    <ul>
-        <li>
-            <a href="{{ path('events_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('events_edit', { 'id': event.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <!-- Title -->
+            <h1>{{ event.title }}</h1>
+
+            <hr>
+
+            <!-- Duration -->
+            {% if event.start and event.end %}
+                <p><span class="glyphicon glyphicon-time"></span>
+                {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
+                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                    au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                {% else %}
+                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
+                {% endif %}
+                </p>
+            {% endif %}
+
+            <!-- Address -->
+            {% if event.address %}
+                <p><span class="glyphicon glyphicon-home"></span>
+                    {{ event.address }}
+                </p>
+            {% endif %}
+
+            <!-- Remaining Places-->
+            {% if event.registrations|length < event.places %}
+                <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
+            {% else %}
+                <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
+            {% endif %}
+
+            <hr>
+
+            <!-- Preview Image -->
+            {% if not event.imageName %}
+                <td><img class="img-responsive" src="{{ asset('/public/img/events/default.jpg') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
+            {% else %}
+                <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
+            {% endif %}
+            <hr>
+
+            {{ event.description | raw }}
+
+            <hr>
+
+            <th>Mots-clés</th>
+            <td><!--Affichage des tags de l'évènement -->
+                <div style="display:flex;flex-flow:row nowrap;">
+                {% for tag in event.tag %}
+
+                    <div class="buttonLink">
+                        <a href="{{ path('tags_events_search', { 'libelle': tag.libelle }) }}">{{ tag.libelle }}</a>
+                    </div>
+                {% endfor  %}
+                </div>
+            </td>
+
+<hr>
+
+            <!-- Registrations -->
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <table style="border: 1px solid black">
+                    <thead>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>E-mail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for registration in event.registrations %}
+                        <tr>
+                            <td>{{ registration.prenom }}</td>
+                            <td>{{ registration.nom }}</td>
+                            <td>{{ registration.email }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+
+<hr>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="buttonLink">
+            <a href="{{ path('events_edit', { 'id': event.id }) }}">Editer l'évènement</a>
+        </div>
+        {{ form_start(delete_form) }}
+        <input class="btn btn-danger"  type="submit" value="Effacer l'évènement">
+        {{ form_end(delete_form) }}
+
+        <div class="buttonLink">
+            <a href="{{ path('events_index') }}">Retourner à la liste</a>
+        </div>
+    {% endif %}
+          </hr>
+    </div></div>
+    </div>
+  </div>
+
 {% endblock %}

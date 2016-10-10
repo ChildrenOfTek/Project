@@ -8,11 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EventsBundle\Entity\Events;
 use EventsBundle\Form\EventsType;
+use EventsBundle\Form\EventsTypeEdit;
+use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Events controller.
  *
- * @Route("/evenements")
+ * @Route("/events")
  */
 class EventsController extends Controller
 {
@@ -26,23 +29,27 @@ class EventsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $events = $em->getRepository('EventsBundle:Events')->findBy(array(), array('start' => 'ASC'));
+        $pastevents = $em->getRepository('EventsBundle:Events')->findPastEvents();
+        $futureevents = $em->getRepository('EventsBundle:Events')->findFutureEvents();
 
         return $this->render('events/index.html.twig', array(
-            'events' => $events,
+            'pastevents' => $pastevents,
+            'futureevents' => $futureevents
         ));
     }
 
     /**
      * Creates a new Events entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/new", name="events_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
+    	$em=$this->getDoctrine()->getEntityManager();    	
         $event = new Events();
-        $form = $this->createForm('EventsBundle\Form\EventsType', $event);
+        // $form = $this->createForm('EventsBundle\Form\EventsType', $event);
+        $form = $this->createForm(new EventsType($em), $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,20 +84,25 @@ class EventsController extends Controller
 
     /**
      * Displays a form to edit an existing Events entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}/edit", name="events_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Events $event)
     {
+        $em=$this->getDoctrine()->getEntityManager();
+
         $deleteForm = $this->createDeleteForm($event);
-        $editForm = $this->createForm('EventsBundle\Form\EventsType', $event);
+        $editForm = $this->createForm(new EventsTypeEdit($em), $event);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush();
+
+            $this->addFlash('success',
+                'L\'évènement a bien été mis à jour !');
 
             return $this->redirectToRoute('events_edit', array('id' => $event->getId()));
         }
@@ -104,7 +116,7 @@ class EventsController extends Controller
 
     /**
      * Deletes a Events entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/{id}", name="events_delete")
      * @Method("DELETE")
      */
@@ -124,7 +136,7 @@ class EventsController extends Controller
 
     /**
      * Creates a form to delete a Events entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @param Events $event The Events entity
      *
      * @return \Symfony\Component\Form\Form The form

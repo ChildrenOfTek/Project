@@ -15,18 +15,25 @@
     <div class="panel-heading">Liste des dossiers et fichiers</div>
 
 
-{% if dirs is empty %}
+{% if articlesdirs is empty and eventsdirs is empty %}
     {{ "Il n'y a encore aucun dossier crée !" }}
 {% else %}
     <div class="panel-body" style="font-size:30px;">Accès rapide :
         <select name="dropdpown" size="1" id="select-anchor">
-            {% for dir in dirs %}
+            <optgroup label="Articles">
+            {% for dir in articlesdirs %}
                 <option value="#{{ dir.basename }}">{{ dir.basename[-8:8] }}</option>
             {% endfor %}
+            </optgroup>
+            <optgroup label="Évènements">
+            {% for dir in eventsdirs %}
+                <option value="#{{ dir.basename }}">{{ dir.basename[-8:8] }}</option>
+            {% endfor %}
+            </optgroup>
         </select>
 
     </div>
-    {% for dir in dirs %}
+    {% for dir in articlesdirs %}
         <table class="table table-hover table-bordered">
             <thead>
 
@@ -40,7 +47,7 @@
             </tr>
             </thead>
 
-            {% for file in files %}
+            {% for file in articlesfiles %}
 
             {% if file.path == dir.pathname %}
             <tr>
@@ -64,9 +71,53 @@
                 {% endif %}
 
             {% endfor %}
+        }
 
 </table>
     {% endfor %}
+
+    {% for dir in eventsdirs %}
+        <table class="table table-hover table-bordered">
+            <thead>
+
+            <tr>
+                <th id="{{ dir.basename  }}">Liste des fichiers présents dans <strong>{{ dir.basename }}</strong> :
+            <a href="#top" class="btn"><span class="glyphicon glyphicon-chevron-up"></span></a></th>
+                <th>Aperçu (cliquez pour agrandir)</th>
+                <th>Actions:
+                        <a href="{{ path('association_finder_deleteDir',{"dir":dir.basename}) }}">Supprimer le dossier (Doit etre vide)</a>
+                    </th>
+            </tr>
+            </thead>
+
+            {% for file in eventsfiles %}
+
+            {% if file.path == dir.pathname %}
+            <tr>
+                <td>{{ file.filename }}</td>
+                <td><a href="javascript:ouvre_doc('{{ app.request.basePath }}/public/img/events/{{ dir.basename }}/{{ file.filename }}')">
+                        <img class="img-responsive" src="{{ app.request.basePath }}/public/img/events/{{ dir.basename }}/{{ file.filename }}" style="width:100px;height:50px;">
+                    </a>
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ app.request.basePath }}/public/img/events/{{ dir.basename }}/{{ file.filename }}" download>Telecharger</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('association_finder_deleteFile',{"name":file.filename,"dir":dir.basename}) }}">Supprimer l'image (<strong>Attention</strong> définitif, voir Aide)</a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+                {% endif %}
+
+            {% endfor %}
+
+</table>
+    {% endfor %}
+
 {% endif %}
 </div></div></div>
 

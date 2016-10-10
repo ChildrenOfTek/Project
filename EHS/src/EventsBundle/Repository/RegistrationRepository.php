@@ -14,13 +14,11 @@ class RegistrationRepository extends EntityRepository
 {
 
 	public function findRegistration($id) {
-     
         $qb = $this->getEntityManager()->createQueryBuilder();
             $qb->select('r')
             ->from('\EventsBundle\Entity\Registration', 'r')
             ->innerJoin('r.events', 'e', 'WITH', 'e.id = ?1')
             ->setParameter(1, $id);
-
- return $qb->getQuery()->getResult();
+		return $qb->getQuery()->getResult();
     }
 }

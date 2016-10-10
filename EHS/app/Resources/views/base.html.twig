@@ -61,7 +61,7 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agenda<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ path('events_index') }}">Evenements</a></li>
+                      <li><a href="{{ path('events_index') }}">Évènements</a></li>
                         {% if(is_granted('ROLE_PRESS')) %}
                             <li><a href="{{ path('association_annuaire') }}">Annuaire</a></li>
                         {% endif %}
@@ -105,7 +105,7 @@
                         {% if(is_granted('ROLE_ADMIN')) %}
 
                             <li><a href="{{ path('article_index') }}">Articles</a></li>
-                            <li><a href="{{ path('events_index') }}">Evenements</a></li>
+                            <li><a href="{{ path('events_index') }}">Évènements</a></li>
                             <hr>
                             <li><a href="{{ path('newsletter_index') }}">Newsletter</a></li>
                             <li><a href="{{ path('association_archive_index') }}">Archives</a></li>

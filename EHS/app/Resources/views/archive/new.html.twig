@@ -17,11 +17,21 @@
     {{ form_widget(form.imageFile) }}
 </div>
 <hr>
-    <input class="btn btn-success" type="submit" value="Créer une archive" />
-    {{ form_end(form) }}
-    <div class="buttonLink">
-        <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
-    </div>
+<table>
+<tr>
+    <td>
+        <input class="button" type="submit" value="Créer une archive" />
+        {{ form_end(form) }}
+    </td>
+    <td>
+        <div class="buttonLink">
+            <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
+        </div>
+    </td>
+</tr>
+</table>
+
+
 
 </div></div></div></div></div>
 

@@ -34,25 +34,33 @@
                 <td>{% if user.birthDate %}{{ user.birthDate | localizeddate("medium", "none", null, null, "d LLL Y") }}{% endif %}</td>
             </tr>
         </tbody>
-
-                        {% if app.user.username == user.username %}
+                <table>
+                    <tr>
+                        <td>
+                            {% if app.user.username == user.username %}
                             <div class="buttonLink">
                                 <a href="{{ path("password_change") }}">Changer de mot de passe</a>
                             </div>
-                                {% if(is_granted('ROLE_ADMIN')) %}
-                                        <div class="buttonLink">
-                                            <a href="{{ path('user_editadmin',{"id":user.id}) }}">Editer son profil</a>
-                                        </div>
-                                {% else %}
-                                    <div class="buttonLink">
-                                        <a href="{{ path('user_edit',{"id":user.id}) }}">Editer son profil</a>
-                                    </div>
-                                {% endif %}
+                        </td>
+                        <td>
+                            {% if(is_granted('ROLE_ADMIN')) %}
+                            <div class="buttonLink">
+                                <a href="{{ path('user_editadmin',{"id":user.id}) }}">Editer son profil</a>
+                            </div>
+                        </td>
+                        <td>
+                            {% else %}
+                                <div class="buttonLink">
+                                    <a href="{{ path('user_edit',{"id":user.id}) }}">Editer son profil</a>
+                                </div>
+                            {% endif %}
+                        </td>
+                            {% endif %}
 
-                        {% endif %}
-                        <div class="buttonLink">
-                            <a href="{{ path('index') }}">Retour</a>
-                        </div>
+                    </tr>
+                </table>
+
+
 
     </table>
 </div></div></div></div></div>

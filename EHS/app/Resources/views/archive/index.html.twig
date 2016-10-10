@@ -6,12 +6,18 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
-            <div class="panel-heading">Liste des archives</div>
-            <div class="panel-body">
-                <div class="container">
-                    <div class="buttonLink">
+            <table class="table">
+            <tr class='panel-heading'>
+                <td colspan="6"><h3>Liste des archives</h3></td>
+                <td colspan="4">
+                    <div class="buttonLinkTop">
                         <a href="{{ path('association_archive_new') }}">Créer une nouvelle archive</a>
                     </div>
+                </td>
+            </tr>
+                </table>
+            <div class="panel-body">
+                <div class="container">
                     <table class="table table-hover table-bordered">
         <thead>
             <tr>

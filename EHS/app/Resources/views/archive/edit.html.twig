@@ -20,14 +20,27 @@
         {{ form_widget(edit_form.imageFile) }}
     </div>
 <hr>
-    <input class="btn btn-success" type="submit" value="Editer une archive" />
-    {{ form_end(edit_form) }}
-    <div class="buttonLink">
-        <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
-    </div>
+<table>
+    <tr>
+        <td>
+            <input class="button" type="submit" value="Editer une archive" />
+            {{ form_end(edit_form) }}
+        </td>
+        <td>
+            <div class="buttonLink">
+                <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
+            </div>
+        </td>
+        <td>
+            {{ form_start(delete_form) }}
+            <input class="button" type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </td>
+    </tr>
+</table>
 
-    {{ form_start(delete_form) }}
-        <input class="btn btn-danger" type="submit" value="Supprimer">
-    {{ form_end(delete_form) }}
+
+
+
 </div></div></div></div></div>
 {% endblock %}

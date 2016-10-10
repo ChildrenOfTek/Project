@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class ArticleTypeEdit extends AbstractType
 {
@@ -24,15 +25,9 @@ class ArticleTypeEdit extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user',EntityType::class, array(
-                'class'=>'UserBundle:User',
-                'property'=>'nom',
-                'label'=>'Auteur'))
-
             ->add('dateArticle', DateType::class, array(
                 'data' => new \Datetime(),
                 'widget'=>'choice',
-                'format'=>'dd-MM-yyyy',
                 'label'=>'Date de création'
             ))
 
@@ -47,15 +42,15 @@ class ArticleTypeEdit extends AbstractType
                     'attr'=>array('rows'=>15),
                     'label'=>'Contenu de l\'article'))
 
-            ->add('datePublication',DateType::class,array(
+            ->add('datePublication',DateTimeType::class,array(
                 'data'=> new \Datetime(),
                 'widget'=>'choice',
-                'format'=>'dd-MM-yyyy',
                 'label'=>'Date de publication'))
 
             ->add('imageFile',VichFileType::class,
                 array('required'=>false,
-                    'label'=>'Choisissez un fichier à ajouter'))
+                    'label'=>'Choisissez un fichier pour remplacer',
+                    'download_link' => false))
             ->add('online')
             ->add('tag',CollectionType::class,array(
                 'entry_type'=>TagsType::class,
@@ -65,7 +60,8 @@ class ArticleTypeEdit extends AbstractType
 
             ))
             ->add('online',CheckboxType::class, array(
-                'label'=>'L\'article doit-il être mis en ligne?'))
+                'label'=>'L\'article doit-il être mis en ligne?',
+                'required'=>false))
         ;
     }
 

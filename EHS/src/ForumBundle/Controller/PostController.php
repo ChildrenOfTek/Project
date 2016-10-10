@@ -17,22 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class PostController extends Controller
 {
-    /**
-     * Lists all Post entities.
-     * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/", name="post_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $posts = $em->getRepository('ForumBundle:Post')->findAll();
-
-        return $this->render('post/index.html.twig', array(
-            'posts' => $posts,
-        ));
-    }
 
     /**
      * Creates a new Post entity.
@@ -55,6 +39,9 @@ class PostController extends Controller
             $post->setAuthor($author);
             $em->persist($post);
             $em->flush();
+
+            $this->addFlash('success',
+                'Un nouveau post a bien été crée !');
 
             return $this->redirectToRoute('topic_show', array('id' => $_GET['id'] ));
         }

@@ -31,7 +31,7 @@
             <hr>
 
             <!-- Date/Time -->
-            <p><span class="glyphicon glyphicon-time"></span> Publié le {{ article.datePublication | date('d-m-Y H:i') }}</p>
+            <p><span class="glyphicon glyphicon-time"></span> Publié le {{ article.datePublication | localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}</p>
 
             <hr>
 
@@ -54,11 +54,14 @@
             <!-- Comments Form -->
             <th>Tags</th>
             <td><!--Affichage des tags de l'article -->
+                <div style="display:flex;flex-flow:row nowrap;">
                 {% for tag in article.tag %}
 
-                <button class="tagbox">{{ tag.libelle}}</button>
-
+                    <div class="buttonLink">
+                        <a href="{{ path('tags_search', { 'libelle': tag.libelle }) }}">{{ tag.libelle }}</a>
+                    </div>
                 {% endfor  %}
+                </div>
             </td>
 
 
@@ -69,25 +72,25 @@
 
                     <!-- End Nested Comment -->
 
-            </div>
-            </div>
 
-</div>
-        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('article_index') }}">Retourner à la liste</a>
-        </li>
-        {% if is_granted('ROLE_ADMIN') %}
-        <li>
+<hr>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="buttonLink">
             <a href="{{ path('article_edit', { 'id': article.id }) }}">Editer l'article</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Effacer l'article">
-            {{ form_end(delete_form) }}
-        </li>
-        {% endif %}
-    </ul>
+        </div>
+        {{ form_start(delete_form) }}
+        <input class="btn btn-danger"  type="submit" value="Effacer l'article">
+        {{ form_end(delete_form) }}
+
+        <div class="buttonLink">
+            <a href="{{ path('article_index') }}">Retourner à la liste</a>
+        </div>
+    {% endif %}
+          </hr>
+    </div></div>
+    </div>
+  </div>
+
 {% endblock %}

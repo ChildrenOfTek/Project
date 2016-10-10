@@ -13,8 +13,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Doctrine\ORM\EntityRepository;
 
 class ArticleType extends AbstractType
 {
@@ -31,15 +32,10 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user',EntityType::class, array(
-                'class'=>'UserBundle:User',
-                'property'=>'nom',
-                'label'=>'Auteur'))
 
             ->add('dateArticle', DateType::class, array(
                 'data' => new \Datetime(),
                 'widget'=>'choice',
-                'format'=>'dd-MM-yyyy',
                 'label'=>'Date de création'
 
             ))
@@ -54,19 +50,17 @@ class ArticleType extends AbstractType
             ->add('datePublication',DateTimeType::class,array(
                 'data'=> new \Datetime('now'),
                 'widget'=>'choice',
-                'format'=>'dd-MM-yyyy HH',
                 'label'=>'Date de publication'))
 
-            ->add('imageFile',VichFileType::class,
+            ->add('imageFile',VichImageType::class,
                 array('required'=>false,
                     'label'=>'Choisissez un fichier à ajouter'))
 
-            ->add('tag',ChoiceType::class,array(
+            ->add('tag',EntityType::class,array(
+                'class'=>'ArticleBundle:Tags',
+                'choice_label'=>'libelle',
                 'label'=>'Tags à ajouter',
-                'label_attr'=>array('class'=>'checkbox-inline'),
-                'choices'=>$this->fillTags(),
                 'attr'=>array('class'=>CheckboxType::class),
-                'choices_as_values'=>true,
                 'expanded'=>true,
                 'multiple'=>true
                 ))

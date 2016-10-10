@@ -5,9 +5,14 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Profil de {{ user.nom }} {{ user.prenom }}</h1>
 
-    <table>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Profil de {{ user.nom }} {{ user.prenom }}</div>
+            <div class="panel-body">
+                <div class="container">
+                    <table class="table table-hover table-bordered">
         <tbody>
             <tr>
                 <th>Nom</th>
@@ -29,28 +34,27 @@
                 <td>{% if user.birthDate %}{{ user.birthDate|date('d-m-Y') }}{% endif %}</td>
             </tr>
         </tbody>
+
+                        {% if app.user.username == user.username %}
+                            <div class="buttonLink">
+                                <a href="{{ path("password_change") }}">Changer de mot de passe</a>
+                            </div>
+                                {% if(is_granted('ROLE_ADMIN')) %}
+                                        <div class="buttonLink">
+                                            <a href="{{ path('user_editadmin',{"id":user.id}) }}">Editer son profil</a>
+                                        </div>
+                                {% else %}
+                                    <div class="buttonLink">
+                                        <a href="{{ path('user_edit',{"id":user.id}) }}">Editer son profil</a>
+                                    </div>
+                                {% endif %}
+
+                        {% endif %}
+                        <div class="buttonLink">
+                            <a href="javascript:history.go(-1)">Retour</a>
+                        </div>
+
     </table>
+</div></div></div></div></div>
 
-    {% if app.user.username == user.username %}
-        <ul>
-            {% if(is_granted('ROLE_ADMIN')) %}
-                <li>
-                    <a href="{{ path('user_editadmin',{"id":user.id}) }}">Editer son profil</a>
-                </li>
-            {% else %}
-            <li>
-                <a href="{{ path('user_edit',{"id":user.id}) }}">Editer son profil</a>
-            </li>
-            {% endif %}
-            <li>
-                <a href="{{ path("password_change") }}">Changer de mot de passe</a>
-            </li>
-        </ul>
-    {% endif %}
-
-    <ul>
-        <li>
-            <a href="javascript:history.go(-1)">Retour page précedente</a>
-        </li>
-    </ul>
 {% endblock %}

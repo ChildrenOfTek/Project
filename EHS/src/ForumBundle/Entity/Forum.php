@@ -50,6 +50,9 @@ class Forum
     public function __construct() {
         $this->topics = new ArrayCollection();
     }
+
+/*********************** METHODES OBLIGATOIRES *********************/
+    
     /**
      * Get id
      *

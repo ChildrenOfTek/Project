@@ -5,10 +5,13 @@
 {% endblock %}
 
 {% block section %}
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="jumbotron">
-                <h1>Nous contacter</h1>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Nous contacter par mail : </div>
+            <div class="panel-body">
+                <div class="containerContact">
+        <div class="blocGauche">
 
                 <form action="{{ path('contact') }}" method="post">
 
@@ -37,8 +40,33 @@
                     <button class="btn btn-success btn-big">Envoyer</button>
                 </form>
             </div>
+
+        <div class="blocDroite">
+            <ul>
+                <h3>Nous contacter par courrier</h3>
+                <li>
+                    Adresse de l'association :
+                </li>
+                <li>
+                    6 avenue de la Devinière
+                </li>
+                <li>
+                    44000
+                </li>
+                <li>
+                    Nantes
+                </li>
+            </ul>
+
+        </div>
+    </div></div>
         </div>
     </div>
+</div>
 
 {% endblock %}
+{% block stylesheets %}
 
+    <link href="{{ asset('public/CSS/contact.css') }}" rel="stylesheet" type="text/css"/>
+
+{% endblock %}

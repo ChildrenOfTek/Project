@@ -50,3 +50,4 @@ gregwar_captcha_routing:
 
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"
+     prefix:   /

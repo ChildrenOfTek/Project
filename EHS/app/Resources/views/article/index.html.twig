@@ -21,37 +21,49 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Utilisateur / Nom Prénom</th>
+                <th style="padding-left:50px;">Nom prénom</th>
                 <th>Date de rédaction</th>
                 <th>Titre de l'article</th>
                 <th>Contenu</th>
                 <th>Date de Publication</th>
-                <th>Image</th>
+                <th>Image (cliquez pour agrandir)</th>
                 <th>En ligne</th>
                 <th>Tags</th>
-                <th>Actions</th>
+                <th style="padding-right:200px;">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for article in articles %}
             <tr>
                 <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
-                <td>{{ article.user.username }} / {{ article.user.nom }} {{ article.user.prenom }}</td>
+                <td>{{ article.user.nom }} {{ article.user.prenom }}</td>
                 <td>{{ article.dateArticle | date('d-m-Y H:i:s') }}</td>
                 <td>{{ article.titreArticle }}</td>
-                <td>{{ article.content }}</td>
+                <td>{{ article.content | raw }}</td>
                 <td>{{ article.datePublication | date('d-m-Y H:i:s') }}</td>
 
                 {% if not article.imageName %}
-                    <td><img class="img-responsive" src="{{ asset('/public/img/article/default.jpg') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
+                    <td><a href="javascript:ouvre_doc('{{ asset('/public/img/article/default.jpg') }}')">
+                            <img class="img-responsive" src="{{ asset('/public/img/article/default.jpg') }}" alt="{{ article.titreArticle }}" style="width:150px;height:50px;">
+                        </a>
+                    </td>
                 {% else %}
-                    <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;"></td>
+                    <td><a href="javascript:ouvre_doc('{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}')">
+                            <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:150px;height:50px;">
+                        </a>
+                    </td>
                 {% endif %}
-
-                <td>{% if article.online %}Oui{% else %}Non{% endif %}</td>
+                {% if article.online %}
+                <td style="background-color: #98d44e"></td>
+                    {% else %}
+                    <td style="background-color: red"></td>
+                    {% endif %}
                 <td><!--Affichage des tags de l'article -->
                     {% for tag in article.tag %}
-                        {{ tag.libelle }}<br/>
+
+                            <a href="{{ path('tags_search', { 'libelle': tag.libelle }) }}">{{ tag.libelle }}</a>
+
+
                     {% endfor  %}
                 </td>
                 <td>

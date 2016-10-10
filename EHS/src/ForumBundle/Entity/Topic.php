@@ -64,6 +64,9 @@ class Topic
     public function __construct() {
         $this->posts = new ArrayCollection();
     }
+    
+
+/*********************** METHODES OBLIGATOIRES **********************
     /**
      * Get id
      *

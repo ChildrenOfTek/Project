@@ -1,0 +1,13 @@
+<p>Bonjour !!</p>
+
+<p> Vous avez été contacté depuis le site de l'association Ethique
+ Handicap et Société</p>
+<p>Vous recevez ce message de la part de {{ user.nom }} {{ user.prenom }}</p>
+<p>{{ user.email }} </p>
+
+<p><h2>Voici le message : </h2></p>
+<p>
+    {{ contact.contenu }}
+</p>
+
+<a href="{{ path('index') }}">Aller sur le site</a>

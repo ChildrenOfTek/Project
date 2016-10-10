@@ -5,16 +5,27 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Edition d'article</h1>
-
+    <button class="btn btn-info buttonInfo">
+        <a style="color:white;text-decoration: none;" href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'articleEdit'}) }}')">Voir l'aide</a>
+    </button>
+    <section>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Edition d'article</div>
+            <div class="panel-body">
     {{ form_start(edit_form) }}
         {{ form_row(edit_form.user) }}
         {{ form_row(edit_form.dateArticle) }}
         {{ form_row(edit_form.titreArticle) }}
         {{ form_row(edit_form.content) }}
         {{ form_row(edit_form.datePublication) }}
+                {% if article.imageName %}
+                     <img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titreArticle }}" style="width:304px;height:228px;">
+                {% endif %}
         <div class="vich-file">
-        {{ form_widget(edit_form.imageFile) }}
+            {{ form_widget(edit_form.imageFile) }}
+        </div>
         {{ form_row(edit_form.online) }}
 
     <h3>Tags</h3>
@@ -24,20 +35,19 @@
             <li>{{ form_row(oneTag.libelle) }}</li>
         {% endfor %}
     </ul>
-    <input type="submit" value="Editer" />
+                <hr>
+    <input class="btn btn-success" type="submit" value="Editer" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('article_index') }}">Retour à la liste</a>
-        </li>
-        <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
+                <input class="btn btn-danger" type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
-
+            <div class="buttonLink">
+                <a href="{{ path('article_index') }}">Retour à la liste</a>
+            </div>
+                </hr>
+</div></div></div></div>
+</section>
 {% endblock %}
 {% block javascripts %}
             <script type="text/javascript" src="{{ asset('public/script/DynamicTagging.js') }}"></script>

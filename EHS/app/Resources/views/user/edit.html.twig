@@ -5,21 +5,34 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Edition des utilisateurs</h1>
+    <section>
+        <button class="btn btn-info buttonInfo">
+            <a style="color:white;text-decoration: none;" href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'userEdit'}) }}')">Voir l'aide</a>
+        </button>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Edition des utilisateurs</div>
+            <div class="panel-body">
+
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Editer" />
-    {{ form_end(edit_form) }}
+                <hr>
+        <input class="btn btn-success" type="submit" value="Editer" />
 
-    <ul>
-        <li>
-            <a href="{{ path('user_index') }}">Retour à la liste</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
+                {{ form_end(edit_form) }}
+
+                        {{ form_start(delete_form) }}
+                        <input class="btn btn-danger" type="submit" value="Supprimer">
+                        {{ form_end(delete_form) }}
+                <div class="buttonLink">
+                    <a href="{{ path('user_index') }}">Retour à la liste</a>
+                </div>
+
+            </div></div></div></div>
+
+
+    </section>
 {% endblock %}

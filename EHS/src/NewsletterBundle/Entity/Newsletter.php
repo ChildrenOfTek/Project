@@ -3,6 +3,7 @@
 namespace NewsletterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Newsletter
@@ -38,9 +39,16 @@ class Newsletter
     /**
      * @var string
      *
-     * @ORM\Column(name="texte", type="string", length=255, nullable=true)
+     * @ORM\Column(name="texte", type="text", nullable=true)
      */
     private $texte;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ArticleBundle\Entity\Article", inversedBy="newsletter", cascade={"persist"})
+     * @ORM\JoinTable(name="newsletters_articles")
+     */
+    private $article;
+
 
 
     /**
@@ -120,5 +128,46 @@ class Newsletter
     public function getTexte()
     {
         return $this->texte;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticle()
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param mixed $article
+     */
+    public function setArticle($article)
+    {
+        $this->article = $article;
+    }
+
+
+
+    /**
+     * Add article
+     *
+     * @param \ArticleBundle\Entity\Article $article
+     * @return Newsletter
+     */
+    public function addArticle(\ArticleBundle\Entity\Article $article)
+    {
+        $this->article[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \ArticleBundle\Entity\Article $article
+     */
+    public function removeArticle(\ArticleBundle\Entity\Article $article)
+    {
+        $this->article->removeElement($article);
     }
 }

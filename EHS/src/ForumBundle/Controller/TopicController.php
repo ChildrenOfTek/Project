@@ -18,22 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  */
 class TopicController extends Controller
 {
-    /**
-     * Lists all Topic entities.
-     * @Security("has_role('ROLE_ADMIN')")
-     * @Route("/", name="topic_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();//
-
-        $topics = $em->getRepository('ForumBundle:Topic')->findAll();
-
-        return $this->render('topic/index.html.twig', array(
-            'topics' => $topics,
-        ));
-    }
+    
 
     /**
      * Creates a new Topic entity.
@@ -57,6 +42,9 @@ class TopicController extends Controller
             $topic->setAuthor($author);
             $em->persist($topic);
             $em->flush();
+
+            $this->addFlash('success',
+                'Un nouveau topic a bien été crée !');
             
             return $this->redirectToRoute('forum_show', array('id' => $_GET['id']));
         }

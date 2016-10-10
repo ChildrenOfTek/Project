@@ -9,14 +9,17 @@
             <div class="panel-heading">Liste des archives</div>
             <div class="panel-body">
                 <div class="container">
+                    <div class="buttonLink">
+                        <a href="{{ path('association_archive_new') }}">Créer une nouvelle archive</a>
+                    </div>
                     <table class="table table-hover table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Date de création</th>
+                <th>Dernière mise à jour</th>
                 <th>Titre de l'archive</th>
                 <th>Nom du fichier</th>
-                <th>Dernière mise à jour</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,10 +27,14 @@
         {% for archive in archives %}
             <tr>
                 <td><a href="{{ path('association_archive_show', { 'id': archive.id }) }}">{{ archive.id }}</a></td>
-                <td>{% if archive.dateCreation %}{{ archive.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if archive.dateCreation %}{{ archive.dateCreation|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if archive.updatedAt %}{{ archive.updatedAt|date('d-m-Y H:i:s') }}{% endif %}</td>
                 <td>{{ archive.titreArchive }}</td>
-                <td><a href="{{ vich_uploader_asset(archive, 'imageFile') }}" download>{{ archive.imageName }}</a></td>
-                <td>{% if archive.updatedAt %}{{ archive.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                {% if archive.imageName matches '/^[0-9]/' %}
+                    <td><a href="{{ app.request.basePath }}/..{{ vich_uploader_asset(archive, 'imageFile') }}" download>{{ archive.imageName }}</a></td>
+                {% else %}
+                    <td><a href="{{ app.request.basePath }}/../archives/association/{{ archive.imageName }}" download>{{ archive.imageName }}</a></td>
+                {% endif %}
                 <td>
                     <ul>
                         <li>
@@ -42,11 +49,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('association_archive_new') }}">Créer une nouvelle archive</a>
-        </li>
-    </ul>
 </div></div></div></div></div></div>
 {% endblock %}

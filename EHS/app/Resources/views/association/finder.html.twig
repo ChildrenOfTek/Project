@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Voir les fichiers présents
+{% endblock %}
+
+{% block section %}
+    <button class="btn btn-info buttonInfo">
+        <a style="color:white;text-decoration: none;" href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'finder'}) }}')">Voir l'aide</a>
+    </button>
+    <div id="top"></div>
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+    <div class="panel-heading">Liste des dossiers et fichiers</div>
+
+
+{% if dirs is empty %}
+    {{ "Il n'y a encore aucun dossier crée !" }}
+{% else %}
+    <div class="panel-body" style="font-size:30px;">Accès rapide :
+        <select name="dropdpown" size="1" id="select-anchor">
+            {% for dir in dirs %}
+                <option value="#{{ dir.basename }}">{{ dir.basename[-8:8] }}</option>
+            {% endfor %}
+        </select>
+
+    </div>
+    {% for dir in dirs %}
+        <table class="table table-hover table-bordered">
+            <thead>
+
+            <tr>
+                <th id="{{ dir.basename  }}">Liste des fichiers présents dans <strong>{{ dir.basename }}</strong> :
+            <a href="#top" class="btn"><span class="glyphicon glyphicon-chevron-up"></span></a></th>
+                <th>Aperçu (cliquez pour agrandir)</th>
+                <th>Actions:
+                        <a href="{{ path('association_finder_deleteDir',{"dir":dir.basename}) }}">Supprimer le dossier (Doit etre vide)</a>
+                    </th>
+            </tr>
+            </thead>
+
+            {% for file in files %}
+
+            {% if file.path == dir.pathname %}
+            <tr>
+                <td>{{ file.filename }}</td>
+                <td><a href="javascript:ouvre_doc('{{ app.request.basePath }}/public/img/article/{{ dir.basename }}/{{ file.filename }}')">
+                        <img class="img-responsive" src="{{ app.request.basePath }}/public/img/article/{{ dir.basename }}/{{ file.filename }}" style="width:100px;height:50px;">
+                    </a>
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ app.request.basePath }}/public/img/article/{{ dir.basename }}/{{ file.filename }}" download>Telecharger</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('association_finder_deleteFile',{"name":file.filename,"dir":dir.basename}) }}">Supprimer l'image (<strong>Attention</strong> définitif, voir Aide)</a>
+                        </li>
+
+                    </ul>
+                </td>
+            </tr>
+                {% endif %}
+
+            {% endfor %}
+
+</table>
+    {% endfor %}
+{% endif %}
+</div></div></div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $('#select-anchor').change( function () {
+                var targetPosition = $($(this).val()).offset().top;
+                $('html,body').animate({ scrollTop: targetPosition}, 'slow');
+            });
+        });
+    </script>
+{% endblock %}

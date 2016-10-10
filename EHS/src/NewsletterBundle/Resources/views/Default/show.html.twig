@@ -1,14 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block section %}
-    <h1>Newsletter</h1>
+    <h1>newsletter - affichage</h1>
+<div class="container">
 
-    <table>
+    <table class="table table-hover table-bordered">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ newsletter.id }}</td>
-            </tr>
             <tr>
                 <th>Date</th>
                 <td>{% if newsletter.date %}{{ newsletter.date|date('d-m-Y') }}{% endif %}</td>
@@ -19,23 +16,34 @@
             </tr>
             <tr>
                 <th>Texte</th>
-                <td>{{ newsletter.texte }}</td>
+                <td>{{ newsletter.texte|raw }}</td>
             </tr>
+            <tr>
+                <th>Articles</th>
+                <td>
+                    {% for article in newsletter.article %}
+                        {{ article.titreArticle }}
+                        <br>
+                    {% endfor  %}
+                </td>
+            </tr>
+
+
         </tbody>
     </table>
-
+</div>
     <ul>
         <li>
-            <a href="{{ path('newsletter_send', { 'id': newsletter.id }) }}">Send</a>
+            <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">éditer</a>
         </li>
         <li>
-            <a href="{{ path('newsletter_edit', { 'id': newsletter.id }) }}">Edit</a>
+            <a href="{{ path('newsletter_send', { 'id': newsletter.id }) }}">envoyer</a>
         </li>
         <li>
-            <a href="{{ path('newsletter_delete', { 'id': newsletter.id }) }}">Delete</a>
+            <a href="{{ path('newsletter_delete', { 'id': newsletter.id }) }}">supprimer</a>
         </li>
         <li>
-            <a href="{{ path('newsletter_index') }}">Back to the list</a>
+            <a href="{{ path('newsletter_index') }}">retour à la liste</a>
         </li>
     </ul>
 {% endblock %}

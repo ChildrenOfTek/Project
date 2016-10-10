@@ -42,8 +42,9 @@ class ChangePasswordController extends Controller
         $user->setPassword($encoded);
         $em->persist($user);
         $em->flush();
+        $this->addFlash('success','Votre mot de passe a bien été changé !');
 
-    return $this->redirectToRoute('index');
+    return $this->redirectToRoute('user_showpublic',array("id"=>$user->getId()));
     }
 
     return $this->render('security/changePassword.html.twig', array(

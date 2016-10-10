@@ -34,7 +34,7 @@ class Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateArticle", type="datetimetz")
+     * @ORM\Column(name="dateArticle", type="datetime")
      */
     private $dateArticle;
 
@@ -55,7 +55,7 @@ class Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datePublication", type="datetimetz")
+     * @ORM\Column(name="datePublication", type="datetime")
      */
     private $datePublication;
 
@@ -91,18 +91,14 @@ class Article
 
     /**
      * @ORM\ManyToMany(targetEntity="Tags", inversedBy="articles",cascade={"persist"})
-     * @ORM\JoinTable(name="tags_articles")s
+     * @ORM\JoinTable(name="tags_articles")
      */
     private $tag;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Newsletter")
+     * @ORM\ManyToMany(targetEntity="NewsletterBundle\Entity\Newsletter", mappedBy="article")
      */
     private $newsletter;
-
-    public function __construct() {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id

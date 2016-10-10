@@ -81,6 +81,24 @@
             </div>
             </div>
 
+            <!-- Registrations -->
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <table>
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>E-mail</th>
+                    </tr>
+                {% for registration in event.registrations %}
+                    <rt>
+                        <td>{{ registration.prenom }}</td>
+                        <td>{{ registration.nom }}</td>
+                        <td>{{ registration.email }}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+            {% endif %}
 </div>
         </div>
 </section>

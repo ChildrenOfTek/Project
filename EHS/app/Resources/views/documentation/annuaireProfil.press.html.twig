@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Annuaire
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Documentation pour l'annuaire :</div>
+                <div class="panel-body">
+
+                    <div class="blocColumn">
+                        <div class="blocHaut">
+                            <img src="{{ asset('doc/annuaireProfil.png') }}" alt ="Creation d'un article"/>
+                        </div>
+                        <div class="blocBas">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Profil</div>
+                                        <div class="panel-body">
+
+                            <p>Ici, le profil des personnes faisant partie du groupe <strong>Presse</strong> sont affichés.
+                            </p>
+
+                            <p>
+                                Cela vous permet d'acceder rapidement aux informations pour <strong>contacter</strong> vos pairs.
+                            </p>
+                            <p>
+                                En cliquant sur <a href="" class="disabled">bernard@gerard.com</a>, une page apparait vous permettant
+                                de contacter directement par <strong>mail</strong> la personne concernée.
+                            </p>
+
+                </div></div></div></div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    </div></div></div></div>
+
+{% endblock %}
+{%  block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/CSS/doc.css') }}"
+{% endblock %}
+{% block footer %}
+{% endblock %}

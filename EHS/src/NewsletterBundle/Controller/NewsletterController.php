@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use NewsletterBundle\Entity\Newsletter;
 use NewsletterBundle\Form\NewsletterType;
+use NewsletterBundle\Form\NewsletterTypeEdit;
 use UserBundle\Entity\User;
 
 /**
@@ -38,15 +39,14 @@ class NewsletterController extends Controller
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request) {
-        $newsletter = new Newsletter();
-        $form = $this->createForm('NewsletterBundle\Form\NewsletterType', $newsletter);
-        $form->handleRequest($request);
-
         $em = $this->getDoctrine()->getManager();
-        $articles = $em->getRepository('ArticleBundle:Article')->findNewArticles();
+        $newsletter = new Newsletter();
+        $form = $this->createForm(new NewsletterType($em), $newsletter);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($newsletter);
             $em->flush();
 
@@ -55,7 +55,6 @@ class NewsletterController extends Controller
 
         return $this->render('NewsletterBundle:Default:new.html.twig', array(
             'newsletter' => $newsletter,
-            'articles' => $articles,
             'form' => $form->createView(),
         ));
     }
@@ -66,8 +65,7 @@ class NewsletterController extends Controller
      * @Route("/{id}", name="newsletter_show")
      * @Method("GET")
      */
-    public function showAction(Newsletter $newsletter)
-    {
+    public function showAction(Newsletter $newsletter) {
         $deleteForm = $this->createDeleteForm($newsletter);
 
         return $this->render('NewsletterBundle:Default:show.html.twig', array(
@@ -81,10 +79,10 @@ class NewsletterController extends Controller
      * @Route("/edit/{id}", name="newsletter_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Newsletter $newsletter)
-    {
+    public function editAction(Request $request, Newsletter $newsletter)  {
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($newsletter);
-        $editForm = $this->createForm('NewsletterBundle\Form\NewsletterType', $newsletter);
+        $editForm = $this->createForm(new NewsletterTypeEdit($em), $newsletter);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -145,13 +143,42 @@ class NewsletterController extends Controller
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('UserBundle:User')->findAll();
         $checked = [];
+        $corps = "";
+
+        if ($newsletter->getArticle()->isEmpty()) {
+            $corps = "</body></html>";
+        } else {
+            foreach ($newsletter->getArticle() as $nl) {
+                if($nl->getImageName()== null )
+                {
+                    $corps = $corps . "<hr><h4>" .
+                        $nl->getTitreArticle() .
+                        "</h4><p><img src=\"http://localhost" .
+                        $this->getRequest()->getBasePath() . "/public/img/article/default.jpg
+                         width=\"150\" style=\"float:left; padding:10px\">" .
+                        $nl->getContent() . "</p>";
+
+                }else{
+                    $corps = $corps . "<hr><h4>" .
+                        $nl->getTitreArticle() .
+                        "</h4><p><img src=\"http://localhost" .
+                        $this->getRequest()->getBasePath() . "/public/img/article/Article_" .
+                        $nl->getDateArticle()->format("d_m_y") . "/" . $nl->getImageName() .
+                        "\" width=\"150\" style=\"float:left; padding:10px\">" . $nl->getContent() . "</p>";
+
+                }
+            }
+        }
 
         foreach ($users as $user) {
             $message = \Swift_Message::newInstance()
                 ->setSubject($newsletter->getSujet())
                 ->setFrom(array('guillossou.michele@gmail.com' => 'Michele Guillossou'))
                 ->setTo(array($user->getEmail() => $user->getPrenom() . " " . $user->getNom()))
-                ->setBody($newsletter->getTexte(), 'text/html');
+                ->setBody("<html><head></head><body><center><h1>" .
+                    $newsletter->getSujet() . "</h1></center><p>" .
+                    $newsletter->getTexte() . "</p>" . $corps,
+                    'text/html');
             $this->get('mailer')->send($message);
             $checked[] = $user->getPrenom() . " " . $user->getNom();
         }

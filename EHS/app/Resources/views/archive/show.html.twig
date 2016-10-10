@@ -5,9 +5,16 @@
 {% endblock %}
 
 {% block section %}
-    <h1>Archive</h1>
 
-    <table>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">Archive</div>
+            <div class="panel-body">
+                <div class="container col-md-10 col-md-offset-1">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered table-striped">
+
         <tbody>
             <tr>
                 <th>Id</th>
@@ -23,26 +30,32 @@
             </tr>
             <tr>
                 <th>Nom du fichier</th>
-                <td><a href="{{ vich_uploader_asset(archive, 'imageFile') }}" download>{{ archive.imageName }}</a></td>
+                <td>{{ archive.imagename }}</td>
             </tr>
             <tr>
                 <th>Dernière mise à jour</th>
                 <td>{% if archive.updatedAt %}{{ archive.updatedAt|date('d-m-Y H:i:s') }}{% endif %}</td>
             </tr>
+            <tr>
+                <th>Telecharger</th>
+                <td><a href="{{ app.request.basePath }}/../{{ vich_uploader_asset(archive, 'imageFile') }}" download>Cliquez ici</a></td>
+            </tr>
+
         </tbody>
     </table>
+                        <hr>
+                        <div class="buttonLink">
+                            <a href="{{ path('association_archive_edit', { 'id': archive.id }) }}">Editer</a>
+                        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
-        </li>
-        <li>
-            <a href="{{ path('association_archive_edit', { 'id': archive.id }) }}">Editer</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Supprimer">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                        {{ form_start(delete_form) }}
+                        <input class="btn btn-danger" type="submit" value="Supprimer">
+                        {{ form_end(delete_form) }}
+
+                        <div class="buttonLink">
+                            <a href="{{ path('association_archive_index') }}">Retour à la liste</a>
+                        </div>
+</div></div></div></div></div></div>
+
+
 {% endblock %}

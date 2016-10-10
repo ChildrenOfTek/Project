@@ -54,7 +54,10 @@ class ForumController extends Controller
             $em->persist($forum);
             $em->flush();
 
-            return $this->redirectToRoute('forum_show', array('id' => $forum->getId()));
+            $this->addFlash('success',
+                'Un nouveau sujet de forum a bien été crée !');
+
+            return $this->redirectToRoute('forum_index');
         }
 
         return $this->render('forum/new.html.twig', array(

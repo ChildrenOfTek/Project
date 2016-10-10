@@ -58,21 +58,25 @@
         <h1>Évènements passés</h1><hr>
         {% for event in pastevents %}
             <h1><a href="{{ path('events_show', { 'id': event.id }) }}">{{ event.title }}</a></h1>
-            {% if event.start and event.end %}
-                <p><span class="glyphicon glyphicon-time"></span>
-                {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
-                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
-                    au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
-                {% else %}
-                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
-                {% endif %}
-                </p>
-            {% endif %}
             {% if event.address %}
                 <p><span class="glyphicon glyphicon-home"></span>
                     {{ event.address }}
                 </p>
             {% endif %}
+            <div class="date">
+                <h4>                
+                {% if event.start and event.end %}
+                    <p><span class="glyphicon glyphicon-time"></span>
+                    {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
+                        Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                        au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                    {% else %}
+                        {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
+                    {% endif %}
+                    </p>
+                {% endif %}
+                </h4>
+            </div>
             {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}
             <br/>
             <!-- Tags -->

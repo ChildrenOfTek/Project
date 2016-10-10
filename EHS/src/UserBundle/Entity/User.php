@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use ArticleBundle\Entity\Article;
 
+
 /**
  * User
  *
@@ -96,7 +97,13 @@ class User implements UserInterface, \Serializable
      *     match=true,
      *     message="Un numero de téléphone doit être composé de chiffres."
      * )
-     * @ORM\Column(name="telephone", type="string", length=30)
+     * @Assert\Length(
+     *      min = 9,
+     *      max = 10,
+     *      minMessage = "Votre telephone doit comprendre au moins {{ limit }} caractères",
+     *      maxMessage = "Votre telephone ne doit pas depasser {{ limit }} caractères"
+     * )
+     * @ORM\Column(name="telephone", type="string", length=15)
      */
     protected $telephone;
     
@@ -125,6 +132,7 @@ class User implements UserInterface, \Serializable
      * @ORM\OneToMany(targetEntity="ArticleBundle\Entity\Article",mappedBy="user", cascade={"persist","remove"})
      *
      */
+
     private $article;
 
     /**
@@ -132,6 +140,7 @@ class User implements UserInterface, \Serializable
      *
      */
     private $topic;
+
     
     public function __construct()
     {

@@ -47,6 +47,9 @@ class Post
      */
     private $topic;
 
+    
+
+/*********************** METHODES OBLIGATOIRES *********************/
 
     /**
      * Get id
@@ -150,4 +153,6 @@ class Post
 
         return $this;
     }
+
+
 }

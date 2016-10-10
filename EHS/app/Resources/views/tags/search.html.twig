@@ -19,24 +19,25 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><a href="{{path('article_show',{'id':article.id})}}">{{article.titreArticle}}</a></div>
                         <div class="panel-body">
-                            {{ article.content}}<br/>
-                            {% for tag in article.tag %}
-                                <a href="{{ path('tags_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
-                            {% endfor  %}
+                            {{ article.content | raw}}<br/>
+                            <div style="display:flex;flex-flow:row nowrap;">
+                                {% for tag in article.tag %}
+                                    <div class="buttonLink">
+                                        <a href="{{ path('tags_search', { 'libelle': tag.libelle }) }}">{{ tag.libelle }}</a>
+                                    </div>
+                                {% endfor  %}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
     {% endfor %}
-    <ul>
-        <li>
-            <a href="{{ path('index') }}">Retour aux articles</a>
-        </li>
-    </ul>
-{% endif %}
-
+    <div class="buttonLink">
+        <a href="{{ path('index') }}">Retour à l'accueil</a>
+    </div>
 
 {% if futureevents is defined and pastevents is defined %}
          <div class="row">

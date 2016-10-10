@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AssociationBundle\Entity\Archive;
 use AssociationBundle\Form\ArchiveType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Archive controller.
@@ -18,7 +19,7 @@ class ArchiveController extends Controller
 {
     /**
      * Lists all Archive entities.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @Route("/", name="association_archive_index")
      * @Method("GET")
      */
@@ -29,6 +30,23 @@ class ArchiveController extends Controller
         $archives = $em->getRepository('AssociationBundle:Archive')->findAll();
 
         return $this->render('archive/index.html.twig', array(
+            'archives' => $archives,
+        ));
+    }
+
+    /**
+     * Lists all Archive entities.
+     * @Security("has_role('ROLE_PRESS')")
+     * @Route("/press", name="association_archive_press")
+     * @Method("GET")
+     */
+    public function indexPresseAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $archives = $em->getRepository('AssociationBundle:Archive')->findAll();
+
+        return $this->render('archive/indexPress.html.twig', array(
             'archives' => $archives,
         ));
     }

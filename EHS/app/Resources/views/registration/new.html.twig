@@ -11,14 +11,23 @@
         <div class="panel-body">
 <div class="container">
 {% include('events/showReg.html.twig') %}
-
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input class="btn btn-success" type="submit" value="S'inscrire" />
-    {{ form_end(form) }}
+    {{ form_widget(form) }}
+<table>
+    <tr>
+        <td>
+            <input class="button" type="submit" value="S'inscrire" />
+            {{ form_end(form) }}
+        </td>
+        <td>
+            <div class="buttonLink">
+                <a href="{{ path('events_index') }}">Retour à la liste des évènements</a>
+            </div>
+        </td>
+    </tr>
+</table>
 
-<div class="buttonLink">
-            <a href="{{ path('events_index') }}">Retour à la liste des évènements</a>
-</div></div>
+
+</div>
 
 {% endblock %}

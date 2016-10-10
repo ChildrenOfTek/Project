@@ -21,10 +21,10 @@
         {% if event.start and event.end %}
             <p><span class="glyphicon glyphicon-time"></span>
             {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
-                Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL") }}
-                au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL") }}
+                Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL Y") }}
+                au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL Y") }}
             {% else %}
-                {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
+                {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL Y- HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
             {% endif %}
             </p>
         {% endif %}
@@ -74,10 +74,10 @@
             {% if event.start and event.end %}
                 <p><span class="glyphicon glyphicon-time"></span>
                 {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
-                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL") }}
-                    au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL") }}
+                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL Y") }}
+                    au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL Y") }}
                 {% else %}
-                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
+                    {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL Y - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
                 {% endif %}
                 </p>
             {% endif %}

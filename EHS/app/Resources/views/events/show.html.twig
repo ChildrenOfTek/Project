@@ -20,7 +20,7 @@
             {% if event.start and event.end %}
                 <p><span class="glyphicon glyphicon-time"></span>
                 {% if event.start|date('Y-m-d') != event.end|date('Y-m-d') %}
-                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
+                    Du {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}<br/>
                     au {{ event.end|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}
                 {% else %}
                     {{ event.start|localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}-{{ event.end|localizeddate("medium", "none", null, null, "HH:mm") }}
@@ -73,19 +73,19 @@
             <!-- Registrations -->
 
             {% if is_granted('ROLE_ADMIN') %}
-                <table style="border: 1px solid black">
+                <table>
                     <thead>
-                        <tr>
-                            <th>Prénom</th>
+                    <tr class='panel-heading'>
                             <th>Nom</th>
+                            <th>Prénom</th>
                             <th>E-mail</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for registration in event.registrations %}
                         <tr>
-                            <td>{{ registration.prenom }}</td>
                             <td>{{ registration.nom }}</td>
+                            <td>{{ registration.prenom }}</td>
                             <td>{{ registration.email }}</td>
                         </tr>
                     {% endfor %}
@@ -94,19 +94,28 @@
             {% endif %}
 
 <hr>
+<table>
+    <tr>
+        <td>
+            {% if is_granted('ROLE_ADMIN') %}
+            <div class="buttonLink">
+                <a href="{{ path('events_edit', { 'id': event.id }) }}">Editer l'évènement</a>
+            </div>
+        </td>
+        <td>
+            {{ form_start(delete_form) }}
+            <input class="buttonDanger"  type="submit" value="Effacer l'évènement">
+            {{ form_end(delete_form) }}
+            {% endif %}
+        </td>
+        <td>
+            <div class="buttonLink">
+                <a href="{{ path('events_index') }}">Retourner à la liste</a>
+            </div>
+        </td>
+    </tr>
+</table>
 
-    {% if is_granted('ROLE_ADMIN') %}
-        <div class="buttonLink">
-            <a href="{{ path('events_edit', { 'id': event.id }) }}">Editer l'évènement</a>
-        </div>
-        {{ form_start(delete_form) }}
-        <input class="btn btn-danger"  type="submit" value="Effacer l'évènement">
-        {{ form_end(delete_form) }}
-
-        <div class="buttonLink">
-            <a href="{{ path('events_index') }}">Retourner à la liste</a>
-        </div>
-    {% endif %}
           </hr>
     </div></div>
     </div>

@@ -53,9 +53,21 @@ class EventsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data=$form->getData();
+            if($data->getStart()>$data->getEnd())
+            {
+                $this->addFlash('error','La date de début est supérieure à celle de fin');
+                return $this->render('events/new.html.twig', array(
+                    'event' => $event,
+                    'form' => $form->createView(),
+                ));
+            }
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($event);
             $em->flush();
+
+            $this->addFlash('success','L\'évènement a bien été crée !');
 
             return $this->redirectToRoute('events_show', array('id' => $event->getId()));
         }

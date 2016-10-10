@@ -15,7 +15,7 @@ protected $oldPassword;
 
 /**
 * @Assert\Length(
-*     min = 5,
+*     min = 6,
 *     minMessage = "Le mot de passe doit faire au minimum 6 caractères"
 * )
 */

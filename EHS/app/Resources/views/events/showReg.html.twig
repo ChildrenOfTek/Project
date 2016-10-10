@@ -30,7 +30,7 @@
 
             <!-- Remaining Places-->
             {% if event.registrations|length < event.places %}
-                {{ event.places - event.registrations|length }} {{ (event.places - event.registration|length) > 1 ? 'places restantes.' : 'place restante.' }}
+                {{ event.places - event.registrations|length }} {{ (event.places - event.registrations|length) > 1 ? 'places restantes.' : 'place restante.' }}
             {% else %}
                 <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
             {% endif %}

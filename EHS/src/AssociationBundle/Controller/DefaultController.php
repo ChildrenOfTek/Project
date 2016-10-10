@@ -345,31 +345,63 @@ class DefaultController extends Controller
         };
 
         $finder = new Finder();
-        $finder2=new Finder();
+        $finder2= new Finder();
+
+        $finder3= new Finder();
+        $finder4= new Finder();
+
         //ce finder reccupere les fichiers
         $finder->files()->in($this->get('kernel'
             )->getRootDir() . '/../web/public/img/article')->notName('default.jpg')->sort($sort);
         //ce finder reccupere les dossiers
         $finder2->directories()->in($this->get('kernel'
             )->getRootDir() . '/../web/public/img/article')->sort($sort);
-        $files=[];
-        $dirs=[];
+
+        //ce finder reccupere les fichiers
+        $finder3->files()->in($this->get('kernel'
+            )->getRootDir() . '/../web/public/img/events')->notName('default.jpg')->sort($sort);
+        //ce finder reccupere les dossiers
+        $finder4->directories()->in($this->get('kernel'
+            )->getRootDir() . '/../web/public/img/events')->sort($sort);
+
+        $articlesfiles=[];
+        $eventsfiles=[];
+
+        $articlesdirs=[];
+        $eventsdirs=[];
+
         //on crée deux tableaux pour chacunes des entrées
         foreach ($finder as $file) {
-            $files[]=$file;
+            // $files[]=$file;
+            $articlesfiles[] = $file;
         }
         foreach ($finder2 as $dir) {
-            $dirs[]=$dir;
+            $articlesdirs[]=$dir;
         }
+
+        foreach ($finder3 as $file) {
+            // $files[]=$file;
+            $eventsfiles[] = $file;
+        }
+        foreach ($finder4 as $dir) {
+            $eventsdirs[]=$dir;
+        }
+        // var_dump($eventsfiles); var_dump($articlesfiles);
+        // var_dump($eventsdirs); var_dump($articlesdirs);
+        // die();
+
         return $this->render('association/finder.html.twig', array(
             // on renvoie dans la vue "la vue" du formulaire
-            'files'=>$files,
-            'dirs'=>$dirs
+            'articlesfiles'=>$articlesfiles,
+            'eventsfiles'=>$eventsfiles,
+            'articlesdirs'=>$articlesdirs,
+            'eventsdirs'=>$eventsdirs
         ));
+
     }
 
     /**
-     * Deletes an image corresponding to an article.
+     * Deletes an image corresponding to an article or an event.
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/finder/{name}/{dir}/delete", name="association_finder_deleteFile")
      * @Method("GET")
@@ -405,7 +437,7 @@ class DefaultController extends Controller
         elseif($event)
         {
                 $file=$this->get('kernel'
-                    )->getRootDir() . '/../web/public/img/article/'.$dir.'/'.$name;
+                    )->getRootDir() . '/../web/public/img/events/'.$dir.'/'.$name;
                 //on verifie que le fichier existe, sinon on lance une erreur
                 if($file){
                     unlink($file);
@@ -438,7 +470,7 @@ class DefaultController extends Controller
      * @Route("/finder/{dir}/delete", name="association_finder_deleteDir")
      * @Method("GET")
      */
-    public function finderDirDeleteAction($dir,Request $request)
+    public function finderDirDeleteAction($dir, Request $request)
     {
         function is_dir_empty($dir) {
             if (!is_readable($dir)) return NULL;
@@ -450,25 +482,41 @@ class DefaultController extends Controller
             }
             return TRUE;
         }
+
         $finder=new Finder();
+        $finder2=new Finder();
+
         $doss=$this->get('kernel')->getRootDir() . '/../web/public/img/article/'.$dir;
+        if(is_dir($doss))
             $finder->directories()->in($doss);
+
+        $doss2=$this->get('kernel')->getRootDir() . '/../web/public/img/events/'.$dir;
+        //var_dump($doss2); die();
+        if(is_dir($doss2))
+            $finder2->directories()->in($doss2);
 
            if($finder)
            {
                if(is_dir_empty($doss)){
 
                rmdir($doss);
-               $this->addFlash('success','Le dossier a bien été supprimée !');
+               $this->addFlash('success','Le dossier Article a bien été supprimé !');
 
-               }else{
+               }
+               if(is_dir_empty($doss2)){
+
+               rmdir($doss2);
+               $this->addFlash('success','Le dossier Events a bien été supprimé !');
+
+               }
+               else{
 
                    $this->addFlash('error','Le dossier n\'est pas vide !');
                }
-
-            }else{
+            }
+             else {
                $this->addFlash('error','Le dossier n\'a pas été trouvé !');
-                return $this->finderAction();
+                return $this->finderAction();              
             }
 
             return $this->finderAction();

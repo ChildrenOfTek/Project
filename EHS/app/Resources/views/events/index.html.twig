@@ -8,6 +8,11 @@
         <div class="panel-heading">Liste des évènements</div>
         <div class="panel-body">
 <div class="container">
+          <div class="buttonLinkTop">
+              {% if(is_granted('ROLE_ADMIN')) %}
+                <a href="{{ path('events_new') }}">Créer un événement</a>
+            {% endif %}
+           </div>
 <h1>Évènements en cours ou à venir</h1><hr>
 {% if futureevents %}
     {% for event in futureevents %}
@@ -30,15 +35,17 @@
                 {{ event.address }}
             </p>
         {% endif %}
-        </h4>
+</h4>
+        <hr>      
         {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}
-
+<hr>
         <!-- Image -->
         {% if not event.imageName %}
-            <td><img class="img-responsive" src="{{ asset('/public/img/article/default.jpg') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
+            <td><img class="img-responsive" src="{{ asset('/public/img/events/default.jpg') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
         {% else %}
             <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
         {% endif %}
+<hr>
 
         <!-- Tags -->
         Mots-clés :
@@ -82,9 +89,9 @@
                 </p>
             {% endif %}
             </h4>
-
+<hr>
             {{ event.description|length > 100 ? event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES')|slice(0, 100) ~ '...' : event.description|striptags|convert_encoding('UTF-8', 'HTML-ENTITIES') }}
-
+<hr>
             <!-- Image -->
             {% if not event.imageName %}
                 <td><img class="img-responsive" src="{{ asset('/public/img/events/default.jpg') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
@@ -98,19 +105,11 @@
                 <a href="{{ path('tags_events_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
                 <!-- <button class="tagbox" type="submit">{{ tag.libelle}}</button> -->
             {% endfor %}
-            <br/>
-            {% if event.registrations|length < event.places %}
-                <a href="{{ path('registration_new', {"id": event.id }) }}">S'inscrire</a>
-            {% else %}
-                <p> Le nombre d'inscription maximum pour cet évènement a été atteint </p>
-            {% endif %}
+            <br/>           
             <hr>
         {% endfor %}
     {% endif %}
-{% endif %}
-    {% if(is_granted('ROLE_ADMIN')) %}
-        <a href="{{ path('events_new') }}">Créer un événement</a>
-    {% endif %}
+{% endif %}   
 
 </div>
 

@@ -30,7 +30,7 @@ class EventsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('title','text',array('label'=>'Titre'))
             ->add('description','ckeditor',array(
               'attr'=>array('rows'=>5),
               'label'=>'Présentation de l\'évènement'))
@@ -45,8 +45,8 @@ class EventsType extends AbstractType
             ->add('imageFile',VichFileType::class,
                 array('required'=>false,
                     'label'=>'Choisissez un fichier à ajouter'))
-            ->add('places', 'integer')
-            ->add('address')
+            ->add('places', 'integer',array('label'=>'Nombre de places'))
+            ->add('address','text',array('label'=>'Adresse'))
             ->add('tag',ChoiceType::class,array(
                 'label'=>'Tags à ajouter',
                 'label_attr'=>array('class'=>'checkbox-inline'),

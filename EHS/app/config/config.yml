@@ -170,7 +170,6 @@ ivory_ck_editor:
         my_custom_config:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
-            skin: "office2013"
             language:                   %locale%
             toolbar:                    "my_toolbar_1"            # Charger la toolbar tollbar_1 (voir plus bas)
             uiColor:                    "#cccccc"           # Couleur de fond de l'interface

@@ -44,11 +44,12 @@
             {% else %}
                 <td><img class="img-responsive" src="{{ asset('/public/img') }}{{ vich_uploader_asset(event, 'imageFile') }}" alt="{{ event.title }}" style="width:304px;height:228px;"></td>
             {% endif %}
+            <hr>
 
             <!-- Post Content -->
 
             {{ event.description|raw }}
-
+            <hr>
             <!-- Tags -->
             Mots-clés :
             {% for tag in event.tag %}

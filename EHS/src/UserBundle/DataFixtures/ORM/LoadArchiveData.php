@@ -30,24 +30,28 @@ class LoadArchiveDta extends AbstractFixture implements OrderedFixtureInterface,
         $archive->setDateCreation($date);
         $archive->setTitreArchive('Statuts');
         $archive->setImageName('STATUTS_DECLARATION_MG-FB.doc');
+        $archive->setCommentaire('Les status de l\'association');
         $archive->setUpdatedAt($date);
 
         $archive1=new Archive();
         $archive1->setDateCreation($date);
         $archive1->setTitreArchive('Communiqué du 23 Janvier');
         $archive1->setUpdatedAt($date);
+        $archive->setCommentaire('Bilan du 23 Janvier');
         $archive1->setImageName('communique_bilan_du_23_janvier.docx');
 
         $archive2=new Archive();
         $archive2->setDateCreation($date);
         $archive2->setTitreArchive('PV AG CONSTITUTIVE 17déc 2015');
         $archive2->setUpdatedAt($date);
+        $archive->setCommentaire('Procès verbaux de l\'AG');
         $archive2->setImageName('PV_AG_CONSTITUTIVE_17dec_2015signee_FB.pdf');
 
         $archive3=new Archive();
         $archive3->setDateCreation($date);
         $archive3->setTitreArchive('Flyer Rencontre Citoyenne');
         $archive3->setUpdatedAt($date);
+        $archive->setCommentaire('Flyer utilisé pour la rencontre');
         $archive3->setImageName('Flyer_Rencontre_Citoyenne.pdf');
 
         $manager->persist($archive);
@@ -63,6 +67,6 @@ class LoadArchiveDta extends AbstractFixture implements OrderedFixtureInterface,
     {
         // the order in which fixtures will be loaded
         // the lower the number, the sooner that this fixture is loaded
-        return 8;
+        return 6;
     }
 }

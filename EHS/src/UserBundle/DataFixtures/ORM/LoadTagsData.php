@@ -21,25 +21,6 @@ class LoadTagsData extends AbstractFixture implements OrderedFixtureInterface
             'Association',
             'Politique',
             'Evenements',
-            'Lorem',
-            'Ipsum',
-            'Classe',
-            'Debut',
-            'Fin',
-            'Milieu',
-            'Forum',
-            'Santéé',
-            'Informationss',
-            'Associations',
-            'Politiques',
-            'Evenementss',
-            'Lorems',
-            'Ipsums',
-            'Classes',
-            'Debuts',
-            'Fins',
-            'Milieus',
-            'Forums'
 
         ];
         for($i=0;$i<count($lib);$i++)

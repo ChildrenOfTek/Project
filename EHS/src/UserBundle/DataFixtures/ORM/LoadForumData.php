@@ -18,12 +18,18 @@ class LoadForumData extends AbstractFixture implements OrderedFixtureInterface
             'Membres',
             'Divers'
         ];
+        $desc=[
+            'Un endroit pour discuter Santé',
+            'Parlons de l\'association',
+            'Discussions entre membres',
+            'Expression libre'
+        ];
         $forums=[];
         for($i=0;$i<count($forum);$i++)
         {
             $forums[$i] = new Forum();
             $forums[$i]->setLibForum($forum[$i]);
-            $forums[$i]->setDescription($forum[$i]);
+            $forums[$i]->setDescription($desc[$i]);
             $this->addReference('Forum'.$i, $forums[$i]);
             $manager->persist($forums[$i]);
         }

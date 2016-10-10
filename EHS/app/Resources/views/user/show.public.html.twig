@@ -13,27 +13,27 @@
             <div class="panel-body">
                 <div class="container">
                     <table class="table table-hover table-bordered">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-                <th>Cp</th>
-                <td>{{ user.cp }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ user.ville }}</td>
-            </tr>
-            <tr>
-                <th>Date de naissance</th>
-                <td>{% if user.birthDate %}{{ user.birthDate | localizeddate("medium", "none", null, null, "d LLL Y") }}{% endif %}</td>
-            </tr>
-        </tbody>
+                      <tbody>
+                          <tr>
+                              <th>Nom</th>
+                              <td>{{ user.nom }}</td>
+                          </tr>
+                          <tr>
+                              <th>Prenom</th>
+                              <td>{{ user.prenom }}</td>
+                          </tr>
+                              <th>Cp</th>
+                              <td>{{ user.cp }}</td>
+                          </tr>
+                          <tr>
+                              <th>Ville</th>
+                              <td>{{ user.ville }}</td>
+                          </tr>
+                          <tr>
+                              <th>Date de naissance</th>
+                              <td>{% if user.birthDate %}{{ user.birthDate | localizeddate("medium", "none", null, null, "d LLL Y") }}{% endif %}</td>
+                          </tr>
+                      </tbody>
 
                         {% if app.user.username == user.username %}
                             <div class="buttonLink">

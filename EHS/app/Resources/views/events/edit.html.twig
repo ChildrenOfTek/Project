@@ -25,18 +25,29 @@
         {{ form_row(edit_form.places) }}
         {{ form_row(edit_form.address) }}
     <h3>Tags</h3>
+                {{ form_row(edit_form.tag) }}
 
                 <hr>
-    <input class="btn btn-success" type="submit" value="Editer" />
-    {{ form_end(edit_form) }}
-
+<table>
+    <tr>
+        <td>
+            <input class="button" type="submit" value="Editer" />
+            {{ form_end(edit_form) }}
+        </td>
+        <td>
             {{ form_start(delete_form) }}
-                <input class="btn btn-danger" type="submit" value="Supprimer">
+            <input class="buttonDanger" type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
+        </td>
+        <td>
             <div class="buttonLink">
                 <a href="{{ path('events_index') }}">Retour à la liste</a>
             </div>
-                </hr>
+        </td>
+    </tr>
+</table>
+
+
 </div></div></div></div>
 </section>
 {% endblock %}

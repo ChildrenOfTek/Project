@@ -35,6 +35,13 @@ class Archive
     private $titreArchive;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaire", type="string", nullable=true)
+     */
+    private $commentaire;
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="archive_fichier", fileNameProperty="imageName")
@@ -183,8 +190,21 @@ class Archive
         $this->titreArchive = $titreArchive;
     }
 
+    /**
+     * @return string
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
 
-
+    /**
+     * @param string $commentaire
+     */
+    public function setCommentaire($commentaire)
+    {
+        $this->commentaire = $commentaire;
+    }
 
 }
 

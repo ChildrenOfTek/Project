@@ -26,6 +26,7 @@ class ArchiveType extends AbstractType
                 'widget'=>'choice',
                 'format'=>'dd-MM-yyyy',
                 'label'=>'Date de création'))
+            ->add('commentaire','text',array('label'=>'Commentaire (optionnel)'))
 
             ->add('imageFile',VichFileType::class,
                 array('required'=>false,

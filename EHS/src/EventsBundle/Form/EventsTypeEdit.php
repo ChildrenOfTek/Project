@@ -36,7 +36,8 @@ class EventsTypeEdit extends AbstractType
             ))
             ->add('imageFile',VichFileType::class,
                 array('required'=>false,
-                    'label'=>'Choisissez un fichier à ajouter'))
+                    'label'=>'Choisissez un fichier à ajouter',
+                    'download_link'=>false))
             ->add('places', 'integer',array('label'=>'Nombre de places'))
             ->add('address','text',array('label'=>'Adresse'))
             ->add('tag',EntityType::class,array(

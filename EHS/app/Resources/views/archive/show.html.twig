@@ -28,6 +28,10 @@
                 <td>{{ archive.titreArchive }}</td>
             </tr>
             <tr>
+                <th>Commentaire</th>
+                <td>{{ archive.commentaire }}</td>
+            </tr>
+            <tr>
                 <th>Nom du fichier</th>
                 <td>{{ archive.imagename }}</td>
             </tr>
@@ -57,7 +61,7 @@
         </td>
         <td>
             {{ form_start(delete_form) }}
-            <input class="button" type="submit" value="Supprimer">
+            <input class="buttonDanger" type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
         </td>
         <td>

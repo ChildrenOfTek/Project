@@ -109,6 +109,17 @@ class EventsController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $data=$editForm->getData();
+            if($data->getStart()>$data->getEnd())
+            {
+                $this->addFlash('error','La date de début est supérieure à celle de fin');
+                return $this->render('events/edit.html.twig', array(
+                    'event' => $event,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                ));
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush();
@@ -116,7 +127,7 @@ class EventsController extends Controller
             $this->addFlash('success',
                 'L\'évènement a bien été mis à jour !');
 
-            return $this->redirectToRoute('events_edit', array('id' => $event->getId()));
+            return $this->redirectToRoute('events_show', array('id' => $event->getId()));
         }
 
         return $this->render('events/edit.html.twig', array(

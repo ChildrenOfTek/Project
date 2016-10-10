@@ -25,6 +25,7 @@
                 <th>Date de création</th>
                 <th>Dernière mise à jour</th>
                 <th>Titre de l'archive</th>
+                <th>Commentaire</th>
                 <th>Nom du fichier</th>
                 <th>Actions</th>
             </tr>
@@ -36,6 +37,7 @@
                 <td>{% if archive.dateCreation %}{{ archive.dateCreation|localizeddate("medium", "none", null, null, "d LLL Y HH:MM") }}{% endif %}</td>
                 <td>{% if archive.updatedAt %}{{ archive.updatedAt|localizeddate("medium", "none", null, null, "d LLL Y HH:MM") }}{% endif %}</td>
                 <td>{{ archive.titreArchive }}</td>
+                <td>{{ archive.commentaire }}</td>
                 {% if archive.imageName matches '/^[0-9]/' %}
                     <td><a href="{{ app.request.basePath }}/..{{ vich_uploader_asset(archive, 'imageFile') }}" download>{{ archive.imageName }}</a></td>
                 {% else %}

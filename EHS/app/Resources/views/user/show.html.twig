@@ -74,18 +74,25 @@
                         </tr>
         </tbody>
 
-                        </table></div></div></div></div></div>
-    <ul>
-        <div class="buttonLink">
-            <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
-        </div>
+                        </table>
+<table>
+    <tr>
+        <td>
+            <div class="buttonLink">
+                <a href="{{ path('user_editadmin', { 'id': user.id }) }}">Editer</a>
+            </div>
+        </td>
+        <td>
             {{ form_start(delete_form) }}
-            <input class="btn btn-danger" type="submit" value="Supprimer">
+            <input class="buttonDanger" type="submit" value="Supprimer">
             {{ form_end(delete_form) }}
-        </li>
-        <div class="buttonLink">
-            <a href="{{ path('user_index') }}">Retour à la liste </a>
-        </div>
-    </ul>
-
+        </td>
+        <td>
+            <div class="buttonLink">
+                <a href="{{ path('user_index') }}">Retour à la liste </a>
+            </div>
+        </td>
+    </tr>
+</table>
+</div></div></div></div></div>
 {% endblock %}

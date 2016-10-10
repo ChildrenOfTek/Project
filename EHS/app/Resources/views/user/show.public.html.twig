@@ -22,6 +22,7 @@
                 <th>Prenom</th>
                 <td>{{ user.prenom }}</td>
             </tr>
+            <tr>
                 <th>Cp</th>
                 <td>{{ user.cp }}</td>
             </tr>
@@ -37,7 +38,7 @@
                 <table>
                     <tr>
                         <td>
-                            {% if app.user.username == user.username %}
+                        {% if app.user.username == user.username %}
                             <div class="buttonLink">
                                 <a href="{{ path("password_change") }}">Changer de mot de passe</a>
                             </div>

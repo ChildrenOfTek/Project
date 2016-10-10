@@ -19,6 +19,14 @@ body a:link{
 body a:visited{
     color: #BF37B4;
 }
+
+
+.img-center {
+	margin: 0 auto;
+}
+
+
+
 .carousel {
     margin-top: -120px;
     height: 60%;
@@ -80,15 +88,38 @@ hr{
 
 button{
     border-style: none;
-    background-color: #0AC375;
+    background-color: #4ecd71;
     color: #fff;
     padding: 10px;
     border-radius: 5px;
 }
 
 button:hover{
-    background-color: #0cf090;
-    -webkit-transition: all 0.2s ease-in-out;
+  border-style: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #09ec49;
+  -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.button{
+  margin-bottom: 10px;
+  margin-right: 10px;
+  border-style: none;
+  background-color: #4ecd71;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+
+}
+
+.button:hover{
+  background-color: #09ec49;
+  -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
@@ -96,25 +127,26 @@ button:hover{
 
 
 .buttonLink{
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
-    text-decoration: none;
+    margin-right: 10px;
+      text-decoration: none;
 }
 
 .buttonLink a{
-    background-color: #0AC375;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
+  background-color: #4ecd71;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .buttonLink a:hover{
-    background-color: #0cf090;
-    text-decoration: none;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    -webkit-transition: all 0.2s ease-in-out;
+  background-color: #09ec49;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
@@ -123,6 +155,37 @@ button:hover{
 
 .buttonLink a:visited{
     color: #fff;
+}
+
+.buttonLinkTop{
+
+    margin-top: 20px;
+    margin-bottom: 15px;
+      text-decoration: none;
+}
+
+.buttonLinkTop a{
+  background-color: #4ecd71;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.buttonLinkTop a:hover{
+  background-color: #09ec49;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.buttonLinkTop a:visited{
+  color: #fff;
 }
 
 
@@ -135,6 +198,10 @@ button:hover{
     background-color: rgba(0, 0, 0, 0.2);
     padding: 10px;
     border-radius: 5px;
+}
+
+table{
+  border-radius: 5px;
 }
 
 .tagbox-link:hover{
@@ -665,7 +732,7 @@ a:link, a:visited {
   margin-right: auto;
   margin-left: auto;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  
+
   }
 
 

@@ -1,41 +1,40 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}
     Créer un utilisateur
 {% endblock %}
-
 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
-
-
 {% block section %}
 <section>
     <button class="btn btn-info buttonInfo">
         <a style="color:white;text-decoration: none;" href="javascript:ouvre_doc('{{path('documentation_show',{'doc':'userNew'}) }}')">Voir l'aide</a>
     </button>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-default">
-      <div class="panel-heading">Création d'un utilisateur</div>
-        <div class="panel-body">
-          <div class="container col-md-8 col-md-offset-1">
+<div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">Création d'un utilisateur</div>
+      <div class="panel-body">
+        <div class="container col-md-8 col-md-offset-1">
+          {{ form_start(form) }}
+          {{ form_widget(form) }}
+        <hr>
+          <table>
+            <tr>
+              <td>
+                <input type="submit" value="Ajouter" class="button">
+                {{ form_end(form) }}
+              </td>
+              <td>
+                <div class="buttonLink">
+                <a href="{{ path('user_index') }}">Annuler</a>
+                </div>
+              </td>
+            </tr>
+          </table>
 
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-              <hr>
-
-        <input class="btn btn-success" type="submit" value="AJOUTER UN UTILISATEUR" />
-          <div class="buttonLink">
-              <a href="{{ path('user_index') }}">ANNULER</a>
-          </div>
-              <hr>
-    {{ form_end(form) }}
-
-          </div>
         </div>
       </div>
     </div>
   </div>
-
 </section>
+{% endblock %}
+{% block footer %}
 {% endblock %}

@@ -41,7 +41,8 @@
                 <td>{{ article.user.nom }} {{ article.user.prenom }}</td>
                 <td>{{ article.dateArticle | localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}</td>
                 <td>{{ article.titreArticle }}</td>
-                <td>{{ article.content | raw }}</td>
+                <td> {{ article.content | length > 100 ? article.content | slice(0, 100) | raw ~ '...' : article.content | raw }}</td>
+
                 <td>{{ article.datePublication | localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}</td>
 
                 {% if not article.imageName %}
@@ -62,10 +63,10 @@
                     {% endif %}
                 <td><!--Affichage des tags de l'article -->
                     {% for tag in article.tag %}
-
+<div class="tagbox">
                             <a href="{{ path('tags_search', { 'libelle': tag.libelle }) }}">{{ tag.libelle }}</a>
 
-
+</div>
                     {% endfor  %}
                 </td>
                 <td>

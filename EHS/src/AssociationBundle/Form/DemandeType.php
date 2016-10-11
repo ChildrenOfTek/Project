@@ -21,8 +21,8 @@ class DemandeType extends AbstractType
     {
         $builder
             ->setMethod('POST')
-            ->add('nom',TextType::class)
-            ->add('prenom',TextType::class)
+            ->add('nom',TextType::class,array('label'=>'Nom ou Raison Sociale'))
+            ->add('prenom',TextType::class,array('required'=>false,'label'=>'Prenom (Facultatif si Raison Sociale)'))
             ->add('adresse',TextType::class)
             ->add('cp',TextType::class,array('label'=>'Code Postal'),array('attr'=> array('minlength'=>'4','maxlength'=>'5')))
             ->add('ville')

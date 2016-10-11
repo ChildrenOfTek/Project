@@ -102,7 +102,9 @@
             <!-- Tags -->
             Mots-clés :
             {% for tag in event.tag %}
+    <div class="tagbox" style="width:100px;">
                 <a href="{{ path('tags_events_search',{"libelle":tag.libelle}) }}">{{ tag.libelle}}</a>
+    </div>
                 <!-- <button class="tagbox" type="submit">{{ tag.libelle}}</button> -->
             {% endfor %}
             <br/>           

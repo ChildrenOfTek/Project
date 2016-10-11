@@ -31,7 +31,7 @@
             <hr>
 
             <!-- Date/Time -->
-            <p><span class="glyphicon glyphicon-time"></span> Publié le {{ article.datePublication | localizeddate("medium", "none", null, null, "ccc d LLL - HH:mm") }}</p>
+            <p><span class="glyphicon glyphicon-time"></span> Publié le {{ article.datePublication | localizeddate("medium", "none", null, null, "ccc d LLL Y - HH:mm") }}</p>
 
             <hr>
 
@@ -57,7 +57,7 @@
                 <div style="display:flex;flex-flow:row nowrap;">
                 {% for tag in article.tag %}
 
-                    <div class="buttonLink">
+                    <div class="tagbox">
                         <a href="{{ path('tags_search', { 'libelle': tag.libelle }) }}">{{ tag.libelle }}</a>
                     </div>
                 {% endfor  %}

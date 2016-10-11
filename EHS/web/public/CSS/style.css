@@ -961,3 +961,32 @@ a:link, a:visited {
     position: fixed;
     z-index:2;
 }
+.tagbox-link{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+table{
+    border-radius: 5px;
+}
+
+.tagbox-link:hover{
+    background-color: #ebc413;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.tagbox-link:visited{
+    color: #fff;
+}

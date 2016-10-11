@@ -61,7 +61,7 @@
                 <div style="display:flex;flex-flow:row nowrap;">
                 {% for tag in event.tag %}
 
-                    <div class="buttonLink">
+                    <div class="tagbox">
                         <a href="{{ path('tags_events_search', { 'libelle': tag.libelle }) }}">{{ tag.libelle }}</a>
                     </div>
                 {% endfor  %}

@@ -32,10 +32,11 @@ class UserType extends AbstractType
                 'choice_label'=>'name',
                 'label'=>'Role à attribuer',
                 'multiple'=>true,
-                'expanded'=>true
+                'expanded'=>true,
+                'empty_data'=>"ROLE_USER"
                 ))
-            ->add('nom')
-            ->add('prenom')
+            ->add('nom','text',array('label'=>'Nom ou Raison Sociale'))
+            ->add('prenom','text',array('required'=>false,'label'=>'Prenom (Facultatif si Raison Sociale)'))
             ->add('adresse')
             ->add('cp',TextType::class,array('label'=>'Code Postal','constraints'=> new Length(array('min' => 4,'max' => 5))))
             ->add('ville')

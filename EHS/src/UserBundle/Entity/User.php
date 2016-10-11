@@ -45,8 +45,13 @@ class User implements UserInterface, \Serializable
      */
     protected $password;
 
-
     /**
+    * @Assert\Collection(
+    *     fields = {
+    *         "role" =  @Assert\Required()
+    *     },
+    *   allowMissingFields = true
+    * )
      * @ORM\ManyToMany(targetEntity="Role", inversedBy="users", cascade={"remove","persist"}))
      */
     protected $userRoles;
@@ -61,7 +66,7 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255,nullable=true)
      */
     protected $prenom;
     
